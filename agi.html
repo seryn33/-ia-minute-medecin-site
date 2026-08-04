@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AGI : qui dit quoi, et que surveiller · L'IA Minute du Médecin</title>
+<meta name="description" content="Ressource compagnon du livre L'IA Minute du Médecin : qui annonce quoi et depuis quand, le test Einstein expliqué, pourquoi les prédictions se trompent, et les trois signaux à surveiller.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Fira+Sans+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --rouge:#DC322F;--noir:#1A1A1A;--blanc:#FFFFFF;--jaune:#FFD700;
+  --bleu:#3498DB;--orange:#F39C12;--vert:#27AE60;--violet:#8E44AD;--teal:#1ABC9C;
+  --gris:#BDC3C7;--gris-clair:#F4F5F6;--gris-ligne:#E1E4E6;--gris-texte:#5A6268;
+}
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{margin:0;background:var(--blanc);color:var(--noir);font-family:"Fira Sans Condensed","Roboto Condensed",Arial,sans-serif;font-size:17px;line-height:1.5;}
+.page{max-width:720px;margin:0 auto;padding:0 18px 80px;}
+h1,h2,h3,h4{font-family:"Oswald","Arial Narrow",Arial,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.2px;}
+p{margin:0 0 14px;}
+
+header{padding:26px 0 8px;}
+.eyebrow{display:inline-block;font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:var(--blanc);background:var(--noir);padding:5px 11px;}
+h1{font-size:33px;line-height:1.06;margin:14px 0 0;}
+h1 mark{background:var(--jaune);color:var(--noir);padding:0 5px;}
+.sous-titre{font-family:"Fira Sans Condensed",Arial,sans-serif;font-style:italic;font-weight:600;color:var(--rouge);font-size:19px;margin:10px 0 0;text-transform:none;}
+.trait{height:4px;background:var(--rouge);margin:16px 0 22px;}
+.meta{font-size:14px;color:var(--gris-texte);margin:0 0 22px;}
+
+.flash{border:3px solid var(--rouge);border-radius:14px;padding:16px 18px;margin:0 0 26px;}
+.flash h2{font-size:19px;margin:0 0 10px;color:var(--rouge);}
+.flash ul{margin:0;padding-left:20px;}
+.flash li{margin-bottom:9px;}
+
+nav{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 34px;}
+nav button{font-family:"Oswald",Arial,sans-serif;font-weight:500;font-size:13px;letter-spacing:.6px;text-transform:uppercase;background:var(--gris-clair);color:var(--noir);border:2px solid var(--gris-ligne);border-radius:999px;padding:7px 13px;cursor:pointer;}
+nav button:hover{background:var(--noir);color:var(--blanc);border-color:var(--noir);}
+nav button:focus-visible{outline:3px solid var(--rouge);outline-offset:2px;}
+
+section{border-top:2px solid var(--gris-ligne);padding-top:26px;margin-top:34px;scroll-margin-top:14px;}
+section > h2{font-size:25px;margin:0 0 4px;line-height:1.1;}
+.chapeau{color:var(--gris-texte);font-size:16px;margin:0 0 20px;}
+h3{font-size:19px;margin:26px 0 8px;}
+
+.tableau{width:100%;border-collapse:collapse;font-size:15px;margin:0 0 18px;}
+.tableau th,.tableau td{border:1px solid var(--gris-ligne);padding:8px 10px;text-align:left;vertical-align:top;}
+.tableau th{background:var(--noir);color:var(--blanc);font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:13px;letter-spacing:.5px;}
+.tableau tr:nth-child(even) td{background:var(--gris-clair);}
+.tableau td.proche{border-left:5px solid var(--rouge);}
+.tableau td.moyen{border-left:5px solid var(--orange);}
+.tableau td.loin{border-left:5px solid var(--bleu);}
+
+.raison{display:flex;gap:14px;border:2px solid var(--gris-ligne);border-radius:14px;padding:14px;margin-bottom:12px;}
+.num{flex:0 0 38px;height:38px;border-radius:50%;background:var(--noir);color:var(--blanc);font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:17px;display:flex;align-items:center;justify-content:center;}
+.raison h4{font-size:16px;margin:3px 0 6px;}
+.raison p{font-size:15.5px;margin:0 0 6px;}
+.raison p:last-child{margin-bottom:0;}
+.consequence{font-size:15px;background:var(--gris-clair);border-left:4px solid var(--bleu);padding:8px 10px;}
+.consequence b{font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:12.5px;letter-spacing:.6px;color:var(--bleu);}
+
+.signal{display:flex;gap:14px;border:2px solid var(--gris-ligne);border-radius:14px;padding:14px;margin-bottom:12px;}
+.signal .num{background:var(--rouge);}
+.signal h4{font-size:16px;margin:3px 0 6px;}
+.signal p{font-size:15.5px;margin:0 0 6px;}
+.signal p:last-child{margin-bottom:0;}
+.observer{font-size:15px;background:#F3FBF6;border-left:4px solid var(--vert);padding:8px 10px;}
+.observer b{font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:12.5px;letter-spacing:.6px;color:var(--vert);}
+
+.bloc{border:2px solid var(--gris-ligne);border-radius:14px;overflow:hidden;margin:0 0 16px;}
+.bloc-tete{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--gris-clair);padding:10px 12px;border-bottom:2px solid var(--gris-ligne);}
+.bloc-tete h4{margin:0;font-size:15px;}
+.copier{font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:12px;letter-spacing:.8px;text-transform:uppercase;background:var(--rouge);color:var(--blanc);border:none;border-radius:6px;padding:7px 12px;cursor:pointer;white-space:nowrap;}
+.copier.ok{background:var(--vert);}
+.copier:focus-visible{outline:3px solid var(--noir);outline-offset:2px;}
+pre{margin:0;padding:14px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px;line-height:1.5;white-space:pre-wrap;word-wrap:break-word;}
+.note{font-size:15.5px;background:var(--gris-clair);border-left:4px solid var(--bleu);padding:9px 11px;margin:0 0 16px;}
+.note b{font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:12.5px;letter-spacing:.6px;color:var(--bleu);}
+.badge{display:inline-block;background:var(--gris);color:var(--noir);border-radius:5px;font-family:"Oswald",Arial,sans-serif;font-size:11.5px;letter-spacing:.7px;text-transform:uppercase;padding:3px 8px;margin:0 6px 6px 0;}
+
+.banniere{background:var(--rouge);color:var(--blanc);border-radius:14px;padding:18px 20px;margin:26px 0;}
+.banniere p{margin:0;font-family:"Oswald",Arial,sans-serif;font-size:19px;line-height:1.25;text-transform:uppercase;}
+.banniere small{display:block;font-family:"Fira Sans Condensed",Arial,sans-serif;text-transform:none;font-size:15px;margin-top:8px;opacity:.95;}
+
+details{border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;margin-bottom:10px;}
+details[open]{border-color:var(--noir);}
+summary{cursor:pointer;font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:16px;text-transform:uppercase;letter-spacing:.3px;}
+summary::-webkit-details-marker{display:none;}
+summary::before{content:"+ ";color:var(--rouge);font-weight:700;}
+details[open] summary::before{content:"\2212 ";}
+details p{margin:10px 0 0;font-size:16px;}
+
+footer{border-top:4px solid var(--noir);margin-top:44px;padding-top:18px;font-size:14px;color:var(--gris-texte);}
+footer strong{color:var(--noir);}
+
+@media (max-width:520px){
+  body{font-size:16px;}h1{font-size:27px;}section > h2{font-size:21px;}
+  .tableau{font-size:14px;}pre{font-size:12.5px;}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none !important;scroll-behavior:auto !important;}}
+</style>
+</head>
+<body>
+<div class="page">
+
+<header>
+  <span class="eyebrow">Ressource compagnon · L'IA Minute du Médecin</span>
+  <h1>AGI : <mark>qui dit quoi, et que surveiller</mark></h1>
+  <p class="sous-titre">Les échéances annoncées avec leurs dates et leurs auteurs, le test Einstein expliqué, pourquoi ces prédictions se trompent, et les trois signaux qui valent mieux que les annonces.</p>
+  <div class="trait"></div>
+  <p class="meta">Mise à jour : 25 juillet 2026. Les déclarations citées sont datées : dans ce domaine, une prédiction sans date n'a aucune valeur.</p>
+</header>
+
+<div class="flash">
+  <h2>Trois choses à savoir avant d'entrer dans le débat</h2>
+  <ul>
+    <li><strong>Personne ne parle de la même chose.</strong> Pour les uns, l'AGI est un système capable de réaliser la plupart des tâches économiquement utiles. Pour d'autres, c'est un système déployant l'ensemble des capacités cognitives humaines. La première définition est atteignable bientôt, la seconde peut-être jamais. Quand deux dirigeants annoncent des dates différentes, ils ne mesurent pas la même chose.</li>
+    <li><strong>Les échéances se sont allongées, pas raccourcies.</strong> Le patron de DeepMind annonçait en 2025 une AGI dans trois à cinq ans. En 2026, il situe l'échéance autour de 2030 à un an près, avec environ une chance sur deux. Ce glissement discret est plus instructif que n'importe quelle annonce.</li>
+    <li><strong>Et cela ne change rien à votre semaine prochaine.</strong> Aucun des usages décrits dans ce livre ne dépend de l'AGI. La transcription d'une consultation, la synthèse d'un article, la fiche patient illustrée : tout cela fonctionne avec l'IA étroite d'aujourd'hui, et fonctionnera même si l'AGI n'arrive jamais.</li>
+  </ul>
+</div>
+
+<nav aria-label="Sommaire">
+  <button type="button" data-cible="qui">Qui dit quoi</button>
+  <button type="button" data-cible="einstein">Le test Einstein</button>
+  <button type="button" data-cible="erreurs">Pourquoi ça se trompe</button>
+  <button type="button" data-cible="signaux">Les 3 signaux</button>
+  <button type="button" data-cible="medecine">Ce qui ne dépend pas de l'AGI</button>
+  <button type="button" data-cible="si">Et si ça arrivait</button>
+  <button type="button" data-cible="faq">Questions</button>
+  <button type="button" data-cible="sources">Sources</button>
+</nav>
+
+<!-- QUI -->
+<section id="qui">
+  <h2>Qui annonce quoi, et depuis quand</h2>
+  <p class="chapeau">Le liseré rouge signale les échéances les plus proches. Notez surtout la colonne de droite : la définition retenue explique la plupart des écarts.</p>
+
+  <table class="tableau">
+    <thead><tr><th>Qui</th><th>Échéance annoncée</th><th>Définition retenue</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="proche"><strong>Dario Amodei</strong><br>Anthropic</td>
+        <td>« Un pays de génies dans un centre de données » dès <strong>2027</strong>, propos tenus à Davos en janvier 2026.</td>
+        <td>Un système dépassant les meilleurs experts humains dans la plupart des domaines intellectuels, sans exiger la généralité complète.</td>
+      </tr>
+      <tr>
+        <td class="moyen"><strong>Demis Hassabis</strong><br>Google DeepMind</td>
+        <td>Environ <strong>2030</strong>, à un an près. Environ une chance sur deux d'ici la fin de la décennie. Révision à la hausse par rapport à son estimation de 2025, qui était de trois à cinq ans.</td>
+        <td>Un système déployant l'ensemble des capacités cognitives humaines, avec une généralité constante. La définition la plus exigeante des trois.</td>
+      </tr>
+      <tr>
+        <td class="loin"><strong>Yann LeCun</strong><br>a quitté Meta fin 2025 pour fonder son laboratoire</td>
+        <td>Des <strong>décennies</strong>. Il considère l'approche actuelle par grands modèles de langage comme une impasse pour atteindre une intelligence de niveau humain.</td>
+        <td>Une intelligence qui construit un modèle du monde et raisonne par simulation, plutôt qu'en prédisant du texte.</td>
+      </tr>
+      <tr>
+        <td class="moyen"><strong>OpenAI</strong><br>position institutionnelle</td>
+        <td>Historiquement optimiste, sans date ferme publiquement tenue.</td>
+        <td>Un système autonome capable d'accomplir la plupart des tâches économiquement utiles. Barre nettement plus basse que celle de DeepMind.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p class="note"><b>La lecture utile</b> Amodei et Hassabis ne se contredisent pas nécessairement : le premier décrit un système extrêmement compétent, le second exige une généralité complète. Un même système pourrait donc être une AGI pour l'un et pas pour l'autre. Avant de discuter d'une date, demandez toujours la définition.</p>
+</section>
+
+<!-- EINSTEIN -->
+<section id="einstein">
+  <h2>Le test Einstein, en détail</h2>
+  <p class="chapeau">C'est la proposition la plus intéressante du débat, parce qu'elle est falsifiable.</p>
+
+  <p>Le 17 février 2026, à l'Institut indien des sciences de Bangalore, en marge du sommet indien sur l'IA, le patron de Google DeepMind a formulé le critère suivant : entraîner un système sur les seules connaissances disponibles jusqu'en <strong>1911</strong>, puis vérifier s'il parvient à formuler seul la relativité générale, comme Einstein l'a fait en <strong>1915</strong>. Son verdict sur l'état de l'art : les systèmes actuels n'en seraient pas capables.</p>
+
+  <h3>Pourquoi cette date précise</h3>
+  <p>1911 est l'année où Einstein commence à travailler sérieusement sur la gravitation et l'accélération. Novembre 1915, il publie les équations de champ. Environ quatre ans séparent l'intuition de la théorie complète. Le test ne mesure donc pas un volume de connaissances, mais la capacité à produire une idée que personne n'avait, à partir des mêmes données que tout le monde.</p>
+
+  <h3>Ce que le test sépare</h3>
+  <table class="tableau">
+    <thead><tr><th>Ce que les systèmes actuels savent faire</th><th>Ce que le test exige</th></tr></thead>
+    <tbody>
+      <tr><td>Résoudre des problèmes de niveau olympiade internationale de mathématiques</td><td>Poser un problème que personne n'avait formulé</td></tr>
+      <tr><td>Restituer et recombiner une connaissance existante, très bien</td><td>Produire une connaissance absente de l'ensemble d'entraînement</td></tr>
+      <tr><td>Expliquer la relativité générale de façon impeccable</td><td>L'inventer sans jamais l'avoir lue</td></tr>
+      <tr><td>Réussir des tâches balisées avec une régularité impressionnante</td><td>Tenir cette régularité sur tous les domaines à la fois</td></tr>
+    </tbody>
+  </table>
+
+  <p><strong>Ce que le même dirigeant reconnaît comme limite actuelle :</strong> une intelligence en dents de scie. Des systèmes capables d'obtenir une médaille d'or en olympiade de mathématiques, et de trébucher sur un problème simple formulé autrement. Ce n'est pas un défaut de puissance, c'est un défaut de généralité, et c'est exactement l'objet du test.</p>
+</section>
+
+<!-- ERREURS -->
+<section id="erreurs">
+  <h2>Pourquoi ces prédictions se trompent, presque toujours</h2>
+  <p class="chapeau">Cinq mécanismes, dont aucun ne suppose la mauvaise foi.</p>
+
+  <div class="raison">
+    <div class="num">1</div>
+    <div>
+      <h4>Les incitations ne sont pas neutres</h4>
+      <p>Les personnes qui annoncent l'AGI dirigent des entreprises qui lèvent des capitaux, recrutent et vendent. L'annonce d'une échéance proche n'est pas nécessairement malhonnête, mais elle n'est jamais désintéressée. Un chercheur académique et un dirigeant ne courent pas le même risque à se tromper.</p>
+      <p class="consequence"><b>Conséquence</b> : pondérez toute prédiction par la position de celui qui la formule, comme vous le feriez pour un conflit d'intérêts dans une publication.</p>
+    </div>
+  </div>
+
+  <div class="raison">
+    <div class="num">2</div>
+    <div>
+      <h4>La définition bouge avec l'échéance</h4>
+      <p>Quand la date approche sans que le système promis n'arrive, c'est souvent la définition qui s'ajuste. Un critère se voit assoupli, un domaine est exclu du périmètre, un nouveau palier intermédiaire est nommé. Le calendrier est alors tenu, mais il ne mesure plus la même chose.</p>
+      <p class="consequence"><b>Conséquence</b> : notez la définition en même temps que la date. Sans elle, l'annonce est invérifiable.</p>
+    </div>
+  </div>
+
+  <div class="raison">
+    <div class="num">3</div>
+    <div>
+      <h4>On extrapole une courbe en S comme si elle était droite</h4>
+      <p>Toutes les technologies progressent vite après une percée, puis ralentissent quand les gains faciles sont épuisés. En pleine phase rapide, l'extrapolation linéaire donne des dates spectaculaires. Ce n'est pas de la naïveté, c'est une erreur de forme de courbe, et elle est classique.</p>
+      <p class="consequence"><b>Conséquence</b> : méfiez-vous des raisonnements en « au rythme actuel ». Le rythme actuel n'est jamais durable.</p>
+    </div>
+  </div>
+
+  <div class="raison">
+    <div class="num">4</div>
+    <div>
+      <h4>La démonstration réussie masque la fiabilité moyenne</h4>
+      <p>Un système qui réussit une tâche remarquable devant une caméra peut échouer une fois sur cinq en usage réel. En médecine, vous connaissez la différence : un cas publié n'est pas une série, et une série n'est pas une pratique.</p>
+      <p class="consequence"><b>Conséquence</b> : demandez toujours le taux d'échec, pas la meilleure performance.</p>
+    </div>
+  </div>
+
+  <div class="raison">
+    <div class="num">5</div>
+    <div>
+      <h4>Les prédictions ratées ne coûtent rien</h4>
+      <p>Personne ne tient le registre des échéances non tenues. Celui qui annonce cinq ans et se trompe n'est pas sanctionné, alors que celui qui a raison est cité pendant dix ans. Le système récompense donc l'annonce audacieuse, indépendamment de sa justesse.</p>
+      <p class="consequence"><b>Conséquence</b> : le meilleur test d'un prédicteur est son historique. Que disait-il il y a trois ans, et que s'est-il passé ?</p>
+    </div>
+  </div>
+</section>
+
+<!-- SIGNAUX -->
+<section id="signaux">
+  <h2>Les trois signaux à surveiller</h2>
+  <p class="chapeau">Plutôt que les annonces, ces trois indicateurs vous diront réellement où en est la technologie. Ils sont vérifiables sans compétence technique.</p>
+
+  <div class="signal">
+    <div class="num">1</div>
+    <div>
+      <h4>La production de connaissance nouvelle</h4>
+      <p>Un système qui formule une hypothèse scientifique inédite, la teste et la voit confirmée par des chercheurs humains. Pas une recombinaison brillante de littérature existante, une découverte que personne n'avait faite.</p>
+      <p class="observer"><b>Où l'observer</b> : dans les publications à comité de lecture qui créditent un système comme source d'une hypothèse, et non comme outil d'analyse. C'est rare, et c'est le signal le plus fort.</p>
+    </div>
+  </div>
+
+  <div class="signal">
+    <div class="num">2</div>
+    <div>
+      <h4>La fiabilité sur les tâches longues</h4>
+      <p>La faiblesse actuelle n'est pas la performance ponctuelle, c'est la constance. Un système qui enchaîne cent étapes sans dérive, sur plusieurs heures, franchirait un cap plus significatif que n'importe quel score de référence.</p>
+      <p class="observer"><b>Où l'observer</b> : dans votre propre usage. Le jour où vous cesserez de vérifier les étapes intermédiaires d'une tâche complexe parce qu'elles sont fiables, vous saurez que quelque chose a changé.</p>
+    </div>
+  </div>
+
+  <div class="signal">
+    <div class="num">3</div>
+    <div>
+      <h4>Le transfert entre domaines</h4>
+      <p>Une compétence acquise dans un domaine qui s'applique spontanément à un autre, sans réentraînement. C'est ce que fait un interne quand il transpose un raisonnement de cardiologie à la néphrologie. Les systèmes actuels ne le font que faiblement.</p>
+      <p class="observer"><b>Où l'observer</b> : quand un même système devient bon dans une spécialité sans qu'on l'y ait spécifiquement préparé.</p>
+    </div>
+  </div>
+
+  <p class="note"><b>Ce qui n'est pas un signal</b> Un nouveau record sur un test de référence, une démonstration filmée, une levée de fonds, un nom de version. Ces éléments mesurent l'intensité du marché, pas la profondeur du progrès.</p>
+</section>
+
+<!-- MEDECINE -->
+<section id="medecine">
+  <h2>Ce qui, en médecine, ne dépend pas de l'AGI</h2>
+  <p class="chapeau">C'est le point le plus utile de cette page. Tout ce qui suit fonctionne aujourd'hui, avec de l'IA étroite, et continuerait de fonctionner même si l'AGI n'arrivait jamais.</p>
+
+  <table class="tableau">
+    <thead><tr><th>L'usage</th><th>Ce qu'il exige réellement</th></tr></thead>
+    <tbody>
+      <tr><td>Transcrire une consultation et structurer un compte rendu</td><td>De la reconnaissance de parole et de la mise en forme. Aucune généralité requise.</td></tr>
+      <tr><td>Synthétiser un article ou un corpus documentaire</td><td>De la lecture et de la restitution ancrée sur une source. C'est même le cas où les systèmes actuels sont les plus fiables.</td></tr>
+      <tr><td>Rédiger un courrier ou une fiche patient</td><td>De la génération de texte contrainte, avec relecture humaine.</td></tr>
+      <tr><td>Produire un support illustré ou une infographie</td><td>De la génération d'image guidée, avec validation médicale.</td></tr>
+      <tr><td>Chercher, croiser et sourcer une information</td><td>De la recherche documentaire outillée, avec vérification à la source.</td></tr>
+      <tr><td>Analyser vos propres données d'activité</td><td>Du calcul sur un tableau que vous fournissez.</td></tr>
+    </tbody>
+  </table>
+
+  <p><strong>Ce qui, en revanche, exigerait bien plus que ce qui existe :</strong> raisonner sur un cas complexe sans supervision, décider seul d'une conduite à tenir, engager une responsabilité. Aucun de ces trois usages n'est à l'ordre du jour, et c'est heureux : le cadre juridique européen ne les autoriserait pas davantage.</p>
+</section>
+
+<!-- SI -->
+<section id="si">
+  <h2>Et si l'AGI arrivait vraiment</h2>
+  <p class="chapeau">Exercice de prudence, sans emballement ni catastrophisme.</p>
+
+  <table class="tableau">
+    <thead><tr><th>Ce qui changerait vite</th><th>Ce qui changerait lentement</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>La recherche : formulation d'hypothèses, conception d'essais, analyse. C'est le domaine où l'effet serait le plus immédiat et le plus visible.</td>
+        <td>La consultation. Un examen clinique, un examen physique, une annonce, une relation de confiance ne se délèguent pas à un logiciel, quelle que soit sa puissance.</td>
+      </tr>
+      <tr>
+        <td>La documentation et l'administratif, déjà en cours, mais complètement.</td>
+        <td>La réglementation. Les cycles de certification d'un dispositif médical se comptent en années, indépendamment de la vitesse de la technologie.</td>
+      </tr>
+      <tr>
+        <td>Le diagnostic assisté sur données structurées : imagerie, biologie, signaux.</td>
+        <td>La confiance des patients, qui se construit sur des décennies et se perd sur un incident.</td>
+      </tr>
+      <tr>
+        <td>La formation initiale, qui devrait se reconstruire autour de ce qui reste humain.</td>
+        <td>La responsabilité juridique, qui suppose un sujet de droit. Une machine n'en est pas un.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="banniere">
+    <p>Préparez-vous pour ce qui est réel. Restez vigilant sur ce qui est promis.
+    <small>La compétence utile est la même dans tous les scénarios : savoir cadrer une demande et vérifier une sortie. Elle ne dépend d'aucune échéance et ne se périme avec aucun modèle.</small></p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <h2>Questions fréquentes</h2>
+
+  <details>
+    <summary>Faut-il prendre ces annonces au sérieux ?</summary>
+    <p>Oui, comme information sur les intentions et les investissements du secteur. Non, comme calendrier fiable. Ce sont deux lectures différentes, et confondre les deux conduit soit à l'emballement, soit au mépris, qui sont deux erreurs symétriques.</p>
+  </details>
+
+  <details>
+    <summary>Un médecin peut-il être remplacé par une AGI ?</summary>
+    <p>La question technique et la question sociale sont distinctes. Techniquement, aucun système actuel n'en approche. Juridiquement, l'exercice médical suppose un professionnel inscrit et responsable. Et humainement, une part importante de la consultation n'est pas de l'information : c'est de la présence.</p>
+  </details>
+
+  <details>
+    <summary>Pourquoi les experts ne sont-ils pas d'accord ?</summary>
+    <p>Parce qu'ils ne mesurent pas la même chose, qu'ils n'ont pas les mêmes incitations, et parce que personne ne sait si l'approche actuelle suffit ou s'il manque une découverte. Ce désaccord n'est pas un dysfonctionnement, c'est l'état normal d'un domaine en recherche.</p>
+  </details>
+
+  <details>
+    <summary>Que répondre à un patient qui me dit que l'IA fera mieux que moi ?</summary>
+    <p>Que sur certaines tâches précises, c'est déjà vrai, et que c'est une bonne nouvelle. Que sur l'ensemble de la démarche, du recueil à la décision, aucun système n'en est capable. Et que dans les deux cas, quelqu'un doit signer.</p>
+  </details>
+
+  <details>
+    <summary>Dois-je changer quelque chose à ma pratique à cause de ces annonces ?</summary>
+    <p>Non. Changez-la à cause de ce qui fonctionne déjà, ce qui est le sujet de tout le reste de ce livre. Les annonces ne sont pas une raison d'agir, elles sont une raison de rester attentif.</p>
+  </details>
+
+  <details>
+    <summary>Comment suivre le sujet sans y passer mes soirées ?</summary>
+    <p>En surveillant les trois signaux de cette page plutôt que l'actualité. Ils bougent rarement, et quand ils bougent, cela compte. Le reste est du bruit de marché.</p>
+  </details>
+</section>
+
+<!-- SOURCES -->
+<section id="sources">
+  <h2>Sources</h2>
+  <table class="tableau">
+    <thead><tr><th>Élément</th><th>Source</th></tr></thead>
+    <tbody>
+      <tr><td>Test Einstein : entraînement limité aux connaissances antérieures à 1911, capacité à dériver seul la relativité générale publiée en 1915, verdict sur l'incapacité des systèmes actuels</td><td>Demis Hassabis, entretien à l'Institut indien des sciences de Bangalore, 17 février 2026, en marge du sommet indien sur l'impact de l'IA</td></tr>
+      <tr><td>Définition de l'AGI comme système déployant l'ensemble des capacités cognitives humaines, et description d'une intelligence en dents de scie</td><td>Demis Hassabis, sommet indien sur l'impact de l'IA, New Delhi, février 2026</td></tr>
+      <tr><td>Estimation de l'AGI autour de 2030 à un an près, révisée depuis une estimation de trois à cinq ans formulée début 2025, et probabilité d'environ 50 % d'ici la fin de la décennie</td><td>Déclarations publiques de Demis Hassabis, 2025 et 2026</td></tr>
+      <tr><td>« Un pays de génies dans un centre de données » à l'horizon 2027</td><td>Dario Amodei, échange public à Davos, janvier 2026</td></tr>
+      <tr><td>Départ de Yann LeCun de Meta fin 2025 pour fonder son propre laboratoire, et position selon laquelle les grands modèles de langage constituent une impasse vers l'intelligence de niveau humain</td><td>Entretiens publics de Yann LeCun, fin 2025 et 2026</td></tr>
+      <tr><td>Définition de l'AGI par la capacité à accomplir la plupart des tâches économiquement utiles</td><td>Position institutionnelle historique d'OpenAI</td></tr>
+      <tr><td>Sommet indien sur l'impact de l'IA, New Delhi, 16 au 20 février 2026</td><td>Programme officiel du sommet</td></tr>
+    </tbody>
+  </table>
+  <p class="chapeau">Les déclarations publiques évoluent vite et sont parfois reformulées d'une interview à l'autre. Les dates indiquées ici permettent de vérifier chaque propos à sa source, ce qui est la seule façon sérieuse de suivre ce débat.</p>
+</section>
+
+<footer>
+  <p><strong>L'IA Minute du Médecin</strong>, Dr Guillaume Zagury et Samuel De Queiroz, Éditions Medicilline.</p>
+  <p>Ressource compagnon de la double page consacrée à l'intelligence artificielle générale. Cette page rapporte des positions publiques datées et ne prend parti pour aucune d'entre elles.</p>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var chips = document.querySelectorAll("nav button[data-cible]");
+  Array.prototype.forEach.call(chips, function(btn){
+    btn.addEventListener("click", function(){
+      var cible = document.getElementById(btn.getAttribute("data-cible"));
+      if(cible){ cible.scrollIntoView({ behavior:"smooth", block:"start" }); }
+    });
+  });
+
+  var boutons = document.querySelectorAll(".copier");
+  Array.prototype.forEach.call(boutons, function(btn){
+    btn.addEventListener("click", function(){
+      var bloc = btn.closest(".bloc");
+      var pre = bloc ? bloc.querySelector("pre") : null;
+      if(!pre){ return; }
+      var texte = pre.textContent;
+      var fini = function(){
+        btn.textContent = "Copié";
+        btn.classList.add("ok");
+        setTimeout(function(){ btn.textContent = "Copier"; btn.classList.remove("ok"); }, 1800);
+      };
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(texte).then(fini, function(){ secours(texte, fini); });
+      } else { secours(texte, fini); }
+    });
+  });
+
+  function secours(texte, fini){
+    var z = document.createElement("textarea");
+    z.value = texte;
+    z.setAttribute("readonly","");
+    z.style.position = "absolute";
+    z.style.left = "-9999px";
+    document.body.appendChild(z);
+    z.select();
+    try { document.execCommand("copy"); fini(); } catch(e){}
+    document.body.removeChild(z);
+  }
+})();
+</script>
+</body>
+</html>

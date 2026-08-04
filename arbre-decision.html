@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Puis-je utiliser l'IA ? · L'IA Minute du Médecin</title>
+<meta name="description" content="Ressource compagnon du livre L'IA Minute du Médecin : l'arbre de décision interactif, douze situations déjà tranchées, le test d'identifiabilité en six points.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Fira+Sans+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --rouge:#DC322F;--noir:#1A1A1A;--blanc:#FFFFFF;--jaune:#FFD700;
+  --bleu:#3498DB;--orange:#F39C12;--vert:#27AE60;--violet:#8E44AD;--teal:#1ABC9C;
+  --gris:#BDC3C7;--gris-clair:#F4F5F6;--gris-ligne:#E1E4E6;--gris-texte:#5A6268;
+}
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{margin:0;background:var(--blanc);color:var(--noir);font-family:"Fira Sans Condensed","Roboto Condensed",Arial,sans-serif;font-size:17px;line-height:1.5;}
+.page{max-width:720px;margin:0 auto;padding:0 18px 80px;}
+h1,h2,h3,h4{font-family:"Oswald","Arial Narrow",Arial,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.2px;}
+p{margin:0 0 14px;}
+
+header{padding:26px 0 8px;}
+.eyebrow{display:inline-block;font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:var(--blanc);background:var(--noir);padding:5px 11px;}
+h1{font-size:33px;line-height:1.06;margin:14px 0 0;}
+h1 mark{background:var(--jaune);color:var(--noir);padding:0 5px;}
+.sous-titre{font-family:"Fira Sans Condensed",Arial,sans-serif;font-style:italic;font-weight:600;color:var(--rouge);font-size:19px;margin:10px 0 0;text-transform:none;}
+.trait{height:4px;background:var(--rouge);margin:16px 0 22px;}
+.meta{font-size:14px;color:var(--gris-texte);margin:0 0 22px;}
+
+.flash{border:3px solid var(--rouge);border-radius:14px;padding:16px 18px;margin:0 0 26px;}
+.flash h2{font-size:19px;margin:0 0 10px;color:var(--rouge);}
+.flash ul{margin:0;padding-left:20px;}
+.flash li{margin-bottom:9px;}
+
+nav{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 34px;}
+nav button{font-family:"Oswald",Arial,sans-serif;font-weight:500;font-size:13px;letter-spacing:.6px;text-transform:uppercase;background:var(--gris-clair);color:var(--noir);border:2px solid var(--gris-ligne);border-radius:999px;padding:7px 13px;cursor:pointer;}
+nav button:hover{background:var(--noir);color:var(--blanc);border-color:var(--noir);}
+nav button:focus-visible{outline:3px solid var(--rouge);outline-offset:2px;}
+
+section{border-top:2px solid var(--gris-ligne);padding-top:26px;margin-top:34px;scroll-margin-top:14px;}
+section > h2{font-size:25px;margin:0 0 4px;line-height:1.1;}
+.chapeau{color:var(--gris-texte);font-size:16px;margin:0 0 20px;}
+h3{font-size:19px;margin:26px 0 8px;}
+
+/* ARBRE INTERACTIF */
+.arbre{border:3px solid var(--noir);border-radius:16px;padding:18px 20px;margin:0 0 18px;}
+.etape-arbre{margin-bottom:6px;}
+.etape-arbre h4{font-size:17px;margin:0 0 6px;}
+.etape-arbre p{font-size:16px;margin:0 0 12px;}
+.etape-arbre .precision{font-size:15px;color:var(--gris-texte);margin:0 0 12px;}
+.choix{display:flex;gap:10px;flex-wrap:wrap;}
+.choix button{
+  font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:14px;letter-spacing:.7px;text-transform:uppercase;
+  background:var(--blanc);color:var(--noir);border:2px solid var(--noir);
+  border-radius:8px;padding:11px 20px;cursor:pointer;
+}
+.choix button:hover{background:var(--noir);color:var(--blanc);}
+.choix button:focus-visible{outline:3px solid var(--rouge);outline-offset:2px;}
+.fil{font-size:14px;color:var(--gris-texte);margin:0 0 14px;font-family:"Oswald",Arial,sans-serif;letter-spacing:.5px;text-transform:uppercase;}
+.resultat-feu{border-radius:12px;padding:16px 18px;color:var(--blanc);margin-bottom:14px;}
+.feu-vert{background:var(--vert);}
+.feu-orange{background:var(--orange);}
+.feu-rouge{background:var(--rouge);}
+.resultat-feu h4{margin:0 0 8px;font-size:21px;color:var(--blanc);}
+.resultat-feu p{margin:0 0 10px;font-size:16px;}
+.resultat-feu p:last-child{margin-bottom:0;}
+.resultat-feu ul{margin:0;padding-left:20px;font-size:16px;}
+.resultat-feu li{margin-bottom:5px;}
+.recommencer{font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:13px;letter-spacing:.7px;text-transform:uppercase;background:var(--blanc);color:var(--noir);border:2px solid var(--noir);border-radius:8px;padding:9px 16px;cursor:pointer;}
+
+.cas{display:flex;gap:14px;border:2px solid var(--gris-ligne);border-radius:14px;padding:13px 14px;margin-bottom:10px;align-items:flex-start;}
+.pastille-feu{flex:0 0 74px;height:30px;border-radius:6px;color:var(--blanc);font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:12.5px;letter-spacing:.6px;display:flex;align-items:center;justify-content:center;margin-top:2px;}
+.pf-vert{background:var(--vert);}.pf-orange{background:var(--orange);}.pf-rouge{background:var(--rouge);}
+.cas-corps{flex:1;min-width:0;}
+.cas-corps h4{font-size:16px;margin:0 0 5px;}
+.cas-corps p{font-size:15.5px;margin:0;}
+
+.test{display:flex;gap:14px;border:2px solid var(--gris-ligne);border-radius:14px;padding:14px;margin-bottom:12px;}
+.num{flex:0 0 38px;height:38px;border-radius:50%;background:var(--noir);color:var(--blanc);font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:17px;display:flex;align-items:center;justify-content:center;}
+.test h4{font-size:16px;margin:3px 0 6px;}
+.test p{font-size:15.5px;margin:0 0 6px;}
+.test p:last-child{margin-bottom:0;}
+.exemple{font-size:15px;background:var(--gris-clair);border-left:4px solid var(--orange);padding:8px 10px;}
+.exemple b{font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:12.5px;letter-spacing:.6px;color:var(--orange);}
+
+.bloc{border:2px solid var(--gris-ligne);border-radius:14px;overflow:hidden;margin:0 0 16px;}
+.bloc-tete{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--gris-clair);padding:10px 12px;border-bottom:2px solid var(--gris-ligne);}
+.bloc-tete h4{margin:0;font-size:15px;}
+.copier{font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:12px;letter-spacing:.8px;text-transform:uppercase;background:var(--rouge);color:var(--blanc);border:none;border-radius:6px;padding:7px 12px;cursor:pointer;white-space:nowrap;}
+.copier.ok{background:var(--vert);}
+.copier:focus-visible{outline:3px solid var(--noir);outline-offset:2px;}
+pre{margin:0;padding:14px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px;line-height:1.5;white-space:pre-wrap;word-wrap:break-word;}
+.note{font-size:15.5px;background:var(--gris-clair);border-left:4px solid var(--bleu);padding:9px 11px;margin:0 0 16px;}
+.note b{font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:12.5px;letter-spacing:.6px;color:var(--bleu);}
+
+.tableau{width:100%;border-collapse:collapse;font-size:15px;margin:0 0 18px;}
+.tableau th,.tableau td{border:1px solid var(--gris-ligne);padding:8px 10px;text-align:left;vertical-align:top;}
+.tableau th{background:var(--noir);color:var(--blanc);font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:13px;letter-spacing:.5px;}
+.tableau tr:nth-child(even) td{background:var(--gris-clair);}
+
+.banniere{background:var(--noir);color:var(--blanc);border-radius:14px;padding:18px 20px;margin:26px 0;}
+.banniere p{margin:0;font-family:"Oswald",Arial,sans-serif;font-size:19px;line-height:1.25;text-transform:uppercase;}
+.banniere small{display:block;font-family:"Fira Sans Condensed",Arial,sans-serif;text-transform:none;font-size:15px;margin-top:8px;opacity:.95;}
+
+details{border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;margin-bottom:10px;}
+details[open]{border-color:var(--noir);}
+summary{cursor:pointer;font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:16px;text-transform:uppercase;letter-spacing:.3px;}
+summary::-webkit-details-marker{display:none;}
+summary::before{content:"+ ";color:var(--rouge);font-weight:700;}
+details[open] summary::before{content:"\2212 ";}
+details p{margin:10px 0 0;font-size:16px;}
+
+footer{border-top:4px solid var(--noir);margin-top:44px;padding-top:18px;font-size:14px;color:var(--gris-texte);}
+footer strong{color:var(--noir);}
+
+@media (max-width:520px){
+  body{font-size:16px;}h1{font-size:27px;}section > h2{font-size:21px;}
+  .tableau{font-size:14px;}pre{font-size:12.5px;}
+  .choix button{width:100%;}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none !important;scroll-behavior:auto !important;}}
+</style>
+</head>
+<body>
+<div class="page">
+
+<header>
+  <span class="eyebrow">Ressource compagnon · L'IA Minute du Médecin</span>
+  <h1>Puis-je utiliser l'IA ? <mark>La version interactive</mark></h1>
+  <p class="sous-titre">L'arbre déroulé question par question, douze situations déjà tranchées, et le test d'identifiabilité en six points.</p>
+  <div class="trait"></div>
+  <p class="meta">Mise à jour : 25 juillet 2026.</p>
+</header>
+
+<div class="flash">
+  <h2>Trois précisions qui changent les réponses</h2>
+  <ul>
+    <li><strong>Héberger en Europe ne remplace pas la certification.</strong> C'est la confusion la plus répandue. Le stockage sur le territoire européen règle une question de transfert de données. L'hébergement de données de santé pour le compte d'un tiers impose en plus une certification spécifique. Les deux exigences se cumulent, elles ne se substituent jamais.</li>
+    <li><strong>Une donnée identifiante n'est pas seulement un nom.</strong> Un âge exact, une date de consultation, une commune et une pathologie peu fréquente suffisent souvent à reconnaître une personne. C'est l'objet du test en six points plus bas, et c'est la question qui commande tout l'arbre.</li>
+    <li><strong>Le feu orange n'est pas un feu vert prudent.</strong> Il impose quatre choses : informer le patient, le mentionner au dossier, superviser réellement, et tracer la décision. Si vous ne pouvez pas faire les quatre, vous n'êtes pas en orange, vous êtes en rouge.</li>
+  </ul>
+</div>
+
+<nav aria-label="Sommaire">
+  <button type="button" data-cible="outil">L'arbre interactif</button>
+  <button type="button" data-cible="situations">12 situations</button>
+  <button type="button" data-cible="identifiabilite">Test d'identifiabilité</button>
+  <button type="button" data-cible="orange">Tenir le feu orange</button>
+  <button type="button" data-cible="afficher">La version à afficher</button>
+  <button type="button" data-cible="faq">Questions</button>
+  <button type="button" data-cible="sources">Sources</button>
+</nav>
+
+<!-- ARBRE -->
+<section id="outil">
+  <h2>L'arbre, question par question</h2>
+  <p class="chapeau">Trois questions, trente secondes. À faire pour un nouvel usage, pas pour chaque prompt : une fois la réponse connue, elle vaut pour tous les usages du même type.</p>
+
+  <div class="arbre">
+    <p class="fil" id="fil">Départ · Je veux utiliser l'IA pour une tâche médicale</p>
+    <div id="zone-arbre"></div>
+  </div>
+
+  <p class="note"><b>Ce que l'arbre ne remplace pas</b> Il trie les usages, il ne valide pas un outil. Un feu vert signifie que la nature de la tâche n'engage ni donnée identifiante ni décision clinique. Il ne dit rien de la qualité de ce que produira l'outil, ni de votre obligation de relire.</p>
+</section>
+
+<!-- SITUATIONS -->
+<section id="situations">
+  <h2>Douze situations déjà tranchées</h2>
+  <p class="chapeau">Les cas qui reviennent le plus souvent en formation, avec leur réponse et le motif qui la détermine.</p>
+
+  <div class="cas">
+    <span class="pastille-feu pf-vert">VERT</span>
+    <div class="cas-corps">
+      <h4>Résumer un article scientifique que je viens de télécharger</h4>
+      <p>Aucune donnée patient, aucune décision clinique engagée par la sortie elle-même. Vérifiez seulement vos droits de diffusion sur le document.</p>
+    </div>
+  </div>
+
+  <div class="cas">
+    <span class="pastille-feu pf-vert">VERT</span>
+    <div class="cas-corps">
+      <h4>Créer une affiche de prévention pour la salle d'attente</h4>
+      <p>Contenu générique destiné au public. Le contrôle porte sur l'exactitude médicale du visuel, pas sur la confidentialité.</p>
+    </div>
+  </div>
+
+  <div class="cas">
+    <span class="pastille-feu pf-vert">VERT</span>
+    <div class="cas-corps">
+      <h4>Rédiger un courrier à un fournisseur ou à un organisme</h4>
+      <p>Administratif pur. C'est l'usage le plus simple et souvent le plus rentable en temps gagné.</p>
+    </div>
+  </div>
+
+  <div class="cas">
+    <span class="pastille-feu pf-vert">VERT</span>
+    <div class="cas-corps">
+      <h4>Préparer un cas clinique fictif pour un enseignement</h4>
+      <p>Fictif signifie construit, pas anonymisé à partir d'un vrai. La nuance est essentielle : un cas réel dépersonnalisé reste un cas réel.</p>
+    </div>
+  </div>
+
+  <div class="cas">
+    <span class="pastille-feu pf-orange">ORANGE</span>
+    <div class="cas-corps">
+      <h4>Demander un diagnostic différentiel sur une situation type</h4>
+      <p>Aucune donnée identifiante, mais la sortie va nourrir une réflexion clinique. Supervision et traçabilité de ce que vous en retenez.</p>
+    </div>
+  </div>
+
+  <div class="cas">
+    <span class="pastille-feu pf-orange">ORANGE</span>
+    <div class="cas-corps">
+      <h4>Faire reformuler un compte rendu pour le patient</h4>
+      <p>Le document sera remis et engagera votre signature. Relecture ligne à ligne, et mention de l'aide utilisée si le document est illustré ou généré.</p>
+    </div>
+  </div>
+
+  <div class="cas">
+    <span class="pastille-feu pf-orange">ORANGE</span>
+    <div class="cas-corps">
+      <h4>Utiliser un scribe qui écoute la consultation</h4>
+      <p>Outil dédié, hébergement conforme, information du patient, relecture avant export. Les quatre conditions du feu orange sont réunies et doivent l'être.</p>
+    </div>
+  </div>
+
+  <div class="cas">
+    <span class="pastille-feu pf-orange">ORANGE</span>
+    <div class="cas-corps">
+      <h4>Analyser mes données d'activité anonymisées</h4>
+      <p>Sans nom ni identifiant, avec un compte professionnel. Le contrôle porte sur le nettoyage du fichier avant dépôt et sur la vérification des calculs.</p>
+    </div>
+  </div>
+
+  <div class="cas">
+    <span class="pastille-feu pf-rouge">ROUGE</span>
+    <div class="cas-corps">
+      <h4>Coller un courrier reçu d'un confrère pour le résumer</h4>
+      <p>Le document contient l'identité, la date et le motif. Le résumer suppose de le transmettre. Retapez la question sans identité, ou abstenez-vous.</p>
+    </div>
+  </div>
+
+  <div class="cas">
+    <span class="pastille-feu pf-rouge">ROUGE</span>
+    <div class="cas-corps">
+      <h4>Importer une fiche de réunion de concertation</h4>
+      <p>Elle comporte obligatoirement l'identité du patient et vit dans un dossier communicant hébergé pour cela. Elle n'en sort pas.</p>
+    </div>
+  </div>
+
+  <div class="cas">
+    <span class="pastille-feu pf-rouge">ROUGE</span>
+    <div class="cas-corps">
+      <h4>Demander une posologie pour un patient précis</h4>
+      <p>Double motif : donnée identifiante par le contexte, et décision clinique directe. La base de données du médicament reste la source.</p>
+    </div>
+  </div>
+
+  <div class="cas">
+    <span class="pastille-feu pf-rouge">ROUGE</span>
+    <div class="cas-corps">
+      <h4>Faire relire une imagerie par un outil non certifié</h4>
+      <p>Aide au diagnostic sans cadre réglementaire. Ce n'est pas une question de qualité du modèle, c'est une question de statut.</p>
+    </div>
+  </div>
+</section>
+
+<!-- IDENTIFIABILITE -->
+<section id="identifiabilite">
+  <h2>Le test d'identifiabilité, en six points</h2>
+  <p class="chapeau">La première question de l'arbre est celle où l'on se trompe le plus, parce qu'on pense au nom et pas au reste.</p>
+
+  <div class="test">
+    <div class="num">1</div>
+    <div>
+      <h4>L'identité directe</h4>
+      <p>Nom, prénom, initiales, date de naissance, numéro de dossier, numéro de sécurité sociale, adresse, téléphone, adresse électronique.</p>
+      <p class="exemple"><b>Le piège</b> Les initiales. Beaucoup les croient anonymes. Dans une patientèle de ville, deux initiales et un âge suffisent souvent.</p>
+    </div>
+  </div>
+
+  <div class="test">
+    <div class="num">2</div>
+    <div>
+      <h4>L'âge exact</h4>
+      <p>Un âge à l'unité près est un identifiant partiel. Une tranche ne l'est pas.</p>
+      <p class="exemple"><b>Le correctif</b> « Un patient de la soixantaine » produit exactement la même réponse que « un patient de 63 ans », et sort du champ.</p>
+    </div>
+  </div>
+
+  <div class="test">
+    <div class="num">3</div>
+    <div>
+      <h4>Les dates</h4>
+      <p>Date de consultation, d'hospitalisation, d'examen, d'intervention. Croisées avec un lieu, elles désignent une personne.</p>
+      <p class="exemple"><b>Le correctif</b> Des délais relatifs : « il y a environ trois mois », « depuis une quinzaine de jours ».</p>
+    </div>
+  </div>
+
+  <div class="test">
+    <div class="num">4</div>
+    <div>
+      <h4>Le lieu</h4>
+      <p>Commune, quartier, établissement, service, nom du confrère adressant. En zone peu dense, la commune seule est très discriminante.</p>
+      <p class="exemple"><b>Le correctif</b> Rien, ou « en ville », « en établissement ». Le lieu n'apporte presque jamais à la réponse.</p>
+    </div>
+  </div>
+
+  <div class="test">
+    <div class="num">5</div>
+    <div>
+      <h4>La singularité</h4>
+      <p>Profession peu répandue, situation familiale particulière, pathologie rare, antécédent inhabituel, langue parlée. Un seul de ces éléments peut suffire.</p>
+      <p class="exemple"><b>Le correctif</b> Ne le mentionner que s'il est cliniquement décisif, et alors sous forme de catégorie plutôt que de détail.</p>
+    </div>
+  </div>
+
+  <div class="test">
+    <div class="num">6</div>
+    <div>
+      <h4>Le cumul</h4>
+      <p>C'est le point décisif. Chaque élément pris isolément peut sembler anodin. Trois d'entre eux réunis désignent souvent une seule personne dans votre patientèle.</p>
+      <p class="exemple"><b>Le test final</b> Montrez votre formulation à un confrère de votre structure. S'il devine de qui il s'agit, recommencez. S'il répond « ça pourrait être plusieurs de mes patients », vous y êtes.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ORANGE -->
+<section id="orange">
+  <h2>Tenir le feu orange</h2>
+  <p class="chapeau">Le feu orange n'est pas un feu vert avec des précautions. C'est un régime, et il comporte quatre obligations qui vont ensemble.</p>
+
+  <table class="tableau">
+    <thead><tr><th>L'obligation</th><th>Ce que cela veut dire concrètement</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Informer</strong></td><td>Une phrase au patient, dans des mots simples, la première fois. Pas un formulaire, une phrase.</td></tr>
+      <tr><td><strong>Mentionner au dossier</strong></td><td>Une ligne, la première fois : information donnée, pas d'opposition exprimée. Elle vaut pour la suite.</td></tr>
+      <tr><td><strong>Superviser</strong></td><td>Relire, confronter, et pouvoir dire pourquoi vous avez retenu ou écarté la sortie. Un clic de validation n'est pas une supervision.</td></tr>
+      <tr><td><strong>Tracer la décision</strong></td><td>Trois lignes au dossier quand la sortie a pesé sur une conduite : ce qu'elle proposait, ce que vous avez retenu, pourquoi.</td></tr>
+    </tbody>
+  </table>
+
+  <p><strong>La règle de bascule :</strong> si vous ne pouvez pas faire les quatre, vous n'êtes pas en orange, vous êtes en rouge. C'est ce qui rend l'arbre utilisable, parce qu'il ne laisse pas de zone grise confortable.</p>
+</section>
+
+<!-- AFFICHER -->
+<section id="afficher">
+  <h2>La version à afficher près de votre écran</h2>
+  <p class="chapeau">Cinq lignes à recopier sur une fiche, ou à imprimer telles quelles. C'est cette version que vous consulterez réellement.</p>
+
+  <div class="bloc">
+    <div class="bloc-tete"><h4>Mémo de trente secondes</h4><button type="button" class="copier">Copier</button></div>
+    <pre>AVANT CHAQUE NOUVEL USAGE
+
+1. Y a-t-il une donnée identifiante ?
+   Nom, âge exact, date, lieu, singularité, ou trois éléments cumulés.
+   OUI et je ne peux pas l'enlever : FEU ROUGE.
+
+2. L'hébergeur est-il certifié pour les données de santé ?
+   L'Europe ne suffit pas, la certification est une exigence distincte.
+   NON et il y a des données de santé : FEU ROUGE.
+
+3. La sortie va-t-elle influencer une décision clinique ?
+   NON : FEU VERT.
+   OUI : FEU ORANGE, et alors les quatre obligations s'appliquent.
+
+LES QUATRE OBLIGATIONS DU FEU ORANGE
+Informer le patient · Le mentionner au dossier · Superviser réellement · Tracer la décision.
+Si je ne peux pas faire les quatre, je suis en rouge.
+
+EN CAS DE DOUTE
+Feu rouge. Une donnée partie ne revient jamais.</pre>
+  </div>
+
+  <div class="banniere">
+    <p>En cas de doute, feu rouge. Une donnée partie ne revient jamais.
+    <small>C'est l'irréversibilité qui fait la règle, pas la sanction. Un message envoyé, un fichier déposé, un document collé : aucun de ces gestes ne se rattrape.</small></p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <h2>Questions fréquentes</h2>
+
+  <details>
+    <summary>Faut-il refaire l'arbre à chaque prompt ?</summary>
+    <p>Non. Vous le faites une fois par type d'usage. Une fois que vous savez que « résumer un article » est vert et que « faire relire un courrier reçu » est rouge, la réponse vaut pour toutes les fois suivantes. En pratique, une dizaine de passages suffit à couvrir votre activité.</p>
+  </details>
+
+  <details>
+    <summary>Mon outil dit qu'il est conforme au RGPD, cela suffit-il ?</summary>
+    <p>Non. La conformité au règlement européen sur la protection des données et la certification pour l'hébergement de données de santé sont deux choses différentes. Beaucoup de fournisseurs mettent en avant la première parce qu'elle est plus facile à obtenir. Demandez explicitement la seconde, par écrit.</p>
+  </details>
+
+  <details>
+    <summary>Et si j'utilise un modèle qui tourne sur mon propre ordinateur ?</summary>
+    <p>La question de l'hébergement disparaît, puisque rien ne sort. Restent les deux autres : la donnée identifiante, si votre poste n'est pas sécurisé et sauvegardé comme le reste de votre système d'information, et l'influence sur la décision clinique, qui ne dépend pas du lieu d'exécution.</p>
+  </details>
+
+  <details>
+    <summary>Le feu vert dispense-t-il de relire ?</summary>
+    <p>Jamais. Le feu vert porte sur la confidentialité et l'engagement clinique, pas sur l'exactitude de la sortie. Une affiche de prévention en feu vert peut contenir une erreur médicale que vous signez.</p>
+  </details>
+
+  <details>
+    <summary>Que faire si je réalise après coup que j'étais en rouge ?</summary>
+    <p>Supprimez la conversation et les documents déposés, notez ce qui s'est passé, et prévenez le responsable de la protection des données de votre structure s'il en existe un. Un incident tracé et corrigé se traite. Le nier ne le fait pas disparaître, et prive votre structure de la possibilité de réagir.</p>
+  </details>
+
+  <details>
+    <summary>Puis-je afficher l'arbre en salle de pause pour l'équipe ?</summary>
+    <p>C'est même la meilleure chose à en faire. La plupart des incidents viennent de personnes qui n'ont jamais eu de règle écrite. L'arbre affiché vaut mieux qu'une consigne orale répétée trois fois.</p>
+  </details>
+</section>
+
+<!-- SOURCES -->
+<section id="sources">
+  <h2>Sources</h2>
+  <table class="tableau">
+    <thead><tr><th>Élément</th><th>Source</th></tr></thead>
+    <tbody>
+      <tr><td>Obligation de recourir à un hébergeur certifié pour l'hébergement de données de santé à caractère personnel pour le compte d'un tiers</td><td>Code de la santé publique, article L.1111-8, et référentiel de certification de l'Agence du Numérique en Santé</td></tr>
+      <tr><td>Distinction entre localisation des données et certification de l'hébergeur</td><td>Cadre national de la doctrine du numérique en santé</td></tr>
+      <tr><td>Données de santé, catégorie particulière, et critères d'identification directe ou indirecte d'une personne</td><td>RGPD, articles 4 et 9, et doctrine de la Commission nationale de l'informatique et des libertés sur l'anonymisation</td></tr>
+      <tr><td>Secret médical</td><td>Code de la santé publique, article L.1110-4, et Code pénal, article 226-13</td></tr>
+      <tr><td>Information du patient sur l'utilisation de l'IA dans la démarche médicale et traçabilité de cette information</td><td>Académie nationale de médecine, rapport 25-12 adopté le 7 octobre 2025</td></tr>
+      <tr><td>Garantie humaine et information du patient pour les dispositifs médicaux comportant un traitement algorithmique entraîné sur des données massives</td><td>Code de la santé publique, article L.4001-3</td></tr>
+      <tr><td>Obligations de supervision humaine et d'usage conforme à la destination prévue</td><td>Règlement (UE) 2024/1689</td></tr>
+    </tbody>
+  </table>
+  <p class="chapeau">Cet arbre est un outil d'aide à la décision pédagogique. Il ne se substitue ni à l'analyse d'une situation particulière, ni à l'avis de votre délégué à la protection des données.</p>
+</section>
+
+<footer>
+  <p><strong>L'IA Minute du Médecin</strong>, Dr Guillaume Zagury et Samuel De Queiroz, Éditions Medicilline.</p>
+  <p>Ressource compagnon de la double page consacrée à l'arbre de décision. Aucune réponse n'est enregistrée et aucune donnée n'est transmise : tout se déroule dans votre navigateur.</p>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var chips = document.querySelectorAll("nav button[data-cible]");
+  Array.prototype.forEach.call(chips, function(btn){
+    btn.addEventListener("click", function(){
+      var cible = document.getElementById(btn.getAttribute("data-cible"));
+      if(cible){ cible.scrollIntoView({ behavior:"smooth", block:"start" }); }
+    });
+  });
+
+  var zone = document.getElementById("zone-arbre");
+  var fil = document.getElementById("fil");
+
+  var etapes = {
+    q1: {
+      titre: "Question 1 · Données identifiantes",
+      texte: "Votre demande contient-elle un élément permettant de reconnaître une personne ?",
+      precision: "Nom, initiales, âge exact, date, commune, établissement, profession singulière, pathologie rare. Et surtout : trois de ces éléments cumulés.",
+      choix: [
+        { libelle: "Non, aucun", suite: "q2", fil: "Aucune donnée identifiante" },
+        { libelle: "Oui, il y en a", suite: "anonymisation", fil: "Données identifiantes présentes" }
+      ]
+    },
+    anonymisation: {
+      titre: "Puis-je les retirer ?",
+      texte: "Pouvez-vous reformuler sans perdre ce qui est cliniquement utile ?",
+      precision: "« Un patient de la soixantaine, sous anticoagulant, depuis environ trois mois » remplace presque toujours une description identifiante, sans rien perdre.",
+      choix: [
+        { libelle: "Oui, je reformule", suite: "q2", fil: "Reformulé sans identifiant" },
+        { libelle: "Non, impossible", suite: "rouge1", fil: "Impossible à anonymiser" }
+      ]
+    },
+    q2: {
+      titre: "Question 2 · Hébergement",
+      texte: "Des données de santé vont-elles être traitées par l'outil ?",
+      precision: "Si oui, l'hébergeur doit être certifié pour les données de santé. L'hébergement en Europe est une exigence distincte, qui ne remplace pas la certification.",
+      choix: [
+        { libelle: "Aucune donnée de santé", suite: "q3", fil: "Pas de donnée de santé" },
+        { libelle: "Oui, et l'hébergeur est certifié", suite: "q3", fil: "Hébergeur certifié" },
+        { libelle: "Oui, mais pas certifié", suite: "rouge2", fil: "Hébergeur non certifié" }
+      ]
+    },
+    q3: {
+      titre: "Question 3 · Influence clinique",
+      texte: "La sortie va-t-elle peser sur une décision concernant un patient ?",
+      precision: "Diagnostic, conduite à tenir, prescription, orientation, document remis au patient. Si la réponse est peut-être, considérez que c'est oui.",
+      choix: [
+        { libelle: "Non", suite: "vert", fil: "Aucune influence clinique" },
+        { libelle: "Oui", suite: "orange", fil: "Influence clinique" }
+      ]
+    }
+  };
+
+  var resultats = {
+    vert: {
+      classe: "feu-vert",
+      titre: "Feu vert · Usage libre",
+      texte: "Ni donnée identifiante, ni influence sur une décision clinique. Vous pouvez y aller.",
+      liste: [
+        "Relisez quand même la sortie : le feu vert porte sur la confidentialité, pas sur l'exactitude.",
+        "Si le contenu est destiné au public, vérifiez l'information médicale avant diffusion.",
+        "Si un visuel est généré, mentionnez-le en pied de document."
+      ]
+    },
+    orange: {
+      classe: "feu-orange",
+      titre: "Feu orange · Usage encadré",
+      texte: "Aucune donnée identifiante, mais la sortie va peser sur une décision. Quatre obligations s'appliquent, et elles vont ensemble.",
+      liste: [
+        "Informer le patient de l'usage de l'IA dans sa prise en charge.",
+        "Le mentionner au dossier, une fois.",
+        "Superviser réellement : relire, confronter, décider.",
+        "Tracer la décision : ce que la sortie proposait, ce que vous avez retenu, pourquoi.",
+        "Si vous ne pouvez pas faire les quatre, vous êtes en feu rouge."
+      ]
+    },
+    rouge1: {
+      classe: "feu-rouge",
+      titre: "Feu rouge · Données non anonymisables",
+      texte: "La demande suppose de transmettre un élément permettant de reconnaître une personne, et vous ne pouvez pas le retirer.",
+      liste: [
+        "Cherchez un outil relevant du cadre applicable aux données de santé.",
+        "Ou reformulez la question en situation type, quitte à perdre du détail.",
+        "Ou abstenez-vous. Aucune fuite de données n'a jamais fait gagner du temps."
+      ]
+    },
+    rouge2: {
+      classe: "feu-rouge",
+      titre: "Feu rouge · Hébergement non conforme",
+      texte: "Des données de santé seraient traitées par un prestataire qui n'est pas certifié pour cela. La localisation européenne ne suffit pas.",
+      liste: [
+        "Demandez au fournisseur son certificat, par écrit, avec sa date de validité.",
+        "Cherchez une solution relevant du cadre applicable, notamment côté éditeurs métier.",
+        "En attendant, travaillez sans donnée de santé : la plupart des usages le permettent."
+      ]
+    }
+  };
+
+  var parcours = [];
+
+  function afficher(cle){
+    var e = etapes[cle];
+    if(!e){ return; }
+    var html = '<div class="etape-arbre"><h4>' + e.titre + '</h4>' +
+               '<p>' + e.texte + '</p>' +
+               '<p class="precision">' + e.precision + '</p>' +
+               '<div class="choix">';
+    e.choix.forEach(function(c, i){
+      html += '<button type="button" data-suite="' + c.suite + '" data-fil="' + c.fil + '">' + c.libelle + '</button>';
+    });
+    html += '</div></div>';
+    zone.innerHTML = html;
+
+    var boutons = zone.querySelectorAll(".choix button");
+    Array.prototype.forEach.call(boutons, function(b){
+      b.addEventListener("click", function(){
+        parcours.push(b.getAttribute("data-fil"));
+        majFil();
+        var suite = b.getAttribute("data-suite");
+        if(resultats[suite]){ afficherResultat(suite); }
+        else { afficher(suite); }
+      });
+    });
+  }
+
+  function majFil(){
+    fil.textContent = "Départ · " + parcours.join(" · ");
+  }
+
+  function afficherResultat(cle){
+    var r = resultats[cle];
+    var html = '<div class="resultat-feu ' + r.classe + '">' +
+               '<h4>' + r.titre + '</h4>' +
+               '<p>' + r.texte + '</p><ul>';
+    r.liste.forEach(function(l){ html += '<li>' + l + '</li>'; });
+    html += '</ul></div>' +
+            '<button type="button" class="recommencer" id="btn-recommencer">Recommencer</button>';
+    zone.innerHTML = html;
+
+    document.getElementById("btn-recommencer").addEventListener("click", function(){
+      parcours = [];
+      fil.textContent = "Départ · Je veux utiliser l'IA pour une tâche médicale";
+      afficher("q1");
+      zone.scrollIntoView({ behavior:"smooth", block:"nearest" });
+    });
+  }
+
+  afficher("q1");
+
+  var boutons = document.querySelectorAll(".copier");
+  Array.prototype.forEach.call(boutons, function(btn){
+    btn.addEventListener("click", function(){
+      var bloc = btn.closest(".bloc");
+      var pre = bloc ? bloc.querySelector("pre") : null;
+      if(!pre){ return; }
+      var texte = pre.textContent;
+      var fini = function(){
+        btn.textContent = "Copié";
+        btn.classList.add("ok");
+        setTimeout(function(){ btn.textContent = "Copier"; btn.classList.remove("ok"); }, 1800);
+      };
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(texte).then(fini, function(){ secours(texte, fini); });
+      } else { secours(texte, fini); }
+    });
+  });
+
+  function secours(texte, fini){
+    var z = document.createElement("textarea");
+    z.value = texte;
+    z.setAttribute("readonly","");
+    z.style.position = "absolute";
+    z.style.left = "-9999px";
+    document.body.appendChild(z);
+    z.select();
+    try { document.execCommand("copy"); fini(); } catch(e){}
+    document.body.removeChild(z);
+  }
+})();
+</script>
+</body>
+</html>
