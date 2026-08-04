@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Le scribe IA en consultation · L'IA Minute du Médecin</title>
+<meta name="description" content="Ressource compagnon du livre L'IA Minute du Médecin : information du patient, paramétrage, grille de relecture en six points et situations où l'on coupe le micro.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Fira+Sans+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --rouge:#DC322F;--noir:#1A1A1A;--blanc:#FFFFFF;--jaune:#FFD700;
+  --bleu:#3498DB;--orange:#F39C12;--vert:#27AE60;--violet:#8E44AD;--teal:#1ABC9C;
+  --gris:#BDC3C7;--gris-clair:#F4F5F6;--gris-ligne:#E1E4E6;--gris-texte:#5A6268;
+}
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{margin:0;background:var(--blanc);color:var(--noir);font-family:"Fira Sans Condensed","Roboto Condensed",Arial,sans-serif;font-size:17px;line-height:1.5;}
+.page{max-width:720px;margin:0 auto;padding:0 18px 80px;}
+h1,h2,h3,h4{font-family:"Oswald","Arial Narrow",Arial,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.2px;}
+p{margin:0 0 14px;}
+
+header{padding:26px 0 8px;}
+.eyebrow{display:inline-block;font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:var(--blanc);background:var(--noir);padding:5px 11px;}
+h1{font-size:33px;line-height:1.06;margin:14px 0 0;}
+h1 mark{background:var(--jaune);color:var(--noir);padding:0 5px;}
+.sous-titre{font-family:"Fira Sans Condensed",Arial,sans-serif;font-style:italic;font-weight:600;color:var(--rouge);font-size:19px;margin:10px 0 0;text-transform:none;}
+.trait{height:4px;background:var(--rouge);margin:16px 0 22px;}
+.meta{font-size:14px;color:var(--gris-texte);margin:0 0 22px;}
+
+.flash{border:3px solid var(--rouge);border-radius:14px;padding:16px 18px;margin:0 0 26px;}
+.flash h2{font-size:19px;margin:0 0 10px;color:var(--rouge);}
+.flash ul{margin:0;padding-left:20px;}
+.flash li{margin-bottom:9px;}
+
+nav{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 34px;}
+nav button{font-family:"Oswald",Arial,sans-serif;font-weight:500;font-size:13px;letter-spacing:.6px;text-transform:uppercase;background:var(--gris-clair);color:var(--noir);border:2px solid var(--gris-ligne);border-radius:999px;padding:7px 13px;cursor:pointer;}
+nav button:hover{background:var(--noir);color:var(--blanc);border-color:var(--noir);}
+nav button:focus-visible{outline:3px solid var(--rouge);outline-offset:2px;}
+
+section{border-top:2px solid var(--gris-ligne);padding-top:26px;margin-top:34px;scroll-margin-top:14px;}
+section > h2{font-size:25px;margin:0 0 4px;line-height:1.1;}
+.chapeau{color:var(--gris-texte);font-size:16px;margin:0 0 20px;}
+h3{font-size:19px;margin:26px 0 8px;}
+
+.bloc{border:2px solid var(--gris-ligne);border-radius:14px;overflow:hidden;margin:0 0 16px;}
+.bloc-tete{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--gris-clair);padding:10px 12px;border-bottom:2px solid var(--gris-ligne);}
+.bloc-tete h4{margin:0;font-size:15px;}
+.copier{font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:12px;letter-spacing:.8px;text-transform:uppercase;background:var(--rouge);color:var(--blanc);border:none;border-radius:6px;padding:7px 12px;cursor:pointer;white-space:nowrap;}
+.copier.ok{background:var(--vert);}
+.copier:focus-visible{outline:3px solid var(--noir);outline-offset:2px;}
+pre{margin:0;padding:14px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px;line-height:1.5;white-space:pre-wrap;word-wrap:break-word;}
+.badge{display:inline-block;background:var(--gris);color:var(--noir);border-radius:5px;font-family:"Oswald",Arial,sans-serif;font-size:11.5px;letter-spacing:.7px;text-transform:uppercase;padding:3px 8px;margin:0 6px 6px 0;}
+.note{font-size:15.5px;background:var(--gris-clair);border-left:4px solid var(--bleu);padding:9px 11px;margin:0 0 16px;}
+.note b{font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:12.5px;letter-spacing:.6px;color:var(--bleu);}
+
+.tableau{width:100%;border-collapse:collapse;font-size:15px;margin:0 0 18px;}
+.tableau th,.tableau td{border:1px solid var(--gris-ligne);padding:8px 10px;text-align:left;vertical-align:top;}
+.tableau th{background:var(--noir);color:var(--blanc);font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:13px;letter-spacing:.5px;}
+.tableau tr:nth-child(even) td{background:var(--gris-clair);}
+
+.signal{display:flex;gap:14px;border:2px solid var(--gris-ligne);border-radius:14px;padding:14px;margin-bottom:12px;}
+.pastille{flex:0 0 40px;height:40px;border-radius:50%;color:var(--blanc);font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:18px;display:flex;align-items:center;justify-content:center;background:var(--rouge);}
+.signal h4{font-size:16px;margin:3px 0 6px;}
+.signal p{font-size:15.5px;margin:0 0 6px;}
+.signal p:last-child{margin-bottom:0;}
+.reflexe{font-size:15px;background:#F3FBF6;border-left:4px solid var(--vert);padding:8px 10px;}
+.reflexe b{font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:12.5px;letter-spacing:.6px;color:var(--vert);}
+
+.controle{display:flex;gap:12px;border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;margin-bottom:10px;}
+.controle.fait{border-color:var(--vert);background:#F3FBF6;}
+.controle input{width:22px;height:22px;accent-color:var(--vert);cursor:pointer;flex:0 0 22px;margin-top:2px;}
+.controle h4{margin:0 0 4px;font-size:16px;}
+.controle p{margin:0;font-size:15.5px;}
+.progression{display:flex;align-items:center;gap:12px;margin:0 0 18px;border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;}
+.jauge{flex:1;height:12px;background:var(--gris-ligne);border-radius:999px;overflow:hidden;}
+.jauge span{display:block;height:100%;width:0;background:var(--rouge);transition:width .25s ease;}
+.compteur{font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:16px;white-space:nowrap;}
+
+.zone-rouge{border:3px solid var(--rouge);border-radius:14px;padding:16px 18px;margin:18px 0;}
+.zone-rouge h3{margin-top:0;color:var(--rouge);}
+.interdit{list-style:none;padding:0;margin:0;}
+.interdit li{padding-left:26px;position:relative;margin-bottom:8px;}
+.interdit li::before{content:"\00d7";position:absolute;left:0;top:-2px;color:var(--rouge);font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:22px;line-height:1;}
+
+.banniere{background:var(--rouge);color:var(--blanc);border-radius:14px;padding:18px 20px;margin:26px 0;}
+.banniere p{margin:0;font-family:"Oswald",Arial,sans-serif;font-size:19px;line-height:1.25;text-transform:uppercase;}
+.banniere small{display:block;font-family:"Fira Sans Condensed",Arial,sans-serif;text-transform:none;font-size:15px;margin-top:8px;opacity:.95;}
+
+details{border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;margin-bottom:10px;}
+details[open]{border-color:var(--noir);}
+summary{cursor:pointer;font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:16px;text-transform:uppercase;letter-spacing:.3px;}
+summary::-webkit-details-marker{display:none;}
+summary::before{content:"+ ";color:var(--rouge);font-weight:700;}
+details[open] summary::before{content:"\2212 ";}
+details p{margin:10px 0 0;font-size:16px;}
+
+footer{border-top:4px solid var(--noir);margin-top:44px;padding-top:18px;font-size:14px;color:var(--gris-texte);}
+footer strong{color:var(--noir);}
+
+@media (max-width:520px){
+  body{font-size:16px;}h1{font-size:27px;}section > h2{font-size:21px;}
+  .tableau{font-size:14px;}pre{font-size:12.5px;}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none !important;scroll-behavior:auto !important;}}
+</style>
+</head>
+<body>
+<div class="page">
+
+<header>
+  <span class="eyebrow">Ressource compagnon · L'IA Minute du Médecin</span>
+  <h1>Le scribe en consultation, <mark>ce qu'il faut cadrer</mark></h1>
+  <p class="sous-titre">Ce que disent vraiment les études, le script d'information du patient, la grille de relecture en six points et les consultations où l'on coupe le micro.</p>
+  <div class="trait"></div>
+  <p class="meta">Mise à jour : 25 juillet 2026.</p>
+</header>
+
+<div class="flash">
+  <h2>Le temps gagné, avec les vrais chiffres</h2>
+  <ul>
+    <li><strong>Ce que disent les éditeurs :</strong> une large part des utilisateurs déclare gagner au moins une heure par jour. C'est une donnée déclarative, issue d'enquêtes internes, et elle mesure un ressenti autant qu'un temps.</li>
+    <li><strong>Ce que mesure le seul essai randomisé publié :</strong> une baisse de <strong>9,5 %</strong> du temps passé sur le compte rendu pour les utilisateurs de Nabla, contre le groupe témoin, sans différence significative pour l'autre outil testé. L'étude a porté sur 238 médecins de quatorze spécialités (NEJM AI, décembre 2025). Une étude plus large publiée début 2026 retrouve de l'ordre de seize minutes économisées par huit heures de consultation.</li>
+    <li><strong>Ce que les deux s'accordent à montrer :</strong> une amélioration de l'épuisement professionnel et de la charge mentale perçue. C'est probablement là le vrai bénéfice, et il ne se compte pas en minutes. Vous ne rentrez plus chez vous avec vos comptes rendus, et vous regardez votre patient pendant qu'il parle.</li>
+  </ul>
+</div>
+
+<nav aria-label="Sommaire">
+  <button type="button" data-cible="patient">Informer le patient</button>
+  <button type="button" data-cible="parametrage">Paramétrer</button>
+  <button type="button" data-cible="dicter">Ce qu'il faut dicter</button>
+  <button type="button" data-cible="relecture">La relecture</button>
+  <button type="button" data-cible="couper">Quand couper</button>
+  <button type="button" data-cible="controles">Avant d'exporter</button>
+  <button type="button" data-cible="faq">Questions</button>
+  <button type="button" data-cible="sources">Sources</button>
+</nav>
+
+<!-- PATIENT -->
+<section id="patient">
+  <h2>Informer le patient</h2>
+  <p class="chapeau">C'est l'obligation la plus simple à remplir et la plus souvent oubliée. Une phrase, à dire au début, la première fois.</p>
+
+  <p>Un dispositif qui écoute la consultation traite des données de santé et enregistre la parole du patient. Celui-ci doit être informé de manière claire et pouvoir s'y opposer sans avoir à se justifier, et sans que cela change quoi que ce soit à sa prise en charge. Trois supports suffisent à couvrir la situation.</p>
+
+  <div class="bloc">
+    <div class="bloc-tete"><h4>Ce que vous dites, en une phrase</h4><button type="button" class="copier">Copier</button></div>
+    <pre>"J'utilise un assistant qui écoute notre échange pour rédiger mon compte rendu, ce qui me permet de vous regarder au lieu de taper. Rien n'est conservé une fois le compte rendu écrit, et je le relis avant de le valider. Si vous préférez que je ne l'utilise pas, dites-le-moi, ça ne change rien pour vous."</pre>
+  </div>
+
+  <div class="bloc">
+    <div class="bloc-tete"><h4>Affichette de salle d'attente et de bureau</h4><button type="button" class="copier">Copier</button></div>
+    <pre>ASSISTANT DE RÉDACTION
+
+Pour rédiger votre compte rendu, ce cabinet utilise un assistant qui transcrit la consultation.
+
+Ce que cela change pour vous : votre médecin vous regarde au lieu de taper.
+Ce que cela ne change pas : le secret médical, et le fait que votre médecin relise et valide chaque compte rendu.
+
+Vous pouvez demander que l'assistant ne soit pas utilisé pendant votre consultation. Il suffit de le dire, et cela n'a aucune conséquence sur votre prise en charge.
+
+Pour toute question sur vos données : [nom du responsable de traitement ou du délégué à la protection des données du cabinet].</pre>
+  </div>
+
+  <div class="bloc">
+    <div class="bloc-tete"><h4>Mention à consigner dans le dossier, la première fois</h4><button type="button" class="copier">Copier</button></div>
+    <pre>Patient informé de l'utilisation d'un assistant de transcription pour la rédaction du compte rendu. Information donnée oralement le [date]. Pas d'opposition exprimée.
+
+[ou] Opposition exprimée : assistant non utilisé.</pre>
+  </div>
+
+  <table class="tableau">
+    <thead><tr><th>Situation particulière</th><th>Conduite</th></tr></thead>
+    <tbody>
+      <tr><td>Mineur accompagné</td><td>Informez l'accompagnant et l'enfant, dans des mots adaptés à son âge. L'adolescent vu seul est informé pour lui-même.</td></tr>
+      <tr><td>Majeur protégé ou troubles cognitifs</td><td>Informez la personne et son accompagnant. En cas de doute sur la compréhension, n'activez pas.</td></tr>
+      <tr><td>Tiers présent dans la pièce</td><td>Le tiers est enregistré lui aussi. Informez-le, ou coupez pendant qu'il parle.</td></tr>
+      <tr><td>Patient non francophone</td><td>L'outil transcrit de nombreuses langues, mais l'information sur son usage doit être comprise. Sans interprète, préférez ne pas activer.</td></tr>
+      <tr><td>Refus du patient</td><td>Vous coupez, vous ne discutez pas, et vous le notez au dossier. Un refus n'a pas à être argumenté.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- PARAMETRAGE -->
+<section id="parametrage">
+  <h2>Paramétrer avant la première vraie consultation</h2>
+  <p class="chapeau">Une demi-heure investie une fois. Sans elle, vous passerez trois semaines à corriger les mêmes défauts de mise en forme.</p>
+
+  <table class="tableau">
+    <thead><tr><th>Ce que vous réglez</th><th>Pourquoi</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Le modèle de compte rendu</strong></td><td>Reproduisez la structure que vous utilisez déjà, rubrique par rubrique, dans l'ordre où vous les lisez. Un compte rendu bien structuré mais dans le mauvais ordre vous coûtera du temps à chaque relecture.</td></tr>
+      <tr><td><strong>Le niveau de détail</strong></td><td>Un compte rendu de suivi n'a pas la longueur d'une première consultation. Créez deux modèles plutôt que de couper à chaque fois.</td></tr>
+      <tr><td><strong>Le vocabulaire de votre spécialité</strong></td><td>Ajoutez vos abréviations habituelles et les termes que vous employez, surtout ceux qui ont un homophone courant.</td></tr>
+      <tr><td><strong>La destination</strong></td><td>Vérifiez que l'export arrive dans la bonne rubrique de votre logiciel, et pas dans un champ libre que personne ne relit.</td></tr>
+      <tr><td><strong>Le courrier d'adressage</strong></td><td>Si la génération automatique est proposée, calez votre en-tête et votre formule avant, pas après vingt courriers.</td></tr>
+    </tbody>
+  </table>
+
+  <p class="note"><b>Le test de rodage</b> Faites vos cinq premières consultations en double : le scribe tourne, et vous rédigez comme d'habitude. Vous comparez, vous ajustez le modèle, et vous saurez précisément ce qu'il rate chez vous. Cinq consultations, et vous êtes calé.</p>
+</section>
+
+<!-- DICTER -->
+<section id="dicter">
+  <h2>Ce que le scribe ne peut pas savoir</h2>
+  <p class="chapeau">Il transcrit ce qui est dit. Tout ce qui n'est pas verbalisé n'existe pas pour lui, et c'est la première cause de compte rendu incomplet.</p>
+
+  <table class="tableau">
+    <thead><tr><th>Ce qui manque</th><th>Ce que vous verbalisez</th></tr></thead>
+    <tbody>
+      <tr><td>L'examen clinique</td><td>Dites ce que vous faites et ce que vous trouvez : « auscultation cardiaque, bruits réguliers, pas de souffle ». Vous informez le patient en même temps, ce qui n'est pas un mauvais effet secondaire.</td></tr>
+      <tr><td>Les constantes</td><td>Énoncez les valeurs à voix haute plutôt que de les taper. Vérifiez-les ensuite, les chiffres sont ce que la transcription rate le plus.</td></tr>
+      <tr><td>Votre raisonnement</td><td>Une hypothèse gardée en tête n'apparaîtra pas. Si elle doit figurer au dossier, dites-la.</td></tr>
+      <tr><td>Ce que vous ne voulez pas dire devant le patient</td><td>Ne le dictez pas pendant la consultation. Ajoutez-le au clavier après, dans le compte rendu relu.</td></tr>
+      <tr><td>Les décisions prises après le départ</td><td>Le scribe s'arrête avec la consultation. Le complément se fait à la main.</td></tr>
+    </tbody>
+  </table>
+
+  <p><strong>Le bénéfice inattendu :</strong> verbaliser votre examen transforme la consultation. Le patient comprend ce que vous faites, pourquoi vous le faites, et ce que vous trouvez. Plusieurs praticiens rapportent que c'est le changement qu'ils gardent, indépendamment de l'outil.</p>
+</section>
+
+<!-- RELECTURE -->
+<section id="relecture">
+  <h2>La relecture, six points</h2>
+  <p class="chapeau">Un compte rendu généré est bien écrit, bien structuré, et c'est précisément ce qui endort la vigilance. Ces six points couvrent l'essentiel des erreurs observées.</p>
+
+  <div class="signal">
+    <div class="pastille">1</div>
+    <div>
+      <h4>Les négations</h4>
+      <p>« Pas de douleur thoracique » et « douleur thoracique » ne diffèrent que par deux mots dans un flux de parole. C'est l'erreur la plus fréquente et la plus lourde de conséquences.</p>
+      <p class="reflexe"><b>Réflexe</b> : relire en priorité les lignes qui portent une négation. Ce sont elles qui protègent, et elles qui basculent.</p>
+    </div>
+  </div>
+
+  <div class="signal">
+    <div class="pastille">2</div>
+    <div>
+      <h4>Les chiffres et les unités</h4>
+      <p>Tensions, doses, dates, durées, âges. La transcription d'un nombre dicté rapidement est la deuxième source d'erreur, et un chiffre faux dans un compte rendu exporté devient une donnée du dossier.</p>
+      <p class="reflexe"><b>Réflexe</b> : vérifier chaque nombre contre ce que vous avez mesuré, pas contre ce dont vous vous souvenez.</p>
+    </div>
+  </div>
+
+  <div class="signal">
+    <div class="pastille">3</div>
+    <div>
+      <h4>La latéralité</h4>
+      <p>Droite et gauche s'inversent, surtout quand le patient et vous ne parlez pas du même point de vue. Sur un compte rendu adressé à un chirurgien, l'erreur ne pardonne pas.</p>
+      <p class="reflexe"><b>Réflexe</b> : dire la latéralité une seule fois, clairement, et la vérifier systématiquement à la relecture.</p>
+    </div>
+  </div>
+
+  <div class="signal">
+    <div class="pastille">4</div>
+    <div>
+      <h4>La prudence effacée</h4>
+      <p>C'est le défaut le plus subtil. Vous dites « il pourrait s'agir de », le compte rendu écrit « il s'agit de ». Le modèle lisse les formulations prudentes en affirmations, parce que c'est ainsi qu'on écrit un compte rendu.</p>
+      <p class="reflexe"><b>Réflexe</b> : chercher les verbes affirmatifs sur les lignes diagnostiques. Si vous n'étiez pas certain, remettez le conditionnel vous-même.</p>
+    </div>
+  </div>
+
+  <div class="signal">
+    <div class="pastille">5</div>
+    <div>
+      <h4>Ce qui a été ajouté</h4>
+      <p>Un compte rendu structuré comble parfois une rubrique vide par une formule attendue : « pas d'antécédent notable », « examen sans particularité ». Si vous ne l'avez pas dit, cela n'a pas à figurer.</p>
+      <p class="reflexe"><b>Réflexe</b> : relire chaque rubrique en se demandant si vous avez réellement exploré ce point.</p>
+    </div>
+  </div>
+
+  <div class="signal">
+    <div class="pastille">6</div>
+    <div>
+      <h4>Ce qui n'a pas à y être</h4>
+      <p>Une remarque du patient sans lien avec le motif, un élément de vie privée, une confidence sur un tiers. La transcription retient tout, le compte rendu n'a pas à tout garder.</p>
+      <p class="reflexe"><b>Réflexe</b> : supprimer avant d'exporter. Le dossier est consultable par le patient, et ce qui y figure y reste.</p>
+    </div>
+  </div>
+</section>
+
+<!-- COUPER -->
+<section id="couper">
+  <h2>Les consultations où l'on coupe</h2>
+  <p class="chapeau">Le réflexe le plus important de cette page, et le seul qui ne se rattrape pas après coup.</p>
+
+  <p>Certaines paroles ne doivent pas transiter, même quelques secondes, même chez un prestataire irréprochable. Dans ces situations, le micro reste fermé et le compte rendu se rédige à la main, plus court, avec les seuls éléments nécessaires.</p>
+
+  <div class="zone-rouge">
+    <h3>Micro coupé, sans hésitation</h3>
+    <ul class="interdit">
+      <li>Révélation de violences conjugales, intrafamiliales ou sexuelles</li>
+      <li>Consultation en lien avec une procédure judiciaire en cours</li>
+      <li>Demande d'interruption de grossesse, contraception d'urgence chez une mineure</li>
+      <li>Confidence sur un tiers, un employeur, un membre de la famille</li>
+      <li>Situation psychiatrique aiguë, idées suicidaires, crise</li>
+      <li>Toute consultation où le patient hésite, même sans dire non</li>
+    </ul>
+  </div>
+
+  <p><strong>Comment couper sans créer un malaise :</strong> « Je coupe l'assistant pour cette partie, on est juste tous les deux. » Trois secondes, et le patient comprend que vous avez entendu ce qu'il vous confiait.</p>
+
+  <p class="note"><b>La règle qui simplifie tout</b> Au moindre doute, on n'active pas. Le compte rendu prendra quatre minutes de plus, et c'est le meilleur investissement de la journée.</p>
+</section>
+
+<!-- CONTROLES -->
+<section id="controles">
+  <h2>Avant d'exporter dans le dossier</h2>
+  <p class="chapeau">Six contrôles, une minute. Ce qui part dans le dossier est votre texte, pas un brouillon.</p>
+
+  <div class="progression">
+    <div class="jauge"><span id="jauge-barre"></span></div>
+    <div class="compteur" id="jauge-compteur">0 / 6</div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Les négations sont exactes</h4>
+    <p>Ligne par ligne, sur tout ce qui commence par « pas de », « absence de », « sans ».</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Tous les chiffres ont été vérifiés</h4>
+    <p>Constantes, doses, dates, durées. Contre la mesure, pas contre la mémoire.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>La latéralité est juste</h4>
+    <p>Surtout si le compte rendu part chez un correspondant.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Le degré de certitude est le mien</h4>
+    <p>Ce qui était une hypothèse est resté une hypothèse.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Rien n'a été ajouté que je n'aie dit</h4>
+    <p>Aucune formule de remplissage dans une rubrique que je n'ai pas explorée.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Rien d'inutile n'y figure</h4>
+    <p>Le dossier est consultable par le patient. Ce que vous y laissez, vous l'assumez devant lui.</p></div>
+  </div>
+
+  <div class="banniere">
+    <p>Le scribe transcrit. Vous êtes l'auteur du compte rendu que vous signez.
+    <small>La relecture n'est pas une vérification de forme : le texte exporté devient une pièce du dossier médical, opposable, consultable par le patient et transmissible à vos correspondants.</small></p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <h2>Questions fréquentes</h2>
+
+  <details>
+    <summary>L'enregistrement audio est-il conservé ?</summary>
+    <p>Les principaux éditeurs annoncent ne pas conserver l'audio une fois le compte rendu généré. Faites-vous confirmer ce point par écrit, ainsi que la durée de conservation des transcriptions et du compte rendu, et conservez cette réponse dans votre registre de traitements.</p>
+  </details>
+
+  <details>
+    <summary>Le patient peut-il refuser ?</summary>
+    <p>Oui, sans avoir à se justifier et sans conséquence sur sa prise en charge. C'est précisément pour cela que l'information doit être donnée avant, et non pas découverte par le patient qui aperçoit un micro actif.</p>
+  </details>
+
+  <details>
+    <summary>Faut-il un consentement écrit ?</summary>
+    <p>Une information claire et une possibilité d'opposition suffisent dans la pratique courante, avec une trace au dossier la première fois. Si votre structure a un délégué à la protection des données, faites valider votre formulation par lui : c'est son rôle, et cela vous sécurise.</p>
+  </details>
+
+  <details>
+    <summary>Est-ce un dispositif médical ?</summary>
+    <p>Un outil de documentation qui ne propose ni diagnostic ni conduite à tenir n'a pas la même qualification qu'un dispositif d'aide à la décision. Dès qu'un module suggère un codage, un diagnostic ou une prescription, la question change : demandez à l'éditeur le statut réglementaire exact du module concerné.</p>
+  </details>
+
+  <details>
+    <summary>Combien de temps pour être à l'aise ?</summary>
+    <p>Une semaine pour ne plus y penser, trois semaines pour ajuster vos modèles. Le point de bascule est le moment où vous cessez de relire par méfiance pour relire par méthode, sur les six points de cette page.</p>
+  </details>
+
+  <details>
+    <summary>Que se passe-t-il si l'outil disparaît ou change de main ?</summary>
+    <p>Vos comptes rendus sont dans votre logiciel métier, pas dans le scribe. C'est un argument en faveur d'un export systématique dans le dossier plutôt que d'une conservation dans l'outil, et une question à poser avant de vous engager.</p>
+  </details>
+</section>
+
+<!-- SOURCES -->
+<section id="sources">
+  <h2>Sources</h2>
+  <table class="tableau">
+    <thead><tr><th>Élément</th><th>Source</th></tr></thead>
+    <tbody>
+      <tr><td>Baisse de 9,5 % du temps passé sur le compte rendu pour les utilisateurs de Nabla contre témoin, intervalle de confiance à 95 % de -17,2 % à -1,8 %, absence de différence significative pour l'autre outil testé. Essai randomisé pragmatique à trois bras, 238 médecins ambulatoires, 14 spécialités, novembre 2024 à janvier 2025</td><td>Lukac PJ et coll., Ambient AI Scribes in Clinical Practice: A Randomized Trial, NEJM AI, décembre 2025</td></tr>
+      <tr><td>Ordre de seize minutes de documentation économisées par huit heures de consultation, étude portant sur environ 1 800 cliniciens dans cinq centres universitaires</td><td>Étude publiée début 2026, reprise par la presse spécialisée</td></tr>
+      <tr><td>Amélioration des scores d'épuisement professionnel et de charge de travail perçue, à confirmer par des essais multicentriques</td><td>NEJM AI, décembre 2025, critères de jugement secondaires</td></tr>
+      <tr><td>Chiffres d'adoption : environ 85 000 cliniciens, plus de 130 organisations de santé, 35 langues, 55 spécialités, intégration aux principaux logiciels métier dont Weda</td><td>Communication de l'éditeur et presse économique, 2025 et 2026</td></tr>
+      <tr><td>Part des utilisateurs déclarant gagner au moins une heure par jour</td><td>Donnée déclarative communiquée par l'éditeur</td></tr>
+      <tr><td>Secret médical, information du patient et droit d'accès au dossier</td><td>Code de la santé publique, articles L.1110-4 et L.1111-7</td></tr>
+      <tr><td>Données de santé, catégorie particulière et information des personnes concernées</td><td>RGPD, articles 9, 13 et 14</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<footer>
+  <p><strong>L'IA Minute du Médecin</strong>, Dr Guillaume Zagury et Samuel De Queiroz, Éditions Medicilline.</p>
+  <p>Ressource compagnon de la double page consacrée au compte rendu de consultation. Cette page décrit une méthode d'usage. Les engagements de conservation, d'hébergement et de sécurité relèvent du contrat passé avec l'éditeur que vous choisissez, et méritent d'être vérifiés par écrit avant tout déploiement.</p>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var chips = document.querySelectorAll("nav button[data-cible]");
+  Array.prototype.forEach.call(chips, function(btn){
+    btn.addEventListener("click", function(){
+      var cible = document.getElementById(btn.getAttribute("data-cible"));
+      if(cible){ cible.scrollIntoView({ behavior:"smooth", block:"start" }); }
+    });
+  });
+
+  var controles = document.querySelectorAll("[data-controle]");
+  var barre = document.getElementById("jauge-barre");
+  var compteur = document.getElementById("jauge-compteur");
+  var total = controles.length;
+
+  function maj(){
+    var faits = 0;
+    Array.prototype.forEach.call(controles, function(c){
+      var box = c.querySelector("input[type=checkbox]");
+      if(box && box.checked){ faits++; c.classList.add("fait"); }
+      else { c.classList.remove("fait"); }
+    });
+    barre.style.width = (faits/total*100) + "%";
+    barre.style.background = (faits === total) ? "#27AE60" : "#DC322F";
+    compteur.textContent = faits + " / " + total;
+  }
+
+  Array.prototype.forEach.call(controles, function(c){
+    var box = c.querySelector("input[type=checkbox]");
+    if(box){ box.addEventListener("change", maj); }
+  });
+  maj();
+
+  var boutons = document.querySelectorAll(".copier");
+  Array.prototype.forEach.call(boutons, function(btn){
+    btn.addEventListener("click", function(){
+      var bloc = btn.closest(".bloc");
+      var pre = bloc ? bloc.querySelector("pre") : null;
+      if(!pre){ return; }
+      var texte = pre.textContent;
+      var fini = function(){
+        btn.textContent = "Copié";
+        btn.classList.add("ok");
+        setTimeout(function(){ btn.textContent = "Copier"; btn.classList.remove("ok"); }, 1800);
+      };
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(texte).then(fini, function(){ secours(texte, fini); });
+      } else { secours(texte, fini); }
+    });
+  });
+
+  function secours(texte, fini){
+    var z = document.createElement("textarea");
+    z.value = texte;
+    z.setAttribute("readonly","");
+    z.style.position = "absolute";
+    z.style.left = "-9999px";
+    document.body.appendChild(z);
+    z.select();
+    try { document.execCommand("copy"); fini(); } catch(e){}
+    document.body.removeChild(z);
+  }
+})();
+</script>
+</body>
+</html>

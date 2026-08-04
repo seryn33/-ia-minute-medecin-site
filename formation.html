@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Veille et formation augmentées · L'IA Minute du Médecin</title>
+<meta name="description" content="Ressource compagnon du livre L'IA Minute du Médecin : les quatre livrables de formation prêts à produire, le protocole de vérification croisée, et le portfolio de traçabilité pour la certification périodique.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Fira+Sans+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --rouge:#DC322F;--noir:#1A1A1A;--blanc:#FFFFFF;--jaune:#FFD700;
+  --bleu:#3498DB;--orange:#F39C12;--vert:#27AE60;--violet:#8E44AD;--teal:#1ABC9C;
+  --gris:#BDC3C7;--gris-clair:#F4F5F6;--gris-ligne:#E1E4E6;--gris-texte:#5A6268;
+}
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{margin:0;background:var(--blanc);color:var(--noir);font-family:"Fira Sans Condensed","Roboto Condensed",Arial,sans-serif;font-size:17px;line-height:1.5;}
+.page{max-width:720px;margin:0 auto;padding:0 18px 80px;}
+h1,h2,h3,h4{font-family:"Oswald","Arial Narrow",Arial,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.2px;}
+p{margin:0 0 14px;}
+
+header{padding:26px 0 8px;}
+.eyebrow{display:inline-block;font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:var(--blanc);background:var(--noir);padding:5px 11px;}
+h1{font-size:33px;line-height:1.06;margin:14px 0 0;}
+h1 mark{background:var(--jaune);color:var(--noir);padding:0 5px;}
+.sous-titre{font-family:"Fira Sans Condensed",Arial,sans-serif;font-style:italic;font-weight:600;color:var(--rouge);font-size:19px;margin:10px 0 0;text-transform:none;}
+.trait{height:4px;background:var(--rouge);margin:16px 0 22px;}
+.meta{font-size:14px;color:var(--gris-texte);margin:0 0 22px;}
+
+.flash{border:3px solid var(--rouge);border-radius:14px;padding:16px 18px;margin:0 0 26px;}
+.flash h2{font-size:19px;margin:0 0 10px;color:var(--rouge);}
+.flash ul{margin:0;padding-left:20px;}
+.flash li{margin-bottom:9px;}
+
+nav{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 34px;}
+nav button{font-family:"Oswald",Arial,sans-serif;font-weight:500;font-size:13px;letter-spacing:.6px;text-transform:uppercase;background:var(--gris-clair);color:var(--noir);border:2px solid var(--gris-ligne);border-radius:999px;padding:7px 13px;cursor:pointer;}
+nav button:hover{background:var(--noir);color:var(--blanc);border-color:var(--noir);}
+nav button:focus-visible{outline:3px solid var(--rouge);outline-offset:2px;}
+
+section{border-top:2px solid var(--gris-ligne);padding-top:26px;margin-top:34px;scroll-margin-top:14px;}
+section > h2{font-size:25px;margin:0 0 4px;line-height:1.1;}
+.chapeau{color:var(--gris-texte);font-size:16px;margin:0 0 20px;}
+h3{font-size:19px;margin:26px 0 8px;}
+
+.onglets{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px;}
+.onglets button{font-family:"Oswald",Arial,sans-serif;font-weight:500;font-size:13px;letter-spacing:.6px;text-transform:uppercase;background:var(--blanc);color:var(--noir);border:2px solid var(--noir);border-radius:8px;padding:7px 12px;cursor:pointer;}
+.onglets button[aria-selected="true"]{background:var(--noir);color:var(--blanc);}
+.onglets button:focus-visible{outline:3px solid var(--rouge);outline-offset:2px;}
+.panneau[hidden]{display:none;}
+
+.bloc{border:2px solid var(--gris-ligne);border-radius:14px;overflow:hidden;margin:0 0 16px;}
+.bloc-tete{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--gris-clair);padding:10px 12px;border-bottom:2px solid var(--gris-ligne);}
+.bloc-tete h4{margin:0;font-size:15px;}
+.copier{font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:12px;letter-spacing:.8px;text-transform:uppercase;background:var(--rouge);color:var(--blanc);border:none;border-radius:6px;padding:7px 12px;cursor:pointer;white-space:nowrap;}
+.copier.ok{background:var(--vert);}
+.copier:focus-visible{outline:3px solid var(--noir);outline-offset:2px;}
+pre{margin:0;padding:14px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px;line-height:1.5;white-space:pre-wrap;word-wrap:break-word;}
+.badge{display:inline-block;background:var(--gris);color:var(--noir);border-radius:5px;font-family:"Oswald",Arial,sans-serif;font-size:11.5px;letter-spacing:.7px;text-transform:uppercase;padding:3px 8px;margin:0 6px 6px 0;}
+
+.tableau{width:100%;border-collapse:collapse;font-size:15px;margin:0 0 18px;}
+.tableau th,.tableau td{border:1px solid var(--gris-ligne);padding:8px 10px;text-align:left;vertical-align:top;}
+.tableau th{background:var(--noir);color:var(--blanc);font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:13px;letter-spacing:.5px;}
+.tableau tr:nth-child(even) td{background:var(--gris-clair);}
+
+.controle{display:flex;gap:12px;border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;margin-bottom:10px;}
+.controle.fait{border-color:var(--vert);background:#F3FBF6;}
+.controle input{width:22px;height:22px;accent-color:var(--vert);cursor:pointer;flex:0 0 22px;margin-top:2px;}
+.controle h4{margin:0 0 4px;font-size:16px;}
+.controle p{margin:0;font-size:15.5px;}
+.progression{display:flex;align-items:center;gap:12px;margin:0 0 18px;border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;}
+.jauge{flex:1;height:12px;background:var(--gris-ligne);border-radius:999px;overflow:hidden;}
+.jauge span{display:block;height:100%;width:0;background:var(--rouge);transition:width .25s ease;}
+.compteur{font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:16px;white-space:nowrap;}
+
+.zone-rouge{border:3px solid var(--rouge);border-radius:14px;padding:16px 18px;margin:18px 0;}
+.zone-rouge h3{margin-top:0;color:var(--rouge);}
+.interdit{list-style:none;padding:0;margin:0;}
+.interdit li{padding-left:26px;position:relative;margin-bottom:8px;}
+.interdit li::before{content:"\00d7";position:absolute;left:0;top:-2px;color:var(--rouge);font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:22px;line-height:1;}
+
+.banniere{background:var(--rouge);color:var(--blanc);border-radius:14px;padding:18px 20px;margin:26px 0;}
+.banniere p{margin:0;font-family:"Oswald",Arial,sans-serif;font-size:19px;line-height:1.25;text-transform:uppercase;}
+.banniere small{display:block;font-family:"Fira Sans Condensed",Arial,sans-serif;text-transform:none;font-size:15px;margin-top:8px;opacity:.95;}
+
+details{border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;margin-bottom:10px;}
+details[open]{border-color:var(--noir);}
+summary{cursor:pointer;font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:16px;text-transform:uppercase;letter-spacing:.3px;}
+summary::-webkit-details-marker{display:none;}
+summary::before{content:"+ ";color:var(--rouge);font-weight:700;}
+details[open] summary::before{content:"\2212 ";}
+details p{margin:10px 0 0;font-size:16px;}
+
+footer{border-top:4px solid var(--noir);margin-top:44px;padding-top:18px;font-size:14px;color:var(--gris-texte);}
+footer strong{color:var(--noir);}
+
+@media (max-width:520px){
+  body{font-size:16px;}h1{font-size:27px;}section > h2{font-size:21px;}
+  .tableau{font-size:14px;}pre{font-size:12.5px;}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none !important;scroll-behavior:auto !important;}}
+</style>
+</head>
+<body>
+<div class="page">
+
+<header>
+  <span class="eyebrow">Ressource compagnon · L'IA Minute du Médecin</span>
+  <h1>Formation augmentée : <mark>les livrables</mark></h1>
+  <p class="sous-titre">Quatre productions à sortir d'un seul article, le protocole de vérification croisée, et le portfolio qui alimente votre traçabilité.</p>
+  <div class="trait"></div>
+  <p class="meta">Mise à jour : 25 juillet 2026. Le cadre réglementaire de la formation continue est en pleine recomposition : vérifiez la date avant de vous appuyer sur cette page.</p>
+</header>
+
+<div class="flash">
+  <h2>Ce qui bouge dans votre obligation, et ce qui n'a pas bougé</h2>
+  <ul>
+    <li><strong>L'agence qui pilote le DPC est en cours de fermeture.</strong> La décision a été actée fin 2025 après un rapport de l'Inspection générale des affaires sociales. Le volet scientifique irait à la Haute Autorité de santé, le volet financier à France Compétences. Le financement du DPC reste assuré sur 2026 et les orientations prioritaires ont été prolongées jusqu'au 31 décembre 2026.</li>
+    <li><strong>La certification périodique prend le relais.</strong> Instaurée par ordonnance en juillet 2021, en vigueur depuis le 1er janvier 2023, elle porte sur six ans, neuf à titre transitoire, et couvre quatre axes : actualiser ses connaissances, améliorer la qualité des pratiques, améliorer la relation avec le patient, et prendre en compte sa propre santé. C'est l'Ordre qui contrôle.</li>
+    <li><strong>Une confusion à lever tout de suite :</strong> les 21 heures annuelles, soit 63 heures sur trois ans, ne sont pas une obligation d'heures. C'est un droit de tirage sur l'enveloppe de financement. L'obligation, elle, porte sur un parcours d'actions, pas sur un volume horaire.</li>
+    <li><strong>Le taux qui explique tout le reste :</strong> environ 22 % des professionnels éligibles avaient validé leur obligation triennale sur la période 2020 à 2022, selon le rapport de l'IGAS de mars 2025. Le problème n'a jamais été l'envie d'apprendre.</li>
+  </ul>
+</div>
+
+<nav aria-label="Sommaire">
+  <button type="button" data-cible="cadre">Ce que l'IA ne fait pas</button>
+  <button type="button" data-cible="livrables">Les 4 livrables</button>
+  <button type="button" data-cible="croisement">Vérification croisée</button>
+  <button type="button" data-cible="pairs">Groupe de pairs</button>
+  <button type="button" data-cible="portfolio">Portfolio</button>
+  <button type="button" data-cible="controles">Avant diffusion</button>
+  <button type="button" data-cible="faq">Questions</button>
+  <button type="button" data-cible="sources">Sources</button>
+</nav>
+
+<!-- CADRE -->
+<section id="cadre">
+  <h2>Ce que l'IA ne fait pas, et qu'il faut savoir avant de commencer</h2>
+  <p class="chapeau">Trois malentendus coûteux, à évacuer en une minute.</p>
+
+  <table class="tableau">
+    <thead><tr><th>Ce qu'on croit</th><th>La réalité</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Une session de travail avec une IA compte dans mon obligation</td>
+        <td>Non. Seule une action déposée par un organisme habilité et enregistrée dans le dispositif officiel valide une obligation. Une synthèse produite chez vous ne valide rien, quelle que soit sa qualité.</td>
+      </tr>
+      <tr>
+        <td>L'IA peut remplacer la lecture de la recommandation</td>
+        <td>Non. Elle vous fait arriver à la source en sachant quoi y chercher. La source officielle reste la référence opposable, et c'est elle que vous citez.</td>
+      </tr>
+      <tr>
+        <td>Ce que je produis avec l'IA n'a donc aucune valeur administrative</td>
+        <td>Faux. Ce que vous produisez alimente votre <strong>document de traçabilité</strong> et votre portfolio : ce que vous avez lu, ce que vous en avez tiré, ce que vous avez changé dans votre pratique. C'est exactement la matière que l'on vous demandera de documenter.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p><strong>La bonne façon de voir les choses :</strong> l'IA ne remplace pas votre formation, elle change le rendement du temps que vous y passez. Vous arrivez en session en ayant déjà lu. Vous en repartez avec un support appliqué à votre patientèle plutôt qu'avec un diaporama que vous ne rouvrirez jamais.</p>
+</section>
+
+<!-- LIVRABLES -->
+<section id="livrables">
+  <h2>Les quatre livrables, prêts à produire</h2>
+  <p class="chapeau">Un seul article, quatre sorties. Copiez le prompt, joignez le document, relisez, adaptez. Ces prompts fonctionnent avec n'importe quel assistant conversationnel capable de lire un fichier.</p>
+
+  <div class="onglets" role="tablist">
+    <button type="button" role="tab" aria-selected="true" data-panneau="p-synthese">Synthèse 5 points</button>
+    <button type="button" role="tab" aria-selected="false" data-panneau="p-qcm">QCM</button>
+    <button type="button" role="tab" aria-selected="false" data-panneau="p-fiche">Fiche réflexe</button>
+    <button type="button" role="tab" aria-selected="false" data-panneau="p-brief">Brief 5 slides</button>
+  </div>
+
+  <div class="panneau" id="p-synthese">
+    <p><span class="badge">3 minutes</span><span class="badge">Pour vous</span></p>
+    <div class="bloc">
+      <div class="bloc-tete"><h4>Synthèse orientée pratique de ville</h4><button type="button" class="copier">Copier</button></div>
+      <pre>Voici un article scientifique. Tu travailles uniquement à partir de ce document.
+
+Produis une synthèse en 5 points, destinée à un médecin [spécialité] exerçant en ville, qui connaît déjà le sujet.
+
+Pour chaque point :
+- Une phrase d'affirmation, 20 mots maximum.
+- La donnée chiffrée qui la soutient, telle qu'écrite dans l'article, avec l'intervalle de confiance si disponible.
+- Le numéro de page ou la section d'où elle vient.
+
+Puis, séparément :
+CE QUI CHANGE EN CONSULTATION : une à trois phrases. Si rien ne change, écris "rien pour l'instant" et explique pourquoi.
+CE QUE L'ARTICLE NE PERMET PAS DE CONCLURE : les limites telles que les auteurs les formulent eux-mêmes.
+POPULATION ÉTUDIÉE : critères d'inclusion, et en quoi elle diffère d'une patientèle de ville.
+
+Règles : tu ne complètes jamais avec des connaissances extérieures. Tu ne convertis pas un risque relatif en risque absolu sans le signaler. Si une donnée est absente, tu écris "non rapporté".</pre>
+    </div>
+  </div>
+
+  <div class="panneau" id="p-qcm" hidden>
+    <p><span class="badge">2 minutes</span><span class="badge">Auto-évaluation</span></p>
+    <div class="bloc">
+      <div class="bloc-tete"><h4>Dix questions pour tester ce que vous avez réellement retenu</h4><button type="button" class="copier">Copier</button></div>
+      <pre>À partir de ce document uniquement, rédige 10 questions à choix multiple pour tester ma compréhension.
+
+Répartition imposée :
+- 3 questions sur les faits et les chiffres.
+- 4 questions sur l'application à un cas clinique de ville.
+- 2 questions sur les limites méthodologiques de l'étude.
+- 1 question piège dont la bonne réponse est "l'article ne permet pas de conclure".
+
+Format : question, 4 propositions, puis en dessous la bonne réponse, une explication de 2 lignes, et la référence exacte dans le document.
+
+Contraintes : pas de question dont la réponse est évidente par élimination. Pas de "toutes les réponses ci-dessus". Les distracteurs doivent être plausibles pour un médecin expérimenté, jamais absurdes.</pre>
+    </div>
+  </div>
+
+  <div class="panneau" id="p-fiche" hidden>
+    <p><span class="badge">2 minutes</span><span class="badge">À afficher</span></p>
+    <div class="bloc">
+      <div class="bloc-tete"><h4>Fiche réflexe A5, format mural</h4><button type="button" class="copier">Copier</button></div>
+      <pre>Transforme le contenu de ce document en fiche réflexe destinée à être imprimée en A5 et affichée dans un cabinet.
+
+Structure imposée :
+1. Titre, 6 mots maximum.
+2. QUAND Y PENSER : 3 situations déclenchantes, une ligne chacune.
+3. CE QUE JE FAIS : 4 actions maximum, à l'impératif, dans l'ordre chronologique.
+4. CE QUI DOIT M'ALERTER : 3 signaux, une ligne chacun.
+5. Une ligne de bas de page : source, année, date de mise à jour de la fiche.
+
+Contraintes absolues :
+- 120 mots au total, tout compris. Si tu dépasses, tu coupes du contenu, tu ne réduis pas la police.
+- Aucune posologie, aucun nom commercial. Tu écris "selon protocole" ou "selon prescription".
+- Aucune information qui ne soit pas dans le document fourni.
+- Signale à la fin, hors fiche, les trois points que tu as dû supprimer pour tenir dans le format. C'est à moi de décider s'ils devaient partir.</pre>
+    </div>
+  </div>
+
+  <div class="panneau" id="p-brief" hidden>
+    <p><span class="badge">4 minutes</span><span class="badge">Pour vos confrères</span></p>
+    <div class="bloc">
+      <div class="bloc-tete"><h4>Support de présentation en 5 diapositives</h4><button type="button" class="copier">Copier</button></div>
+      <pre>Prépare le contenu d'une présentation de 5 diapositives, pour 10 minutes devant un groupe de confrères, à partir de ce document uniquement.
+
+Diapositive 1 : la question clinique, formulée comme un cas réel de consultation.
+Diapositive 2 : ce que faisait la pratique courante jusqu'ici.
+Diapositive 3 : ce que montre l'étude. Un seul chiffre par ligne, avec son intervalle de confiance.
+Diapositive 4 : les limites et ce qui empêche de généraliser.
+Diapositive 5 : trois questions ouvertes à poser au groupe, sans réponse fournie.
+
+Pour chaque diapositive : un titre de 5 mots, 3 puces de 10 mots, et une note orale de 4 phrases que je lirai en préparant.
+
+Contrainte : la diapositive 4 doit être aussi étoffée que la 3. Une présentation qui ne présente que les résultats positifs n'est pas une présentation scientifique.</pre>
+    </div>
+  </div>
+</section>
+
+<!-- CROISEMENT -->
+<section id="croisement">
+  <h2>Le protocole de vérification croisée</h2>
+  <p class="chapeau">Deux assistants qui disent la même chose sur le même document ne prouvent rien : ils simplifient souvent de la même manière. Croisez les sources, pas les modèles.</p>
+
+  <div class="bloc">
+    <div class="bloc-tete"><h4>La contre-lecture, à faire sur une deuxième source</h4><button type="button" class="copier">Copier</button></div>
+    <pre>Je te donne un second document sur le même sujet, publié par [organisme], en [année].
+
+Compare-le au premier et produis un tableau à quatre colonnes :
+1. Le point de pratique.
+2. Ce que dit le document 1, citation exacte.
+3. Ce que dit le document 2, citation exacte.
+4. Verdict : accord, nuance, ou désaccord franc.
+
+Ensuite, liste séparément :
+- Les points traités par un seul des deux documents.
+- Les différences de vocabulaire qui masquent un désaccord de fond.
+- Les différences de date qui pourraient expliquer l'écart.
+
+Ne tranche pas à ma place. Ton rôle est de rendre le désaccord visible, pas de le résoudre.</pre>
+  </div>
+
+  <h3>Les trois réflexes de contrôle</h3>
+  <table class="tableau">
+    <thead><tr><th>Réflexe</th><th>Ce qu'il attrape</th></tr></thead>
+    <tbody>
+      <tr><td>Demander la citation littérale de toute affirmation qui changerait une décision</td><td>La reformulation qui a durci un « il est suggéré » en « il est recommandé ».</td></tr>
+      <tr><td>Vérifier les chiffres directement dans le tableau de l'article</td><td>Les erreurs de recopie, les intervalles de confiance omis, la confusion entre risque relatif et absolu.</td></tr>
+      <tr><td>Ouvrir la source officielle sur le point qui vous surprend</td><td>Tout le reste. Si un résultat vous étonne, c'est soit une vraie nouveauté, soit une erreur de synthèse. Les deux méritent trois minutes.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- PAIRS -->
+<section id="pairs">
+  <h2>Le groupe de pairs, là où le gain se démultiplie</h2>
+  <p class="chapeau">Un groupe d'analyse de pratiques bien préparé est le format de formation le plus rentable, et celui où la préparation coûte le plus cher en temps. C'est exactement le point que l'IA soulage.</p>
+
+  <table class="tableau">
+    <thead><tr><th>Avant la séance</th><th>Pendant</th><th>Après</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>L'animateur produit la synthèse et le brief 5 diapositives. Chaque participant reçoit la synthèse 48 heures avant, avec une consigne : venir avec un cas où cela s'appliquait.</td>
+        <td>Le temps de séance passe intégralement sur les cas et les désaccords, pas sur la restitution de l'article. La contre-lecture croisée sert d'arbitre quand le groupe bloque.</td>
+        <td>Un compte rendu d'une page : ce sur quoi le groupe s'est accordé, ce qui reste ouvert, ce que chacun change dans sa pratique. Ce document alimente la traçabilité de tous les participants.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="bloc">
+    <div class="bloc-tete"><h4>Compte rendu de séance, à générer à partir de vos notes</h4><button type="button" class="copier">Copier</button></div>
+    <pre>Voici mes notes brutes d'une séance de groupe d'analyse de pratiques entre [nombre] médecins, sur le thème [thème], le [date].
+
+Produis un compte rendu d'une page structuré ainsi :
+1. Thème et document de référence utilisé.
+2. Points d'accord du groupe, formulés comme des règles de pratique.
+3. Points de désaccord, présentés sans les trancher, avec l'argument de chaque position.
+4. Questions restées ouvertes, à instruire d'ici la prochaine séance.
+5. Engagements de changement de pratique, formulés à la première personne du pluriel.
+
+Contraintes : aucun nom de patient, aucun élément permettant d'identifier un cas. Les cas cliniques évoqués sont reformulés en situations types. Aucun nom de participant, sauf l'animateur.</pre>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <h2>Le portfolio de traçabilité</h2>
+  <p class="chapeau">La partie que personne n'aime tenir, et qui devient simple si elle se remplit au fil de l'eau, en trois lignes par entrée.</p>
+
+  <p>Le document de traçabilité centralise l'historique de vos actions. Avec la montée en charge de la certification périodique, la question ne sera plus seulement « avez-vous suivi une action », mais « qu'en avez-vous fait ». Un tableau tenu régulièrement répond aux deux.</p>
+
+  <div class="bloc">
+    <div class="bloc-tete"><h4>Modèle de ligne de portfolio, à copier dans un tableur</h4><button type="button" class="copier">Copier</button></div>
+    <pre>Date | Thème | Source de référence (titre, organisme, année) | Type d'activité (lecture critique, groupe de pairs, formation enregistrée, staff) | Ce que j'en retiens en une phrase | Ce que je change dans ma pratique | Preuve conservée (fiche réflexe, compte rendu, attestation) | Axe de certification concerné (connaissances, qualité des pratiques, relation patient, santé du professionnel)
+
+Exemple de ligne :
+12/03/2026 | Anticoagulation du sujet âgé | Recommandation [organisme] 2025 | Lecture critique et discussion en groupe de pairs | Le seuil de fonction rénale modifie le choix de molécule plus tôt que je ne le pratiquais | Je recalcule systématiquement la clairance avant renouvellement annuel | Fiche réflexe A5 affichée + compte rendu de séance | Qualité des pratiques</pre>
+  </div>
+
+  <p><strong>Règle de tenue :</strong> une ligne le jour même, jamais en rattrapage. Une entrée sans la colonne « ce que je change » est une lecture, pas une formation.</p>
+</section>
+
+<!-- CONTROLES -->
+<section id="controles">
+  <h2>Avant de diffuser à vos confrères</h2>
+  <p class="chapeau">Un support qui circule dans un groupe de pairs porte votre nom. Cinq contrôles, deux minutes.</p>
+
+  <div class="progression">
+    <div class="jauge"><span id="jauge-barre"></span></div>
+    <div class="compteur" id="jauge-compteur">0 / 5</div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Chaque chiffre a été revu dans l'article d'origine</h4>
+    <p>Pas dans la synthèse, dans le tableau de l'article. C'est le contrôle le plus rentable de tous.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>La source citée est la source officielle, pas l'assistant</h4>
+    <p>On cite la recommandation et l'article, jamais l'outil qui a aidé à les lire. Mentionner l'usage de l'IA en note de bas de page est en revanche une bonne pratique.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Les limites de l'étude occupent autant de place que les résultats</h4>
+    <p>Un support qui ne présente que ce qui marche n'est pas un support de formation, c'est un argumentaire.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Aucun cas réel identifiable ne figure dans le support</h4>
+    <p>Y compris dans les exemples oraux préparés. Un cas de ville se reconnaît vite dans un groupe local.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Je ne redistribue pas le PDF intégral</h4>
+    <p>Un article sous licence ne se diffuse pas librement à un groupe. Partagez la référence, le lien et votre synthèse, pas le fichier.</p></div>
+  </div>
+
+  <div class="zone-rouge">
+    <h3>Ce qui ne rentre pas dans un outil d'IA, même pour préparer une formation</h3>
+    <ul class="interdit">
+      <li>Un cas clinique réel avec ses éléments d'identification, y compris pour « rendre l'exemple plus parlant »</li>
+      <li>Un compte rendu, une imagerie ou un tracé issus d'un dossier</li>
+      <li>Le compte rendu nominatif d'une réunion de concertation</li>
+      <li>Un document interne de votre établissement soumis à confidentialité</li>
+    </ul>
+  </div>
+
+  <div class="banniere">
+    <p>L'IA accélère la compréhension. Elle ne remplace ni la source officielle, ni votre jugement clinique, ni votre obligation.
+    <small>La méthode A.V.E.C. de la Haute Autorité de santé le formule en quatre verbes : apprendre, vérifier, estimer, communiquer.</small></p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <h2>Questions fréquentes</h2>
+
+  <details>
+    <summary>Une synthèse produite avec une IA peut-elle valider une action de formation ?</summary>
+    <p>Non. La validation passe par une action enregistrée dans le dispositif officiel, suivie auprès d'un organisme habilité. Ce que vous produisez de votre côté nourrit votre pratique et votre traçabilité, ce qui est différent et complémentaire.</p>
+  </details>
+
+  <details>
+    <summary>Dois-je indiquer que j'ai utilisé une IA pour préparer un support ?</summary>
+    <p>Ce n'est pas une obligation dans un cadre confraternel, mais c'est une bonne pratique, et cela répond par avance à la question qui viendra dans la salle. Une ligne suffit : contenu préparé avec l'aide d'un assistant, vérifié dans les sources citées.</p>
+  </details>
+
+  <details>
+    <summary>Les 63 heures, c'est bien mon obligation ?</summary>
+    <p>Non, c'est un plafond de financement, 21 heures par an. L'obligation porte sur un parcours d'actions sur la période, pas sur un nombre d'heures. La confusion est très répandue et conduit certains à croire qu'ils sont en règle alors qu'aucune action validante n'a été enregistrée.</p>
+  </details>
+
+  <details>
+    <summary>Que devient mon DPC avec la fermeture de l'agence ?</summary>
+    <p>Le financement était garanti sur 2026 et les orientations prioritaires prolongées jusqu'à la fin de l'année. La suite se joue autour de la certification périodique, avec une répartition annoncée entre la Haute Autorité de santé et France Compétences. Vérifiez l'état du dispositif au moment où vous lisez, il évolue vite.</p>
+  </details>
+
+  <details>
+    <summary>Puis-je importer un article payant dans un outil d'IA ?</summary>
+    <p>Pour votre lecture personnelle, vous manipulez un document auquel vous avez légalement accès. En revanche, ne redistribuez pas le fichier, et ne republiez pas de longs extraits dans un support diffusé. Citez et résumez avec vos propres mots.</p>
+  </details>
+
+  <details>
+    <summary>Deux assistants différents pour vérifier, bonne idée ?</summary>
+    <p>Peu utile. Deux modèles simplifient souvent au même endroit, et leur accord vous donnera une fausse assurance. La vérification utile se fait contre une deuxième source, pas contre un deuxième modèle.</p>
+  </details>
+</section>
+
+<!-- SOURCES -->
+<section id="sources">
+  <h2>Sources</h2>
+  <table class="tableau">
+    <thead><tr><th>Élément</th><th>Source</th></tr></thead>
+    <tbody>
+      <tr><td>Environ 22 % des professionnels éligibles ayant validé leur obligation triennale sur 2020 à 2022</td><td>Rapport de l'Inspection générale des affaires sociales, mars 2025</td></tr>
+      <tr><td>Droit de tirage de 21 heures par an, soit 63 heures sur la période triennale</td><td>Modalités de prise en charge de l'Agence nationale du DPC</td></tr>
+      <tr><td>Obligation triennale : parcours combinant formation continue et évaluation des pratiques</td><td>Code de la santé publique, article L.4133-1</td></tr>
+      <tr><td>Fermeture actée de l'agence, répartition annoncée entre la Haute Autorité de santé et France Compétences, financement assuré sur 2026</td><td>Décision ministérielle de fin 2025, communications de la Direction générale de l'offre de soins, presse professionnelle 2026</td></tr>
+      <tr><td>Prolongation des orientations nationales prioritaires jusqu'au 31 décembre 2026</td><td>Arrêté de prorogation</td></tr>
+      <tr><td>Certification périodique : ordonnance de juillet 2021, entrée en vigueur au 1er janvier 2023, six ans, neuf à titre transitoire, quatre axes, contrôle ordinal</td><td>Ordonnance n° 2021-961 du 19 juillet 2021 et décrets d'application</td></tr>
+      <tr><td>Méthode A.V.E.C.</td><td>Haute Autorité de santé, recommandations sur l'IA générative en santé, 30 octobre 2025</td></tr>
+    </tbody>
+  </table>
+  <p class="chapeau">Le nombre exact d'actions exigées par axe et le calendrier de transition font l'objet de textes d'application successifs. Reportez-vous à votre Ordre pour la règle en vigueur à la date où vous lisez.</p>
+</section>
+
+<footer>
+  <p><strong>L'IA Minute du Médecin</strong>, Dr Guillaume Zagury et Samuel De Queiroz, Éditions Medicilline.</p>
+  <p>Ressource compagnon de la double page consacrée à la veille et à la formation. Cette page décrit une méthode de travail, elle ne constitue ni un conseil juridique, ni une interprétation officielle du dispositif de formation continue.</p>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var chips = document.querySelectorAll("nav button[data-cible]");
+  Array.prototype.forEach.call(chips, function(btn){
+    btn.addEventListener("click", function(){
+      var cible = document.getElementById(btn.getAttribute("data-cible"));
+      if(cible){ cible.scrollIntoView({ behavior:"smooth", block:"start" }); }
+    });
+  });
+
+  var onglets = document.querySelectorAll(".onglets button[data-panneau]");
+  Array.prototype.forEach.call(onglets, function(btn){
+    btn.addEventListener("click", function(){
+      Array.prototype.forEach.call(onglets, function(autre){
+        autre.setAttribute("aria-selected", autre === btn ? "true" : "false");
+        var p = document.getElementById(autre.getAttribute("data-panneau"));
+        if(p){ p.hidden = (autre !== btn); }
+      });
+    });
+  });
+
+  var controles = document.querySelectorAll("[data-controle]");
+  var barre = document.getElementById("jauge-barre");
+  var compteur = document.getElementById("jauge-compteur");
+  var total = controles.length;
+
+  function maj(){
+    var faits = 0;
+    Array.prototype.forEach.call(controles, function(c){
+      var box = c.querySelector("input[type=checkbox]");
+      if(box && box.checked){ faits++; c.classList.add("fait"); }
+      else { c.classList.remove("fait"); }
+    });
+    barre.style.width = (faits/total*100) + "%";
+    barre.style.background = (faits === total) ? "#27AE60" : "#DC322F";
+    compteur.textContent = faits + " / " + total;
+  }
+
+  Array.prototype.forEach.call(controles, function(c){
+    var box = c.querySelector("input[type=checkbox]");
+    if(box){ box.addEventListener("change", maj); }
+  });
+  maj();
+
+  var boutons = document.querySelectorAll(".copier");
+  Array.prototype.forEach.call(boutons, function(btn){
+    btn.addEventListener("click", function(){
+      var bloc = btn.closest(".bloc");
+      var pre = bloc ? bloc.querySelector("pre") : null;
+      if(!pre){ return; }
+      var texte = pre.textContent;
+      var fini = function(){
+        btn.textContent = "Copié";
+        btn.classList.add("ok");
+        setTimeout(function(){ btn.textContent = "Copier"; btn.classList.remove("ok"); }, 1800);
+      };
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(texte).then(fini, function(){ secours(texte, fini); });
+      } else { secours(texte, fini); }
+    });
+  });
+
+  function secours(texte, fini){
+    var zone = document.createElement("textarea");
+    zone.value = texte;
+    zone.setAttribute("readonly","");
+    zone.style.position = "absolute";
+    zone.style.left = "-9999px";
+    document.body.appendChild(zone);
+    zone.select();
+    try { document.execCommand("copy"); fini(); } catch(e){}
+    document.body.removeChild(zone);
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grille d'évaluation d'un outil IA · L'IA Minute du Médecin</title>
+<meta name="description" content="Ressource compagnon du livre L'IA Minute du Médecin : la grille interactive qui calcule votre score, les preuves à exiger critère par critère, et le mail type à envoyer à l'éditeur.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Fira+Sans+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --rouge:#DC322F;--noir:#1A1A1A;--blanc:#FFFFFF;--jaune:#FFD700;
+  --bleu:#3498DB;--orange:#F39C12;--vert:#27AE60;--violet:#8E44AD;--teal:#1ABC9C;
+  --gris:#BDC3C7;--gris-clair:#F4F5F6;--gris-ligne:#E1E4E6;--gris-texte:#5A6268;
+}
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{margin:0;background:var(--blanc);color:var(--noir);font-family:"Fira Sans Condensed","Roboto Condensed",Arial,sans-serif;font-size:17px;line-height:1.5;}
+.page{max-width:720px;margin:0 auto;padding:0 18px 80px;}
+h1,h2,h3,h4{font-family:"Oswald","Arial Narrow",Arial,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.2px;}
+p{margin:0 0 14px;}
+
+header{padding:26px 0 8px;}
+.eyebrow{display:inline-block;font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:var(--blanc);background:var(--noir);padding:5px 11px;}
+h1{font-size:33px;line-height:1.06;margin:14px 0 0;}
+h1 mark{background:var(--jaune);color:var(--noir);padding:0 5px;}
+.sous-titre{font-family:"Fira Sans Condensed",Arial,sans-serif;font-style:italic;font-weight:600;color:var(--rouge);font-size:19px;margin:10px 0 0;text-transform:none;}
+.trait{height:4px;background:var(--rouge);margin:16px 0 22px;}
+.meta{font-size:14px;color:var(--gris-texte);margin:0 0 22px;}
+
+.flash{border:3px solid var(--rouge);border-radius:14px;padding:16px 18px;margin:0 0 26px;}
+.flash h2{font-size:19px;margin:0 0 10px;color:var(--rouge);}
+.flash ul{margin:0;padding-left:20px;}
+.flash li{margin-bottom:9px;}
+
+nav{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 34px;}
+nav button{font-family:"Oswald",Arial,sans-serif;font-weight:500;font-size:13px;letter-spacing:.6px;text-transform:uppercase;background:var(--gris-clair);color:var(--noir);border:2px solid var(--gris-ligne);border-radius:999px;padding:7px 13px;cursor:pointer;}
+nav button:hover{background:var(--noir);color:var(--blanc);border-color:var(--noir);}
+nav button:focus-visible{outline:3px solid var(--rouge);outline-offset:2px;}
+
+section{border-top:2px solid var(--gris-ligne);padding-top:26px;margin-top:34px;scroll-margin-top:14px;}
+section > h2{font-size:25px;margin:0 0 4px;line-height:1.1;}
+.chapeau{color:var(--gris-texte);font-size:16px;margin:0 0 20px;}
+h3{font-size:19px;margin:26px 0 8px;}
+
+/* GRILLE */
+.grille{border:3px solid var(--noir);border-radius:16px;padding:16px 18px;margin:0 0 18px;}
+.cat{margin-bottom:18px;}
+.cat-tete{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.cat-badge{font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:12.5px;letter-spacing:.8px;text-transform:uppercase;color:var(--blanc);padding:5px 10px;border-radius:6px;}
+.c-legal{background:var(--rouge);}
+.c-clinique{background:var(--bleu);}
+.c-ergo{background:var(--vert);}
+.c-cout{background:var(--orange);}
+.c-conf{background:var(--violet);}
+.cat-tete .elim{font-family:"Oswald",Arial,sans-serif;font-size:12px;letter-spacing:.6px;text-transform:uppercase;color:var(--rouge);}
+.critere{border-bottom:1px solid var(--gris-ligne);padding:11px 0;}
+.critere:last-child{border-bottom:none;}
+.critere h4{font-size:16px;margin:0 0 3px;}
+.critere .aide{font-size:14.5px;color:var(--gris-texte);margin:0 0 8px;}
+.notes{display:flex;gap:8px;flex-wrap:wrap;}
+.notes button{
+  font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:13px;letter-spacing:.5px;
+  background:var(--blanc);color:var(--noir);border:2px solid var(--gris-ligne);
+  border-radius:8px;padding:8px 14px;cursor:pointer;
+}
+.notes button[aria-pressed="true"]{background:var(--noir);color:var(--blanc);border-color:var(--noir);}
+.notes button:focus-visible{outline:3px solid var(--rouge);outline-offset:2px;}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px;}
+.bouton-primaire{font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:14px;letter-spacing:.8px;text-transform:uppercase;background:var(--rouge);color:var(--blanc);border:none;border-radius:8px;padding:12px 20px;cursor:pointer;}
+.bouton-secondaire{font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:14px;letter-spacing:.8px;text-transform:uppercase;background:var(--blanc);color:var(--noir);border:2px solid var(--noir);border-radius:8px;padding:10px 18px;cursor:pointer;}
+#resultat{margin-top:18px;}
+.verdict{border-radius:12px;padding:16px 18px;color:var(--blanc);margin-bottom:12px;}
+.v-vert{background:var(--vert);}
+.v-orange{background:var(--orange);}
+.v-rouge{background:var(--rouge);}
+.v-gris{background:var(--gris-clair);color:var(--noir);border:2px solid var(--gris-ligne);}
+.verdict h4{margin:0 0 8px;font-size:22px;color:inherit;}
+.verdict p{margin:0 0 8px;font-size:16px;}
+.verdict p:last-child{margin-bottom:0;}
+.verdict ul{margin:8px 0 0;padding-left:20px;font-size:16px;}
+.verdict li{margin-bottom:5px;}
+.detail-score{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px;}
+.pill{font-family:"Oswald",Arial,sans-serif;font-size:13px;letter-spacing:.5px;text-transform:uppercase;background:var(--gris-clair);border:2px solid var(--gris-ligne);border-radius:999px;padding:6px 12px;}
+
+.preuve{display:flex;gap:14px;border:2px solid var(--gris-ligne);border-radius:14px;padding:14px;margin-bottom:12px;}
+.num{flex:0 0 38px;height:38px;border-radius:50%;background:var(--noir);color:var(--blanc);font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:16px;display:flex;align-items:center;justify-content:center;}
+.preuve h4{font-size:16px;margin:3px 0 6px;}
+.preuve p{font-size:15.5px;margin:0 0 6px;}
+.preuve p:last-child{margin-bottom:0;}
+.exiger{font-size:15px;background:#F3FBF6;border-left:4px solid var(--vert);padding:8px 10px;}
+.exiger b{font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:12.5px;letter-spacing:.6px;color:var(--vert);}
+
+.bloc{border:2px solid var(--gris-ligne);border-radius:14px;overflow:hidden;margin:0 0 16px;}
+.bloc-tete{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--gris-clair);padding:10px 12px;border-bottom:2px solid var(--gris-ligne);}
+.bloc-tete h4{margin:0;font-size:15px;}
+.copier{font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:12px;letter-spacing:.8px;text-transform:uppercase;background:var(--rouge);color:var(--blanc);border:none;border-radius:6px;padding:7px 12px;cursor:pointer;white-space:nowrap;}
+.copier.ok{background:var(--vert);}
+.copier:focus-visible{outline:3px solid var(--noir);outline-offset:2px;}
+pre{margin:0;padding:14px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px;line-height:1.5;white-space:pre-wrap;word-wrap:break-word;}
+.note{font-size:15.5px;background:var(--gris-clair);border-left:4px solid var(--bleu);padding:9px 11px;margin:0 0 16px;}
+.note b{font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:12.5px;letter-spacing:.6px;color:var(--bleu);}
+
+.tableau{width:100%;border-collapse:collapse;font-size:15px;margin:0 0 18px;}
+.tableau th,.tableau td{border:1px solid var(--gris-ligne);padding:8px 10px;text-align:left;vertical-align:top;}
+.tableau th{background:var(--noir);color:var(--blanc);font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:13px;letter-spacing:.5px;}
+.tableau tr:nth-child(even) td{background:var(--gris-clair);}
+
+.banniere{background:var(--rouge);color:var(--blanc);border-radius:14px;padding:18px 20px;margin:26px 0;}
+.banniere p{margin:0;font-family:"Oswald",Arial,sans-serif;font-size:19px;line-height:1.25;text-transform:uppercase;}
+.banniere small{display:block;font-family:"Fira Sans Condensed",Arial,sans-serif;text-transform:none;font-size:15px;margin-top:8px;opacity:.95;}
+
+details{border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;margin-bottom:10px;}
+details[open]{border-color:var(--noir);}
+summary{cursor:pointer;font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:16px;text-transform:uppercase;letter-spacing:.3px;}
+summary::-webkit-details-marker{display:none;}
+summary::before{content:"+ ";color:var(--rouge);font-weight:700;}
+details[open] summary::before{content:"\2212 ";}
+details p{margin:10px 0 0;font-size:16px;}
+
+footer{border-top:4px solid var(--noir);margin-top:44px;padding-top:18px;font-size:14px;color:var(--gris-texte);}
+footer strong{color:var(--noir);}
+
+@media (max-width:520px){
+  body{font-size:16px;}h1{font-size:27px;}section > h2{font-size:21px;}
+  .tableau{font-size:14px;}pre{font-size:12.5px;}
+  .notes button{flex:1;}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none !important;scroll-behavior:auto !important;}}
+</style>
+</head>
+<body>
+<div class="page">
+
+<header>
+  <span class="eyebrow">Ressource compagnon · L'IA Minute du Médecin</span>
+  <h1>La grille, <mark>en version qui calcule</mark></h1>
+  <p class="sous-titre">Notez les dix critères, l'outil applique la règle éliminatoire et rend le verdict. Puis les preuves à exiger et le mail à envoyer à l'éditeur.</p>
+  <div class="trait"></div>
+  <p class="meta">Mise à jour : 25 juillet 2026.</p>
+</header>
+
+<div class="flash">
+  <h2>Trois points à connaître avant de noter quoi que ce soit</h2>
+  <ul>
+    <li><strong>Depuis le 16 mai 2026, seule la version 2.0 de la certification HDS est valable.</strong> Les certificats délivrés sous la version antérieure sont caducs : un hébergeur non migré ne peut plus légalement héberger des données de santé pour le compte de tiers. C'est une question à poser dès aujourd'hui à vos fournisseurs actuels, pas seulement aux futurs.</li>
+    <li><strong>L'hébergement européen n'est pas une alternative à la certification.</strong> Le référentiel en vigueur impose lui-même la localisation dans l'Espace économique européen. Un fournisseur qui répond « nos serveurs sont en Europe » à la question de la certification ne répond pas à la question posée.</li>
+    <li><strong>Des obligations renforcées de souveraineté et de transparence contractuelle</strong> sont issues d'un décret de mars 2026, avec effet à partir de septembre 2026. Vérifiez leur état d'application au moment où vous lisez, et posez la question dans votre demande écrite.</li>
+  </ul>
+</div>
+
+<nav aria-label="Sommaire">
+  <button type="button" data-cible="outil">La grille interactive</button>
+  <button type="button" data-cible="preuves">Les preuves à exiger</button>
+  <button type="button" data-cible="mail">Le mail à l'éditeur</button>
+  <button type="button" data-cible="signaux">Les signaux d'alerte</button>
+  <button type="button" data-cible="apres">Après l'adoption</button>
+  <button type="button" data-cible="faq">Questions</button>
+  <button type="button" data-cible="sources">Sources</button>
+</nav>
+
+<!-- GRILLE -->
+<section id="outil">
+  <h2>La grille interactive</h2>
+  <p class="chapeau">0 = absent ou insuffisant · 1 = partiel · 2 = pleinement conforme. Les trois critères légaux sont éliminatoires : un seul zéro entraîne un refus, quel que soit le total.</p>
+
+  <div class="grille">
+
+    <div class="cat">
+      <div class="cat-tete"><span class="cat-badge c-legal">Conformité légale</span><span class="elim">Éliminatoire · sur 6</span></div>
+
+      <div class="critere" data-c="0" data-legal="1">
+        <h4>1. Certificat HDS version 2.0 en cours de validité</h4>
+        <p class="aide">Numéro, organisme certificateur, date d'expiration. Les certificats antérieurs sont caducs depuis le 16 mai 2026.</p>
+        <div class="notes"><button type="button" data-v="0">0</button><button type="button" data-v="1">1</button><button type="button" data-v="2">2</button></div>
+      </div>
+
+      <div class="critere" data-c="1" data-legal="1">
+        <h4>2. RGPD et règlement européen sur l'IA respectés</h4>
+        <p class="aide">Contrat de sous-traitance disponible, engagement écrit de non-utilisation de vos contenus pour l'entraînement, statut au regard du règlement sur l'IA.</p>
+        <div class="notes"><button type="button" data-v="0">0</button><button type="button" data-v="1">1</button><button type="button" data-v="2">2</button></div>
+      </div>
+
+      <div class="critere" data-c="2" data-legal="1">
+        <h4>3. Garantie humaine documentée</h4>
+        <p class="aide">Information du patient prévue, accès du professionnel aux données et aux résultats, explicabilité du fonctionnement fournie par l'éditeur.</p>
+        <div class="notes"><button type="button" data-v="0">0</button><button type="button" data-v="1">1</button><button type="button" data-v="2">2</button></div>
+      </div>
+    </div>
+
+    <div class="cat">
+      <div class="cat-tete"><span class="cat-badge c-clinique">Qualité clinique</span><span class="elim">Sur 4</span></div>
+
+      <div class="critere" data-c="3">
+        <h4>4. Sources citées et traçables</h4>
+        <p class="aide">Chaque affirmation renvoie à une source identifiable, et vous pouvez l'ouvrir. Une réponse sans source n'est pas vérifiable.</p>
+        <div class="notes"><button type="button" data-v="0">0</button><button type="button" data-v="1">1</button><button type="button" data-v="2">2</button></div>
+      </div>
+
+      <div class="critere" data-c="4">
+        <h4>5. Base de connaissances datée et mise à jour</h4>
+        <p class="aide">L'éditeur indique la date de dernière révision et le rythme de mise à jour. S'il ne sait pas répondre, c'est un zéro.</p>
+        <div class="notes"><button type="button" data-v="0">0</button><button type="button" data-v="1">1</button><button type="button" data-v="2">2</button></div>
+      </div>
+    </div>
+
+    <div class="cat">
+      <div class="cat-tete"><span class="cat-badge c-ergo">Ergonomie</span><span class="elim">Sur 4</span></div>
+
+      <div class="critere" data-c="5">
+        <h4>6. Prise en main en moins de trente minutes</h4>
+        <p class="aide">Testez vous-même, pas en démonstration commerciale. Un outil qui demande une formation de deux jours ne sera pas utilisé par votre secrétariat.</p>
+        <div class="notes"><button type="button" data-v="0">0</button><button type="button" data-v="1">1</button><button type="button" data-v="2">2</button></div>
+      </div>
+
+      <div class="critere" data-c="6">
+        <h4>7. Intégration au logiciel métier et à la messagerie sécurisée</h4>
+        <p class="aide">Sans intégration, chaque usage suppose un copier-coller manuel, et c'est là que les données identifiantes circulent.</p>
+        <div class="notes"><button type="button" data-v="0">0</button><button type="button" data-v="1">1</button><button type="button" data-v="2">2</button></div>
+      </div>
+    </div>
+
+    <div class="cat">
+      <div class="cat-tete"><span class="cat-badge c-cout">Coût</span><span class="elim">Sur 2</span></div>
+
+      <div class="critere" data-c="7">
+        <h4>8. Tarif clair et conditions de résiliation transparentes</h4>
+        <p class="aide">Prix par utilisateur, durée d'engagement, préavis, coût des options. Une grille tarifaire sur devis uniquement vaut 1 au mieux.</p>
+        <div class="notes"><button type="button" data-v="0">0</button><button type="button" data-v="1">1</button><button type="button" data-v="2">2</button></div>
+      </div>
+    </div>
+
+    <div class="cat">
+      <div class="cat-tete"><span class="cat-badge c-conf">Confiance</span><span class="elim">Sur 4</span></div>
+
+      <div class="critere" data-c="8">
+        <h4>9. Réversibilité : je récupère mes données et mes contenus</h4>
+        <p class="aide">Format d'export, délai, ce qui reste chez l'éditeur après résiliation. C'est le critère qui vous protège le jour où vous changez d'avis.</p>
+        <div class="notes"><button type="button" data-v="0">0</button><button type="button" data-v="1">1</button><button type="button" data-v="2">2</button></div>
+      </div>
+
+      <div class="critere" data-c="9">
+        <h4>10. Support technique francophone réactif</h4>
+        <p class="aide">À tester avant de signer : envoyez une vraie question et chronométrez la réponse. C'est le test le plus révélateur de toute la grille.</p>
+        <div class="notes"><button type="button" data-v="0">0</button><button type="button" data-v="1">1</button><button type="button" data-v="2">2</button></div>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button type="button" class="bouton-primaire" id="btn-calculer">Calculer le score</button>
+      <button type="button" class="bouton-secondaire" id="btn-reset">Effacer</button>
+    </div>
+
+    <div id="resultat" aria-live="polite"></div>
+  </div>
+</section>
+
+<!-- PREUVES -->
+<section id="preuves">
+  <h2>Les preuves à exiger, critère par critère</h2>
+  <p class="chapeau">Une note de 2 se justifie par un document, pas par une affirmation en réunion. Voici ce que vous devez avoir en main.</p>
+
+  <div class="preuve">
+    <div class="num">1</div>
+    <div>
+      <h4>Certificat HDS</h4>
+      <p>Le certificat lui-même, avec le numéro, l'organisme certificateur, la version du référentiel et la date d'expiration. Vérifiez que la version est bien la 2.0 et que la date court encore.</p>
+      <p class="exiger"><b>Rédhibitoire</b> Un fournisseur qui répond « nos serveurs sont en Europe » sans produire le certificat. Ce n'est pas la même question, et il le sait.</p>
+    </div>
+  </div>
+
+  <div class="preuve">
+    <div class="num">2</div>
+    <div>
+      <h4>Contrat et engagements</h4>
+      <p>Le contrat de sous-traitance au sens du règlement sur la protection des données, la liste des sous-traitants ultérieurs, la localisation des traitements, et l'engagement écrit de non-utilisation de vos contenus pour l'entraînement des modèles.</p>
+      <p class="exiger"><b>Rédhibitoire</b> Un engagement figurant uniquement sur une page de site web. Ce qui n'est pas au contrat n'existe pas.</p>
+    </div>
+  </div>
+
+  <div class="preuve">
+    <div class="num">3</div>
+    <div>
+      <h4>Statut réglementaire et explicabilité</h4>
+      <p>Le statut de dispositif médical le cas échéant, avec la classe, l'organisme notifié et le numéro de certificat. Et la documentation d'explicabilité destinée aux utilisateurs, qui est une obligation à la charge du concepteur.</p>
+      <p class="exiger"><b>Rédhibitoire</b> « Nous sommes en cours de certification », sans date ni organisme. Une conformité future n'est pas une conformité.</p>
+    </div>
+  </div>
+
+  <div class="preuve">
+    <div class="num">4</div>
+    <div>
+      <h4>Performances et limites</h4>
+      <p>Les performances mesurées, sur quelle population, par qui, et publiées où. Les limites connues et les erreurs typiques documentées.</p>
+      <p class="exiger"><b>Rédhibitoire</b> Des performances annoncées sans population de référence. Un chiffre sans dénominateur ne veut rien dire, en médecine comme ailleurs.</p>
+    </div>
+  </div>
+
+  <div class="preuve">
+    <div class="num">5</div>
+    <div>
+      <h4>Réversibilité</h4>
+      <p>Le format d'export, le délai de mise à disposition, ce qui est effacé chez l'éditeur et sous quel délai, et le coût éventuel de l'opération.</p>
+      <p class="exiger"><b>Rédhibitoire</b> Une réponse évasive. C'est le sujet sur lequel les éditeurs sont les plus flous, et celui qui coûte le plus cher quand on découvre la réponse trop tard.</p>
+    </div>
+  </div>
+</section>
+
+<!-- MAIL -->
+<section id="mail">
+  <h2>Le mail à envoyer avant de signer</h2>
+  <p class="chapeau">Une demande écrite, à conserver. La qualité et le délai de la réponse valent la moitié de votre évaluation.</p>
+
+  <div class="bloc">
+    <div class="bloc-tete"><h4>Demande de pièces justificatives</h4><button type="button" class="copier">Copier</button></div>
+    <pre>Objet : [Nom de la structure] · Pièces justificatives préalables à toute décision
+
+Madame, Monsieur,
+
+Avant d'envisager le déploiement de votre solution, je souhaite disposer par écrit des éléments suivants. Ils conditionnent notre décision et seront conservés dans notre dossier.
+
+1. HÉBERGEMENT
+Copie du certificat HDS de l'hébergeur : numéro, organisme certificateur, version du référentiel et date d'expiration. Merci de confirmer que le certificat est établi sous la version 2.0 du référentiel.
+
+2. TRAITEMENT DES DONNÉES
+Contrat de sous-traitance, liste des sous-traitants ultérieurs, localisation des traitements, et engagement contractuel de non-utilisation de nos contenus pour l'entraînement de vos modèles. Merci d'indiquer l'article du contrat qui porte cet engagement.
+
+3. STATUT RÉGLEMENTAIRE
+Votre solution est-elle un dispositif médical ? Si oui : classe, organisme notifié, numéro et validité du certificat. Si non, sur quel fondement ? Quel est son statut au regard du règlement européen sur l'intelligence artificielle, et quelle est votre échéance de mise en conformité ?
+
+4. PERFORMANCES
+Performances mesurées, population de validation, méthode et publication éventuelle. Limites connues et erreurs typiques documentées, avec vos recommandations pour les détecter.
+
+5. RÉVERSIBILITÉ
+En cas de fin de contrat : format et délai de restitution de nos données et de nos contenus, ce qui est conservé de votre côté et pendant combien de temps, coût éventuel de l'opération.
+
+6. SUPPORT
+Langue, horaires, délai de réponse contractuel, et modalités d'escalade en cas d'incident.
+
+Je vous remercie de répondre point par point. L'absence de réponse à l'un de ces points sera considérée comme un élément d'appréciation.
+
+Cordialement,
+[Nom, fonction, structure]</pre>
+  </div>
+
+  <p class="note"><b>Ce que la réponse vous apprend</b> Un éditeur sérieux répond point par point en quelques jours, avec des pièces jointes. Une réponse qui renvoie à une page web générale, qui promet une conformité future sans date, ou qui propose un rendez-vous téléphonique plutôt qu'un écrit, est en soi une réponse.</p>
+</section>
+
+<!-- SIGNAUX -->
+<section id="signaux">
+  <h2>Les signaux d'alerte en rendez-vous commercial</h2>
+  <p class="chapeau">Repérables en quinze minutes, sans aucune compétence technique.</p>
+
+  <table class="tableau">
+    <thead><tr><th>Ce que vous entendez</th><th>Ce que cela signifie</th></tr></thead>
+    <tbody>
+      <tr><td>« Nos serveurs sont en Europe »</td><td>Réponse à côté de la question de la certification. La localisation est incluse dans le référentiel, elle ne le remplace pas.</td></tr>
+      <tr><td>« Nous sommes conformes au RGPD »</td><td>Le minimum légal, présenté comme un avantage. La question porte sur la certification pour les données de santé.</td></tr>
+      <tr><td>« La certification est en cours »</td><td>Demandez la date de dépôt et l'organisme. Sans ces deux éléments, c'est une intention.</td></tr>
+      <tr><td>« Nos utilisateurs gagnent deux heures par jour »</td><td>Donnée déclarative issue d'une enquête interne. Demandez la méthode, l'effectif et qui a mesuré.</td></tr>
+      <tr><td>« C'est validé par des médecins »</td><td>Combien, lesquels, sur quel protocole, et avec quels liens d'intérêts ? La formule ne veut rien dire seule.</td></tr>
+      <tr><td>« On vous fait une offre si vous signez cette semaine »</td><td>La pression temporelle sur une décision qui engage vos données patient. C'est le signal le plus clair de tous.</td></tr>
+      <tr><td>« Vous pourrez toujours exporter »</td><td>Dans quel format, sous quel délai, et à quel coût ? Faites préciser au contrat.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- APRES -->
+<section id="apres">
+  <h2>Après l'adoption</h2>
+  <p class="chapeau">La grille ne sert pas qu'une fois. Trois moments justifient de la reprendre.</p>
+
+  <table class="tableau">
+    <thead><tr><th>Quand</th><th>Ce que vous revérifiez</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Chaque année</strong></td><td>La validité du certificat d'hébergement, la version du référentiel, et le statut réglementaire de l'outil. Trente minutes, à date fixe.</td></tr>
+      <tr><td><strong>À chaque changement de version majeure</strong></td><td>Les performances annoncées, les limites documentées, et le comportement réel sur vos cas habituels. Une mise à jour peut modifier ce que vous aviez validé.</td></tr>
+      <tr><td><strong>En cas de rachat ou de changement d'actionnaire</strong></td><td>La localisation des traitements, la liste des sous-traitants, et l'engagement de non-utilisation des contenus. Ce sont les premières clauses qui bougent.</td></tr>
+    </tbody>
+  </table>
+
+  <p><strong>Conservez votre grille remplie et datée</strong> avec les pièces reçues. En cas de difficulté, elle démontre que le choix de l'outil a été instruit, ce qui est précisément ce qu'on vous demandera.</p>
+
+  <div class="banniere">
+    <p>Un outil qui refuse de prouver, c'est un outil qui a quelque chose à cacher.
+    <small>Et une conformité annoncée sans document n'est pas une conformité : c'est un argument de vente.</small></p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <h2>Questions fréquentes</h2>
+
+  <details>
+    <summary>Le seuil de 16 sur 20 est-il une norme ?</summary>
+    <p>Non, c'est un repère proposé dans ce livre. Ce qui est structurant, c'est la règle éliminatoire sur les trois critères légaux : elle, elle ne se négocie pas. Un outil à 18 sur 20 avec un zéro en conformité reste un refus.</p>
+  </details>
+
+  <details>
+    <summary>Que faire si mon outil actuel échoue à la grille ?</summary>
+    <p>Commencez par poser les questions par écrit : beaucoup d'échecs viennent d'une méconnaissance plutôt que d'une non-conformité. Si la réponse confirme le problème, restreignez immédiatement l'usage aux tâches sans donnée de santé, et cherchez une alternative sans précipitation.</p>
+  </details>
+
+  <details>
+    <summary>Cette grille s'applique-t-elle aux assistants généralistes ?</summary>
+    <p>Partiellement. Un assistant que vous utilisez sans aucune donnée de santé ne relève pas des critères d'hébergement. En revanche, les critères de sources, de réversibilité et de tarif restent pertinents. Adaptez plutôt que d'écarter.</p>
+  </details>
+
+  <details>
+    <summary>Puis-je demander ces pièces à un éditeur déjà en place ?</summary>
+    <p>Oui, et c'est même l'usage le plus utile de cette page. Un fournisseur installé répond généralement vite, parce qu'il a plus à perdre qu'un prospect. Et vous découvrirez peut-être que le certificat expire dans trois mois.</p>
+  </details>
+
+  <details>
+    <summary>Faut-il un juriste pour lire les réponses ?</summary>
+    <p>Pas pour les six points du mail : ils appellent des documents, pas des interprétations. Un conseil devient utile au moment de signer un contrat d'établissement, ou si une réponse vous semble contradictoire.</p>
+  </details>
+
+  <details>
+    <summary>Et si aucun outil de ma spécialité ne passe la grille ?</summary>
+    <p>Cela arrive, et c'est une information. Dans ce cas, restez sur les usages qui ne touchent pas aux données de santé, qui représentent l'essentiel de ce que décrit ce livre, et attendez que le marché se mette en conformité. Le calendrier réglementaire y pousse.</p>
+  </details>
+</section>
+
+<!-- SOURCES -->
+<section id="sources">
+  <h2>Sources</h2>
+  <table class="tableau">
+    <thead><tr><th>Élément</th><th>Source</th></tr></thead>
+    <tbody>
+      <tr><td>Obligation de certification pour l'hébergement de données de santé à caractère personnel pour le compte d'un tiers</td><td>Code de la santé publique, article L.1111-8</td></tr>
+      <tr><td>Publication de la version 2.0 du référentiel de certification le 16 mai 2024, alignement sur la norme ISO 27001 dans sa version 2022, et exigence de localisation des données au sein de l'Espace économique européen</td><td>Arrêté du 26 avril 2024, Agence du Numérique en Santé</td></tr>
+      <tr><td>Fin de la période transitoire au 16 mai 2026 : tous les certificats actifs doivent être établis sous la version 2.0</td><td>Agence du Numérique en Santé, calendrier de transition</td></tr>
+      <tr><td>Renforcement des obligations de souveraineté et de transparence contractuelle, avec effet en septembre 2026</td><td>Décret du 24 mars 2026</td></tr>
+      <tr><td>Données de santé, catégorie particulière, et obligations du responsable de traitement et du sous-traitant</td><td>RGPD, articles 9 et 28</td></tr>
+      <tr><td>Obligations des déployeurs et calendrier d'application</td><td>Règlement (UE) 2024/1689</td></tr>
+      <tr><td>Garantie humaine, information du patient et explicabilité à la charge du concepteur</td><td>Code de la santé publique, article L.4001-3</td></tr>
+    </tbody>
+  </table>
+  <p class="chapeau">Le seuil de 16 sur 20 et la pondération des critères sont une proposition des auteurs. Les exigences légales citées, elles, ne relèvent pas d'une appréciation.</p>
+</section>
+
+<footer>
+  <p><strong>L'IA Minute du Médecin</strong>, Dr Guillaume Zagury et Samuel De Queiroz, Éditions Medicilline.</p>
+  <p>Ressource compagnon de la double page consacrée à l'évaluation d'un outil. Aucune réponse n'est enregistrée et aucune donnée n'est transmise : le calcul se fait dans votre navigateur.</p>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var chips = document.querySelectorAll("nav button[data-cible]");
+  Array.prototype.forEach.call(chips, function(btn){
+    btn.addEventListener("click", function(){
+      var cible = document.getElementById(btn.getAttribute("data-cible"));
+      if(cible){ cible.scrollIntoView({ behavior:"smooth", block:"start" }); }
+    });
+  });
+
+  var notes = {};
+  var criteres = document.querySelectorAll(".critere[data-c]");
+  Array.prototype.forEach.call(criteres, function(c){
+    var cle = c.getAttribute("data-c");
+    var boutons = c.querySelectorAll(".notes button");
+    Array.prototype.forEach.call(boutons, function(b){
+      b.setAttribute("aria-pressed", "false");
+      b.addEventListener("click", function(){
+        Array.prototype.forEach.call(boutons, function(autre){
+          autre.setAttribute("aria-pressed", autre === b ? "true" : "false");
+        });
+        notes[cle] = parseInt(b.getAttribute("data-v"), 10);
+      });
+    });
+  });
+
+  var zone = document.getElementById("resultat");
+
+  document.getElementById("btn-calculer").addEventListener("click", function(){
+    var manquants = 0;
+    for(var i = 0; i < 10; i++){ if(notes[i] === undefined){ manquants++; } }
+    if(manquants > 0){
+      zone.innerHTML = '<div class="verdict v-gris"><h4>Il manque ' + manquants + ' note' + (manquants > 1 ? 's' : '') + '</h4>' +
+        '<p>Notez les dix critères pour obtenir le verdict.</p></div>';
+      return;
+    }
+
+    var legal = notes[0] + notes[1] + notes[2];
+    var clinique = notes[3] + notes[4];
+    var ergo = notes[5] + notes[6];
+    var cout = notes[7];
+    var conf = notes[8] + notes[9];
+    var total = legal + clinique + ergo + cout + conf;
+
+    var zeroLegal = (notes[0] === 0 || notes[1] === 0 || notes[2] === 0);
+
+    var pills = '<div class="detail-score">' +
+      '<span class="pill">Légal ' + legal + ' / 6</span>' +
+      '<span class="pill">Clinique ' + clinique + ' / 4</span>' +
+      '<span class="pill">Ergonomie ' + ergo + ' / 4</span>' +
+      '<span class="pill">Coût ' + cout + ' / 2</span>' +
+      '<span class="pill">Confiance ' + conf + ' / 4</span>' +
+      '</div>';
+
+    var classe, titre, texte, liste;
+
+    if(zeroLegal){
+      classe = "v-rouge";
+      titre = "Refus · Critère légal éliminatoire à zéro";
+      texte = "Total de " + total + " sur 20, mais au moins un critère de conformité légale est à zéro. La règle éliminatoire s'applique, quel que soit le reste.";
+      liste = [
+        "Identifiez lequel des trois critères est en cause, et demandez la pièce correspondante par écrit.",
+        "Tant que la pièce n'est pas fournie, aucune donnée de santé ne passe par cet outil.",
+        "Si la pièce n'existe pas, la question est tranchée : cherchez une alternative."
+      ];
+    } else if(total >= 16){
+      classe = "v-vert";
+      titre = "Adopter · " + total + " sur 20";
+      texte = "Les critères légaux sont satisfaits et le score dépasse le seuil recommandé. Vous pouvez engager le déploiement.";
+      liste = [
+        "Conservez la grille remplie et datée, avec les pièces reçues.",
+        "Formez les utilisateurs et tracez cette formation.",
+        "Programmez une revue annuelle, notamment sur la validité du certificat.",
+        "Notez la version en service et la date de mise en service."
+      ];
+    } else if(total >= 12){
+      classe = "v-orange";
+      titre = "Demander plus de preuves · " + total + " sur 20";
+      texte = "Rien de rédhibitoire, mais le dossier est incomplet. Ne signez pas encore : les points faibles se négocient toujours mieux avant la signature qu'après.";
+      liste = [
+        "Reprenez les critères notés 0 ou 1 et demandez la pièce manquante par écrit.",
+        "Utilisez le mail type de cette page, en ne conservant que les points concernés.",
+        "Refaites le calcul à réception. Un score qui ne bouge pas après relance est un score définitif."
+      ];
+    } else {
+      classe = "v-rouge";
+      titre = "Refuser · " + total + " sur 20";
+      texte = "Le score est trop faible pour un outil destiné à un usage médical, même sans zéro éliminatoire.";
+      liste = [
+        "Le problème est rarement isolé : un score bas signale en général un éditeur qui n'a pas structuré son offre pour le secteur de la santé.",
+        "Cherchez une alternative, en commençant par les éditeurs de votre logiciel métier.",
+        "En attendant, restez sur les usages sans donnée de santé."
+      ];
+    }
+
+    var html = '<div class="verdict ' + classe + '"><h4>' + titre + '</h4>' + pills + '<p>' + texte + '</p><ul>';
+    liste.forEach(function(l){ html += '<li>' + l + '</li>'; });
+    html += '</ul></div>';
+
+    zone.innerHTML = html;
+    zone.scrollIntoView({ behavior:"smooth", block:"nearest" });
+  });
+
+  document.getElementById("btn-reset").addEventListener("click", function(){
+    notes = {};
+    Array.prototype.forEach.call(document.querySelectorAll(".notes button"), function(b){
+      b.setAttribute("aria-pressed", "false");
+    });
+    zone.innerHTML = "";
+  });
+
+  var boutons = document.querySelectorAll(".copier");
+  Array.prototype.forEach.call(boutons, function(btn){
+    btn.addEventListener("click", function(){
+      var bloc = btn.closest(".bloc");
+      var pre = bloc ? bloc.querySelector("pre") : null;
+      if(!pre){ return; }
+      var texte = pre.textContent;
+      var fini = function(){
+        btn.textContent = "Copié";
+        btn.classList.add("ok");
+        setTimeout(function(){ btn.textContent = "Copier"; btn.classList.remove("ok"); }, 1800);
+      };
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(texte).then(fini, function(){ secours(texte, fini); });
+      } else { secours(texte, fini); }
+    });
+  });
+
+  function secours(texte, fini){
+    var z = document.createElement("textarea");
+    z.value = texte;
+    z.setAttribute("readonly","");
+    z.style.position = "absolute";
+    z.style.left = "-9999px";
+    document.body.appendChild(z);
+    z.select();
+    try { document.execCommand("copy"); fini(); } catch(e){}
+    document.body.removeChild(z);
+  }
+})();
+</script>
+</body>
+</html>

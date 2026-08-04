@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Le site du cabinet, guide complet · L'IA Minute du Médecin</title>
+<meta name="description" content="Ressource compagnon du livre L'IA Minute du Médecin : le prompt complet de site médical, le chantier en quatre temps, les mentions obligatoires et les interdits déontologiques avant mise en ligne.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Fira+Sans+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --rouge:#DC322F;--noir:#1A1A1A;--blanc:#FFFFFF;--jaune:#FFD700;
+  --bleu:#3498DB;--orange:#F39C12;--vert:#27AE60;--violet:#8E44AD;--teal:#1ABC9C;
+  --gris:#BDC3C7;--gris-clair:#F4F5F6;--gris-ligne:#E1E4E6;--gris-texte:#5A6268;
+}
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{margin:0;background:var(--blanc);color:var(--noir);font-family:"Fira Sans Condensed","Roboto Condensed",Arial,sans-serif;font-size:17px;line-height:1.5;}
+.page{max-width:720px;margin:0 auto;padding:0 18px 80px;}
+h1,h2,h3,h4{font-family:"Oswald","Arial Narrow",Arial,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.2px;}
+p{margin:0 0 14px;}
+
+header{padding:26px 0 8px;}
+.eyebrow{display:inline-block;font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:var(--blanc);background:var(--noir);padding:5px 11px;}
+h1{font-size:33px;line-height:1.06;margin:14px 0 0;}
+h1 mark{background:var(--jaune);color:var(--noir);padding:0 5px;}
+.sous-titre{font-family:"Fira Sans Condensed",Arial,sans-serif;font-style:italic;font-weight:600;color:var(--rouge);font-size:19px;margin:10px 0 0;text-transform:none;}
+.trait{height:4px;background:var(--rouge);margin:16px 0 22px;}
+.meta{font-size:14px;color:var(--gris-texte);margin:0 0 22px;}
+
+.flash{border:3px solid var(--rouge);border-radius:14px;padding:16px 18px;margin:0 0 26px;}
+.flash h2{font-size:19px;margin:0 0 10px;color:var(--rouge);}
+.flash ul{margin:0;padding-left:20px;}
+.flash li{margin-bottom:9px;}
+
+nav{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 34px;}
+nav button{font-family:"Oswald",Arial,sans-serif;font-weight:500;font-size:13px;letter-spacing:.6px;text-transform:uppercase;background:var(--gris-clair);color:var(--noir);border:2px solid var(--gris-ligne);border-radius:999px;padding:7px 13px;cursor:pointer;}
+nav button:hover{background:var(--noir);color:var(--blanc);border-color:var(--noir);}
+nav button:focus-visible{outline:3px solid var(--rouge);outline-offset:2px;}
+
+section{border-top:2px solid var(--gris-ligne);padding-top:26px;margin-top:34px;scroll-margin-top:14px;}
+section > h2{font-size:25px;margin:0 0 4px;line-height:1.1;}
+.chapeau{color:var(--gris-texte);font-size:16px;margin:0 0 20px;}
+h3{font-size:19px;margin:26px 0 8px;}
+
+.temps{display:flex;gap:14px;border:2px solid var(--gris-ligne);border-radius:14px;padding:14px;margin-bottom:12px;}
+.pastille{flex:0 0 42px;height:42px;border-radius:50%;color:var(--blanc);font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:19px;display:flex;align-items:center;justify-content:center;}
+.p-bleu{background:var(--bleu);}.p-orange{background:var(--orange);}.p-vert{background:var(--vert);}.p-violet{background:var(--violet);}
+.temps-corps{flex:1;min-width:0;}
+.temps h4{font-size:17px;margin:4px 0 6px;}
+.temps p{font-size:16px;margin:0 0 8px;}
+.temps p:last-child{margin-bottom:0;}
+.piege{font-size:15px;background:var(--gris-clair);border-left:4px solid var(--orange);padding:8px 10px;margin:0;}
+.piege b{font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:13px;letter-spacing:.6px;color:var(--orange);}
+
+.bloc{border:2px solid var(--gris-ligne);border-radius:14px;overflow:hidden;margin:0 0 16px;}
+.bloc-tete{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--gris-clair);padding:10px 12px;border-bottom:2px solid var(--gris-ligne);}
+.bloc-tete h4{margin:0;font-size:15px;}
+.copier{font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:12px;letter-spacing:.8px;text-transform:uppercase;background:var(--rouge);color:var(--blanc);border:none;border-radius:6px;padding:7px 12px;cursor:pointer;white-space:nowrap;}
+.copier.ok{background:var(--vert);}
+.copier:focus-visible{outline:3px solid var(--noir);outline-offset:2px;}
+pre{margin:0;padding:14px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px;line-height:1.5;white-space:pre-wrap;word-wrap:break-word;}
+.badge{display:inline-block;background:var(--gris);color:var(--noir);border-radius:5px;font-family:"Oswald",Arial,sans-serif;font-size:11.5px;letter-spacing:.7px;text-transform:uppercase;padding:3px 8px;margin:0 6px 6px 0;}
+
+.tableau{width:100%;border-collapse:collapse;font-size:15px;margin:0 0 18px;}
+.tableau th,.tableau td{border:1px solid var(--gris-ligne);padding:8px 10px;text-align:left;vertical-align:top;}
+.tableau th{background:var(--noir);color:var(--blanc);font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:13px;letter-spacing:.5px;}
+.tableau tr:nth-child(even) td{background:var(--gris-clair);}
+
+.controle{display:flex;gap:12px;border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;margin-bottom:10px;}
+.controle.fait{border-color:var(--vert);background:#F3FBF6;}
+.controle input{width:22px;height:22px;accent-color:var(--vert);cursor:pointer;flex:0 0 22px;margin-top:2px;}
+.controle h4{margin:0 0 4px;font-size:16px;}
+.controle p{margin:0;font-size:15.5px;}
+.progression{display:flex;align-items:center;gap:12px;margin:0 0 18px;border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;}
+.jauge{flex:1;height:12px;background:var(--gris-ligne);border-radius:999px;overflow:hidden;}
+.jauge span{display:block;height:100%;width:0;background:var(--rouge);transition:width .25s ease;}
+.compteur{font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:16px;white-space:nowrap;}
+
+.zone-rouge{border:3px solid var(--rouge);border-radius:14px;padding:16px 18px;margin:18px 0;}
+.zone-rouge h3{margin-top:0;color:var(--rouge);}
+.interdit{list-style:none;padding:0;margin:0;}
+.interdit li{padding-left:26px;position:relative;margin-bottom:8px;}
+.interdit li::before{content:"\00d7";position:absolute;left:0;top:-2px;color:var(--rouge);font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:22px;line-height:1;}
+.obligatoire{list-style:none;padding:0;margin:0;}
+.obligatoire li{padding-left:26px;position:relative;margin-bottom:7px;}
+.obligatoire li::before{content:"\2713";position:absolute;left:0;top:0;color:var(--vert);font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:18px;line-height:1.1;}
+
+.banniere{background:var(--rouge);color:var(--blanc);border-radius:14px;padding:18px 20px;margin:26px 0;}
+.banniere p{margin:0;font-family:"Oswald",Arial,sans-serif;font-size:19px;line-height:1.25;text-transform:uppercase;}
+.banniere small{display:block;font-family:"Fira Sans Condensed",Arial,sans-serif;text-transform:none;font-size:15px;margin-top:8px;opacity:.95;}
+
+details{border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;margin-bottom:10px;}
+details[open]{border-color:var(--noir);}
+summary{cursor:pointer;font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:16px;text-transform:uppercase;letter-spacing:.3px;}
+summary::-webkit-details-marker{display:none;}
+summary::before{content:"+ ";color:var(--rouge);font-weight:700;}
+details[open] summary::before{content:"\2212 ";}
+details p{margin:10px 0 0;font-size:16px;}
+
+footer{border-top:4px solid var(--noir);margin-top:44px;padding-top:18px;font-size:14px;color:var(--gris-texte);}
+footer strong{color:var(--noir);}
+
+@media (max-width:520px){
+  body{font-size:16px;}h1{font-size:27px;}section > h2{font-size:21px;}
+  .tableau{font-size:14px;}pre{font-size:12.5px;}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none !important;scroll-behavior:auto !important;}}
+</style>
+</head>
+<body>
+<div class="page">
+
+<header>
+  <span class="eyebrow">Ressource compagnon · L'IA Minute du Médecin</span>
+  <h1>Le site du cabinet, <mark>guide complet</mark></h1>
+  <p class="sous-titre">Le prompt intégral prêt à coller, le chantier en quatre temps, et la liste des mentions sans lesquelles un site de médecin ne doit pas être mis en ligne.</p>
+  <div class="trait"></div>
+  <p class="meta">Mise à jour : 25 juillet 2026.</p>
+</header>
+
+<div class="flash">
+  <h2>Trois choses à savoir avant de commencer</h2>
+  <ul>
+    <li><strong>L'après-midi produit la maquette, pas le site publié.</strong> La génération prend une heure. Le contenu exact, les mentions obligatoires et le nom de domaine prennent le reste. C'est normal, et c'est cette seconde partie qui fait la différence entre un site de médecin et une page jolie.</li>
+    <li><strong>L'offre gratuite ne permet pas une mise en ligne sérieuse.</strong> Sur les plateformes de génération, le gratuit signifie en général projets publics, sous-domaine de la plateforme et quelques crédits par jour. Pour un site professionnel avec votre propre nom de domaine, comptez un abonnement mensuel de l'ordre de vingt-cinq dollars et une dizaine d'euros par an pour le domaine. Cela reste sans commune mesure avec un développement sur mesure.</li>
+    <li><strong>Le piège numéro un est le formulaire de contact.</strong> Ouvrez un champ libre, et un patient y décrira ses symptômes. Vous collectez alors des données de santé sur un hébergement qui n'est pas prévu pour cela. La section dédiée plus bas explique comment garder un formulaire utile et sans risque.</li>
+  </ul>
+</div>
+
+<nav aria-label="Sommaire">
+  <button type="button" data-cible="prompt">Le prompt complet</button>
+  <button type="button" data-cible="chantier">Le chantier</button>
+  <button type="button" data-cible="mentions">Les mentions obligatoires</button>
+  <button type="button" data-cible="interdits">Les interdits</button>
+  <button type="button" data-cible="formulaire">Le formulaire</button>
+  <button type="button" data-cible="controles">Avant publication</button>
+  <button type="button" data-cible="faq">Questions</button>
+  <button type="button" data-cible="sources">Sources</button>
+</nav>
+
+<!-- PROMPT -->
+<section id="prompt">
+  <h2>Le prompt complet</h2>
+  <p class="chapeau">Un seul prompt, long et précis. Remplacez tout ce qui est entre crochets, supprimez les lignes inutiles, collez d'un bloc.</p>
+
+  <div class="bloc">
+    <div class="bloc-tete"><h4>Site vitrine de cabinet médical, prompt intégral</h4><button type="button" class="copier">Copier</button></div>
+    <pre>Crée un site web vitrine pour un cabinet médical français. Sobre, professionnel, sans aucun caractère commercial ou publicitaire. Public : des patients, dont beaucoup de personnes âgées. Le site doit être lisible, rapide, et parfaitement utilisable sur téléphone.
+
+IDENTITÉ DU CABINET
+Nom : [nom du cabinet].
+Type : [cabinet de groupe / cabinet individuel / maison de santé].
+Spécialité : [spécialité].
+Adresse : [adresse complète].
+Téléphone du secrétariat : [numéro].
+
+STRUCTURE ATTENDUE, UNE PAGE UNIQUE AVEC ANCRES
+1. En-tête : nom du cabinet, spécialité, bouton "Prendre rendez-vous" qui pointe vers [URL de prise de rendez-vous], et le numéro de téléphone cliquable.
+2. Bandeau d'urgence, visible dès l'arrivée, fond contrasté : "En cas d'urgence vitale, appelez le 15 ou le 112. Ce site ne permet pas d'obtenir un avis médical."
+3. Horaires : tableau jour par jour, avec les périodes de fermeture. Mentionner la conduite à tenir en dehors de ces horaires.
+4. L'équipe : une fiche par praticien avec nom, prénom, spécialité, numéro RPPS, langues parlées. Pas de superlatif, pas de mise en avant comparative.
+5. Actes pratiqués : liste factuelle, sans promesse de résultat.
+6. Informations pratiques et honoraires : situation au regard de la convention, tarifs des principaux actes, moyens de paiement acceptés, accessibilité aux personnes à mobilité réduite.
+7. Accès : plan, transports en commun, stationnement, étage, ascenseur.
+8. Questions fréquentes : renouvellement d'ordonnance, certificats, résultats d'examens, annulation de rendez-vous. Réponses courtes et factuelles.
+9. Pied de page : mentions légales complètes, politique de confidentialité, date de dernière mise à jour.
+
+CONTRAINTES DE FOND, IMPÉRATIVES
+- Aucun témoignage de patient, aucun avis, aucune note, aucune étoile.
+- Aucune comparaison avec d'autres praticiens ou établissements.
+- Aucune promesse de résultat, aucun superlatif, aucun terme promotionnel.
+- Aucun formulaire de contact avec champ libre. Le contact se fait par téléphone ou par la plateforme de rendez-vous.
+- Aucun outil de mesure d'audience publicitaire, aucun pixel de réseau social, aucun cookie non essentiel.
+- Aucune photographie de patient, aucune image de personne identifiable.
+
+CONTRAINTES TECHNIQUES
+- Une seule page, navigation par ancres, chargement rapide.
+- Contraste élevé, taille de police confortable, boutons larges, compatible lecteur d'écran.
+- Numéro de téléphone et adresse en liens cliquables sur mobile.
+- Balises de titre et description adaptées à une recherche locale du type "[spécialité] [ville]".
+- Données structurées de type cabinet médical pour le référencement local.
+
+STYLE
+Palette sobre à deux couleurs, blanc dominant. Typographie lisible. Pas d'animation, pas de dégradé, pas d'image d'illustration générique de type banque d'images médicales. Photographies réelles du cabinet uniquement, que je fournirai.
+
+Commence par générer la structure et le texte. Je fournirai ensuite les contenus exacts.</pre>
+  </div>
+
+  <p><strong>Pourquoi une seule page :</strong> un patient cherche trois choses, les horaires, l'adresse et le moyen de prendre rendez-vous. Un site de huit pages les enterre. Une page unique bien organisée se maintient aussi beaucoup plus facilement.</p>
+</section>
+
+<!-- CHANTIER -->
+<section id="chantier">
+  <h2>Le chantier, en quatre temps</h2>
+  <p class="chapeau">Comptez une après-midi pour les deux premiers, une semaine calendaire pour les deux suivants, essentiellement de l'attente.</p>
+
+  <div class="temps">
+    <div class="pastille p-bleu">1</div>
+    <div class="temps-corps">
+      <h4>La maquette</h4>
+      <p>Collez le prompt, laissez générer, puis demandez des ajustements en français simple : « agrandis la police du bandeau d'urgence », « déplace les horaires au-dessus de l'équipe ». Ne cherchez pas la perfection graphique à ce stade, seulement la structure.</p>
+      <p class="piege"><b>Piège</b> : enchaîner les retouches esthétiques. Chaque échange consomme un crédit, et le budget se vide en modifiant des nuances de gris.</p>
+    </div>
+  </div>
+
+  <div class="temps">
+    <div class="pastille p-orange">2</div>
+    <div class="temps-corps">
+      <h4>Le contenu réel</h4>
+      <p>Remplacez tous les textes générés par les vôtres. Les horaires exacts, les tarifs exacts, les modalités exactes. Un texte inventé par le modèle qui reste en ligne, c'est une information fausse publiée sous votre nom.</p>
+      <p class="piege"><b>Piège</b> : laisser une phrase générique du type « une équipe à votre écoute pour vous offrir les meilleurs soins ». C'est exactement ce que la déontologie proscrit, et c'est ce que les générateurs produisent par défaut.</p>
+    </div>
+  </div>
+
+  <div class="temps">
+    <div class="pastille p-vert">3</div>
+    <div class="temps-corps">
+      <h4>La conformité</h4>
+      <p>La liste des mentions obligatoires figure plus bas. Elle se remplit une fois, en trente minutes, et elle est la différence entre un site publiable et un site qui vous expose. Passez-la en revue ligne par ligne avant toute mise en ligne.</p>
+      <p class="piege"><b>Piège</b> : croire que les mentions légales générées automatiquement suffisent. Elles sont conçues pour un commerce, pas pour un cabinet médical, et il leur manque toujours l'essentiel.</p>
+    </div>
+  </div>
+
+  <div class="temps">
+    <div class="pastille p-violet">4</div>
+    <div class="temps-corps">
+      <h4>Le domaine et la mise en ligne</h4>
+      <p>Achetez le nom de domaine à votre nom, jamais à celui d'un prestataire. Un intitulé sobre du type nom-du-cabinet-ville, sans terme promotionnel. Branchez-le sur la plateforme, vérifiez le certificat de sécurité, puis testez le site sur trois téléphones différents.</p>
+      <p class="piege"><b>Piège</b> : le nom de domaine déposé par l'agence ou le prestataire. Le jour où vous changez, vous perdez l'adresse et le référencement acquis. C'est le point de dépendance le plus coûteux.</p>
+    </div>
+  </div>
+
+  <h3>Ce qu'il faut savoir sur la dépendance à la plateforme</h3>
+  <p>Le site généré tourne sur l'infrastructure de l'éditeur. Deux précautions simples : exportez le code sur un dépôt qui vous appartient dès la première version stable, et sachez qu'un site vitrine reste techniquement transférable vers n'importe quel hébergeur. Vous ne serez jamais prisonnier tant que vous détenez le domaine et le code.</p>
+</section>
+
+<!-- MENTIONS -->
+<section id="mentions">
+  <h2>Les mentions obligatoires</h2>
+  <p class="chapeau">La page d'accueil et les mentions légales doivent permettre d'identifier sans ambiguïté qui parle. Cette liste se coche.</p>
+
+  <h3>Identité professionnelle</h3>
+  <ul class="obligatoire">
+    <li>Nom et prénom de chaque praticien</li>
+    <li>Date de naissance</li>
+    <li>Numéro d'inscription au tableau de l'Ordre</li>
+    <li>Numéro RPPS</li>
+    <li>Spécialité et qualifications reconnues</li>
+  </ul>
+
+  <h3>Conditions d'exercice</h3>
+  <ul class="obligatoire">
+    <li>Situation au regard de la convention</li>
+    <li>Tarifs des principaux actes pratiqués</li>
+    <li>Appartenance éventuelle à une association de gestion agréée</li>
+    <li>Conditions de réalisation de devis, si la discipline l'impose</li>
+    <li>Modalités territoriales de réponse aux urgences et de permanence des soins</li>
+  </ul>
+
+  <h3>Mentions d'édition et de transparence</h3>
+  <ul class="obligatoire">
+    <li>Identité de l'éditeur du site et directeur de la publication</li>
+    <li>Nom, raison sociale et adresse de l'hébergeur</li>
+    <li>Financement du site et de sa maintenance</li>
+    <li>Déclaration des liens d'intérêts avec toute entreprise du secteur de la santé</li>
+    <li>Existence d'un traitement de données, information des personnes et modalités d'exercice de leurs droits</li>
+    <li>Date de publication et de dernière mise à jour des contenus d'information</li>
+  </ul>
+
+  <p><strong>Le point que le Conseil national recommande en plus :</strong> faire figurer en page d'accueil un lien vers l'annuaire public de l'Ordre, afin que l'internaute puisse vérifier lui-même que le site est bien celui d'un médecin inscrit. Ce n'est pas une obligation légale, c'est une recommandation de la charte applicable aux sites professionnels, et elle coûte une ligne.</p>
+</section>
+
+<!-- INTERDITS -->
+<section id="interdits">
+  <h2>Les interdits</h2>
+  <p class="chapeau">La liberté de communiquer existe depuis 2020. Elle est encadrée, et les limites sont précises.</p>
+
+  <p>L'article R.4127-19-1 du Code de la santé publique pose que le médecin est libre de communiquer au public, y compris sur un site internet, des informations contribuant au libre choix du praticien. Cette communication doit être <strong>loyale et honnête</strong>, elle ne fait pas appel à des <strong>témoignages de tiers</strong>, elle ne repose pas sur des <strong>comparaisons</strong> avec d'autres médecins ou établissements, elle n'incite pas à un recours inutile aux soins et n'induit pas le public en erreur.</p>
+
+  <div class="zone-rouge">
+    <h3>Ce qui ne figure jamais sur le site d'un médecin</h3>
+    <ul class="interdit">
+      <li>Un témoignage de patient, un avis, une note, une étoile, un carrousel de remerciements</li>
+      <li>Une comparaison avec un confrère, une technique concurrente, un établissement</li>
+      <li>Une promesse de résultat, ou une présentation laissant croire que le résultat sera obtenu</li>
+      <li>Une photographie permettant d'identifier un patient, y compris de dos ou recadrée</li>
+      <li>De la publicité, du référencement payant, un partenariat commercial affiché</li>
+      <li>Une mise en page à caractère promotionnel ou commercial</li>
+      <li>Un hébergement ou un financement par une société du secteur qui compromettrait votre indépendance</li>
+    </ul>
+  </div>
+
+  <p><strong>Le cas des photos avant et après :</strong> il concerne surtout les disciplines à visée esthétique, et c'est là que la ligne se franchit le plus souvent. Une présentation qui laisse croire au résultat escompté est qualifiée de tromperie, quelle que soit la discipline.</p>
+</section>
+
+<!-- FORMULAIRE -->
+<section id="formulaire">
+  <h2>Le formulaire de contact</h2>
+  <p class="chapeau">C'est le seul élément techniquement banal qui peut transformer votre site vitrine en traitement de données de santé.</p>
+
+  <p>Un champ libre attire la confidence. « Bonjour docteur, depuis trois jours j'ai des douleurs thoraciques, dois-je m'inquiéter ? » Ce message est une donnée de santé. Il transite par un formulaire, atterrit dans une boîte de réception, et repose sur un hébergement qui n'a pas été prévu pour cela. S'y ajoute un second risque, clinique celui-là : un message urgent lu trois jours plus tard.</p>
+
+  <table class="tableau">
+    <thead><tr><th>Ce que vous voulez</th><th>La bonne solution</th></tr></thead>
+    <tbody>
+      <tr><td>Que le patient prenne rendez-vous</td><td>Un bouton vers votre plateforme de rendez-vous, ou le numéro du secrétariat en lien cliquable.</td></tr>
+      <tr><td>Qu'il pose une question administrative</td><td>Un formulaire à champs fermés : objet à choisir dans une liste courte, nom, téléphone. Aucun champ libre.</td></tr>
+      <tr><td>Qu'il vous transmette un document médical</td><td>La messagerie sécurisée de santé, jamais le site. Indiquez-le explicitement.</td></tr>
+      <tr><td>Qu'il sache quoi faire en urgence</td><td>Le bandeau d'urgence en haut de page, visible sans faire défiler.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="bloc">
+    <div class="bloc-tete"><h4>Le texte à afficher au-dessus de tout formulaire</h4><button type="button" class="copier">Copier</button></div>
+    <pre>Ce formulaire est réservé aux demandes administratives.
+
+N'y écrivez aucune information sur votre santé : symptômes, antécédents, traitements, résultats d'examens. Ces messages ne sont pas consultés en temps réel et ce canal n'est pas prévu pour des informations médicales.
+
+Pour une question médicale, prenez rendez-vous ou appelez le secrétariat.
+En cas d'urgence vitale, appelez le 15 ou le 112.</pre>
+  </div>
+</section>
+
+<!-- CONTROLES -->
+<section id="controles">
+  <h2>Avant de publier</h2>
+  <p class="chapeau">Six contrôles. Le premier est celui qu'on oublie parce qu'on a lu le texte vingt fois.</p>
+
+  <div class="progression">
+    <div class="jauge"><span id="jauge-barre"></span></div>
+    <div class="compteur" id="jauge-compteur">0 / 6</div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Aucun texte généré n'est resté en place</h4>
+    <p>Horaires, tarifs, actes, phrases d'accroche : relisez comme si vous ne les aviez pas écrits. Une seule information inventée suffit à décrédibiliser tout le site.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Les mentions obligatoires sont toutes présentes</h4>
+    <p>Identité, numéro d'inscription, RPPS, convention, principaux honoraires, hébergeur, financement, liens d'intérêts.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Aucun témoignage, aucune note, aucune comparaison</h4>
+    <p>Y compris dans un module d'avis ajouté automatiquement par la plateforme.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Le formulaire ne comporte aucun champ libre</h4>
+    <p>Et le message d'avertissement figure au-dessus.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Le site est testé sur un vrai téléphone</h4>
+    <p>Pas dans l'aperçu de la plateforme. Vérifiez que le numéro s'appelle d'un doigt et que le texte se lit sans zoomer.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Le nom de domaine est à votre nom</h4>
+    <p>Vérifiez le titulaire déclaré, pas seulement qui a payé. Et notez la date d'expiration dans votre agenda.</p></div>
+  </div>
+
+  <div class="banniere">
+    <p>Un site de cabinet informe. Il ne vend pas, il ne promet pas, il ne soigne pas.
+    <small>Communication loyale et honnête, sans témoignages ni comparaisons, sans incitation à un recours inutile aux soins : article R.4127-19-1 du Code de la santé publique.</small></p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <h2>Questions fréquentes</h2>
+
+  <details>
+    <summary>Combien cela coûte-t-il réellement ?</summary>
+    <p>Pour un site vitrine : un abonnement mensuel à la plateforme de génération pendant la durée du chantier, puis un nom de domaine annuel. L'hébergement est inclus dans l'abonnement. Il est possible de repasser sur une formule plus légère une fois le site stabilisé, à condition d'avoir vérifié que le domaine personnalisé reste actif.</p>
+  </details>
+
+  <details>
+    <summary>Dois-je déclarer mon site à l'Ordre ?</summary>
+    <p>Il est recommandé d'informer votre conseil départemental de la création de votre site professionnel. C'est aussi l'occasion de faire relire les mentions par quelqu'un qui les voit tous les jours, ce qui est le meilleur contrôle possible.</p>
+  </details>
+
+  <details>
+    <summary>Puis-je mettre des photos de mon cabinet ?</summary>
+    <p>Oui, et c'est même préférable aux images génériques de banques d'images. Assurez-vous qu'aucun patient, aucun écran affichant un dossier et aucun document n'apparaît sur les clichés.</p>
+  </details>
+
+  <details>
+    <summary>Et le référencement dans Google ?</summary>
+    <p>Le référencement naturel local est autorisé : titres clairs, adresse, spécialité, données structurées. Le référencement payant, lui, est proscrit. Une fiche d'établissement bien tenue et un site sobre suffisent largement pour une recherche du type spécialité plus ville.</p>
+  </details>
+
+  <details>
+    <summary>Puis-je publier des articles d'information santé ?</summary>
+    <p>Oui, à condition qu'ils soient scientifiquement étayés, datés, et qu'ils ne se substituent pas à une consultation. Si vous ne pouvez pas les mettre à jour régulièrement, mieux vaut renvoyer vers des sites d'information publics sans intérêt marchand.</p>
+  </details>
+
+  <details>
+    <summary>Que faire des avis Google qui existent déjà sur mon cabinet ?</summary>
+    <p>Vous n'en êtes pas l'éditeur et vous ne les contrôlez pas. La règle porte sur ce que vous publiez : ne les reprenez pas sur votre site, et n'en faites pas un argument. Un site clair et à jour est la meilleure réponse à une fiche mal renseignée.</p>
+  </details>
+</section>
+
+<!-- SOURCES -->
+<section id="sources">
+  <h2>Sources</h2>
+  <table class="tableau">
+    <thead><tr><th>Élément</th><th>Source</th></tr></thead>
+    <tbody>
+      <tr><td>Liberté de communication du médecin, information loyale et honnête, sans témoignages, sans comparaisons, sans incitation à un recours inutile</td><td>Code de la santé publique, article R.4127-19-1, créé par le décret n° 2020-1662 du 22 décembre 2020</td></tr>
+      <tr><td>Information sur les honoraires en cas de présentation de l'activité au public</td><td>Code de la santé publique, article R.4127-53</td></tr>
+      <tr><td>Obligation de ne faire état que de données confirmées et souci des répercussions des propos auprès du public</td><td>Code de la santé publique, article R.4127-13</td></tr>
+      <tr><td>Mentions d'identité professionnelle, situation conventionnelle, principaux honoraires, modalités de réponse aux urgences, liens d'intérêts, financement du site, lien vers l'annuaire de l'Ordre</td><td>Conseil national de l'Ordre des médecins, Livre blanc « Déontologie médicale sur le web » (2011) et charte de conformité déontologique applicable aux sites web professionnels (2014)</td></tr>
+      <tr><td>Mentions d'identification de l'éditeur et de l'hébergeur d'un site</td><td>Loi pour la confiance dans l'économie numérique</td></tr>
+      <tr><td>Données de santé, catégorie particulière soumise à protection renforcée</td><td>RGPD, article 9</td></tr>
+      <tr><td>Modèle économique des plateformes de génération : offre gratuite limitée avec projets publics et sous-domaine, domaine personnalisé sur formule payante</td><td>Pages tarifaires des éditeurs, consultées en juillet 2026</td></tr>
+    </tbody>
+  </table>
+  <p class="chapeau">Les tarifs et les limites des plateformes changent souvent. Vérifiez la page tarifaire au moment où vous démarrez, et conservez une copie des conditions en vigueur.</p>
+</section>
+
+<footer>
+  <p><strong>L'IA Minute du Médecin</strong>, Dr Guillaume Zagury et Samuel De Queiroz, Éditions Medicilline.</p>
+  <p>Ressource compagnon de la double page consacrée au site du cabinet. Cette page décrit une méthode et rappelle des obligations. Elle ne constitue pas un conseil juridique : en cas de doute sur une mention ou un contenu, votre conseil départemental de l'Ordre est l'interlocuteur qui répond le plus vite.</p>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var chips = document.querySelectorAll("nav button[data-cible]");
+  Array.prototype.forEach.call(chips, function(btn){
+    btn.addEventListener("click", function(){
+      var cible = document.getElementById(btn.getAttribute("data-cible"));
+      if(cible){ cible.scrollIntoView({ behavior:"smooth", block:"start" }); }
+    });
+  });
+
+  var controles = document.querySelectorAll("[data-controle]");
+  var barre = document.getElementById("jauge-barre");
+  var compteur = document.getElementById("jauge-compteur");
+  var total = controles.length;
+
+  function maj(){
+    var faits = 0;
+    Array.prototype.forEach.call(controles, function(c){
+      var box = c.querySelector("input[type=checkbox]");
+      if(box && box.checked){ faits++; c.classList.add("fait"); }
+      else { c.classList.remove("fait"); }
+    });
+    barre.style.width = (faits/total*100) + "%";
+    barre.style.background = (faits === total) ? "#27AE60" : "#DC322F";
+    compteur.textContent = faits + " / " + total;
+  }
+
+  Array.prototype.forEach.call(controles, function(c){
+    var box = c.querySelector("input[type=checkbox]");
+    if(box){ box.addEventListener("change", maj); }
+  });
+  maj();
+
+  var boutons = document.querySelectorAll(".copier");
+  Array.prototype.forEach.call(boutons, function(btn){
+    btn.addEventListener("click", function(){
+      var bloc = btn.closest(".bloc");
+      var pre = bloc ? bloc.querySelector("pre") : null;
+      if(!pre){ return; }
+      var texte = pre.textContent;
+      var fini = function(){
+        btn.textContent = "Copié";
+        btn.classList.add("ok");
+        setTimeout(function(){ btn.textContent = "Copier"; btn.classList.remove("ok"); }, 1800);
+      };
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(texte).then(fini, function(){ secours(texte, fini); });
+      } else { secours(texte, fini); }
+    });
+  });
+
+  function secours(texte, fini){
+    var z = document.createElement("textarea");
+    z.value = texte;
+    z.setAttribute("readonly","");
+    z.style.position = "absolute";
+    z.style.left = "-9999px";
+    document.body.appendChild(z);
+    z.select();
+    try { document.execCommand("copy"); fini(); } catch(e){}
+    document.body.removeChild(z);
+  }
+})();
+</script>
+</body>
+</html>

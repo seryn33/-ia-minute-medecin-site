@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Le calendrier 2026-2030 · L'IA Minute du Médecin</title>
+<meta name="description" content="Ressource compagnon du livre L'IA Minute du Médecin : le calendrier réglementaire réel, vos obligations d'utilisateur, les six questions à poser à un fournisseur et trois scénarios pour 2030.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Fira+Sans+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --rouge:#DC322F;--noir:#1A1A1A;--blanc:#FFFFFF;--jaune:#FFD700;
+  --bleu:#3498DB;--orange:#F39C12;--vert:#27AE60;--violet:#8E44AD;--teal:#1ABC9C;
+  --gris:#BDC3C7;--gris-clair:#F4F5F6;--gris-ligne:#E1E4E6;--gris-texte:#5A6268;
+}
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{margin:0;background:var(--blanc);color:var(--noir);font-family:"Fira Sans Condensed","Roboto Condensed",Arial,sans-serif;font-size:17px;line-height:1.5;}
+.page{max-width:720px;margin:0 auto;padding:0 18px 80px;}
+h1,h2,h3,h4{font-family:"Oswald","Arial Narrow",Arial,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.2px;}
+p{margin:0 0 14px;}
+
+header{padding:26px 0 8px;}
+.eyebrow{display:inline-block;font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:var(--blanc);background:var(--noir);padding:5px 11px;}
+h1{font-size:33px;line-height:1.06;margin:14px 0 0;}
+h1 mark{background:var(--jaune);color:var(--noir);padding:0 5px;}
+.sous-titre{font-family:"Fira Sans Condensed",Arial,sans-serif;font-style:italic;font-weight:600;color:var(--rouge);font-size:19px;margin:10px 0 0;text-transform:none;}
+.trait{height:4px;background:var(--rouge);margin:16px 0 22px;}
+.meta{font-size:14px;color:var(--gris-texte);margin:0 0 22px;}
+
+.flash{border:3px solid var(--rouge);border-radius:14px;padding:16px 18px;margin:0 0 26px;}
+.flash h2{font-size:19px;margin:0 0 10px;color:var(--rouge);}
+.flash ul{margin:0;padding-left:20px;}
+.flash li{margin-bottom:9px;}
+
+nav{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 34px;}
+nav button{font-family:"Oswald",Arial,sans-serif;font-weight:500;font-size:13px;letter-spacing:.6px;text-transform:uppercase;background:var(--gris-clair);color:var(--noir);border:2px solid var(--gris-ligne);border-radius:999px;padding:7px 13px;cursor:pointer;}
+nav button:hover{background:var(--noir);color:var(--blanc);border-color:var(--noir);}
+nav button:focus-visible{outline:3px solid var(--rouge);outline-offset:2px;}
+
+section{border-top:2px solid var(--gris-ligne);padding-top:26px;margin-top:34px;scroll-margin-top:14px;}
+section > h2{font-size:25px;margin:0 0 4px;line-height:1.1;}
+.chapeau{color:var(--gris-texte);font-size:16px;margin:0 0 20px;}
+h3{font-size:19px;margin:26px 0 8px;}
+
+.bloc{border:2px solid var(--gris-ligne);border-radius:14px;overflow:hidden;margin:0 0 16px;}
+.bloc-tete{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--gris-clair);padding:10px 12px;border-bottom:2px solid var(--gris-ligne);}
+.bloc-tete h4{margin:0;font-size:15px;}
+.copier{font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:12px;letter-spacing:.8px;text-transform:uppercase;background:var(--rouge);color:var(--blanc);border:none;border-radius:6px;padding:7px 12px;cursor:pointer;white-space:nowrap;}
+.copier.ok{background:var(--vert);}
+.copier:focus-visible{outline:3px solid var(--noir);outline-offset:2px;}
+pre{margin:0;padding:14px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px;line-height:1.5;white-space:pre-wrap;word-wrap:break-word;}
+.badge{display:inline-block;background:var(--gris);color:var(--noir);border-radius:5px;font-family:"Oswald",Arial,sans-serif;font-size:11.5px;letter-spacing:.7px;text-transform:uppercase;padding:3px 8px;margin:0 6px 6px 0;}
+.note{font-size:15.5px;background:var(--gris-clair);border-left:4px solid var(--bleu);padding:9px 11px;margin:0 0 16px;}
+.note b{font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:12.5px;letter-spacing:.6px;color:var(--bleu);}
+
+.tableau{width:100%;border-collapse:collapse;font-size:15px;margin:0 0 18px;}
+.tableau th,.tableau td{border:1px solid var(--gris-ligne);padding:8px 10px;text-align:left;vertical-align:top;}
+.tableau th{background:var(--noir);color:var(--blanc);font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:13px;letter-spacing:.5px;}
+.tableau tr:nth-child(even) td{background:var(--gris-clair);}
+.tableau td.passe{border-left:5px solid var(--gris);}
+.tableau td.proche{border-left:5px solid var(--rouge);}
+.tableau td.loin{border-left:5px solid var(--bleu);}
+
+.scenario{display:flex;gap:14px;border:2px solid var(--gris-ligne);border-radius:14px;padding:14px;margin-bottom:12px;}
+.pastille{flex:0 0 44px;height:44px;border-radius:50%;color:var(--blanc);font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center;}
+.p-vert{background:var(--vert);}.p-orange{background:var(--orange);}.p-rouge{background:var(--rouge);}
+.scenario h4{font-size:17px;margin:4px 0 6px;}
+.scenario p{font-size:16px;margin:0 0 8px;}
+.scenario p:last-child{margin-bottom:0;}
+.signal{font-size:15px;background:var(--gris-clair);border-left:4px solid var(--noir);padding:8px 10px;}
+.signal b{font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:12.5px;letter-spacing:.6px;}
+
+.controle{display:flex;gap:12px;border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;margin-bottom:10px;}
+.controle.fait{border-color:var(--vert);background:#F3FBF6;}
+.controle input{width:22px;height:22px;accent-color:var(--vert);cursor:pointer;flex:0 0 22px;margin-top:2px;}
+.controle h4{margin:0 0 4px;font-size:16px;}
+.controle p{margin:0;font-size:15.5px;}
+.progression{display:flex;align-items:center;gap:12px;margin:0 0 18px;border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;}
+.jauge{flex:1;height:12px;background:var(--gris-ligne);border-radius:999px;overflow:hidden;}
+.jauge span{display:block;height:100%;width:0;background:var(--rouge);transition:width .25s ease;}
+.compteur{font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:16px;white-space:nowrap;}
+
+.banniere{background:var(--rouge);color:var(--blanc);border-radius:14px;padding:18px 20px;margin:26px 0;}
+.banniere p{margin:0;font-family:"Oswald",Arial,sans-serif;font-size:19px;line-height:1.25;text-transform:uppercase;}
+.banniere small{display:block;font-family:"Fira Sans Condensed",Arial,sans-serif;text-transform:none;font-size:15px;margin-top:8px;opacity:.95;}
+
+.accompagnement{border:3px solid var(--noir);border-radius:16px;padding:20px 22px;margin:32px 0 24px;background:var(--gris-clair);}
+.accompagnement .eyebrow{background:var(--rouge);}
+.accompagnement h3{margin:12px 0 8px;font-size:21px;}
+.accompagnement p{font-size:16px;}
+.liens{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px;}
+.liens a{font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:14px;letter-spacing:.7px;text-transform:uppercase;text-decoration:none;border-radius:8px;padding:11px 18px;display:inline-block;}
+.lien-primaire{background:var(--rouge);color:var(--blanc);}
+.lien-secondaire{background:var(--blanc);color:var(--noir);border:2px solid var(--noir);}
+.liens a:focus-visible{outline:3px solid var(--rouge);outline-offset:3px;}
+.url-texte{font-size:15px;color:var(--gris-texte);margin:12px 0 0;}
+
+details{border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;margin-bottom:10px;}
+details[open]{border-color:var(--noir);}
+summary{cursor:pointer;font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:16px;text-transform:uppercase;letter-spacing:.3px;}
+summary::-webkit-details-marker{display:none;}
+summary::before{content:"+ ";color:var(--rouge);font-weight:700;}
+details[open] summary::before{content:"\2212 ";}
+details p{margin:10px 0 0;font-size:16px;}
+
+footer{border-top:4px solid var(--noir);margin-top:44px;padding-top:18px;font-size:14px;color:var(--gris-texte);}
+footer strong{color:var(--noir);}
+
+@media (max-width:520px){
+  body{font-size:16px;}h1{font-size:27px;}section > h2{font-size:21px;}
+  .tableau{font-size:14px;}pre{font-size:12.5px;}
+  .liens a{width:100%;text-align:center;}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none !important;scroll-behavior:auto !important;}}
+</style>
+</head>
+<body>
+<div class="page">
+
+<header>
+  <span class="eyebrow">Ressource compagnon · L'IA Minute du Médecin</span>
+  <h1>Le calendrier réel, <mark>date par date</mark></h1>
+  <p class="sous-titre">Ce qui s'applique quand, ce que vous devez faire en tant qu'utilisateur, les six questions à poser à un fournisseur, et trois scénarios pour 2030 plutôt qu'une prophétie.</p>
+  <div class="trait"></div>
+  <p class="meta">Mise à jour : 25 juillet 2026.</p>
+</header>
+
+<div class="flash">
+  <h2>Trois précisions qui changent la lecture du calendrier</h2>
+  <ul>
+    <li><strong>Toute IA médicale n'est pas classée à haut risque.</strong> Le règlement européen ne qualifie ainsi que certains systèmes, notamment ceux qui constituent un composant de sécurité d'un produit déjà soumis à une évaluation de conformité par un organisme tiers, ce qui vise les dispositifs médicaux. Un assistant rédactionnel qui vous aide à écrire un courrier n'entre pas dans cette catégorie : il relève d'obligations de transparence, ce qui n'est pas la même chose.</li>
+    <li><strong>La date qui compte pour les dispositifs médicaux n'est pas 2026.</strong> Les obligations générales du règlement s'appliquent à partir du 2 août 2026, mais les systèmes intégrés à des produits comme les dispositifs médicaux relèvent d'un calendrier propre, jusqu'au 2 août 2027. À cela s'ajoutent les échéances de transition du règlement sur les dispositifs médicaux, qui courent selon la classe du produit jusqu'à fin 2027 et fin 2028.</li>
+    <li><strong>Une obligation vous concerne déjà, et elle est passée inaperçue.</strong> Depuis février 2025, toute organisation qui déploie de l'IA doit veiller à ce que les personnes qui l'utilisent disposent d'un niveau suffisant de <strong>maîtrise de ces outils</strong>, compte tenu de leurs fonctions et du contexte d'usage. En clair : si votre secrétariat utilise un assistant, sa formation n'est pas une bonne pratique, c'est une obligation.</li>
+  </ul>
+</div>
+
+<nav aria-label="Sommaire">
+  <button type="button" data-cible="calendrier">Le calendrier</button>
+  <button type="button" data-cible="vous">Ce qui vous incombe</button>
+  <button type="button" data-cible="fournisseur">6 questions au fournisseur</button>
+  <button type="button" data-cible="scenarios">Trois scénarios 2030</button>
+  <button type="button" data-cible="chiffres">Les chiffres, avec prudence</button>
+  <button type="button" data-cible="preparer">Se préparer</button>
+  <button type="button" data-cible="aller-plus-loin">Aller plus loin</button>
+  <button type="button" data-cible="faq">Questions</button>
+  <button type="button" data-cible="sources">Sources</button>
+</nav>
+
+<!-- CALENDRIER -->
+<section id="calendrier">
+  <h2>Le calendrier, date par date</h2>
+  <p class="chapeau">Gris pour ce qui est déjà en vigueur, rouge pour ce qui arrive, bleu pour l'horizon éloigné.</p>
+
+  <table class="tableau">
+    <thead><tr><th>Date</th><th>Ce qui s'applique</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="passe"><strong>2 février 2025</strong></td>
+        <td>Interdiction des pratiques d'IA jugées inacceptables. Et surtout, entrée en vigueur de l'obligation de <strong>maîtrise des outils d'IA</strong> pour les organisations qui en déploient : les utilisateurs doivent disposer d'un niveau de compétence suffisant au regard de leurs fonctions.</td>
+      </tr>
+      <tr>
+        <td class="passe"><strong>2 août 2025</strong></td>
+        <td>Obligations applicables aux fournisseurs de modèles d'IA à usage général, et mise en place de la gouvernance européenne et nationale.</td>
+      </tr>
+      <tr>
+        <td class="proche"><strong>2 août 2026</strong></td>
+        <td>Application de l'essentiel du règlement : obligations liées aux systèmes à haut risque listés à l'annexe III, et <strong>obligations de transparence</strong> sur les contenus générés artificiellement et sur l'interaction avec un système d'IA.</td>
+      </tr>
+      <tr>
+        <td class="proche"><strong>2 août 2027</strong></td>
+        <td>Application aux systèmes d'IA constituant un composant de sécurité de produits réglementés, ce qui vise notamment les <strong>dispositifs médicaux</strong>. C'est la date qui concerne réellement les logiciels de santé embarquant de l'IA.</td>
+      </tr>
+      <tr>
+        <td class="proche"><strong>31 décembre 2027 et 31 décembre 2028</strong></td>
+        <td>Fin des périodes de transition du règlement sur les dispositifs médicaux, selon la classe du produit. Deux calendriers différents, souvent confondus avec celui du règlement sur l'IA.</td>
+      </tr>
+      <tr>
+        <td class="loin"><strong>2030</strong></td>
+        <td>Échéances de mise en conformité applicables à certains systèmes déjà en service, notamment ceux utilisés par les autorités publiques. Rien qui concerne directement un cabinet de ville.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p class="note"><b>À retenir</b> Deux réglementations distinctes se superposent pour un logiciel médical : celle qui encadre l'IA et celle qui encadre les dispositifs médicaux. Ce n'est pas une double contrainte inventée par les fabricants, c'est le régime prévu, et il explique pourquoi certains outils disparaîtront du marché plutôt que de se mettre en conformité.</p>
+</section>
+
+<!-- VOUS -->
+<section id="vous">
+  <h2>Ce qui vous incombe, à vous</h2>
+  <p class="chapeau">L'essentiel du règlement pèse sur ceux qui conçoivent et mettent sur le marché. Quatre obligations concernent celui qui utilise.</p>
+
+  <table class="tableau">
+    <thead><tr><th>L'obligation</th><th>Ce que cela veut dire en cabinet</th></tr></thead>
+    <tbody>
+      <tr><td><strong>La maîtrise de l'outil</strong></td><td>Vous et vos collaborateurs devez savoir ce que fait l'outil, ses limites et ses erreurs typiques. Une formation, même courte, tracée par une attestation, répond à cette exigence. C'est aussi ce qui vous protège en cas de difficulté.</td></tr>
+      <tr><td><strong>L'usage conforme à la notice</strong></td><td>Un logiciel de santé s'utilise dans le cadre prévu par son fabricant. Le détourner de son usage prévu déplace la responsabilité vers vous, et vide la garantie du fabricant.</td></tr>
+      <tr><td><strong>La supervision humaine effective</strong></td><td>Non pas une case cochée, mais une personne compétente, disponible, qui peut comprendre la sortie du système et s'en écarter. Un clic de validation systématique n'est pas une supervision.</td></tr>
+      <tr><td><strong>L'information des personnes</strong></td><td>Un patient a le droit de savoir qu'il interagit avec un système d'IA, et qu'un contenu a été généré artificiellement. Une ligne sur un document, une phrase à l'oral : cela suffit, encore faut-il le faire.</td></tr>
+    </tbody>
+  </table>
+
+  <p><strong>Ce que le règlement ne dit pas :</strong> il ne remplace ni le secret médical, ni les règles d'hébergement des données de santé, ni la déontologie. Il s'y ajoute. Un usage parfaitement conforme au règlement sur l'IA peut rester une faute déontologique.</p>
+</section>
+
+<!-- FOURNISSEUR -->
+<section id="fournisseur">
+  <h2>Six questions à poser avant d'acheter</h2>
+  <p class="chapeau">À poser par écrit, et à conserver. Les réponses vous serviront bien plus qu'une démonstration.</p>
+
+  <div class="bloc">
+    <div class="bloc-tete"><h4>Le questionnaire fournisseur, prêt à envoyer</h4><button type="button" class="copier">Copier</button></div>
+    <pre>Madame, Monsieur,
+
+Avant d'envisager le déploiement de votre solution dans notre structure, je souhaite obtenir par écrit les éléments suivants.
+
+1. STATUT RÉGLEMENTAIRE
+Votre solution est-elle un dispositif médical au sens de la réglementation européenne ? Si oui, quelle classe, quel organisme notifié, quel numéro de certificat et quelle date de validité ? Si non, sur quel fondement ?
+
+2. RÈGLEMENT SUR L'IA
+Votre système est-il qualifié à haut risque au sens du règlement européen sur l'IA ? Quelle est votre échéance de mise en conformité, et où en êtes-vous à ce jour ?
+
+3. DONNÉES
+Où sont hébergées les données ? L'hébergeur est-il certifié pour les données de santé ? Quelles données sortent de l'Union européenne, le cas échéant ? Quelle est la durée de conservation, et que devient l'enregistrement source ?
+
+4. ENTRAÎNEMENT
+Nos données sont-elles utilisées pour entraîner ou améliorer vos modèles ? Sous quelle forme cet engagement figure-t-il au contrat, et non seulement dans une page marketing ?
+
+5. PERFORMANCE ET LIMITES
+Quelles sont les performances mesurées de votre système, sur quelle population, et par qui ? Quelles sont les erreurs typiques documentées, et que recommandez-vous pour les détecter ?
+
+6. RÉVERSIBILITÉ
+Si nous mettons fin au contrat, sous quel format et dans quel délai récupérons-nous les données produites ? Que devient ce qui reste chez vous ?
+
+Je vous remercie de répondre point par point, ces éléments conditionnant notre décision.</pre>
+  </div>
+
+  <p class="note"><b>Le signal à guetter</b> Un fournisseur sérieux répond aux six points par écrit, en quelques jours. Une réponse qui renvoie à une page web générale, ou qui promet une conformité future sans date, est en soi une réponse.</p>
+</section>
+
+<!-- SCENARIOS -->
+<section id="scenarios">
+  <h2>Trois scénarios pour 2030</h2>
+  <p class="chapeau">Personne ne sait ce que sera 2030. En revanche, on peut décrire trois trajectoires plausibles et les signaux qui permettront de savoir laquelle se réalise.</p>
+
+  <div class="scenario">
+    <div class="pastille p-vert">A</div>
+    <div>
+      <h4>L'intégration réussie</h4>
+      <p>L'IA s'installe dans les logiciels métier, certifiée et encadrée. Le compte rendu, le codage, le courrier et la veille sont préparés automatiquement, le médecin valide. Le temps administratif recule réellement, et il est réinvesti dans la consultation.</p>
+      <p class="signal"><b>Signal à guetter</b> Des éditeurs de logiciels de cabinet qui obtiennent des certifications, et non des startups qui lèvent des fonds.</p>
+    </div>
+  </div>
+
+  <div class="scenario">
+    <div class="pastille p-orange">B</div>
+    <div>
+      <h4>La fracture d'usage</h4>
+      <p>Le scénario le plus probable. Une partie des praticiens tire un bénéfice réel, une autre reste à l'écart, faute de temps, d'équipement ou d'appétence. L'écart se creuse entre structures équipées et exercices isolés, et la charge administrative se déplace plutôt qu'elle ne disparaît.</p>
+      <p class="signal"><b>Signal à guetter</b> L'écart d'équipement entre maisons de santé et cabinets isolés, et la place de l'IA dans les négociations conventionnelles.</p>
+    </div>
+  </div>
+
+  <div class="scenario">
+    <div class="pastille p-rouge">C</div>
+    <div>
+      <h4>Le reflux</h4>
+      <p>Le coût de la conformité, quelques incidents médiatisés et une déception sur les gains réels freinent l'adoption. Des outils disparaissent, des projets sont abandonnés, comme le prévoient déjà les analystes pour une large part des projets d'agents. L'IA reste utile mais cantonnée à la périphérie du soin.</p>
+      <p class="signal"><b>Signal à guetter</b> Le retrait d'outils du marché européen pour cause de conformité, et le premier contentieux impliquant une sortie d'IA dans un dossier.</p>
+    </div>
+  </div>
+
+  <p><strong>Ce qui est commun aux trois :</strong> dans aucun d'eux le médecin n'est remplacé, et dans les trois la compétence qui compte est la même, savoir cadrer une demande et vérifier une sortie. C'est la seule chose qui mérite d'être apprise maintenant, parce qu'elle résiste à tous les scénarios.</p>
+</section>
+
+<!-- CHIFFRES -->
+<section id="chiffres">
+  <h2>Les chiffres, avec les précautions d'usage</h2>
+  <p class="chapeau">Deux données circulent partout sur ce sujet. L'une est solide, l'autre beaucoup moins.</p>
+
+  <table class="tableau">
+    <thead><tr><th>La donnée</th><th>Ce qu'elle vaut</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>La pénurie mondiale de soignants d'ici 2030</strong></td>
+        <td>Solide, et à jour dans sa dernière version : l'Organisation mondiale de la santé projette un déficit d'environ <strong>11 millions</strong> de professionnels de santé en 2030, après une révision à la hausse de l'estimation précédente qui était de l'ordre de 10 millions. Cette pénurie est concentrée dans les pays à revenu faible et intermédiaire, ce qui doit être précisé quand on cite le chiffre en France.</td>
+      </tr>
+      <tr>
+        <td><strong>Le marché mondial de l'IA en santé en 2030</strong></td>
+        <td>Fragile. Les projections publiées vont d'environ 110 à près de 200 milliards de dollars selon les cabinets d'études, avec des périmètres et des méthodes différents. Le chiffre le plus repris provient d'un cabinet privé, pas d'une institution. À citer, si on le cite, comme un ordre de grandeur commercial et non comme une prévision autorisée.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p class="note"><b>La règle qui vaut pour tout ce chapitre</b> Une projection à cinq ans n'est pas une information, c'est une hypothèse. Elle sert à situer une tendance, jamais à fonder une décision.</p>
+</section>
+
+<!-- PREPARER -->
+<section id="preparer">
+  <h2>Ce qu'il est utile de faire maintenant</h2>
+  <p class="chapeau">Cinq gestes, valables quel que soit le scénario qui se réalise.</p>
+
+  <div class="progression">
+    <div class="jauge"><span id="jauge-barre"></span></div>
+    <div class="compteur" id="jauge-compteur">0 / 5</div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Former les personnes, pas seulement acheter des outils</h4>
+    <p>C'est une obligation depuis février 2025, et c'est surtout ce qui fait la différence entre un outil utilisé et un abonnement payé.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Écrire vos règles internes, en une page</h4>
+    <p>Ce qui est autorisé, ce qui ne l'est jamais, qui valide quoi. Une page suffit, et elle vous servira le jour où quelqu'un posera la question.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Poser les six questions à vos fournisseurs actuels</h4>
+    <p>Pas seulement aux futurs. Vous découvrirez peut-être qu'un outil déjà en place n'a pas de réponse.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Tenir un inventaire de vos outils d'IA</h4>
+    <p>Nom, usage, données concernées, fournisseur, date de dernière vérification. Un tableau de dix lignes, tenu à jour une fois par an.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Choisir une compétence à développer, pas un outil à maîtriser</h4>
+    <p>Cadrer une demande et vérifier une sortie. Les deux se transposent à tous les outils, et survivront à celui que vous utilisez aujourd'hui.</p></div>
+  </div>
+
+  <div class="banniere">
+    <p>L'IA ne remplace pas le médecin. Elle remplace les tâches qui l'empêchent de soigner.
+    <small>Encore faut-il que ces tâches soient réellement rendues, et non déplacées ailleurs. C'est la question que 2030 tranchera.</small></p>
+  </div>
+</section>
+
+<!-- ACCOMPAGNEMENT -->
+<section id="aller-plus-loin">
+  <h2>Aller plus loin</h2>
+
+  <div class="accompagnement">
+    <span class="eyebrow">Prompt ID · Conseil et formation en IA générative</span>
+    <h3>Former votre équipe n'est plus une option</h3>
+    <p>Depuis février 2025, les organisations qui déploient des outils d'IA doivent s'assurer que ceux qui les utilisent en maîtrisent le fonctionnement et les limites. Samuel De Queiroz, coauteur de cet ouvrage, accompagne depuis 2023 des équipes de santé et d'entreprise sur ce sujet : audit d'une journée, formations à trois niveaux, sprint de cinq jours, ou référent embarqué sur la durée.</p>
+    <p>Plus de 1 100 professionnels formés, une cinquantaine d'organisations accompagnées, membre du Claude Partner Network, formateur à l'Université Paris Cité.</p>
+    <div class="liens">
+      <a class="lien-primaire" href="https://cal.com/samuel-de-queiroz/appel-decouverte" target="_blank" rel="noopener">Réserver un échange de 30 min</a>
+      <a class="lien-secondaire" href="https://www.prompt-id.com/" target="_blank" rel="noopener">Découvrir Prompt ID</a>
+    </div>
+    <p class="url-texte">www.prompt-id.com · contact@prompt-id.com · Coutras, Gironde</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <h2>Questions fréquentes</h2>
+
+  <details>
+    <summary>Mon assistant conversationnel est-il concerné par le règlement ?</summary>
+    <p>Pas au titre du haut risque tant qu'il ne fait qu'aider à rédiger ou à chercher. Il relève en revanche des obligations de transparence applicables à partir du 2 août 2026, et vous restez soumis à l'obligation de maîtrise de l'outil, qui est déjà en vigueur.</p>
+  </details>
+
+  <details>
+    <summary>Dois-je faire une déclaration quelque part ?</summary>
+    <p>Non, pas en tant qu'utilisateur en cabinet. Les obligations d'enregistrement pèsent sur les fournisseurs de systèmes à haut risque. Votre travail consiste à savoir ce que vous utilisez, à former ceux qui s'en servent et à conserver la trace de vos vérifications.</p>
+  </details>
+
+  <details>
+    <summary>Que se passe-t-il si un outil que j'utilise n'est pas conforme en 2027 ?</summary>
+    <p>Il ne pourra plus être commercialisé dans l'Union européenne dans cet usage. Vous devrez en changer, ce qui rend la question de la réversibilité des données déterminante au moment de l'achat. C'est le sixième point du questionnaire fournisseur.</p>
+  </details>
+
+  <details>
+    <summary>La pénurie de soignants est-elle un argument valable pour l'IA ?</summary>
+    <p>Elle décrit un contexte, pas une solution. Le déficit projeté concerne surtout les pays à revenu faible et intermédiaire, où l'accès aux outils numériques est justement le plus limité. En citer le chiffre sans cette précision est trompeur.</p>
+  </details>
+
+  <details>
+    <summary>Faut-il attendre la stabilisation réglementaire avant de se lancer ?</summary>
+    <p>Non, parce que les usages qui vous font gagner du temps aujourd'hui, rédaction, veille, synthèse, supports patients, ne relèvent pas du haut risque. Ce qui mérite d'attendre, ce sont les outils qui agissent sur le dossier ou proposent une décision clinique.</p>
+  </details>
+
+  <details>
+    <summary>Comment savoir si mon logiciel métier va intégrer de l'IA certifiée ?</summary>
+    <p>Posez la question à votre éditeur, par écrit, avec les six points du questionnaire. Sa capacité à répondre avec des dates et un organisme notifié est le meilleur indicateur de ce qui vous attend.</p>
+  </details>
+</section>
+
+<!-- SOURCES -->
+<section id="sources">
+  <h2>Sources</h2>
+  <table class="tableau">
+    <thead><tr><th>Élément</th><th>Source</th></tr></thead>
+    <tbody>
+      <tr><td>Calendrier d'application : interdictions et obligation de maîtrise des outils d'IA au 2 février 2025, modèles à usage général au 2 août 2025, application générale au 2 août 2026, systèmes intégrés à des produits réglementés au 2 août 2027</td><td>Règlement (UE) 2024/1689 sur l'intelligence artificielle</td></tr>
+      <tr><td>Obligations des déployeurs : usage conforme à la notice, supervision humaine par des personnes compétentes, information des personnes concernées</td><td>Règlement (UE) 2024/1689</td></tr>
+      <tr><td>Périodes de transition du règlement sur les dispositifs médicaux, échéances distinctes selon la classe du produit</td><td>Règlement (UE) 2017/745 et règlement modificatif de 2023</td></tr>
+      <tr><td>Déficit projeté d'environ 11 millions de professionnels de santé en 2030, après révision à la hausse de l'estimation antérieure</td><td>Organisation mondiale de la santé, données sur les personnels de santé, 2025 et 2026</td></tr>
+      <tr><td>Projections du marché mondial de l'IA en santé à l'horizon 2030, allant d'environ 110 à près de 200 milliards de dollars selon les cabinets</td><td>Rapports de cabinets d'études privés, 2022 à 2026</td></tr>
+      <tr><td>Prévision d'abandon de plus de 40 % des projets d'IA agentique d'ici fin 2027</td><td>Gartner, juin 2025</td></tr>
+      <tr><td>Méthode A.V.E.C.</td><td>Haute Autorité de santé, recommandations sur l'IA générative en santé, 30 octobre 2025</td></tr>
+    </tbody>
+  </table>
+  <p class="chapeau">Les calendriers réglementaires peuvent être ajustés par des textes ultérieurs. Vérifiez les dates auprès d'une source officielle avant toute décision d'investissement ou de mise en conformité.</p>
+</section>
+
+<footer>
+  <p><strong>L'IA Minute du Médecin</strong>, Dr Guillaume Zagury et Samuel De Queiroz, Éditions Medicilline.</p>
+  <p>Ressource compagnon de la double page consacrée à l'horizon 2030. Cette page présente une lecture pédagogique de textes complexes. Elle ne constitue pas un conseil juridique et ne se substitue pas à l'analyse d'un professionnel du droit pour une situation particulière.</p>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var chips = document.querySelectorAll("nav button[data-cible]");
+  Array.prototype.forEach.call(chips, function(btn){
+    btn.addEventListener("click", function(){
+      var cible = document.getElementById(btn.getAttribute("data-cible"));
+      if(cible){ cible.scrollIntoView({ behavior:"smooth", block:"start" }); }
+    });
+  });
+
+  var controles = document.querySelectorAll("[data-controle]");
+  var barre = document.getElementById("jauge-barre");
+  var compteur = document.getElementById("jauge-compteur");
+  var total = controles.length;
+
+  function maj(){
+    var faits = 0;
+    Array.prototype.forEach.call(controles, function(c){
+      var box = c.querySelector("input[type=checkbox]");
+      if(box && box.checked){ faits++; c.classList.add("fait"); }
+      else { c.classList.remove("fait"); }
+    });
+    barre.style.width = (faits/total*100) + "%";
+    barre.style.background = (faits === total) ? "#27AE60" : "#DC322F";
+    compteur.textContent = faits + " / " + total;
+  }
+
+  Array.prototype.forEach.call(controles, function(c){
+    var box = c.querySelector("input[type=checkbox]");
+    if(box){ box.addEventListener("change", maj); }
+  });
+  maj();
+
+  var boutons = document.querySelectorAll(".copier");
+  Array.prototype.forEach.call(boutons, function(btn){
+    btn.addEventListener("click", function(){
+      var bloc = btn.closest(".bloc");
+      var pre = bloc ? bloc.querySelector("pre") : null;
+      if(!pre){ return; }
+      var texte = pre.textContent;
+      var fini = function(){
+        btn.textContent = "Copié";
+        btn.classList.add("ok");
+        setTimeout(function(){ btn.textContent = "Copier"; btn.classList.remove("ok"); }, 1800);
+      };
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(texte).then(fini, function(){ secours(texte, fini); });
+      } else { secours(texte, fini); }
+    });
+  });
+
+  function secours(texte, fini){
+    var z = document.createElement("textarea");
+    z.value = texte;
+    z.setAttribute("readonly","");
+    z.style.position = "absolute";
+    z.style.left = "-9999px";
+    document.body.appendChild(z);
+    z.select();
+    try { document.execCommand("copy"); fini(); } catch(e){}
+    document.body.removeChild(z);
+  }
+})();
+</script>
+</body>
+</html>

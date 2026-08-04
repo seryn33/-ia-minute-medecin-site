@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Du visuel au mini-cours filmé · L'IA Minute du Médecin</title>
+<meta name="description" content="Ressource compagnon du livre L'IA Minute du Médecin : la chaîne de production d'une vidéo médicale, les prompts prêts à copier, le cadre déontologique de diffusion et les contrôles avant publication.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Fira+Sans+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --rouge:#DC322F;--noir:#1A1A1A;--blanc:#FFFFFF;--jaune:#FFD700;
+  --bleu:#3498DB;--orange:#F39C12;--vert:#27AE60;--violet:#8E44AD;--teal:#1ABC9C;
+  --gris:#BDC3C7;--gris-clair:#F4F5F6;--gris-ligne:#E1E4E6;--gris-texte:#5A6268;
+}
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{margin:0;background:var(--blanc);color:var(--noir);font-family:"Fira Sans Condensed","Roboto Condensed",Arial,sans-serif;font-size:17px;line-height:1.5;}
+.page{max-width:720px;margin:0 auto;padding:0 18px 80px;}
+h1,h2,h3,h4{font-family:"Oswald","Arial Narrow",Arial,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.2px;}
+p{margin:0 0 14px;}
+
+header{padding:26px 0 8px;}
+.eyebrow{display:inline-block;font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:var(--blanc);background:var(--noir);padding:5px 11px;}
+h1{font-size:33px;line-height:1.06;margin:14px 0 0;}
+h1 mark{background:var(--jaune);color:var(--noir);padding:0 5px;}
+.sous-titre{font-family:"Fira Sans Condensed",Arial,sans-serif;font-style:italic;font-weight:600;color:var(--rouge);font-size:19px;margin:10px 0 0;text-transform:none;}
+.trait{height:4px;background:var(--rouge);margin:16px 0 22px;}
+.meta{font-size:14px;color:var(--gris-texte);margin:0 0 22px;}
+
+.flash{border:3px solid var(--rouge);border-radius:14px;padding:16px 18px;margin:0 0 26px;}
+.flash h2{font-size:19px;margin:0 0 10px;color:var(--rouge);}
+.flash ul{margin:0;padding-left:20px;}
+.flash li{margin-bottom:9px;}
+
+nav{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 34px;}
+nav button{font-family:"Oswald",Arial,sans-serif;font-weight:500;font-size:13px;letter-spacing:.6px;text-transform:uppercase;background:var(--gris-clair);color:var(--noir);border:2px solid var(--gris-ligne);border-radius:999px;padding:7px 13px;cursor:pointer;}
+nav button:hover{background:var(--noir);color:var(--blanc);border-color:var(--noir);}
+nav button:focus-visible{outline:3px solid var(--rouge);outline-offset:2px;}
+
+section{border-top:2px solid var(--gris-ligne);padding-top:26px;margin-top:34px;scroll-margin-top:14px;}
+section > h2{font-size:25px;margin:0 0 4px;line-height:1.1;}
+.chapeau{color:var(--gris-texte);font-size:16px;margin:0 0 20px;}
+h3{font-size:19px;margin:26px 0 8px;}
+
+.temps{display:flex;gap:14px;border:2px solid var(--gris-ligne);border-radius:14px;padding:14px;margin-bottom:12px;}
+.pastille{flex:0 0 42px;height:42px;border-radius:50%;color:var(--blanc);font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:19px;display:flex;align-items:center;justify-content:center;}
+.p-bleu{background:var(--bleu);}.p-orange{background:var(--orange);}.p-vert{background:var(--vert);}.p-violet{background:var(--violet);}
+.temps-corps{flex:1;min-width:0;}
+.temps h4{font-size:17px;margin:4px 0 6px;}
+.temps p{font-size:16px;margin:0 0 8px;}
+.piege{font-size:15px;background:var(--gris-clair);border-left:4px solid var(--orange);padding:8px 10px;margin:0 0 12px;}
+.piege b{font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:13px;letter-spacing:.6px;color:var(--orange);}
+
+.bloc{border:2px solid var(--gris-ligne);border-radius:14px;overflow:hidden;margin:0 0 16px;}
+.bloc-tete{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--gris-clair);padding:10px 12px;border-bottom:2px solid var(--gris-ligne);}
+.bloc-tete h4{margin:0;font-size:15px;}
+.copier{font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:12px;letter-spacing:.8px;text-transform:uppercase;background:var(--rouge);color:var(--blanc);border:none;border-radius:6px;padding:7px 12px;cursor:pointer;white-space:nowrap;}
+.copier.ok{background:var(--vert);}
+.copier:focus-visible{outline:3px solid var(--noir);outline-offset:2px;}
+pre{margin:0;padding:14px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px;line-height:1.5;white-space:pre-wrap;word-wrap:break-word;}
+.badge{display:inline-block;background:var(--gris);color:var(--noir);border-radius:5px;font-family:"Oswald",Arial,sans-serif;font-size:11.5px;letter-spacing:.7px;text-transform:uppercase;padding:3px 8px;margin:0 6px 6px 0;}
+
+.tableau{width:100%;border-collapse:collapse;font-size:15px;margin:0 0 18px;}
+.tableau th,.tableau td{border:1px solid var(--gris-ligne);padding:8px 10px;text-align:left;vertical-align:top;}
+.tableau th{background:var(--noir);color:var(--blanc);font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:13px;letter-spacing:.5px;}
+.tableau tr:nth-child(even) td{background:var(--gris-clair);}
+
+.controle{display:flex;gap:12px;border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;margin-bottom:10px;}
+.controle.fait{border-color:var(--vert);background:#F3FBF6;}
+.controle input{width:22px;height:22px;accent-color:var(--vert);cursor:pointer;flex:0 0 22px;margin-top:2px;}
+.controle h4{margin:0 0 4px;font-size:16px;}
+.controle p{margin:0;font-size:15.5px;}
+.progression{display:flex;align-items:center;gap:12px;margin:0 0 18px;border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;}
+.jauge{flex:1;height:12px;background:var(--gris-ligne);border-radius:999px;overflow:hidden;}
+.jauge span{display:block;height:100%;width:0;background:var(--rouge);transition:width .25s ease;}
+.compteur{font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:16px;white-space:nowrap;}
+
+.zone-rouge{border:3px solid var(--rouge);border-radius:14px;padding:16px 18px;margin:18px 0;}
+.zone-rouge h3{margin-top:0;color:var(--rouge);}
+.interdit{list-style:none;padding:0;margin:0;}
+.interdit li{padding-left:26px;position:relative;margin-bottom:8px;}
+.interdit li::before{content:"\00d7";position:absolute;left:0;top:-2px;color:var(--rouge);font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:22px;line-height:1;}
+
+.banniere{background:var(--rouge);color:var(--blanc);border-radius:14px;padding:18px 20px;margin:26px 0;}
+.banniere p{margin:0;font-family:"Oswald",Arial,sans-serif;font-size:19px;line-height:1.25;text-transform:uppercase;}
+.banniere small{display:block;font-family:"Fira Sans Condensed",Arial,sans-serif;text-transform:none;font-size:15px;margin-top:8px;opacity:.95;}
+
+details{border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;margin-bottom:10px;}
+details[open]{border-color:var(--noir);}
+summary{cursor:pointer;font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:16px;text-transform:uppercase;letter-spacing:.3px;}
+summary::-webkit-details-marker{display:none;}
+summary::before{content:"+ ";color:var(--rouge);font-weight:700;}
+details[open] summary::before{content:"\2212 ";}
+details p{margin:10px 0 0;font-size:16px;}
+
+footer{border-top:4px solid var(--noir);margin-top:44px;padding-top:18px;font-size:14px;color:var(--gris-texte);}
+footer strong{color:var(--noir);}
+
+@media (max-width:520px){
+  body{font-size:16px;}h1{font-size:27px;}section > h2{font-size:21px;}
+  .tableau{font-size:14px;}pre{font-size:12.5px;}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none !important;scroll-behavior:auto !important;}}
+</style>
+</head>
+<body>
+<div class="page">
+
+<header>
+  <span class="eyebrow">Ressource compagnon · L'IA Minute du Médecin</span>
+  <h1>Du visuel fixe au <mark>mini-cours filmé</mark></h1>
+  <p class="sous-titre">La chaîne de production complète, les prompts prêts à copier, et le cadre déontologique de diffusion que personne ne vous explique.</p>
+  <div class="trait"></div>
+  <p class="meta">Mise à jour : 25 juillet 2026. Le marché de la vidéo générative bouge tous les mois : cette page est révisée, le livre non.</p>
+</header>
+
+<div class="flash">
+  <h2>L'état du terrain, aujourd'hui</h2>
+  <ul>
+    <li><strong>Sora est fermé.</strong> OpenAI a annoncé l'arrêt le 24 mars 2026, six mois après le lancement de l'application. Retenez la leçon plutôt que le nom : un outil vidéo peut disparaître en une nuit, vos scripts et vos images sources, non.</li>
+    <li><strong>L'audio natif ne parle pas encore français.</strong> Les modèles vidéo qui génèrent une voix synchronisée couvrent aujourd'hui une poignée de langues, le français n'en fait pas partie. Pour un contenu francophone, la voix est produite séparément, par vous ou par un outil de synthèse vocale.</li>
+    <li><strong>Les clips sont courts par construction.</strong> Comptez cinq à dix secondes par génération selon les modèles, extensibles par prolongation. Un mini-cours de deux minutes est donc un assemblage, jamais une génération unique.</li>
+    <li><strong>Toute image ou vidéo générée est marquée.</strong> Filigranes invisibles et métadonnées d'origine sont désormais la norme, et les obligations européennes de transparence sur les contenus générés artificiellement s'appliquent à partir du 2 août 2026. Affichez la mention, c'est plus simple que de la subir.</li>
+  </ul>
+</div>
+
+<nav aria-label="Sommaire">
+  <button type="button" data-cible="decider">Image, audio ou vidéo</button>
+  <button type="button" data-cible="chaine">La chaîne</button>
+  <button type="button" data-cible="prompts">Les prompts</button>
+  <button type="button" data-cible="reglages">Les réglages</button>
+  <button type="button" data-cible="diffuser">Diffuser</button>
+  <button type="button" data-cible="controles">Avant publication</button>
+  <button type="button" data-cible="faq">Questions</button>
+  <button type="button" data-cible="sources">Sources</button>
+</nav>
+
+<!-- DECIDER -->
+<section id="decider">
+  <h2>Avant de produire : est-ce vraiment une vidéo qu'il vous faut</h2>
+  <p class="chapeau">La vidéo est le format le plus coûteux en temps et le moins durable. Elle ne se justifie que sur deux choses : un geste, ou une séquence.</p>
+
+  <table class="tableau">
+    <thead><tr><th>Votre message</th><th>Le bon format</th><th>Pourquoi</th></tr></thead>
+    <tbody>
+      <tr><td>Une synthèse, une conduite à tenir, une liste de signes</td><td>Visuel fixe</td><td>Se colle au mur, se photographie, se relit. Rien ne bat une image fixe pour une information consultée en urgence.</td></tr>
+      <tr><td>Un geste technique ou une séquence dans le temps</td><td>Vidéo courte</td><td>La technique d'inhalation, une auto-injection, un exercice de rééducation, l'évolution d'une crise : ce sont des mouvements, l'image fixe les trahit.</td></tr>
+      <tr><td>Un contenu long à écouter en déplacement</td><td>Audio</td><td>Une synthèse de recommandation ou un point de veille se consomme mieux en voiture qu'à l'écran.</td></tr>
+      <tr><td>Une explication à donner une seule fois à un seul patient</td><td>Votre voix, en consultation</td><td>Aucun outil ne rentabilise dix minutes de production pour un usage unique.</td></tr>
+    </tbody>
+  </table>
+
+  <p><strong>Le test en une question :</strong> si votre contenu tient sur une page imprimée sans rien perdre, ne le filmez pas.</p>
+</section>
+
+<!-- CHAINE -->
+<section id="chaine">
+  <h2>La chaîne de production, en quatre temps</h2>
+  <p class="chapeau">Le premier mini-cours demande une heure. Le troisième, vingt minutes, parce que votre gabarit et votre voix sont déjà prêts.</p>
+
+  <div class="temps">
+    <div class="pastille p-bleu">1</div>
+    <div class="temps-corps">
+      <h4>Le script, avant tout le reste</h4>
+      <p>Une vidéo médicale ratée est presque toujours une vidéo écrite après coup. Fixez la durée d'abord : <strong>130 mots parlés font environ une minute</strong>. Un mini-cours utile tient en 90 à 150 secondes, soit 200 à 320 mots. Écrivez le texte complet, découpé en plans, avant d'ouvrir le moindre générateur.</p>
+      <p class="piege"><b>Piège</b> : générer de jolies images puis chercher quoi dire dessus. Vous obtenez un diaporama commenté, pas un cours.</p>
+    </div>
+  </div>
+
+  <div class="temps">
+    <div class="pastille p-orange">2</div>
+    <div class="temps-corps">
+      <h4>Les planches, une par plan</h4>
+      <p>Chaque plan devient une image fixe soignée, au bon format d'écran. Générez toutes les planches dans la même session et avec la même consigne de style, sinon la charte visuelle change en cours de route. Pour les titres et les libellés, vérifiez chaque caractère : le rendu de texte s'est beaucoup amélioré, il n'est pas infaillible en français.</p>
+      <p class="piege"><b>Piège</b> : mettre trop de texte dans l'image. À l'écran, six mots par ligne et trois lignes maximum, sinon c'est illisible sur un téléphone.</p>
+    </div>
+  </div>
+
+  <div class="temps">
+    <div class="pastille p-vert">3</div>
+    <div class="temps-corps">
+      <h4>L'animation, en mouvements discrets</h4>
+      <p>Chaque planche est animée en un clip court, en mode image vers vidéo. Pour un contenu médical, l'animation utile est <strong>sobre</strong> : un lent zoom, un léger panoramique, une apparition progressive. Tout mouvement ample déforme le texte présent dans l'image et fait apparaître des artefacts anatomiques.</p>
+      <p class="piege"><b>Piège</b> : demander un mouvement de caméra spectaculaire sur un schéma. Les libellés se dissolvent, les structures anatomiques se déforment, et personne ne le remarque avant la diffusion.</p>
+    </div>
+  </div>
+
+  <div class="temps">
+    <div class="pastille p-violet">4</div>
+    <div class="temps-corps">
+      <h4>La voix, le montage, les sous-titres</h4>
+      <p>Enregistrez votre propre voix : c'est plus rapide qu'il n'y paraît, c'est gratuit, et c'est votre crédibilité qui parle. Assemblez les clips dans n'importe quel outil de montage grand public, ajoutez une page de titre, une page de fin avec les mentions, et <strong>des sous-titres systématiques</strong>, puisque la majorité des vidéos sont regardées sans le son et que les sous-titres conditionnent l'accessibilité.</p>
+      <p class="piege"><b>Piège</b> : laisser la vidéo se terminer sur la dernière image du contenu. La page de fin porte votre identité, la date, et la mention d'usage de l'IA. Elle n'est pas décorative, elle est votre protection.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROMPTS -->
+<section id="prompts">
+  <h2>Les prompts, prêts à copier</h2>
+  <p class="chapeau">Un prompt de script en français, deux prompts visuels en anglais, et le gabarit de page de fin.</p>
+
+  <p><span class="badge">Temps 1</span><span class="badge">À lancer sur vos sources</span></p>
+  <div class="bloc">
+    <div class="bloc-tete"><h4>Script de mini-cours, 90 à 150 secondes</h4><button type="button" class="copier">Copier</button></div>
+    <pre>Rôle : tu es scénariste pédagogique pour un médecin qui produit un mini-cours vidéo. Tu ne prescris pas et tu n'inventes aucune donnée.
+
+Sujet : [sujet précis, par exemple : la technique d'inhalation avec chambre chez l'enfant].
+Public : [patients adultes sans culture médicale / parents / confrères / internes].
+Durée cible : [120] secondes, soit environ [260] mots parlés.
+
+Tâche : écris le script complet, découpé en 6 à 8 plans. Pour chaque plan :
+PLAN n
+DURÉE : x secondes
+VOIX OFF : le texte exact à lire, phrases de 15 mots maximum
+À L'ÉCRAN : les 3 à 6 mots affichés, pas davantage
+IMAGE : la description du visuel à générer
+
+Contraintes :
+- Une seule idée par plan. Le premier plan pose la question, le dernier donne la conduite à tenir.
+- Aucune donnée chiffrée qui ne figure pas dans les documents fournis. Si une donnée manque, tu écris [à compléter par le médecin].
+- Aucun nom de marque, aucun dosage.
+- Vouvoiement, registre professionnel, pas de superlatif, pas de promesse de résultat.
+- Termine par une ligne "Sources utilisées" citant les documents et sections.</pre>
+  </div>
+
+  <p><span class="badge">Temps 2</span><span class="badge">Une planche par plan</span></p>
+  <div class="bloc">
+    <div class="bloc-tete"><h4>Planche visuelle, format écran</h4><button type="button" class="copier">Copier</button></div>
+    <pre>Medical educational still frame, 16:9 horizontal format, clean white background, French language.
+
+Content: [describe the visual for this plan, for example: a simplified side view of a child using a pressurised inhaler with a transparent spacer, drawn as a flat diagram].
+
+Text on screen: "[three to six words, exactly as written here]", bold condensed sans-serif, black, top left. No other text anywhere in the image.
+
+Style: flat 2D vector illustration, bold black outlines, limited palette of red, black, white with one accent colour, no gradients, no shadows, no photorealism, no 3D rendering, no brand logo, no watermark, no stethoscope, no medical uniform.
+
+Layout: generous empty space at the bottom third of the frame, reserved for subtitles.</pre>
+  </div>
+
+  <p><span class="badge">Temps 3</span><span class="badge">Mouvement sobre</span></p>
+  <div class="bloc">
+    <div class="bloc-tete"><h4>Animation de la planche, image vers vidéo</h4><button type="button" class="copier">Copier</button></div>
+    <pre>Animate this still image into a short clip.
+
+Camera: very slow push in, no more than 5 percent zoom over the whole clip. No pan, no tilt, no rotation, no handheld shake.
+
+Motion: only the [named element, for example: the airflow arrows] moves, gently and continuously. Everything else stays perfectly still.
+
+Absolute constraints: keep all on-screen text identical, sharp and unchanged. Do not redraw, distort or re-letter any text. Do not alter anatomical structures. Do not add characters, objects, logos or captions. No morphing, no flicker, no lens flare, no dramatic lighting change.
+
+Duration: [5] seconds. Output: [1080p], 16:9.</pre>
+  </div>
+
+  <p><span class="badge">Temps 4</span><span class="badge">À placer en dernière image</span></p>
+  <div class="bloc">
+    <div class="bloc-tete"><h4>Page de fin, mentions</h4><button type="button" class="copier">Copier</button></div>
+    <pre>Dr [Prénom NOM], [spécialité], [ville].
+[Numéro RPPS si vous le communiquez].
+
+Contenu à visée d'information et d'éducation à la santé. Ne remplace pas une consultation médicale.
+
+Sources : [référence 1], [référence 2]. Contenu à jour au [date].
+
+Illustrations et animations générées par intelligence artificielle. Contenu rédigé et validé par le médecin.</pre>
+  </div>
+</section>
+
+<!-- REGLAGES -->
+<section id="reglages">
+  <h2>Les réglages qui changent le résultat</h2>
+  <p class="chapeau">Ce ne sont pas des détails techniques, ce sont les six choix qui décident si la vidéo est utilisable.</p>
+
+  <table class="tableau">
+    <thead><tr><th>Réglage</th><th>Ce qu'il faut choisir</th></tr></thead>
+    <tbody>
+      <tr><td>Format d'image</td><td>16:9 pour la salle d'attente et un site, 9:16 vertical pour un lien envoyé au patient sur son téléphone. Décidez avant de générer les planches : on ne recadre pas un schéma sans le mutiler.</td></tr>
+      <tr><td>Durée par clip</td><td>Générez court, cinq secondes suffisent pour un plan commenté. Un clip long coûte plus cher en crédits et dérive davantage.</td></tr>
+      <tr><td>Résolution</td><td>1080p suffit pour tous les usages décrits ici. La 4K consomme un quota disproportionné pour une différence invisible sur un écran de salle d'attente.</td></tr>
+      <tr><td>Audio</td><td>Désactivez l'audio généré. Vous ajouterez la voix française au montage, ce qui vous laisse le contrôle du contenu, mot pour mot.</td></tr>
+      <tr><td>Filigrane</td><td>Les offres gratuites incrustent en général un filigrane visible et n'ouvrent pas de droits d'usage commercial. Vérifiez ce point avant toute diffusion publique, y compris sur le site du cabinet.</td></tr>
+      <tr><td>Sous-titres</td><td>Toujours. Incrustés ou en fichier séparé selon le canal, mais toujours, et relus.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- DIFFUSER -->
+<section id="diffuser">
+  <h2>Diffuser, dans le cadre déontologique</h2>
+  <p class="chapeau">C'est la partie que les tutoriels de production ignorent, et c'est la seule qui peut vous être reprochée.</p>
+
+  <p>Depuis le décret n° 2020-1662 du 22 décembre 2020, l'article <strong>R.4127-19-1</strong> du Code de la santé publique pose que le médecin est libre de communiquer au public, par tout moyen, y compris sur un site internet. Cette liberté est encadrée : la communication doit être <strong>loyale et honnête</strong>, elle ne fait pas appel à des <strong>témoignages de tiers</strong>, elle ne repose pas sur des <strong>comparaisons</strong> avec d'autres médecins ou établissements, elle n'incite pas à un recours inutile aux soins, et elle n'induit pas le public en erreur. Le même article prévoit explicitement la communication à des fins éducatives ou sanitaires, à condition que les informations soient scientifiquement étayées. L'article <strong>R.4127-13</strong> ajoute que le médecin ne doit faire état que de données confirmées et doit avoir le souci des répercussions de ses propos auprès du public.</p>
+
+  <table class="tableau">
+    <thead><tr><th>Canal</th><th>Ce qui marche</th><th>Le point de vigilance</th></tr></thead>
+    <tbody>
+      <tr><td>Écran de salle d'attente</td><td>Boucle de 4 à 6 vidéos, sans son, sous-titrées, renouvelée par saison.</td><td>Aucun contenu promotionnel, aucun produit nommé. Prévention et éducation uniquement.</td></tr>
+      <tr><td>Lien envoyé au patient</td><td>Format vertical, une seule notion, moins de 90 secondes.</td><td>Le lien ne remplace pas la remise d'un document écrit ni le plan d'action.</td></tr>
+      <tr><td>Site du cabinet</td><td>Une rubrique de fiches vidéo classées par motif de consultation.</td><td>Si vous présentez votre activité au public, les obligations d'information sur les honoraires s'appliquent également.</td></tr>
+      <tr><td>Réseaux sociaux</td><td>La même vidéo, sans modification, avec la page de fin conservée.</td><td>Pas de témoignage patient, pas de comparaison, pas de mise en scène de résultats. La section commentaires devient votre responsabilité éditoriale.</td></tr>
+      <tr><td>Formation de votre équipe</td><td>Le canal le plus rentable et le moins risqué : protocoles internes, accueil, gestes d'urgence.</td><td>Aucun cas réel identifiable, même en interne.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="zone-rouge">
+    <h3>Ce qui n'entre jamais dans une vidéo destinée au public</h3>
+    <ul class="interdit">
+      <li>Un cas clinique réel, même anonymisé en apparence, si le patient reste reconnaissable par le contexte</li>
+      <li>Une photographie, une imagerie ou un tracé issus d'un dossier patient</li>
+      <li>Un témoignage de patient, y compris spontané et sincère</li>
+      <li>Une comparaison avec un confrère, un établissement, une technique concurrente</li>
+      <li>Un nom de marque, un logo, un dispositif identifiable, une posologie</li>
+      <li>Une promesse de résultat, un superlatif, un chiffre non sourcé</li>
+    </ul>
+  </div>
+</section>
+
+<!-- CONTROLES -->
+<section id="controles">
+  <h2>Les six contrôles avant publication</h2>
+  <p class="chapeau">Une vidéo circule et se republie. Ce que vous mettez en ligne engage votre responsabilité professionnelle, pas celle du modèle.</p>
+
+  <div class="progression">
+    <div class="jauge"><span id="jauge-barre"></span></div>
+    <div class="compteur" id="jauge-compteur">0 / 6</div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Chaque mot affiché à l'écran a été relu</h4>
+    <p>Les générateurs produisent encore des fautes et des mots inventés en français, y compris dans un titre parfaitement lisible par ailleurs.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Chaque geste et chaque schéma est médicalement exact</h4>
+    <p>Regardez image par image. Dispositif tenu à l'envers, structure anatomique déformée par l'animation, sens d'un flux inversé : ce sont les erreurs typiques, et elles passent inaperçues à vitesse normale.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Aucune donnée de patient n'a été utilisée en entrée</h4>
+    <p>Ni image de dossier, ni compte rendu, ni photographie clinique dans les outils de génération.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>La page de fin porte les mentions</h4>
+    <p>Identité, date, sources, limite du contenu, et usage de l'IA. C'est aussi ce qui vous protège d'une republication sortie de son contexte.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Les droits d'usage sont vérifiés</h4>
+    <p>L'offre gratuite du générateur autorise-t-elle une diffusion publique ? Le filigrane est-il acceptable ? La musique ajoutée est-elle libre de droits ?</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Le contenu reste dans le cadre de R.4127-19-1</h4>
+    <p>Information loyale et honnête, pas de témoignage, pas de comparaison, pas d'incitation à un recours inutile, données confirmées.</p></div>
+  </div>
+
+  <div class="banniere">
+    <p>L'outil produit les images. Le médecin écrit, vérifie image par image, signe et assume.
+    <small>Un mini-cours mal vérifié se partage plus vite qu'un document papier mal rédigé. La vitesse de production ne doit pas devenir la vitesse de diffusion.</small></p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <h2>Questions fréquentes</h2>
+
+  <details>
+    <summary>Combien de temps pour une vidéo de deux minutes ?</summary>
+    <p>Une heure la première fois, dont la moitié pour le script. Vingt à trente minutes ensuite, une fois vos gabarits de planche et votre page de fin enregistrés.</p>
+  </details>
+
+  <details>
+    <summary>Quel outil choisir, puisqu'ils changent tous les six mois ?</summary>
+    <p>La question est mal posée. Choisissez un outil d'image et un outil vidéo qui exportent proprement, et gardez la propriété de ce qui compte : le script, les planches, la voix. Ce sont les seuls actifs réutilisables quand une plateforme ferme, ce qui arrive, comme l'a montré l'arrêt de Sora en mars 2026.</p>
+  </details>
+
+  <details>
+    <summary>Puis-je faire lire mon texte par une voix de synthèse ?</summary>
+    <p>Oui, en indiquant qu'il s'agit d'une voix de synthèse. Ne faites jamais cloner votre voix ou celle d'un confrère sans consentement écrit, et n'utilisez pas une voix ressemblant à une personne réelle identifiable.</p>
+  </details>
+
+  <details>
+    <summary>Un avatar qui présente la vidéo, bonne ou mauvaise idée ?</summary>
+    <p>Pour un contenu médical destiné au public, un avatar humain réaliste brouille la question de qui parle et de qui engage sa responsabilité. Un schéma commenté par votre voix est plus clair et plus solide déontologiquement.</p>
+  </details>
+
+  <details>
+    <summary>Puis-je réutiliser ces vidéos en formation payante ?</summary>
+    <p>C'est un usage commercial. Vérifiez les conditions du générateur utilisé, la plupart réservent ce droit aux offres payantes, et conservez la preuve de la version des conditions en vigueur au moment de la production.</p>
+  </details>
+
+  <details>
+    <summary>Faut-il indiquer que le contenu a été généré par IA ?</summary>
+    <p>Oui. Au delà de l'obligation européenne de transparence applicable à partir du 2 août 2026, c'est un gage de loyauté envers le public, et cela vous évite d'avoir à vous justifier après coup.</p>
+  </details>
+</section>
+
+<!-- SOURCES -->
+<section id="sources">
+  <h2>Sources</h2>
+  <table class="tableau">
+    <thead><tr><th>Élément</th><th>Source</th></tr></thead>
+    <tbody>
+      <tr><td>Arrêt de Sora annoncé le 24 mars 2026, six mois après le lancement de l'application</td><td>Annonce OpenAI reprise par la presse spécialisée, mars 2026</td></tr>
+      <tr><td>Durées natives de clip et audio natif limité à quelques langues, français non couvert à ce jour</td><td>Documentation et guides éditeurs des principaux modèles vidéo, juillet 2026</td></tr>
+      <tr><td>Liberté de communication du médecin, information loyale et honnête, absence de témoignages et de comparaisons, finalité éducative ou sanitaire</td><td>Code de la santé publique, article R.4127-19-1, créé par le décret n° 2020-1662 du 22 décembre 2020</td></tr>
+      <tr><td>Données confirmées et souci des répercussions des propos auprès du public</td><td>Code de la santé publique, article R.4127-13</td></tr>
+      <tr><td>Information sur les honoraires en cas de présentation de l'activité au public</td><td>Code de la santé publique, article R.4127-53 modifié</td></tr>
+      <tr><td>Transparence des contenus générés par IA, application à partir du 2 août 2026</td><td>Règlement (UE) 2024/1689</td></tr>
+      <tr><td>Marquage invisible des images générées</td><td>Documentation des éditeurs de modèles d'image, 2026</td></tr>
+    </tbody>
+  </table>
+  <p class="chapeau">Les tarifs, quotas et versions des générateurs changent tous les mois. Aucun n'est cité ici volontairement : reportez-vous à la page tarifaire de l'éditeur au moment où vous produisez.</p>
+</section>
+
+<footer>
+  <p><strong>L'IA Minute du Médecin</strong>, Dr Guillaume Zagury et Samuel De Queiroz, Éditions Medicilline.</p>
+  <p>Ressource compagnon de la double page consacrée à la génération d'images et de vidéos. Cette page ne recommande aucun éditeur en particulier et ne remplace ni les conditions d'utilisation des outils, ni l'avis de votre conseil départemental de l'Ordre en cas de doute sur une diffusion.</p>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var chips = document.querySelectorAll("nav button[data-cible]");
+  Array.prototype.forEach.call(chips, function(btn){
+    btn.addEventListener("click", function(){
+      var cible = document.getElementById(btn.getAttribute("data-cible"));
+      if(cible){ cible.scrollIntoView({ behavior:"smooth", block:"start" }); }
+    });
+  });
+
+  var controles = document.querySelectorAll("[data-controle]");
+  var barre = document.getElementById("jauge-barre");
+  var compteur = document.getElementById("jauge-compteur");
+  var total = controles.length;
+
+  function maj(){
+    var faits = 0;
+    Array.prototype.forEach.call(controles, function(c){
+      var box = c.querySelector("input[type=checkbox]");
+      if(box && box.checked){ faits++; c.classList.add("fait"); }
+      else { c.classList.remove("fait"); }
+    });
+    barre.style.width = (faits/total*100) + "%";
+    barre.style.background = (faits === total) ? "#27AE60" : "#DC322F";
+    compteur.textContent = faits + " / " + total;
+  }
+
+  Array.prototype.forEach.call(controles, function(c){
+    var box = c.querySelector("input[type=checkbox]");
+    if(box){ box.addEventListener("change", maj); }
+  });
+  maj();
+
+  var boutons = document.querySelectorAll(".copier");
+  Array.prototype.forEach.call(boutons, function(btn){
+    btn.addEventListener("click", function(){
+      var bloc = btn.closest(".bloc");
+      var pre = bloc ? bloc.querySelector("pre") : null;
+      if(!pre){ return; }
+      var texte = pre.textContent;
+      var fini = function(){
+        btn.textContent = "Copié";
+        btn.classList.add("ok");
+        setTimeout(function(){ btn.textContent = "Copier"; btn.classList.remove("ok"); }, 1800);
+      };
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(texte).then(fini, function(){ secours(texte, fini); });
+      } else { secours(texte, fini); }
+    });
+  });
+
+  function secours(texte, fini){
+    var zone = document.createElement("textarea");
+    zone.value = texte;
+    zone.setAttribute("readonly","");
+    zone.style.position = "absolute";
+    zone.style.left = "-9999px";
+    document.body.appendChild(zone);
+    zone.select();
+    try { document.execCommand("copy"); fini(); } catch(e){}
+    document.body.removeChild(zone);
+  }
+})();
+</script>
+</body>
+</html>

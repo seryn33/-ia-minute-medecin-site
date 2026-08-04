@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bibliothèque de prompts visuels médicaux · L'IA Minute du Médecin</title>
+<meta name="description" content="Ressource compagnon du livre L'IA Minute du Médecin : huit prompts visuels médicaux prêts à copier, l'anatomie d'un prompt, la grille de vérification et la méthode de compositing.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Fira+Sans+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --rouge:#DC322F;--noir:#1A1A1A;--blanc:#FFFFFF;--jaune:#FFD700;
+  --bleu:#3498DB;--orange:#F39C12;--vert:#27AE60;--violet:#8E44AD;--teal:#1ABC9C;
+  --gris:#BDC3C7;--gris-clair:#F4F5F6;--gris-ligne:#E1E4E6;--gris-texte:#5A6268;
+}
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{margin:0;background:var(--blanc);color:var(--noir);font-family:"Fira Sans Condensed","Roboto Condensed",Arial,sans-serif;font-size:17px;line-height:1.5;}
+.page{max-width:720px;margin:0 auto;padding:0 18px 80px;}
+h1,h2,h3,h4{font-family:"Oswald","Arial Narrow",Arial,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.2px;}
+p{margin:0 0 14px;}
+
+header{padding:26px 0 8px;}
+.eyebrow{display:inline-block;font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:var(--blanc);background:var(--noir);padding:5px 11px;}
+h1{font-size:33px;line-height:1.06;margin:14px 0 0;}
+h1 mark{background:var(--jaune);color:var(--noir);padding:0 5px;}
+.sous-titre{font-family:"Fira Sans Condensed",Arial,sans-serif;font-style:italic;font-weight:600;color:var(--rouge);font-size:19px;margin:10px 0 0;text-transform:none;}
+.trait{height:4px;background:var(--rouge);margin:16px 0 22px;}
+.meta{font-size:14px;color:var(--gris-texte);margin:0 0 22px;}
+
+.flash{border:3px solid var(--rouge);border-radius:14px;padding:16px 18px;margin:0 0 26px;}
+.flash h2{font-size:19px;margin:0 0 10px;color:var(--rouge);}
+.flash ul{margin:0;padding-left:20px;}
+.flash li{margin-bottom:9px;}
+
+nav{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 34px;}
+nav button{font-family:"Oswald",Arial,sans-serif;font-weight:500;font-size:13px;letter-spacing:.6px;text-transform:uppercase;background:var(--gris-clair);color:var(--noir);border:2px solid var(--gris-ligne);border-radius:999px;padding:7px 13px;cursor:pointer;}
+nav button:hover{background:var(--noir);color:var(--blanc);border-color:var(--noir);}
+nav button:focus-visible{outline:3px solid var(--rouge);outline-offset:2px;}
+
+section{border-top:2px solid var(--gris-ligne);padding-top:26px;margin-top:34px;scroll-margin-top:14px;}
+section > h2{font-size:25px;margin:0 0 4px;line-height:1.1;}
+.chapeau{color:var(--gris-texte);font-size:16px;margin:0 0 20px;}
+h3{font-size:19px;margin:26px 0 8px;}
+
+.onglets{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px;}
+.onglets button{font-family:"Oswald",Arial,sans-serif;font-weight:500;font-size:12.5px;letter-spacing:.5px;text-transform:uppercase;background:var(--blanc);color:var(--noir);border:2px solid var(--noir);border-radius:8px;padding:7px 11px;cursor:pointer;}
+.onglets button[aria-selected="true"]{background:var(--noir);color:var(--blanc);}
+.onglets button:focus-visible{outline:3px solid var(--rouge);outline-offset:2px;}
+.panneau[hidden]{display:none;}
+
+.bloc{border:2px solid var(--gris-ligne);border-radius:14px;overflow:hidden;margin:0 0 16px;}
+.bloc-tete{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--gris-clair);padding:10px 12px;border-bottom:2px solid var(--gris-ligne);}
+.bloc-tete h4{margin:0;font-size:15px;}
+.copier{font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:12px;letter-spacing:.8px;text-transform:uppercase;background:var(--rouge);color:var(--blanc);border:none;border-radius:6px;padding:7px 12px;cursor:pointer;white-space:nowrap;}
+.copier.ok{background:var(--vert);}
+.copier:focus-visible{outline:3px solid var(--noir);outline-offset:2px;}
+pre{margin:0;padding:14px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px;line-height:1.5;white-space:pre-wrap;word-wrap:break-word;}
+.badge{display:inline-block;background:var(--gris);color:var(--noir);border-radius:5px;font-family:"Oswald",Arial,sans-serif;font-size:11.5px;letter-spacing:.7px;text-transform:uppercase;padding:3px 8px;margin:0 6px 6px 0;}
+.note{font-size:15.5px;background:var(--gris-clair);border-left:4px solid var(--bleu);padding:9px 11px;margin:0 0 16px;}
+.note b{font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:12.5px;letter-spacing:.6px;color:var(--bleu);}
+
+.tableau{width:100%;border-collapse:collapse;font-size:15px;margin:0 0 18px;}
+.tableau th,.tableau td{border:1px solid var(--gris-ligne);padding:8px 10px;text-align:left;vertical-align:top;}
+.tableau th{background:var(--noir);color:var(--blanc);font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:13px;letter-spacing:.5px;}
+.tableau tr:nth-child(even) td{background:var(--gris-clair);}
+
+.controle{display:flex;gap:12px;border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;margin-bottom:10px;}
+.controle.fait{border-color:var(--vert);background:#F3FBF6;}
+.controle input{width:22px;height:22px;accent-color:var(--vert);cursor:pointer;flex:0 0 22px;margin-top:2px;}
+.controle h4{margin:0 0 4px;font-size:16px;}
+.controle p{margin:0;font-size:15.5px;}
+.progression{display:flex;align-items:center;gap:12px;margin:0 0 18px;border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;}
+.jauge{flex:1;height:12px;background:var(--gris-ligne);border-radius:999px;overflow:hidden;}
+.jauge span{display:block;height:100%;width:0;background:var(--rouge);transition:width .25s ease;}
+.compteur{font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:16px;white-space:nowrap;}
+
+.zone-rouge{border:3px solid var(--rouge);border-radius:14px;padding:16px 18px;margin:18px 0;}
+.zone-rouge h3{margin-top:0;color:var(--rouge);}
+.interdit{list-style:none;padding:0;margin:0;}
+.interdit li{padding-left:26px;position:relative;margin-bottom:8px;}
+.interdit li::before{content:"\00d7";position:absolute;left:0;top:-2px;color:var(--rouge);font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:22px;line-height:1;}
+
+.banniere{background:var(--rouge);color:var(--blanc);border-radius:14px;padding:18px 20px;margin:26px 0;}
+.banniere p{margin:0;font-family:"Oswald",Arial,sans-serif;font-size:19px;line-height:1.25;text-transform:uppercase;}
+.banniere small{display:block;font-family:"Fira Sans Condensed",Arial,sans-serif;text-transform:none;font-size:15px;margin-top:8px;opacity:.95;}
+
+details{border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;margin-bottom:10px;}
+details[open]{border-color:var(--noir);}
+summary{cursor:pointer;font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:16px;text-transform:uppercase;letter-spacing:.3px;}
+summary::-webkit-details-marker{display:none;}
+summary::before{content:"+ ";color:var(--rouge);font-weight:700;}
+details[open] summary::before{content:"\2212 ";}
+details p{margin:10px 0 0;font-size:16px;}
+
+footer{border-top:4px solid var(--noir);margin-top:44px;padding-top:18px;font-size:14px;color:var(--gris-texte);}
+footer strong{color:var(--noir);}
+
+@media (max-width:520px){
+  body{font-size:16px;}h1{font-size:27px;}section > h2{font-size:21px;}
+  .tableau{font-size:14px;}pre{font-size:12.5px;}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none !important;scroll-behavior:auto !important;}}
+</style>
+</head>
+<body>
+<div class="page">
+
+<header>
+  <span class="eyebrow">Ressource compagnon · L'IA Minute du Médecin</span>
+  <h1>Bibliothèque de <mark>prompts visuels</mark></h1>
+  <p class="sous-titre">Huit prompts médicaux prêts à copier, l'anatomie d'un prompt qui marche, et la grille de vérification qui empêche une erreur anatomique d'arriver jusqu'à l'imprimante.</p>
+  <div class="trait"></div>
+  <p class="meta">Mise à jour : 25 juillet 2026.</p>
+</header>
+
+<div class="flash">
+  <h2>Trois règles avant de générer</h2>
+  <ul>
+    <li><strong>Ne laissez jamais le modèle écrire vos chiffres.</strong> Un seuil, une posologie, un numéro d'urgence, une date : ces éléments se composent par-dessus l'image, dans votre logiciel de mise en page. Un modèle qui rend un texte à 95 % de fiabilité produit une erreur toutes les vingt affiches, et vous ne saurez pas laquelle.</li>
+    <li><strong>Écrivez vos prompts en anglais, le texte affiché en français.</strong> Les modèles comprennent mieux les consignes de composition en anglais, et rendent correctement du texte français dès lors qu'il est donné entre guillemets, mot pour mot. C'est ce que fait chaque prompt de cette page.</li>
+    <li><strong>Toute image générée est marquée.</strong> Filigrane invisible et métadonnées d'origine sont désormais la norme chez les grands éditeurs, et les obligations européennes de transparence sur les contenus générés artificiellement s'appliquent à partir du 2 août 2026. Sur un document remis à un patient, une ligne de pied de page suffit : illustration générée par IA, contenu validé par le médecin.</li>
+  </ul>
+</div>
+
+<nav aria-label="Sommaire">
+  <button type="button" data-cible="anatomie">Anatomie d'un prompt</button>
+  <button type="button" data-cible="bibliotheque">Les 8 prompts</button>
+  <button type="button" data-cible="iterer">Corriger sans tout refaire</button>
+  <button type="button" data-cible="compositing">Le compositing</button>
+  <button type="button" data-cible="grille">Grille de vérification</button>
+  <button type="button" data-cible="controles">Avant impression</button>
+  <button type="button" data-cible="faq">Questions</button>
+  <button type="button" data-cible="sources">Sources</button>
+</nav>
+
+<!-- ANATOMIE -->
+<section id="anatomie">
+  <h2>Anatomie d'un prompt visuel médical</h2>
+  <p class="chapeau">Six blocs, toujours dans le même ordre. Les trois premiers décrivent ce que vous voulez, les trois derniers empêchent ce que vous ne voulez pas.</p>
+
+  <table class="tableau">
+    <thead><tr><th>Bloc</th><th>Ce qu'il contient</th></tr></thead>
+    <tbody>
+      <tr><td><strong>1. Le format</strong></td><td>Type de document, ratio, orientation, fond. « Medical infographic poster, 3:4 vertical, white background ».</td></tr>
+      <tr><td><strong>2. Le sujet</strong></td><td>Ce qui est représenté, avec le vocabulaire anatomique exact, en anglais. Plus vous êtes précis, moins le modèle improvise.</td></tr>
+      <tr><td><strong>3. Le texte affiché</strong></td><td>Chaque mot à afficher, entre guillemets, exactement comme il doit apparaître. Et rien d'autre : « no other text anywhere in the image ».</td></tr>
+      <tr><td><strong>4. Le style</strong></td><td>Flat 2D vector, bold condensed sans-serif, palette limitée. Le style médical utile est plat, lisible et sans effet.</td></tr>
+      <tr><td><strong>5. La composition</strong></td><td>Où se place quoi. Réservez explicitement les zones vides destinées à recevoir votre texte au montage.</td></tr>
+      <tr><td><strong>6. Les exclusions</strong></td><td>Le bloc que tout le monde oublie, et qui fait la moitié du résultat. Voir juste en dessous.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="bloc">
+    <div class="bloc-tete"><h4>Bloc d'exclusions standard, à coller à la fin de chaque prompt</h4><button type="button" class="copier">Copier</button></div>
+    <pre>Strict exclusions: no 3D rendering, no gradients, no drop shadows, no glow, no photorealism, no textures, no decorative borders, no dark background, no pastel palette, no handwritten font, no watermark, no blurry text.
+
+No stethoscope, no white coat, no medical cross, no caduceus, no hospital corridor, no generic doctor figure.
+
+No identifiable real person, no celebrity, no brand name, no product packaging, no logo.
+
+No text other than what is specified above. No invented words, no lorem ipsum, no random letters. All French accents must be rendered correctly.</pre>
+  </div>
+
+  <p class="note"><b>Pourquoi le stéthoscope</b> Les modèles ajoutent spontanément un stéthoscope, une blouse blanche ou une croix verte dès qu'un prompt contient le mot « medical ». Ces éléments encombrent la composition sans rien apporter, et datent immédiatement le visuel. L'exclusion explicite est le seul moyen fiable de les faire disparaître.</p>
+</section>
+
+<!-- BIBLIOTHEQUE -->
+<section id="bibliotheque">
+  <h2>La bibliothèque</h2>
+  <p class="chapeau">Huit prompts complets. Remplacez ce qui est entre crochets, collez le bloc d'exclusions à la fin, générez.</p>
+
+  <div class="onglets" role="tablist">
+    <button type="button" role="tab" aria-selected="true" data-panneau="p-prevention">Affiche prévention</button>
+    <button type="button" role="tab" aria-selected="false" data-panneau="p-fiche">Fiche patient adulte</button>
+    <button type="button" role="tab" aria-selected="false" data-panneau="p-enfant">Fiche enfant</button>
+    <button type="button" role="tab" aria-selected="false" data-panneau="p-bd">BD éducative</button>
+    <button type="button" role="tab" aria-selected="false" data-panneau="p-schema">Schéma physiopatho</button>
+    <button type="button" role="tab" aria-selected="false" data-panneau="p-geste">Geste technique</button>
+    <button type="button" role="tab" aria-selected="false" data-panneau="p-poster">Poster de congrès</button>
+    <button type="button" role="tab" aria-selected="false" data-panneau="p-signal">Signalétique</button>
+  </div>
+
+  <!-- PREVENTION -->
+  <div class="panneau" id="p-prevention">
+    <p><span class="badge">Salle d'attente</span><span class="badge">A3 ou A4</span></p>
+    <div class="bloc">
+      <div class="bloc-tete"><h4>Affiche de prévention, format mural</h4><button type="button" class="copier">Copier</button></div>
+      <pre>Medical prevention poster, 3:4 vertical format, clean white background, French language, flat 2D vector illustration style, print-ready at high resolution.
+
+Layout: a bold title area at the top, then four numbered rows stacked vertically, then a wide empty band at the bottom.
+
+Each row contains, from left to right: a large coloured circle with a white numeral inside, then a simple flat icon in a second coloured circle, then a short bold black uppercase heading, then one line of black text.
+
+Row 1: red circle "1", icon of a face with one side drooping. Heading "[VISAGE]". Text "[une ligne de description]".
+Row 2: orange circle "2", icon of an arm falling. Heading "[BRAS]". Text "[une ligne]".
+Row 3: blue circle "3", icon of a speech bubble with scrambled letters. Heading "[PAROLE]". Text "[une ligne]".
+Row 4: green circle "4", icon of a telephone. Heading "[ALERTE]". Text "[une ligne]".
+
+The bottom band must be left completely empty, with no text and no decoration. It is reserved for information that will be added afterwards.
+
+Style: bold condensed sans-serif typography, palette limited to red, black and white with one accent colour per row, thick clean outlines, no shading.
+
+[coller ici le bloc d'exclusions standard]</pre>
+    </div>
+    <p class="note"><b>Le geste clé</b> La bande vide en bas reçoit le numéro d'urgence, la mention du cabinet et la date. Ces trois éléments ne se génèrent jamais : ce sont eux qui engagent votre responsabilité.</p>
+  </div>
+
+  <!-- FICHE ADULTE -->
+  <div class="panneau" id="p-fiche" hidden>
+    <p><span class="badge">Remise en consultation</span><span class="badge">A4</span></p>
+    <div class="bloc">
+      <div class="bloc-tete"><h4>Fiche explicative pour un patient adulte</h4><button type="button" class="copier">Copier</button></div>
+      <pre>Educational medical diagram for a patient handout, 3:4 vertical format, clean white background, French language, flat 2D vector style.
+
+Subject: a simplified cross-section diagram of [organe ou structure anatomique, en anglais], drawn side by side in two states.
+
+Left panel: the normal state, labelled "[NORMAL]". Right panel: the abnormal state showing [description précise du mécanisme, par exemple: narrowing of the airway with thickened wall and mucus], labelled "[texte court]".
+
+Both panels use the same viewing angle, the same scale and the same colour code, so the difference between them is immediately visible.
+
+Colour code: healthy structures in soft blue, affected structures in soft orange. No alarming red, no dramatic contrast.
+
+Add three empty label boxes with thin leader lines pointing to [structure 1], [structure 2] and [structure 3]. The boxes must be empty: the labels will be added afterwards.
+
+Style: clean medical illustration, thick black outlines, flat colours, no shading, no gradient, anatomically simplified but structurally correct.
+
+[coller ici le bloc d'exclusions standard]</pre>
+    </div>
+    <p class="note"><b>Pourquoi des étiquettes vides</b> Les libellés anatomiques en français sont l'endroit où les modèles se trompent le plus, et une légende fausse sur un schéma remis au patient est difficile à rattraper. Générer les cartouches vides et les remplir au montage prend deux minutes.</p>
+  </div>
+
+  <!-- FICHE ENFANT -->
+  <div class="panneau" id="p-enfant" hidden>
+    <p><span class="badge">8 à 12 ans</span><span class="badge">Support ludique</span></p>
+    <div class="bloc">
+      <div class="bloc-tete"><h4>Fiche patient enfant, format affichette</h4><button type="button" class="copier">Copier</button></div>
+      <pre>Educational illustration for a child aged [8] years, 3:4 vertical format, clean white background, French language, friendly cartoon style with thick black outlines and flat colours.
+
+Layout: a large central character, and three round vignettes arranged around them.
+
+Character: a [8]-year-old child, [cheveux et tenue], cheerful and calm expression, standing. Not sick-looking, not frightened, not lying in a bed.
+
+Vignette 1: [premier élément à retenir, décrit visuellement].
+Vignette 2: [deuxième élément].
+Vignette 3: [troisième élément].
+
+Each vignette is a simple circular scene with a thin black outline, drawn in the same style as the character.
+
+Above the character, one empty speech bubble, large enough for a short sentence, left completely blank.
+
+Palette: soft and warm, no more than four colours, no red used for anything alarming.
+
+Style: children's book illustration, clean line art, no shading, no gradient, no photorealism, friendly and reassuring.
+
+[coller ici le bloc d'exclusions standard]</pre>
+    </div>
+    <p class="note"><b>Le détail qui change tout</b> Un enfant représenté debout et souriant produit un tout autre effet qu'un enfant alité. Vous illustrez ce qu'il peut faire, pas ce dont il souffre.</p>
+  </div>
+
+  <!-- BD -->
+  <div class="panneau" id="p-bd" hidden>
+    <p><span class="badge">Gabarit réutilisable</span><span class="badge">Toute pathologie</span></p>
+    <p>Une bande dessinée se construit en deux temps : d'abord la fiche de personnage, ensuite les cases, en réutilisant la même description à chaque fois. C'est ce qui évite que l'enfant change de visage entre la case deux et la case cinq.</p>
+    <div class="bloc">
+      <div class="bloc-tete"><h4>Fiche de personnage, à générer en premier</h4><button type="button" class="copier">Copier</button></div>
+      <pre>Character sheet for a children's educational comic. One single character, three views: front, three quarter, side.
+
+Character: a [âge]-year-old child, [cheveux], [tenue], friendly round face, cheerful expression, no accessories.
+
+Style: clean manga-inspired line art for children, bold black outlines, flat colours, soft palette, white background, no shading, no gradient, no text anywhere.
+
+Purpose: this sheet will be reused as a visual reference so the same child appears identical across six comic panels.
+
+[coller ici le bloc d'exclusions standard]</pre>
+    </div>
+    <div class="bloc">
+      <div class="bloc-tete"><h4>Gabarit de case, à répéter six fois</h4><button type="button" class="copier">Copier</button></div>
+      <pre>Single comic panel, vertical format, white background, same child as the reference sheet.
+
+Scene: [décrire l'action de cette case, l'attitude et le décor].
+
+Secondary element: [schéma, objet ou adulte présent dans la case, si nécessaire].
+
+One empty speech bubble at the [top left / top right], large enough for a short sentence, left completely blank.
+
+Style: clean manga-inspired line art for children, bold black outlines, flat colours, soft palette, no shading, no gradient, no dramatic effects, no speed lines, no explosion lines.
+
+[coller ici le bloc d'exclusions standard]</pre>
+    </div>
+    <p class="note"><b>Règle de scénario</b> Une idée par case, six cases maximum, une bulle de dix mots. Et la dernière case porte toujours la conduite à tenir, jamais la maladie.</p>
+  </div>
+
+  <!-- SCHEMA -->
+  <div class="panneau" id="p-schema" hidden>
+    <p><span class="badge">Cours, FMC</span><span class="badge">Projection</span></p>
+    <div class="bloc">
+      <div class="bloc-tete"><h4>Schéma physiopathologique pour un cours</h4><button type="button" class="copier">Copier</button></div>
+      <pre>Scientific diagram for a medical teaching slide, 16:9 horizontal format, clean white background, flat 2D vector style, designed to stay readable when projected.
+
+Subject: a step by step mechanism diagram of [mécanisme physiopathologique, en anglais], showing [nombre] successive stages arranged from left to right.
+
+Each stage is drawn inside a rounded rectangle, connected to the next by a thick arrow. Inside each rectangle: a simple schematic illustration of what happens at that stage, and an empty caption strip underneath.
+
+All caption strips must be left completely empty. They will be filled afterwards.
+
+Colour code: one colour per stage, from blue to orange, used consistently. Structures that remain unchanged across stages keep the same colour and the same position.
+
+Style: clean scientific illustration, thick black outlines, flat colours, no shading, no gradient, no photorealism, high contrast for projection.
+
+[coller ici le bloc d'exclusions standard]</pre>
+    </div>
+    <p class="note"><b>Vérification prioritaire</b> Le sens des flèches et la position relative des structures. Un modèle inverse volontiers un flux ou déplace un organe pour équilibrer sa composition.</p>
+  </div>
+
+  <!-- GESTE -->
+  <div class="panneau" id="p-geste" hidden>
+    <p><span class="badge">Éducation thérapeutique</span><span class="badge">Pas à pas</span></p>
+    <div class="bloc">
+      <div class="bloc-tete"><h4>Geste technique en quatre temps</h4><button type="button" class="copier">Copier</button></div>
+      <pre>Instructional step by step illustration, 3:4 vertical format, clean white background, flat 2D vector style, French language.
+
+Layout: four numbered panels stacked in a two by two grid. Each panel shows one step of the same gesture, seen from the same angle, with the same hands and the same device.
+
+Subject: [décrire le geste, en anglais, par exemple: using a pressurised inhaler with a transparent spacer chamber].
+
+Step 1: [description précise].
+Step 2: [description précise].
+Step 3: [description précise].
+Step 4: [description précise].
+
+Hands: adult hands, neutral skin tone, no jewellery, no nail polish, no watch. Correct number of fingers, correct grip on the device.
+
+Device: drawn as a generic unbranded object, plain colours, no label, no text, no brand mark.
+
+Each panel carries a large numeral in a coloured circle in its upper left corner, and an empty caption strip at the bottom.
+
+Style: clean instructional illustration, thick black outlines, flat colours, no shading, no photorealism.
+
+[coller ici le bloc d'exclusions standard]</pre>
+    </div>
+    <p class="note"><b>Le point de vigilance</b> Les mains. C'est encore la faiblesse la plus visible des modèles, et sur un geste technique elle rend l'illustration inutilisable. Regardez le nombre de doigts et la prise sur le dispositif avant tout le reste.</p>
+  </div>
+
+  <!-- POSTER -->
+  <div class="panneau" id="p-poster" hidden>
+    <p><span class="badge">Congrès</span><span class="badge">Grand format</span></p>
+    <div class="bloc">
+      <div class="bloc-tete"><h4>Trame de poster scientifique</h4><button type="button" class="copier">Copier</button></div>
+      <pre>Scientific poster layout template, portrait A0 proportions, clean white background, flat 2D vector style, no text content.
+
+Structure: a full width header band at the top, then a three column body, then a full width footer band.
+
+Header band: one large empty rectangle for the title, and below it a thinner empty strip for authors and affiliations. Both left completely blank.
+
+Left column: three empty content blocks of decreasing height, each with a small coloured square marker in its upper left corner.
+Middle column: one large empty rectangle for a figure, and two empty content blocks below it.
+Right column: two empty content blocks and one empty rectangle for a summary box with a coloured border.
+
+Footer band: three small empty rectangles evenly spaced, for logos and references.
+
+Colour code: a single accent colour used for the block markers and the summary box border, everything else in black, white and light grey.
+
+Style: sober academic layout, thin clean rules, generous white space, no illustration, no icon, no decoration, absolutely no text anywhere.
+
+[coller ici le bloc d'exclusions standard]</pre>
+    </div>
+    <p class="note"><b>Usage prévu</b> Ce prompt produit une trame vide, pas un poster. Vous l'importez dans votre logiciel de mise en page et vous y coulez votre contenu. C'est plus rapide que de partir d'un gabarit institutionnel, et infiniment plus sûr que de laisser un modèle écrire vos résultats.</p>
+  </div>
+
+  <!-- SIGNALETIQUE -->
+  <div class="panneau" id="p-signal" hidden>
+    <p><span class="badge">Cabinet</span><span class="badge">Série cohérente</span></p>
+    <div class="bloc">
+      <div class="bloc-tete"><h4>Série de pictogrammes pour le cabinet</h4><button type="button" class="copier">Copier</button></div>
+      <pre>Set of [6] flat vector pictograms, arranged in a single grid on a clean white background, all drawn in exactly the same style, line weight and proportions.
+
+Pictograms required: [1. salle d'attente / waiting area], [2. accueil / reception desk], [3. toilettes / restroom], [4. accès fauteuil roulant / wheelchair access], [5. lavage des mains / hand washing], [6. sortie / exit].
+
+Each pictogram is a simple black silhouette inside a rounded square with a thin outline. No colour except one accent colour used identically in each pictogram.
+
+Style: universal signage style, geometric, highly legible at small size, thick even strokes, no detail, no perspective, no shading.
+
+No text under the pictograms: they will be labelled afterwards.
+
+[coller ici le bloc d'exclusions standard]</pre>
+    </div>
+    <p class="note"><b>Astuce</b> Générez toute la série en une seule image pour garantir la cohérence de style, puis découpez chaque pictogramme au montage. Six générations séparées donnent six styles légèrement différents.</p>
+  </div>
+</section>
+
+<!-- ITERER -->
+<section id="iterer">
+  <h2>Corriger sans tout refaire</h2>
+  <p class="chapeau">L'édition en conversation est la fonction la plus utile et la moins utilisée. Elle évite de régénérer une image entière pour un détail.</p>
+
+  <table class="tableau">
+    <thead><tr><th>Ce que vous demandez</th><th>Comment le formuler</th></tr></thead>
+    <tbody>
+      <tr><td>Changer une couleur</td><td>« Keep everything identical. Change only the blue circle in row 3 to green. »</td></tr>
+      <tr><td>Corriger une structure</td><td>« Keep the composition and the style identical. Redraw only [structure] so that [correction précise]. Do not change anything else. »</td></tr>
+      <tr><td>Vider une zone</td><td>« Keep everything identical. Remove all text from the bottom band and leave it completely empty. »</td></tr>
+      <tr><td>Ajouter un élément</td><td>« Keep everything identical. Add [élément] in the [emplacement], drawn in the same style and line weight as the existing elements. »</td></tr>
+      <tr><td>Changer le format</td><td>Ne le demandez pas. Regénérez depuis le prompt d'origine en changeant le ratio : un recadrage automatique casse les compositions.</td></tr>
+    </tbody>
+  </table>
+
+  <p><strong>La formule qui marche :</strong> commencer par « keep everything identical » et nommer précisément le seul élément à modifier. Sans cette phrase, le modèle recompose l'image entière et vous perdez ce qui était déjà bon.</p>
+</section>
+
+<!-- COMPOSITING -->
+<section id="compositing">
+  <h2>Le compositing</h2>
+  <p class="chapeau">La règle qui structure toute cette page : on génère l'image, on compose le texte par-dessus.</p>
+
+  <table class="tableau">
+    <thead><tr><th>À générer</th><th>À composer dans votre maquette</th></tr></thead>
+    <tbody>
+      <tr><td>Illustrations, schémas, personnages, pictogrammes</td><td>Le titre et les sous-titres</td></tr>
+      <tr><td>Structure de mise en page et zones colorées</td><td>Tous les chiffres, seuils, doses et numéros</td></tr>
+      <tr><td>Icônes et éléments graphiques</td><td>Les libellés anatomiques et les légendes</td></tr>
+      <tr><td>Fonds, cadres, bandeaux</td><td>Le logo du cabinet et vos coordonnées</td></tr>
+      <tr><td>Textes courts non critiques, dans l'image</td><td>Les mentions légales, la date et la source</td></tr>
+    </tbody>
+  </table>
+
+  <h3>La méthode, en quatre minutes</h3>
+  <p>Générez l'image avec ses zones vides. Importez-la comme fond dans votre logiciel de mise en page. Posez vos blocs de texte dans les zones réservées, avec votre police et votre palette. Enregistrez le document comme modèle : la prochaine affiche ne demandera plus que de changer l'image et deux lignes de texte.</p>
+
+  <p class="note"><b>Le bénéfice caché</b> Un texte composé reste modifiable. Le jour où un numéro change, une recommandation évolue ou une date se périme, vous corrigez en dix secondes au lieu de tout régénérer et de tout revérifier.</p>
+</section>
+
+<!-- GRILLE -->
+<section id="grille">
+  <h2>La grille de vérification</h2>
+  <p class="chapeau">À passer sur chaque visuel avant impression. Dans cet ordre, parce que les erreurs les plus graves sont les moins visibles.</p>
+
+  <table class="tableau">
+    <thead><tr><th>Ce que vous regardez</th><th>L'erreur typique</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Les structures anatomiques</strong></td><td>Organe déplacé, vaisseau mal orienté, structure en double, proportion aberrante. Comparez à une planche de référence, pas à votre souvenir.</td></tr>
+      <tr><td><strong>La latéralité</strong></td><td>Le cœur à droite, le foie à gauche. Les modèles inversent volontiers pour équilibrer une composition.</td></tr>
+      <tr><td><strong>Le sens des flux</strong></td><td>Flèches inversées sur un schéma circulatoire, respiratoire ou métabolique.</td></tr>
+      <tr><td><strong>Les mains et les dispositifs</strong></td><td>Nombre de doigts, prise sur l'objet, dispositif tenu à l'envers, chambre d'inhalation absente.</td></tr>
+      <tr><td><strong>Le texte, caractère par caractère</strong></td><td>Accents manquants, lettre inventée au milieu d'un mot, mot coupé. Lisez à voix basse plutôt que des yeux.</td></tr>
+      <tr><td><strong>Les éléments parasites</strong></td><td>Stéthoscope, blouse, croix verte réapparus malgré l'exclusion. Regardez les bords de l'image, c'est là qu'ils se cachent.</td></tr>
+      <tr><td><strong>La lisibilité réelle</strong></td><td>Imprimez en noir et blanc, à la taille finale, et posez la feuille sur un mur à deux mètres. Ce test attrape ce que l'écran cache.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- CONTROLES -->
+<section id="controles">
+  <h2>Avant impression</h2>
+  <p class="chapeau">Six contrôles. Le premier est celui qui protège votre patient, le dernier celui qui vous protège.</p>
+
+  <div class="progression">
+    <div class="jauge"><span id="jauge-barre"></span></div>
+    <div class="compteur" id="jauge-compteur">0 / 6</div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>L'information médicale est exacte</h4>
+    <p>Structures, latéralité, sens des flux, gestes. Vérifiés contre une source, pas contre une impression.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Aucun chiffre n'a été généré</h4>
+    <p>Seuils, doses, délais, numéros d'urgence : tous composés par vous, dans votre maquette.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Aucune donnée patient n'a été utilisée</h4>
+    <p>Ni dans le prompt, ni comme image de référence. Aucune photographie de patient, jamais, même recadrée.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Aucune marque, aucun logo, aucun dispositif identifiable</h4>
+    <p>Y compris un emballage reconnaissable au second plan.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Chaque caractère a été relu</h4>
+    <p>Accents compris. Le test de lecture à voix basse est plus efficace que la relecture visuelle.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Le pied de page porte l'origine et la date</h4>
+    <p>« Document remis par le Dr [nom] le [date]. Illustration générée par IA, contenu validé par le médecin. »</p></div>
+  </div>
+
+  <div class="zone-rouge">
+    <h3>Ce qui n'entre jamais dans un générateur d'images</h3>
+    <ul class="interdit">
+      <li>Une photographie de patient, en entier ou recadrée, comme image de référence</li>
+      <li>Une imagerie médicale issue d'un dossier, même sans les mentions d'identité</li>
+      <li>Le prénom, l'âge exact et la pathologie d'une personne réelle dans un même prompt</li>
+      <li>Le portrait d'un confrère ou d'un membre de l'équipe sans son accord écrit</li>
+      <li>Une image protégée destinée à être imitée ou prolongée</li>
+    </ul>
+  </div>
+
+  <div class="banniere">
+    <p>Le modèle dessine. Vous signez, donc vous vérifiez, structure par structure et caractère par caractère.
+    <small>Un document illustré remis à un patient circule pendant des mois et se photocopie. Une erreur anatomique imprimée est plus durable qu'une phrase mal dite en consultation.</small></p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <h2>Questions fréquentes</h2>
+
+  <details>
+    <summary>Pourquoi écrire les prompts en anglais ?</summary>
+    <p>Parce que les consignes de composition, de style et d'exclusion sont mieux interprétées en anglais. Le texte destiné à apparaître dans l'image, lui, se donne en français entre guillemets, mot pour mot. Les deux cohabitent sans difficulté dans le même prompt.</p>
+  </details>
+
+  <details>
+    <summary>Combien d'essais faut-il en moyenne ?</summary>
+    <p>Deux à quatre pour une affiche simple, davantage dès qu'il y a du texte dans l'image. La bonne pratique est de générer d'abord sans texte, de valider la composition, puis d'ajouter le texte au montage. Vous divisez le nombre d'essais par trois.</p>
+  </details>
+
+  <details>
+    <summary>Puis-je utiliser ces visuels en formation payante ?</summary>
+    <p>C'est un usage commercial. Vérifiez les conditions du générateur employé, conservez la version des conditions en vigueur au moment de la création, et gardez la trace de vos prompts. Cette précaution vaut pour tous les contenus générés, pas seulement les images.</p>
+  </details>
+
+  <details>
+    <summary>Le rendu est-il utilisable pour de l'impression professionnelle ?</summary>
+    <p>Pour un A4 ou un A3 affiché en salle d'attente, oui, à condition de générer dans la résolution la plus haute proposée. Pour un grand format, générez l'illustration et composez la mise en page dans un logiciel qui travaille en vectoriel, sinon les textes s'empâtent.</p>
+  </details>
+
+  <details>
+    <summary>Puis-je faire générer un schéma que je n'aurais pas su dessiner ?</summary>
+    <p>Vous pouvez, mais c'est le cas le plus risqué : vous ne pourrez pas vérifier ce que vous ne maîtrisez pas. Si vous ne pouvez pas juger de l'exactitude d'un schéma, ne le remettez pas à un patient et ne le projetez pas devant des confrères.</p>
+  </details>
+
+  <details>
+    <summary>Faut-il indiquer que l'image a été générée ?</summary>
+    <p>Oui, une ligne suffit. Au delà de l'obligation européenne de transparence applicable à partir du 2 août 2026, c'est un gage de loyauté envers le patient, et cela évite la question désagréable posée après coup.</p>
+  </details>
+</section>
+
+<!-- SOURCES -->
+<section id="sources">
+  <h2>Sources</h2>
+  <table class="tableau">
+    <thead><tr><th>Élément</th><th>Source</th></tr></thead>
+    <tbody>
+      <tr><td>Rendu de texte dans l'image, résolution native élevée, édition en conversation et usage d'images de référence multiples</td><td>Documentation des éditeurs de modèles d'image, 2026</td></tr>
+      <tr><td>Marquage invisible des images générées et métadonnées d'origine</td><td>Documentation des éditeurs, 2026</td></tr>
+      <tr><td>Transparence des contenus générés par intelligence artificielle, application à partir du 2 août 2026</td><td>Règlement (UE) 2024/1689</td></tr>
+      <tr><td>Données de santé, catégorie particulière soumise à protection renforcée</td><td>RGPD, article 9</td></tr>
+      <tr><td>Secret médical</td><td>Code de la santé publique, article L.1110-4</td></tr>
+      <tr><td>Méthode A.V.E.C.</td><td>Haute Autorité de santé, recommandations sur l'IA générative en santé, 30 octobre 2025</td></tr>
+    </tbody>
+  </table>
+  <p class="chapeau">Les capacités des modèles d'image évoluent tous les trimestres. Les prompts de cette page sont volontairement écrits sans nom de modèle : ils fonctionnent sur tout générateur capable de rendre du texte et de tenir une consigne de style.</p>
+</section>
+
+<footer>
+  <p><strong>L'IA Minute du Médecin</strong>, Dr Guillaume Zagury et Samuel De Queiroz, Éditions Medicilline.</p>
+  <p>Ressource compagnon de la double page consacrée à la génération d'images. Les visuels produits à partir de ces prompts sont des propositions graphiques. L'exactitude de l'information médicale qu'ils portent relève de la responsabilité du médecin qui les valide et les diffuse.</p>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var chips = document.querySelectorAll("nav button[data-cible]");
+  Array.prototype.forEach.call(chips, function(btn){
+    btn.addEventListener("click", function(){
+      var cible = document.getElementById(btn.getAttribute("data-cible"));
+      if(cible){ cible.scrollIntoView({ behavior:"smooth", block:"start" }); }
+    });
+  });
+
+  var onglets = document.querySelectorAll(".onglets button[data-panneau]");
+  Array.prototype.forEach.call(onglets, function(btn){
+    btn.addEventListener("click", function(){
+      Array.prototype.forEach.call(onglets, function(autre){
+        autre.setAttribute("aria-selected", autre === btn ? "true" : "false");
+        var p = document.getElementById(autre.getAttribute("data-panneau"));
+        if(p){ p.hidden = (autre !== btn); }
+      });
+    });
+  });
+
+  var controles = document.querySelectorAll("[data-controle]");
+  var barre = document.getElementById("jauge-barre");
+  var compteur = document.getElementById("jauge-compteur");
+  var total = controles.length;
+
+  function maj(){
+    var faits = 0;
+    Array.prototype.forEach.call(controles, function(c){
+      var box = c.querySelector("input[type=checkbox]");
+      if(box && box.checked){ faits++; c.classList.add("fait"); }
+      else { c.classList.remove("fait"); }
+    });
+    barre.style.width = (faits/total*100) + "%";
+    barre.style.background = (faits === total) ? "#27AE60" : "#DC322F";
+    compteur.textContent = faits + " / " + total;
+  }
+
+  Array.prototype.forEach.call(controles, function(c){
+    var box = c.querySelector("input[type=checkbox]");
+    if(box){ box.addEventListener("change", maj); }
+  });
+  maj();
+
+  var boutons = document.querySelectorAll(".copier");
+  Array.prototype.forEach.call(boutons, function(btn){
+    btn.addEventListener("click", function(){
+      var bloc = btn.closest(".bloc");
+      var pre = bloc ? bloc.querySelector("pre") : null;
+      if(!pre){ return; }
+      var texte = pre.textContent;
+      var fini = function(){
+        btn.textContent = "Copié";
+        btn.classList.add("ok");
+        setTimeout(function(){ btn.textContent = "Copier"; btn.classList.remove("ok"); }, 1800);
+      };
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(texte).then(fini, function(){ secours(texte, fini); });
+      } else { secours(texte, fini); }
+    });
+  });
+
+  function secours(texte, fini){
+    var z = document.createElement("textarea");
+    z.value = texte;
+    z.setAttribute("readonly","");
+    z.style.position = "absolute";
+    z.style.left = "-9999px";
+    document.body.appendChild(z);
+    z.select();
+    try { document.execCommand("copy"); fini(); } catch(e){}
+    document.body.removeChild(z);
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Préparer un staff sans dossier patient · L'IA Minute du Médecin</title>
+<meta name="description" content="Ressource compagnon du livre L'IA Minute du Médecin : le protocole de préparation d'un staff ou d'une RCP, la transformation d'un cas réel en question générique, et les prompts de croisement de sources.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Fira+Sans+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --rouge:#DC322F;--noir:#1A1A1A;--blanc:#FFFFFF;--jaune:#FFD700;
+  --bleu:#3498DB;--orange:#F39C12;--vert:#27AE60;--violet:#8E44AD;--teal:#1ABC9C;
+  --gris:#BDC3C7;--gris-clair:#F4F5F6;--gris-ligne:#E1E4E6;--gris-texte:#5A6268;
+}
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{margin:0;background:var(--blanc);color:var(--noir);font-family:"Fira Sans Condensed","Roboto Condensed",Arial,sans-serif;font-size:17px;line-height:1.5;}
+.page{max-width:720px;margin:0 auto;padding:0 18px 80px;}
+h1,h2,h3,h4{font-family:"Oswald","Arial Narrow",Arial,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.2px;}
+p{margin:0 0 14px;}
+
+header{padding:26px 0 8px;}
+.eyebrow{display:inline-block;font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:var(--blanc);background:var(--noir);padding:5px 11px;}
+h1{font-size:33px;line-height:1.06;margin:14px 0 0;}
+h1 mark{background:var(--jaune);color:var(--noir);padding:0 5px;}
+.sous-titre{font-family:"Fira Sans Condensed",Arial,sans-serif;font-style:italic;font-weight:600;color:var(--rouge);font-size:19px;margin:10px 0 0;text-transform:none;}
+.trait{height:4px;background:var(--rouge);margin:16px 0 22px;}
+.meta{font-size:14px;color:var(--gris-texte);margin:0 0 22px;}
+
+.flash{border:3px solid var(--rouge);border-radius:14px;padding:16px 18px;margin:0 0 26px;}
+.flash h2{font-size:19px;margin:0 0 10px;color:var(--rouge);}
+.flash ul{margin:0;padding-left:20px;}
+.flash li{margin-bottom:9px;}
+
+nav{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 34px;}
+nav button{font-family:"Oswald",Arial,sans-serif;font-weight:500;font-size:13px;letter-spacing:.6px;text-transform:uppercase;background:var(--gris-clair);color:var(--noir);border:2px solid var(--gris-ligne);border-radius:999px;padding:7px 13px;cursor:pointer;}
+nav button:hover{background:var(--noir);color:var(--blanc);border-color:var(--noir);}
+nav button:focus-visible{outline:3px solid var(--rouge);outline-offset:2px;}
+
+section{border-top:2px solid var(--gris-ligne);padding-top:26px;margin-top:34px;scroll-margin-top:14px;}
+section > h2{font-size:25px;margin:0 0 4px;line-height:1.1;}
+.chapeau{color:var(--gris-texte);font-size:16px;margin:0 0 20px;}
+h3{font-size:19px;margin:26px 0 8px;}
+
+.temps{display:flex;gap:14px;border:2px solid var(--gris-ligne);border-radius:14px;padding:14px;margin-bottom:12px;}
+.pastille{flex:0 0 56px;height:40px;border-radius:20px;color:var(--blanc);font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center;}
+.p-bleu{background:var(--bleu);}.p-orange{background:var(--orange);}.p-vert{background:var(--vert);}.p-violet{background:var(--violet);}
+.temps-corps{flex:1;min-width:0;}
+.temps h4{font-size:17px;margin:3px 0 6px;}
+.temps p{font-size:16px;margin:0 0 8px;}
+.temps p:last-child{margin-bottom:0;}
+.piege{font-size:15px;background:var(--gris-clair);border-left:4px solid var(--orange);padding:8px 10px;margin:0;}
+.piege b{font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:13px;letter-spacing:.6px;color:var(--orange);}
+
+.onglets{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px;}
+.onglets button{font-family:"Oswald",Arial,sans-serif;font-weight:500;font-size:13px;letter-spacing:.6px;text-transform:uppercase;background:var(--blanc);color:var(--noir);border:2px solid var(--noir);border-radius:8px;padding:7px 12px;cursor:pointer;}
+.onglets button[aria-selected="true"]{background:var(--noir);color:var(--blanc);}
+.onglets button:focus-visible{outline:3px solid var(--rouge);outline-offset:2px;}
+.panneau[hidden]{display:none;}
+
+.bloc{border:2px solid var(--gris-ligne);border-radius:14px;overflow:hidden;margin:0 0 16px;}
+.bloc-tete{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--gris-clair);padding:10px 12px;border-bottom:2px solid var(--gris-ligne);}
+.bloc-tete h4{margin:0;font-size:15px;}
+.copier{font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:12px;letter-spacing:.8px;text-transform:uppercase;background:var(--rouge);color:var(--blanc);border:none;border-radius:6px;padding:7px 12px;cursor:pointer;white-space:nowrap;}
+.copier.ok{background:var(--vert);}
+.copier:focus-visible{outline:3px solid var(--noir);outline-offset:2px;}
+pre{margin:0;padding:14px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px;line-height:1.5;white-space:pre-wrap;word-wrap:break-word;}
+.badge{display:inline-block;background:var(--gris);color:var(--noir);border-radius:5px;font-family:"Oswald",Arial,sans-serif;font-size:11.5px;letter-spacing:.7px;text-transform:uppercase;padding:3px 8px;margin:0 6px 6px 0;}
+
+.tableau{width:100%;border-collapse:collapse;font-size:15px;margin:0 0 18px;}
+.tableau th,.tableau td{border:1px solid var(--gris-ligne);padding:8px 10px;text-align:left;vertical-align:top;}
+.tableau th{background:var(--noir);color:var(--blanc);font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:13px;letter-spacing:.5px;}
+.tableau tr:nth-child(even) td{background:var(--gris-clair);}
+.tableau td.oui{border-left:5px solid var(--vert);}
+.tableau td.non{border-left:5px solid var(--rouge);}
+
+.controle{display:flex;gap:12px;border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;margin-bottom:10px;}
+.controle.fait{border-color:var(--vert);background:#F3FBF6;}
+.controle input{width:22px;height:22px;accent-color:var(--vert);cursor:pointer;flex:0 0 22px;margin-top:2px;}
+.controle h4{margin:0 0 4px;font-size:16px;}
+.controle p{margin:0;font-size:15.5px;}
+.progression{display:flex;align-items:center;gap:12px;margin:0 0 18px;border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;}
+.jauge{flex:1;height:12px;background:var(--gris-ligne);border-radius:999px;overflow:hidden;}
+.jauge span{display:block;height:100%;width:0;background:var(--rouge);transition:width .25s ease;}
+.compteur{font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:16px;white-space:nowrap;}
+
+.zone-rouge{border:3px solid var(--rouge);border-radius:14px;padding:16px 18px;margin:18px 0;}
+.zone-rouge h3{margin-top:0;color:var(--rouge);}
+.interdit{list-style:none;padding:0;margin:0;}
+.interdit li{padding-left:26px;position:relative;margin-bottom:8px;}
+.interdit li::before{content:"\00d7";position:absolute;left:0;top:-2px;color:var(--rouge);font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:22px;line-height:1;}
+
+.banniere{background:var(--rouge);color:var(--blanc);border-radius:14px;padding:18px 20px;margin:26px 0;}
+.banniere p{margin:0;font-family:"Oswald",Arial,sans-serif;font-size:19px;line-height:1.25;text-transform:uppercase;}
+.banniere small{display:block;font-family:"Fira Sans Condensed",Arial,sans-serif;text-transform:none;font-size:15px;margin-top:8px;opacity:.95;}
+
+details{border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;margin-bottom:10px;}
+details[open]{border-color:var(--noir);}
+summary{cursor:pointer;font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:16px;text-transform:uppercase;letter-spacing:.3px;}
+summary::-webkit-details-marker{display:none;}
+summary::before{content:"+ ";color:var(--rouge);font-weight:700;}
+details[open] summary::before{content:"\2212 ";}
+details p{margin:10px 0 0;font-size:16px;}
+
+footer{border-top:4px solid var(--noir);margin-top:44px;padding-top:18px;font-size:14px;color:var(--gris-texte);}
+footer strong{color:var(--noir);}
+
+@media (max-width:520px){
+  body{font-size:16px;}h1{font-size:27px;}section > h2{font-size:21px;}
+  .tableau{font-size:14px;}pre{font-size:12.5px;}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none !important;scroll-behavior:auto !important;}}
+</style>
+</head>
+<body>
+<div class="page">
+
+<header>
+  <span class="eyebrow">Ressource compagnon · L'IA Minute du Médecin</span>
+  <h1>Préparer un staff, <mark>sans y mettre un dossier</mark></h1>
+  <p class="sous-titre">Le protocole de préparation collective, la transformation d'un cas réel en question générique, et les prompts qui font ressortir les désaccords entre vos sources.</p>
+  <div class="trait"></div>
+  <p class="meta">Mise à jour : 25 juillet 2026.</p>
+</header>
+
+<div class="flash">
+  <h2>La ligne rouge, posée d'emblée</h2>
+  <ul>
+    <li><strong>Une fiche de réunion de concertation n'entre jamais dans un espace de lecture documentaire.</strong> Elle comporte obligatoirement le nom, le prénom, la date de naissance, le sexe et la commune du patient. Elle vit dans le dossier communicant régional, hébergé chez un prestataire certifié pour les données de santé, avec des accès nominatifs tracés. La déplacer ailleurs, même quelques minutes, sort de ce cadre.</li>
+    <li><strong>Ce que vous préparez, c'est la question. Pas le dossier.</strong> La distinction est simple et elle tient toute la méthode : la littérature, les référentiels et vos protocoles se chargent, se croisent et se résument. Le cas du patient se discute en réunion, dossier ouvert dans l'outil prévu pour cela.</li>
+    <li><strong>Le nom de l'outil a changé, pas le principe.</strong> L'espace documentaire de Google s'appelle Gemini Notebook depuis le 16 juillet 2026. Même site, mêmes carnets, mêmes liens. Et la même règle qu'avant : il ne répond qu'à partir des documents que vous lui donnez, chaque affirmation renvoyant au passage cité.</li>
+  </ul>
+</div>
+
+<nav aria-label="Sommaire">
+  <button type="button" data-cible="frontiere">La frontière</button>
+  <button type="button" data-cible="castype">Le cas type</button>
+  <button type="button" data-cible="protocole">Le protocole</button>
+  <button type="button" data-cible="prompts">Les prompts</button>
+  <button type="button" data-cible="animation">Animer la réunion</button>
+  <button type="button" data-cible="controles">Avant d'importer</button>
+  <button type="button" data-cible="faq">Questions</button>
+  <button type="button" data-cible="sources">Sources</button>
+</nav>
+
+<!-- FRONTIERE -->
+<section id="frontiere">
+  <h2>Ce qui entre, ce qui n'entre pas</h2>
+  <p class="chapeau">Le tableau à afficher au-dessus de l'écran avant la première importation.</p>
+
+  <table class="tableau">
+    <thead><tr><th>Document</th><th>Où il va</th></tr></thead>
+    <tbody>
+      <tr><td class="oui">Articles scientifiques, méta-analyses, essais</td><td>Dans le carnet. C'est exactement ce pour quoi il est fait.</td></tr>
+      <tr><td class="oui">Recommandations et référentiels, français et internationaux</td><td>Dans le carnet, en version complète et datée.</td></tr>
+      <tr><td class="oui">Vos protocoles de service ou de cabinet, vos arbres décisionnels</td><td>Dans le carnet. C'est ce mélange avec la littérature qui produit la valeur.</td></tr>
+      <tr><td class="oui">Un enregistrement de conférence, un support de congrès</td><td>Dans le carnet, sous réserve des droits de diffusion.</td></tr>
+      <tr><td class="oui">Un cas type reconstruit, sans aucun élément identifiant</td><td>Dans le carnet. La méthode de reconstruction est juste en dessous.</td></tr>
+      <tr><td class="non">Une fiche ou un compte rendu de réunion de concertation</td><td>Reste dans le dossier communicant. Ne sort pas.</td></tr>
+      <tr><td class="non">Un compte rendu d'imagerie, d'anatomopathologie, de biologie</td><td>Reste dans le dossier patient et le logiciel de la structure.</td></tr>
+      <tr><td class="non">Un courrier reçu d'un confrère</td><td>Reste dans la messagerie sécurisée et le dossier.</td></tr>
+      <tr><td class="non">Une liste de patients à discuter, même sans les comptes rendus</td><td>Une liste nominative est une donnée de santé par recoupement.</td></tr>
+      <tr><td class="non">Une capture d'écran du logiciel métier</td><td>Ne sort pas, quel qu'en soit le contenu apparent.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- CAS TYPE -->
+<section id="castype">
+  <h2>Transformer un cas réel en question générique</h2>
+  <p class="chapeau">C'est le geste central de toute cette page, et il ne prend pas plus de deux minutes.</p>
+
+  <p>Vous avez une vraie question, née d'un vrai patient. Elle mérite d'être instruite avant la réunion. Ce qui doit disparaître, ce n'est pas la question, c'est tout ce qui permet de remonter à la personne.</p>
+
+  <h3>Les six éléments à retirer</h3>
+  <table class="tableau">
+    <thead><tr><th>À retirer</th><th>À écrire à la place</th></tr></thead>
+    <tbody>
+      <tr><td>Nom, prénom, initiales, numéro de dossier</td><td>Rien. Le cas n'a pas besoin d'être désigné.</td></tr>
+      <tr><td>Âge exact et date de naissance</td><td>Une tranche : « patient de la soixantaine ».</td></tr>
+      <tr><td>Dates de consultation, d'hospitalisation, d'examen</td><td>Des délais relatifs : « il y a environ trois mois ».</td></tr>
+      <tr><td>Commune, établissement, service, nom du confrère</td><td>Rien, ou « en ville », « en établissement ».</td></tr>
+      <tr><td>Profession, situation familiale, éléments de vie singuliers</td><td>Uniquement si l'élément est cliniquement décisif, et alors formulé en catégorie.</td></tr>
+      <tr><td>Association rare entre pathologie et contexte</td><td>Reformuler en présentation typique, ou renoncer à ce détail.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="bloc">
+    <div class="bloc-tete"><h4>Gabarit de cas type, à remplir avant importation</h4><button type="button" class="copier">Copier</button></div>
+    <pre>SITUATION TYPE À INSTRUIRE
+
+Profil : patient de la [tranche d'âge], [sexe si cliniquement pertinent], avec [comorbidité 1] et [comorbidité 2].
+Contexte : suivi en [ville ou établissement], sous [classe thérapeutique, sans nom commercial].
+Élément déclencheur : [le fait clinique qui pose question, sans date].
+Ce qui a déjà été fait : [examens et traitements, en catégories].
+
+QUESTION POSÉE AU GROUPE
+[Une seule phrase, qui se termine par un point d'interrogation.]
+
+CE QUE JE VEUX SAVOIR AVANT LA RÉUNION
+1. Ce que disent les recommandations françaises en vigueur sur cette situation.
+2. Ce que disent les recommandations internationales, et où elles divergent.
+3. Le niveau de preuve derrière chaque option.
+4. Ce qui n'est pas couvert par les référentiels et relèvera donc de la discussion.</pre>
+  </div>
+
+  <p><strong>Le test avant d'importer :</strong> montrez le cas type à un confrère de votre structure. S'il peut identifier le patient, il n'est pas assez générique. S'il vous répond « ça pourrait être plusieurs de mes patients », vous y êtes.</p>
+</section>
+
+<!-- PROTOCOLE -->
+<section id="protocole">
+  <h2>Le protocole de préparation</h2>
+  <p class="chapeau">Quatre moments, répartis sur la semaine. Le total tient en une heure, dont quarante minutes de lecture qui, autrement, n'auraient pas eu lieu.</p>
+
+  <div class="temps">
+    <div class="pastille p-bleu">J-7</div>
+    <div class="temps-corps">
+      <h4>Le corpus</h4>
+      <p>Créez le carnet du staff. Importez les articles retenus, la ou les recommandations concernées en version complète, et votre protocole interne s'il existe. Nommez chaque fichier avec son année. Un carnet par staff, pas un carnet permanent qui accumule.</p>
+      <p class="piege"><b>Piège</b> : importer les articles sans le référentiel. La discussion se fera alors sur des études isolées, sans le cadre qui les rend applicables ou non.</p>
+    </div>
+  </div>
+
+  <div class="temps">
+    <div class="pastille p-orange">J-3</div>
+    <div class="temps-corps">
+      <h4>Le croisement</h4>
+      <p>Posez les questions de comparaison, pas les questions de résumé. Ce que vous cherchez : les points d'accord, les désaccords entre sources, les niveaux de preuve, et ce qui n'est traité nulle part. C'est ce dernier point qui remplira votre réunion.</p>
+      <p class="piege"><b>Piège</b> : demander une synthèse générale. Vous obtiendrez un texte lisse qui donnera au groupe l'impression que tout est réglé.</p>
+    </div>
+  </div>
+
+  <div class="temps">
+    <div class="pastille p-vert">J-1</div>
+    <div class="temps-corps">
+      <h4>Les livrables</h4>
+      <p>Générez ce qui circule avant la réunion : une synthèse d'une page envoyée aux participants, et une version audio pour ceux qui l'écouteront en voiture. Le diaporama et le quiz, eux, ne servent que si la réunion a un temps de formation.</p>
+      <p class="piege"><b>Piège</b> : envoyer le rapport complet. Personne ne le lira. Une page, avec les trois questions qui seront discutées, se lit dans un couloir.</p>
+    </div>
+  </div>
+
+  <div class="temps">
+    <div class="pastille p-violet">Jour J</div>
+    <div class="temps-corps">
+      <h4>La réunion</h4>
+      <p>Le temps de séance ne sert plus à restituer les articles, puisque tout le monde les a en tête. Il sert aux cas et aux désaccords. Les dossiers s'ouvrent dans l'outil habituel, pas dans le carnet.</p>
+      <p class="piege"><b>Piège</b> : projeter le carnet pendant la réunion et y taper une question sur un cas en cours. C'est là que la donnée patient entre par accident.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROMPTS -->
+<section id="prompts">
+  <h2>Les prompts de croisement</h2>
+  <p class="chapeau">Quatre questions à poser à votre corpus, dans cet ordre. Elles sont conçues pour produire de la discussion, pas du consensus.</p>
+
+  <div class="onglets" role="tablist">
+    <button type="button" role="tab" aria-selected="true" data-panneau="p-comparer">Comparer</button>
+    <button type="button" role="tab" aria-selected="false" data-panneau="p-preuve">Niveaux de preuve</button>
+    <button type="button" role="tab" aria-selected="false" data-panneau="p-audio">Le brief audio</button>
+    <button type="button" role="tab" aria-selected="false" data-panneau="p-apres">Après la réunion</button>
+  </div>
+
+  <div class="panneau" id="p-comparer">
+    <div class="bloc">
+      <div class="bloc-tete"><h4>La grille de comparaison multi-sources</h4><button type="button" class="copier">Copier</button></div>
+      <pre>Mon carnet contient [nombre] documents sur [sujet]. Ne produis pas de synthèse générale.
+
+Construis un tableau de comparaison, une ligne par point de pratique en discussion, et une colonne par document.
+
+Dans chaque case : ce que dit le document, en une phrase, avec la citation exacte entre guillemets. Si le document ne traite pas ce point, écris "non traité".
+
+Sous le tableau, quatre listes distinctes :
+1. ACCORDS : les points où toutes les sources disent la même chose.
+2. DÉSACCORDS FRANCS : les points où deux sources se contredisent, avec la citation de chacune.
+3. NUANCES : les points où les sources disent la même chose avec un degré d'engagement différent, en citant le verbe employé par chacune.
+4. ZONES BLANCHES : les points cliniquement importants qu'aucun document ne traite.
+
+Ne tranche aucun désaccord. Ton rôle est de les rendre visibles pour que le groupe en discute.</pre>
+    </div>
+  </div>
+
+  <div class="panneau" id="p-preuve" hidden>
+    <div class="bloc">
+      <div class="bloc-tete"><h4>Peser ce qui soutient chaque option</h4><button type="button" class="copier">Copier</button></div>
+      <pre>Pour chacune des options thérapeutiques identifiées dans le corpus, produis une fiche courte :
+
+- Le type d'étude ou de document qui la soutient, et son année.
+- L'effectif et la population étudiée, avec les critères d'inclusion tels qu'ils sont écrits.
+- Le critère de jugement principal, en précisant s'il est clinique ou intermédiaire.
+- L'effet absolu et l'effet relatif, avec l'intervalle de confiance quand il est disponible.
+- Le grade de recommandation, s'il est indiqué dans la source. Sinon, écris "non gradé".
+- Ce qui limite l'extrapolation à la population que je vois en pratique.
+
+Classe les options de la mieux étayée à la moins étayée, et dis-moi explicitement quand l'écart entre deux options n'est pas significatif.
+
+N'utilise aucune connaissance extérieure au carnet.</pre>
+    </div>
+  </div>
+
+  <div class="panneau" id="p-audio" hidden>
+    <div class="bloc">
+      <div class="bloc-tete"><h4>Cadrer la version audio</h4><button type="button" class="copier">Copier</button></div>
+      <pre>Public : des médecins qui connaissent le sujet et qui écouteront en voiture, une seule fois, sans pouvoir revenir en arrière.
+
+Concentre-toi sur trois choses, dans cet ordre :
+1. Les deux ou trois points où les sources ne sont pas d'accord.
+2. Ce qui a changé par rapport à la version précédente du référentiel.
+3. Les questions qui resteront ouvertes en réunion.
+
+Ignore : l'épidémiologie générale, la physiopathologie, l'historique du sujet, et tout ce qui relève du rappel de cours.
+
+Ton : direct, sans formule d'accroche, sans emphase. Annonce dès la première phrase les trois points qui seront traités, pour que l'auditeur sache où il va.
+
+Durée cible : le temps d'un trajet court.</pre>
+    </div>
+  </div>
+
+  <div class="panneau" id="p-apres" hidden>
+    <div class="bloc">
+      <div class="bloc-tete"><h4>Le relevé de décisions, à partir de vos notes</h4><button type="button" class="copier">Copier</button></div>
+      <pre>Voici mes notes brutes de la réunion du [date] sur [thème], prises pendant la séance et déjà expurgées de tout élément identifiant.
+
+Produis un relevé d'une page :
+1. Le thème et les documents de référence utilisés.
+2. Les points sur lesquels le groupe s'est accordé, formulés comme des règles de pratique applicables.
+3. Les points restés en désaccord, avec l'argument de chaque position, sans les trancher.
+4. Les questions à instruire d'ici la prochaine réunion, et qui s'en charge.
+5. Ce qui change concrètement dans notre pratique à partir de maintenant.
+
+Contraintes : aucun nom de patient, aucune situation reconnaissable, aucun nom de participant sauf l'animateur. Si mes notes contiennent un élément identifiant, signale-le-moi au lieu de le recopier.</pre>
+    </div>
+  </div>
+</section>
+
+<!-- ANIMATION -->
+<section id="animation">
+  <h2>Animer la réunion</h2>
+  <p class="chapeau">Le vrai gain n'est pas le temps de préparation économisé. C'est ce que devient le temps de réunion.</p>
+
+  <table class="tableau">
+    <thead><tr><th>Avant</th><th>Après</th></tr></thead>
+    <tbody>
+      <tr><td>Vingt minutes de restitution d'articles par celui qui les a lus</td><td>Tout le monde a reçu une page et l'a lue. On démarre sur les cas.</td></tr>
+      <tr><td>Un consensus mou obtenu par fatigue en fin de séance</td><td>Les trois désaccords sont annoncés dès le début et traités un par un.</td></tr>
+      <tr><td>Un compte rendu rédigé trois semaines plus tard, de mémoire</td><td>Un relevé de décisions produit le soir même à partir des notes.</td></tr>
+      <tr><td>Des questions qui reviennent d'une réunion à l'autre</td><td>Les zones blanches sont identifiées et attribuées à quelqu'un.</td></tr>
+    </tbody>
+  </table>
+
+  <p><strong>Le rôle qui change :</strong> celui qui prépare cesse d'être celui qui a lu pour les autres. Il devient celui qui a cadré la question. C'est un travail plus court et nettement plus utile au groupe.</p>
+</section>
+
+<!-- CONTROLES -->
+<section id="controles">
+  <h2>Avant chaque importation</h2>
+  <p class="chapeau">Cinq secondes par document. C'est le seul moment où l'erreur est encore rattrapable.</p>
+
+  <div class="progression">
+    <div class="jauge"><span id="jauge-barre"></span></div>
+    <div class="compteur" id="jauge-compteur">0 / 5</div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Ce document ne contient aucune identité</h4>
+    <p>Ni en première page, ni dans un en-tête, ni dans un tableau au milieu du fichier.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>J'ai vérifié les métadonnées du fichier</h4>
+    <p>Un PDF exporté d'un logiciel métier porte souvent un nom de fichier et des propriétés qui contiennent l'identité du patient.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Le cas type ne permet pas de reconnaître quelqu'un</h4>
+    <p>Le test du confrère : s'il devine, recommencez.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Je sais qui aura accès à ce carnet</h4>
+    <p>Un carnet partagé expose toutes ses sources à tous ceux qui y accèdent, y compris les documents ajoutés par d'autres.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>J'ai le droit de diffuser ce document au groupe</h4>
+    <p>Un article sous licence se cite et se résume, il ne se redistribue pas en intégralité, même en interne.</p></div>
+  </div>
+
+  <div class="zone-rouge">
+    <h3>Le réflexe si la donnée est passée quand même</h3>
+    <ul class="interdit">
+      <li>Ne laissez pas le document « le temps de la réunion » : supprimez-le immédiatement du carnet</li>
+      <li>Supprimez également les réponses générées qui en reprennent le contenu</li>
+      <li>Prévenez le responsable de la protection des données de votre structure, c'est son rôle et pas une dénonciation</li>
+      <li>Notez ce qui s'est passé : un incident tracé et corrigé se traite, un incident tu devient un problème</li>
+    </ul>
+  </div>
+
+  <div class="banniere">
+    <p>On instruit la question dans le carnet. On discute le cas en réunion, dossier ouvert dans l'outil prévu pour ça.
+    <small>Les fiches de concertation pluridisciplinaire comportent obligatoirement l'identité du patient et sont conservées dans un dossier communicant hébergé chez un prestataire certifié pour les données de santé.</small></p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <h2>Questions fréquentes</h2>
+
+  <details>
+    <summary>Puis-je vraiment tout préparer sans jamais entrer un cas réel ?</summary>
+    <p>Oui, parce que ce qui se prépare, ce n'est pas le cas, c'est la question qu'il pose. Un cas type bien construit produit exactement la même instruction documentaire, sans aucun des risques.</p>
+  </details>
+
+  <details>
+    <summary>Et l'anonymisation, cela ne suffit-il pas ?</summary>
+    <p>Retirer le nom ne suffit pas. Une pathologie peu fréquente, une tranche d'âge précise et un établissement suffisent souvent à identifier une personne. C'est pourquoi le gabarit de cas type retire aussi les dates, les lieux et les singularités.</p>
+  </details>
+
+  <details>
+    <summary>Combien de temps prend la préparation, honnêtement ?</summary>
+    <p>Une heure la première fois, une quarantaine de minutes ensuite. Comparé à la lecture réelle de cinq articles et d'un référentiel, le gain est net. Comparé à ne pas les lire du tout, ce qui est la situation habituelle, le gain est ailleurs : la réunion devient utile.</p>
+  </details>
+
+  <details>
+    <summary>Le carnet peut-il servir d'archive de nos staffs ?</summary>
+    <p>Pour les documents de référence, oui, et c'est même un bon usage. Pour les relevés de décisions, préférez l'espace documentaire de votre structure : ce sont des documents de travail collectifs qui doivent survivre au compte de celui qui les a créés.</p>
+  </details>
+
+  <details>
+    <summary>Puis-je partager le carnet avec les participants ?</summary>
+    <p>Oui, en lecture. Faites le ménage avant : ils verront l'ensemble des sources, y compris celles que vous aviez ajoutées et oubliées.</p>
+  </details>
+
+  <details>
+    <summary>Et si un participant y dépose un document patient ?</summary>
+    <p>C'est le risque principal du partage en édition. Prévenez explicitement le groupe à l'ouverture du carnet, et privilégiez le partage en lecture seule, l'ajout de sources restant de votre ressort.</p>
+  </details>
+</section>
+
+<!-- SOURCES -->
+<section id="sources">
+  <h2>Sources</h2>
+  <table class="tableau">
+    <thead><tr><th>Élément</th><th>Source</th></tr></thead>
+    <tbody>
+      <tr><td>La fiche de réunion de concertation pluridisciplinaire comporte obligatoirement nom, prénom, date de naissance, sexe et commune de résidence</td><td>Compte rendu standardisé de réunion de concertation pluridisciplinaire, réseaux régionaux de cancérologie</td></tr>
+      <tr><td>Les fiches sont enregistrées dans le dossier communicant de cancérologie, hébergé chez un prestataire certifié pour les données de santé, avec accès restreints aux professionnels participant à la prise en charge</td><td>Institut national du cancer et réseaux régionaux de cancérologie</td></tr>
+      <tr><td>Composition minimale d'une réunion de concertation valable : au moins trois spécialités différentes</td><td>Circulaire du 22 février 2005, reprise dans les guides de bonnes pratiques régionaux</td></tr>
+      <tr><td>Renommage de NotebookLM en Gemini Notebook le 16 juillet 2026, produit et carnets inchangés</td><td>Blog officiel Google et Google Workspace Updates</td></tr>
+      <tr><td>Limites du carnet : environ 50 sources en usage gratuit, 500 000 mots par source, 200 Mo par fichier</td><td>Documentation Google et recoupements éditoriaux, 2026</td></tr>
+      <tr><td>Secret médical et hébergement des données de santé</td><td>Code de la santé publique, articles L.1110-4 et L.1111-8</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<footer>
+  <p><strong>L'IA Minute du Médecin</strong>, Dr Guillaume Zagury et Samuel De Queiroz, Éditions Medicilline.</p>
+  <p>Ressource compagnon de la double page consacrée à la préparation collective. Cette page décrit une méthode de travail documentaire. Elle ne se substitue ni aux règles d'organisation de vos réunions, ni aux consignes de votre structure en matière de protection des données.</p>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var chips = document.querySelectorAll("nav button[data-cible]");
+  Array.prototype.forEach.call(chips, function(btn){
+    btn.addEventListener("click", function(){
+      var cible = document.getElementById(btn.getAttribute("data-cible"));
+      if(cible){ cible.scrollIntoView({ behavior:"smooth", block:"start" }); }
+    });
+  });
+
+  var onglets = document.querySelectorAll(".onglets button[data-panneau]");
+  Array.prototype.forEach.call(onglets, function(btn){
+    btn.addEventListener("click", function(){
+      Array.prototype.forEach.call(onglets, function(autre){
+        autre.setAttribute("aria-selected", autre === btn ? "true" : "false");
+        var p = document.getElementById(autre.getAttribute("data-panneau"));
+        if(p){ p.hidden = (autre !== btn); }
+      });
+    });
+  });
+
+  var controles = document.querySelectorAll("[data-controle]");
+  var barre = document.getElementById("jauge-barre");
+  var compteur = document.getElementById("jauge-compteur");
+  var total = controles.length;
+
+  function maj(){
+    var faits = 0;
+    Array.prototype.forEach.call(controles, function(c){
+      var box = c.querySelector("input[type=checkbox]");
+      if(box && box.checked){ faits++; c.classList.add("fait"); }
+      else { c.classList.remove("fait"); }
+    });
+    barre.style.width = (faits/total*100) + "%";
+    barre.style.background = (faits === total) ? "#27AE60" : "#DC322F";
+    compteur.textContent = faits + " / " + total;
+  }
+
+  Array.prototype.forEach.call(controles, function(c){
+    var box = c.querySelector("input[type=checkbox]");
+    if(box){ box.addEventListener("change", maj); }
+  });
+  maj();
+
+  var boutons = document.querySelectorAll(".copier");
+  Array.prototype.forEach.call(boutons, function(btn){
+    btn.addEventListener("click", function(){
+      var bloc = btn.closest(".bloc");
+      var pre = bloc ? bloc.querySelector("pre") : null;
+      if(!pre){ return; }
+      var texte = pre.textContent;
+      var fini = function(){
+        btn.textContent = "Copié";
+        btn.classList.add("ok");
+        setTimeout(function(){ btn.textContent = "Copier"; btn.classList.remove("ok"); }, 1800);
+      };
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(texte).then(fini, function(){ secours(texte, fini); });
+      } else { secours(texte, fini); }
+    });
+  });
+
+  function secours(texte, fini){
+    var z = document.createElement("textarea");
+    z.value = texte;
+    z.setAttribute("readonly","");
+    z.style.position = "absolute";
+    z.style.left = "-9999px";
+    document.body.appendChild(z);
+    z.select();
+    try { document.execCommand("copy"); fini(); } catch(e){}
+    document.body.removeChild(z);
+  }
+})();
+</script>
+</body>
+</html>

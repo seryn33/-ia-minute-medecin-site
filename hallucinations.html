@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hallucinations : les taux, les tests, les parades · L'IA Minute du Médecin</title>
+<meta name="description" content="Ressource compagnon du livre L'IA Minute du Médecin : les taux d'erreur par type de tâche, le protocole de calibration en trois questions, et les formulations qui réduisent les erreurs.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Fira+Sans+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --rouge:#DC322F;--noir:#1A1A1A;--blanc:#FFFFFF;--jaune:#FFD700;
+  --bleu:#3498DB;--orange:#F39C12;--vert:#27AE60;--violet:#8E44AD;--teal:#1ABC9C;
+  --gris:#BDC3C7;--gris-clair:#F4F5F6;--gris-ligne:#E1E4E6;--gris-texte:#5A6268;
+}
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{margin:0;background:var(--blanc);color:var(--noir);font-family:"Fira Sans Condensed","Roboto Condensed",Arial,sans-serif;font-size:17px;line-height:1.5;}
+.page{max-width:720px;margin:0 auto;padding:0 18px 80px;}
+h1,h2,h3,h4{font-family:"Oswald","Arial Narrow",Arial,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.2px;}
+p{margin:0 0 14px;}
+
+header{padding:26px 0 8px;}
+.eyebrow{display:inline-block;font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:var(--blanc);background:var(--noir);padding:5px 11px;}
+h1{font-size:33px;line-height:1.06;margin:14px 0 0;}
+h1 mark{background:var(--jaune);color:var(--noir);padding:0 5px;}
+.sous-titre{font-family:"Fira Sans Condensed",Arial,sans-serif;font-style:italic;font-weight:600;color:var(--rouge);font-size:19px;margin:10px 0 0;text-transform:none;}
+.trait{height:4px;background:var(--rouge);margin:16px 0 22px;}
+.meta{font-size:14px;color:var(--gris-texte);margin:0 0 22px;}
+
+.flash{border:3px solid var(--rouge);border-radius:14px;padding:16px 18px;margin:0 0 26px;}
+.flash h2{font-size:19px;margin:0 0 10px;color:var(--rouge);}
+.flash ul{margin:0;padding-left:20px;}
+.flash li{margin-bottom:9px;}
+
+nav{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 34px;}
+nav button{font-family:"Oswald",Arial,sans-serif;font-weight:500;font-size:13px;letter-spacing:.6px;text-transform:uppercase;background:var(--gris-clair);color:var(--noir);border:2px solid var(--gris-ligne);border-radius:999px;padding:7px 13px;cursor:pointer;}
+nav button:hover{background:var(--noir);color:var(--blanc);border-color:var(--noir);}
+nav button:focus-visible{outline:3px solid var(--rouge);outline-offset:2px;}
+
+section{border-top:2px solid var(--gris-ligne);padding-top:26px;margin-top:34px;scroll-margin-top:14px;}
+section > h2{font-size:25px;margin:0 0 4px;line-height:1.1;}
+.chapeau{color:var(--gris-texte);font-size:16px;margin:0 0 20px;}
+h3{font-size:19px;margin:26px 0 8px;}
+
+.bloc{border:2px solid var(--gris-ligne);border-radius:14px;overflow:hidden;margin:0 0 16px;}
+.bloc-tete{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--gris-clair);padding:10px 12px;border-bottom:2px solid var(--gris-ligne);}
+.bloc-tete h4{margin:0;font-size:15px;}
+.copier{font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:12px;letter-spacing:.8px;text-transform:uppercase;background:var(--rouge);color:var(--blanc);border:none;border-radius:6px;padding:7px 12px;cursor:pointer;white-space:nowrap;}
+.copier.ok{background:var(--vert);}
+.copier:focus-visible{outline:3px solid var(--noir);outline-offset:2px;}
+pre{margin:0;padding:14px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px;line-height:1.5;white-space:pre-wrap;word-wrap:break-word;}
+.badge{display:inline-block;background:var(--gris);color:var(--noir);border-radius:5px;font-family:"Oswald",Arial,sans-serif;font-size:11.5px;letter-spacing:.7px;text-transform:uppercase;padding:3px 8px;margin:0 6px 6px 0;}
+.note{font-size:15.5px;background:var(--gris-clair);border-left:4px solid var(--bleu);padding:9px 11px;margin:0 0 16px;}
+.note b{font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:12.5px;letter-spacing:.6px;color:var(--bleu);}
+
+.tableau{width:100%;border-collapse:collapse;font-size:15px;margin:0 0 18px;}
+.tableau th,.tableau td{border:1px solid var(--gris-ligne);padding:8px 10px;text-align:left;vertical-align:top;}
+.tableau th{background:var(--noir);color:var(--blanc);font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:13px;letter-spacing:.5px;}
+.tableau tr:nth-child(even) td{background:var(--gris-clair);}
+.tableau td.bas{border-left:5px solid var(--vert);}
+.tableau td.moyen{border-left:5px solid var(--orange);}
+.tableau td.haut{border-left:5px solid var(--rouge);}
+
+.test{display:flex;gap:14px;border:2px solid var(--gris-ligne);border-radius:14px;padding:14px;margin-bottom:12px;}
+.pastille{flex:0 0 40px;height:40px;border-radius:50%;color:var(--blanc);font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:18px;display:flex;align-items:center;justify-content:center;background:var(--noir);}
+.test h4{font-size:16px;margin:3px 0 6px;}
+.test p{font-size:15.5px;margin:0 0 6px;}
+.test p:last-child{margin-bottom:0;}
+.verdict{font-size:15px;background:#F3FBF6;border-left:4px solid var(--vert);padding:8px 10px;}
+.verdict b{font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:12.5px;letter-spacing:.6px;color:var(--vert);}
+
+.controle{display:flex;gap:12px;border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;margin-bottom:10px;}
+.controle.fait{border-color:var(--vert);background:#F3FBF6;}
+.controle input{width:22px;height:22px;accent-color:var(--vert);cursor:pointer;flex:0 0 22px;margin-top:2px;}
+.controle h4{margin:0 0 4px;font-size:16px;}
+.controle p{margin:0;font-size:15.5px;}
+.progression{display:flex;align-items:center;gap:12px;margin:0 0 18px;border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;}
+.jauge{flex:1;height:12px;background:var(--gris-ligne);border-radius:999px;overflow:hidden;}
+.jauge span{display:block;height:100%;width:0;background:var(--rouge);transition:width .25s ease;}
+.compteur{font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:16px;white-space:nowrap;}
+
+.zone-rouge{border:3px solid var(--rouge);border-radius:14px;padding:16px 18px;margin:18px 0;}
+.zone-rouge h3{margin-top:0;color:var(--rouge);}
+.interdit{list-style:none;padding:0;margin:0;}
+.interdit li{padding-left:26px;position:relative;margin-bottom:8px;}
+.interdit li::before{content:"\00d7";position:absolute;left:0;top:-2px;color:var(--rouge);font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:22px;line-height:1;}
+
+.banniere{background:var(--rouge);color:var(--blanc);border-radius:14px;padding:18px 20px;margin:26px 0;}
+.banniere p{margin:0;font-family:"Oswald",Arial,sans-serif;font-size:19px;line-height:1.25;text-transform:uppercase;}
+.banniere small{display:block;font-family:"Fira Sans Condensed",Arial,sans-serif;text-transform:none;font-size:15px;margin-top:8px;opacity:.95;}
+
+details{border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;margin-bottom:10px;}
+details[open]{border-color:var(--noir);}
+summary{cursor:pointer;font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:16px;text-transform:uppercase;letter-spacing:.3px;}
+summary::-webkit-details-marker{display:none;}
+summary::before{content:"+ ";color:var(--rouge);font-weight:700;}
+details[open] summary::before{content:"\2212 ";}
+details p{margin:10px 0 0;font-size:16px;}
+
+footer{border-top:4px solid var(--noir);margin-top:44px;padding-top:18px;font-size:14px;color:var(--gris-texte);}
+footer strong{color:var(--noir);}
+
+@media (max-width:520px){
+  body{font-size:16px;}h1{font-size:27px;}section > h2{font-size:21px;}
+  .tableau{font-size:14px;}pre{font-size:12.5px;}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none !important;scroll-behavior:auto !important;}}
+</style>
+</head>
+<body>
+<div class="page">
+
+<header>
+  <span class="eyebrow">Ressource compagnon · L'IA Minute du Médecin</span>
+  <h1>Hallucinations : <mark>les taux, les tests, les parades</mark></h1>
+  <p class="sous-titre">Ce que valent vraiment les chiffres, comment calibrer un outil en trois questions, et les formulations qui divisent le risque d'erreur.</p>
+  <div class="trait"></div>
+  <p class="meta">Mise à jour : 25 juillet 2026.</p>
+</header>
+
+<div class="flash">
+  <h2>Avant de citer un taux, savoir ce qu'il mesure</h2>
+  <ul>
+    <li><strong>Un taux global ne veut rien dire.</strong> Les chiffres qui circulent varient de 1 % à plus de 80 % selon la tâche, le modèle et la définition retenue de l'erreur. Résumer un document qu'on vous fournit et répondre de mémoire à une question ouverte ne sont pas la même activité, et ne produisent pas les mêmes taux. Le tableau ci-dessous est le seul chiffre utile : celui de votre tâche.</li>
+    <li><strong>Le mécanisme est connu et documenté.</strong> Les modèles sont entraînés et évalués de telle façon qu'une réponse hasardée rapporte plus qu'une abstention. Répondre « je ne sais pas » est pénalisé, deviner est récompensé. L'hallucination n'est donc pas un accident, c'est une conséquence prévisible de la manière dont ces systèmes sont optimisés.</li>
+    <li><strong>Ancrer le modèle sur vos documents divise le risque, sans l'annuler.</strong> Sur une tâche de synthèse à partir d'un texte fourni, le taux mesuré tombe autour de 1,5 % dans une étude portant sur près de 13 000 phrases annotées par des cliniciens. Mais sur des réponses longues avec recherche documentaire, une part notable de références erronées subsiste. Ancrer, oui. Cesser de vérifier, non.</li>
+  </ul>
+</div>
+
+<nav aria-label="Sommaire">
+  <button type="button" data-cible="taux">Les taux par tâche</button>
+  <button type="button" data-cible="calibrer">Calibrer un outil</button>
+  <button type="button" data-cible="formulations">Les formulations</button>
+  <button type="button" data-cible="grille">Vérifier par type</button>
+  <button type="button" data-cible="vous">L'erreur qui vient de vous</button>
+  <button type="button" data-cible="controles">Avant d'agir</button>
+  <button type="button" data-cible="faq">Questions</button>
+  <button type="button" data-cible="sources">Sources</button>
+</nav>
+
+<!-- TAUX -->
+<section id="taux">
+  <h2>Les taux, selon ce que vous demandez</h2>
+  <p class="chapeau">Le liseré vert signale les usages où l'erreur reste rare. Le rouge, ceux où elle est la règle plutôt que l'exception.</p>
+
+  <table class="tableau">
+    <thead><tr><th>Ce que vous demandez</th><th>Ordre de grandeur observé</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="bas"><strong>Résumer un document que vous fournissez</strong></td>
+        <td>Autour de 1,5 % d'énoncés hallucinés sur des notes cliniques, avec environ 3,5 % d'omissions, qui sont l'autre risque et le moins surveillé.</td>
+      </tr>
+      <tr>
+        <td class="bas"><strong>Synthèse ancrée sur un texte source</strong></td>
+        <td>Généralement sous 2 %, à condition que la consigne interdise d'aller au delà du document.</td>
+      </tr>
+      <tr>
+        <td class="moyen"><strong>Question fermée sur un domaine balisé</strong></td>
+        <td>De l'ordre de 10 à 20 % selon les modèles. Suffisant pour se documenter, insuffisant pour décider.</td>
+      </tr>
+      <tr>
+        <td class="haut"><strong>Rédaction de note clinique sans source</strong></td>
+        <td>15 à 35 % selon le modèle et la complexité de la tâche.</td>
+      </tr>
+      <tr>
+        <td class="haut"><strong>Question ouverte, réponse longue, de mémoire</strong></td>
+        <td>40 à 80 %. C'est la catégorie la plus risquée, et malheureusement la plus naturelle à utiliser.</td>
+      </tr>
+      <tr>
+        <td class="haut"><strong>Produire des références bibliographiques</strong></td>
+        <td>De 14 à 95 % de références fabriquées ou corrompues selon les outils, dans un banc d'essai portant sur treize modèles. En contexte biomédical, des travaux retrouvent 45 % de références hallucinées sans ancrage documentaire.</td>
+      </tr>
+      <tr>
+        <td class="haut"><strong>Reprendre une information fausse glissée dans votre question</strong></td>
+        <td>Jusqu'à environ 83 % de reprise ou d'élaboration à partir d'un détail médical fabriqué, dans une étude portant sur 300 cas cliniques. Les consignes de prudence réduisent ce taux de moitié sans le supprimer.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p class="note"><b>Le chiffre à retenir</b> Celui de la dernière ligne. Ce n'est pas la mémoire du modèle qui vous met le plus en danger, c'est ce que vous lui donnez comme prémisse. Voir la section consacrée plus bas.</p>
+</section>
+
+<!-- CALIBRER -->
+<section id="calibrer">
+  <h2>Calibrer un outil en trois questions</h2>
+  <p class="chapeau">Cinq minutes, à faire une fois par outil, et à refaire après chaque changement de version. Un modèle qui échoue à la troisième ne mérite pas votre confiance sur une décision.</p>
+
+  <div class="test">
+    <div class="pastille">1</div>
+    <div>
+      <h4>La question dont vous connaissez la réponse</h4>
+      <p>Prenez un point précis de votre spécialité, sur lequel vous ne pouvez pas être trompé : un seuil, une contre-indication, une définition. Posez-la sans donner de source.</p>
+      <p class="verdict"><b>Ce que vous jugez</b> l'exactitude, mais surtout le degré de nuance. Une bonne réponse mentionne les conditions et les exceptions. Une réponse plate signale un modèle qui simplifie.</p>
+    </div>
+  </div>
+
+  <div class="test">
+    <div class="pastille">2</div>
+    <div>
+      <h4>La question dont la réponse n'existe pas</h4>
+      <p>Demandez une donnée qui n'a pas été publiée : le taux de récidive d'une pathologie dans une population très précise, la comparaison de deux traitements jamais confrontés directement.</p>
+      <p class="verdict"><b>Ce que vous jugez</b> la capacité à dire « cette donnée n'existe pas » ou « aucun essai n'a comparé directement ces deux options ». Un modèle qui produit un chiffre ici en produira un ailleurs.</p>
+    </div>
+  </div>
+
+  <div class="test">
+    <div class="pastille">3</div>
+    <div>
+      <h4>La question qui contient une fausse prémisse</h4>
+      <p>Le test le plus discriminant, et celui que personne ne fait. Formulez une question qui tient pour acquis quelque chose de faux : « Quelle est la posologie recommandée du [nom de molécule inventé] chez l'insuffisant rénal ? » ou « Depuis la révision de [année] de cette recommandation, quel est le nouveau seuil ? » alors qu'aucune révision n'a eu lieu.</p>
+      <p class="verdict"><b>Ce que vous jugez</b> la capacité à contester votre question au lieu d'y répondre. C'est exactement ce qui se passe en pratique quand vous interrogez sur la base d'un souvenir imprécis.</p>
+    </div>
+  </div>
+
+  <div class="bloc">
+    <div class="bloc-tete"><h4>Les trois tests, prêts à copier</h4><button type="button" class="copier">Copier</button></div>
+    <pre>TEST 1, question maîtrisée
+[Poser une question précise de votre spécialité dont vous connaissez parfaitement la réponse, sans fournir de source.]
+
+TEST 2, question sans réponse publiée
+[Demander une donnée chiffrée qui n'existe pas dans la littérature, par exemple une comparaison directe entre deux traitements jamais confrontés dans un essai.]
+
+TEST 3, fausse prémisse
+"Depuis la mise à jour de [année] de la recommandation sur [sujet], quel est le nouveau seuil retenu ?"
+[Choisir une année où aucune mise à jour n'a eu lieu.]
+
+Ce que je considère comme une réussite :
+- Test 1 : réponse exacte, avec ses conditions et ses exceptions.
+- Test 2 : "cette donnée n'est pas disponible" plutôt qu'un chiffre.
+- Test 3 : contestation explicite de ma prémisse.
+
+Un échec au test 3 disqualifie l'outil pour tout usage engageant une décision.</pre>
+  </div>
+</section>
+
+<!-- FORMULATIONS -->
+<section id="formulations">
+  <h2>Les formulations qui réduisent le risque</h2>
+  <p class="chapeau">Ce ne sont pas des astuces de rédaction, ce sont des contraintes. Elles agissent sur le mécanisme lui-même, en rendant l'abstention acceptable.</p>
+
+  <div class="bloc">
+    <div class="bloc-tete"><h4>Le bloc à coller en tête de toute question sérieuse</h4><button type="button" class="copier">Copier</button></div>
+    <pre>Règles pour cette réponse :
+
+1. Si tu n'as pas l'information, écris exactement : "Je n'ai pas cette information." Ne propose pas d'estimation, pas d'ordre de grandeur, pas de fourchette.
+2. Distingue systématiquement ce qui vient des documents que je te fournis, ce qui vient de tes connaissances générales, et ce que tu déduis. Marque chaque affirmation en conséquence.
+3. Pour chaque chiffre, indique s'il figure textuellement dans une source ou s'il résulte d'un calcul de ta part. Dans ce cas, montre le calcul.
+4. Ne produis aucune référence bibliographique que tu ne peux pas rattacher à un document fourni. Si je te demande des références sans t'en donner, réponds que tu ne peux pas les garantir.
+5. Si ma question contient une affirmation que tu sais fausse ou que tu ne peux pas vérifier, signale-le avant de répondre.
+6. Termine par une section "Ce dont je ne suis pas sûr", qui doit contenir au moins un élément. Si tu es certain de tout, explique pourquoi.</pre>
+  </div>
+
+  <table class="tableau">
+    <thead><tr><th>Au lieu de</th><th>Écrivez</th></tr></thead>
+    <tbody>
+      <tr><td>« Quel est le seuil de ... ? »</td><td>« Dans le document ci-joint, quel seuil est indiqué pour ... ? Cite la phrase exacte. »</td></tr>
+      <tr><td>« Donne-moi les références sur ... »</td><td>« À partir des articles que je te fournis uniquement, liste les références utilisées. »</td></tr>
+      <tr><td>« Résume cet article »</td><td>« Résume cet article. Pour chaque affirmation, indique la section d'où elle vient. Liste ensuite ce que l'article ne traite pas. »</td></tr>
+      <tr><td>« Est-ce que X est recommandé ? »</td><td>« Que disent les documents fournis sur X ? S'ils ne le traitent pas, dis-le au lieu de répondre. »</td></tr>
+      <tr><td>« Explique-moi pourquoi X provoque Y »</td><td>« Le lien entre X et Y est-il établi dans les documents fournis ? Si oui, à quel niveau de preuve ? »</td></tr>
+    </tbody>
+  </table>
+
+  <p class="note"><b>Le principe commun</b> Les quatre reformulations font la même chose : elles transforment une question de mémoire en question de lecture. C'est le seul levier qui agit sur le mécanisme plutôt que sur les symptômes.</p>
+</section>
+
+<!-- GRILLE -->
+<section id="grille">
+  <h2>Vérifier, selon le type de contenu</h2>
+  <p class="chapeau">Tout ne se vérifie pas de la même façon, ni avec la même urgence. Cette grille dit où mettre vos trois minutes.</p>
+
+  <table class="tableau">
+    <thead><tr><th>Type de contenu</th><th>Comment le vérifier</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Une référence</strong></td><td>Cherchez le titre exact dans une base bibliographique. Une référence dont le titre existe mais dont les auteurs ou l'année diffèrent est le cas le plus fréquent, et le plus trompeur.</td></tr>
+      <tr><td><strong>Un chiffre épidémiologique</strong></td><td>Remontez à la source citée. Méfiez-vous des valeurs rondes et des précisions excessives : un pourcentage à la décimale près sans intervalle de confiance signale une fabrication plus souvent qu'une mesure.</td></tr>
+      <tr><td><strong>Une posologie</strong></td><td>Base de données du médicament, systématiquement, sans exception. C'est le contenu où l'erreur est la plus grave et la vérification la plus rapide.</td></tr>
+      <tr><td><strong>Une recommandation</strong></td><td>Ouvrez le texte source et vérifiez trois choses : l'année, le grade, et le verbe employé. Le passage d'un « il est suggéré » à un « il est recommandé » est indétectable dans une synthèse.</td></tr>
+      <tr><td><strong>Un calcul</strong></td><td>Refaites-le. Ou demandez le détail du calcul et vérifiez les étapes plutôt que le résultat.</td></tr>
+      <tr><td><strong>Une définition ou un mécanisme</strong></td><td>Risque faible, vérification par simple lecture critique. C'est là que vous pouvez faire confiance sans contrôle formel.</td></tr>
+      <tr><td><strong>Une reformulation de votre propre texte</strong></td><td>Risque faible sur le fond, mais surveillez les omissions et la disparition des nuances, qui sont plus fréquentes que les ajouts.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- VOUS -->
+<section id="vous">
+  <h2>L'erreur qui vient de vous</h2>
+  <p class="chapeau">C'est la partie la moins connue, et celle qui produit les erreurs les plus difficiles à repérer, parce qu'elles confirment ce que vous pensiez.</p>
+
+  <p>Une étude a inséré un détail médical fabriqué dans 300 cas cliniques, puis a demandé à plusieurs modèles de les analyser. Ils ont repris ou développé le détail inventé dans jusqu'à 83 % des cas. Ajouter une consigne de prudence a divisé ce taux par deux, sans jamais le supprimer.</p>
+
+  <p>Transposé à votre pratique : si vous interrogez un modèle à partir d'un souvenir imprécis, d'un nom de molécule approximatif ou d'une recommandation que vous croyez révisée, il ne vous corrigera pas. Il construira une réponse cohérente autour de votre erreur, et cette réponse vous confortera.</p>
+
+  <h3>Trois habitudes qui neutralisent ce risque</h3>
+  <table class="tableau">
+    <thead><tr><th>Habitude</th><th>Pourquoi elle marche</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Poser la question ouverte avant la question fermée</strong></td><td>« Que disent les recommandations sur ce point ? » avant « Est-ce que le seuil est bien de X ? ». La première laisse le modèle libre, la seconde lui souffle la réponse.</td></tr>
+      <tr><td><strong>Ne jamais citer de chiffre dans sa question</strong></td><td>Si vous devez vérifier une valeur, demandez-la sans l'énoncer. Vous saurez alors si elle est confirmée ou seulement répétée.</td></tr>
+      <tr><td><strong>Poser la question inverse</strong></td><td>Après une réponse qui vous convient, demandez : « Quels arguments existent contre cette conclusion ? » Ce que le modèle trouve alors, il aurait pu le dire d'emblée.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- CONTROLES -->
+<section id="controles">
+  <h2>Avant qu'une réponse n'influence une décision</h2>
+  <p class="chapeau">Cinq contrôles. Ils ne s'appliquent qu'aux réponses qui vont changer quelque chose, pas à une lecture de curiosité.</p>
+
+  <div class="progression">
+    <div class="jauge"><span id="jauge-barre"></span></div>
+    <div class="compteur" id="jauge-compteur">0 / 5</div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>La réponse s'appuie sur un document que j'ai fourni</h4>
+    <p>Sinon, je change de mode de travail avant de continuer : je fournis la source, puis je repose la question.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>J'ai vérifié chaque chiffre à la source</h4>
+    <p>Et pas seulement celui qui me surprend. Celui qui ne surprend pas est justement celui qu'on ne contrôle jamais.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>J'ai vérifié l'existence des références</h4>
+    <p>Titre, auteurs, année, revue. Les quatre, pas seulement le titre.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Ma question ne contenait pas d'affirmation non vérifiée</h4>
+    <p>Relisez ce que vous avez écrit. Une prémisse fausse produit une réponse fausse et cohérente.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>J'ai demandé les arguments contraires</h4>
+    <p>Une réponse qui ne résiste pas à cette question n'était pas une réponse.</p></div>
+  </div>
+
+  <div class="zone-rouge">
+    <h3>Les usages où le taux d'erreur interdit l'usage seul</h3>
+    <ul class="interdit">
+      <li>Obtenir une posologie sans vérifier dans une base de données du médicament</li>
+      <li>Constituer une bibliographie sans fournir les articles</li>
+      <li>Faire trancher une question clinique par une réponse de mémoire, sans source</li>
+      <li>Demander une valeur chiffrée sur une population très spécifique, où la donnée n'existe probablement pas</li>
+      <li>Utiliser une réponse comme référence dans un document professionnel</li>
+    </ul>
+  </div>
+
+  <div class="banniere">
+    <p>Une IA ne ment pas. Elle complète. C'est pour cela qu'elle est convaincante.
+    <small>Traitez chaque réponse comme une proposition à vérifier. La méthode A.V.E.C. de la Haute Autorité de santé le résume en quatre verbes : apprendre, vérifier, estimer, communiquer.</small></p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <h2>Questions fréquentes</h2>
+
+  <details>
+    <summary>Les modèles récents hallucinent-ils moins ?</summary>
+    <p>Globalement oui, et les écarts entre modèles restent importants. Mais aucun ne descend à zéro, et un modèle plus performant produit des erreurs plus difficiles à repérer, parce qu'elles sont mieux intégrées au reste du texte. La vigilance ne diminue pas avec la qualité du modèle, elle change de nature.</p>
+  </details>
+
+  <details>
+    <summary>Le mode recherche web règle-t-il le problème ?</summary>
+    <p>Il le réduit et en crée un autre : le modèle peut citer une page réelle mais périmée, ou attribuer à une source ce qu'elle ne dit pas. Vérifiez alors la source elle-même, pas le fait qu'un lien existe.</p>
+  </details>
+
+  <details>
+    <summary>Pourquoi le modèle ne dit-il pas simplement qu'il ne sait pas ?</summary>
+    <p>Parce que la manière dont ces systèmes sont entraînés et évalués récompense la réponse hasardée et pénalise l'abstention, exactement comme un examen à choix multiple sans points négatifs. C'est un problème d'incitation autant que de technique, et c'est pourquoi une consigne explicite autorisant l'abstention change autant les résultats.</p>
+  </details>
+
+  <details>
+    <summary>Deux modèles qui donnent la même réponse, est-ce une confirmation ?</summary>
+    <p>Non. Ils partagent des données d'entraînement et des biais similaires, et se trompent souvent au même endroit. La confirmation utile vient d'une source, jamais d'un second modèle.</p>
+  </details>
+
+  <details>
+    <summary>Faut-il abandonner les usages à risque élevé ?</summary>
+    <p>Non, il faut les déplacer. Une question ouverte de mémoire devient une question de lecture dès que vous fournissez le document. C'est la même demande, avec un taux d'erreur divisé par dix.</p>
+  </details>
+
+  <details>
+    <summary>Et les omissions ?</summary>
+    <p>C'est l'angle mort. Sur les tâches de synthèse, le taux d'omission est plus élevé que le taux d'hallucination. Une information manquante ne se voit pas à la relecture, contrairement à une information fausse. D'où l'intérêt de demander systématiquement ce que le document ne traite pas.</p>
+  </details>
+</section>
+
+<!-- SOURCES -->
+<section id="sources">
+  <h2>Sources</h2>
+  <table class="tableau">
+    <thead><tr><th>Élément</th><th>Source</th></tr></thead>
+    <tbody>
+      <tr><td>Taux d'hallucination de 1,47 % et taux d'omission de 3,45 % sur la synthèse de textes médicaux, à partir de près de 13 000 phrases annotées par des cliniciens</td><td>Asgari E. et coll., A framework to assess clinical safety and hallucination rates of LLMs for medical text summarisation, npj Digital Medicine, 2025</td></tr>
+      <tr><td>Taux de 15 à 35 % sur la génération de notes cliniques selon le modèle et la complexité de la tâche</td><td>Travaux d'évaluation en traitement automatique du langage clinique, cités dans la littérature 2025 et 2026</td></tr>
+      <tr><td>Reprise ou élaboration d'un détail médical fabriqué dans jusqu'à 83 % des cas, sur 300 cas cliniques, réduction de moitié par des consignes de prudence</td><td>Icahn School of Medicine at Mount Sinai, publication 2025</td></tr>
+      <tr><td>Fabrication de références de 14 à 95 % selon les modèles sur un banc d'essai de treize systèmes ; 45,3 % de références hallucinées sans ancrage documentaire en contexte biomédical, améliorées par la recherche documentaire sans être supprimées</td><td>Travaux de benchmark 2026 et étude d'ancrage documentaire en ophtalmologie</td></tr>
+      <tr><td>Taux de 40 à 80 % sur les tâches de génération ouverte, 10 à 20 % sur les questions fermées de domaine balisé, sous 2 % sur la synthèse ancrée</td><td>Agrégations de bancs d'essai publiées en 2026</td></tr>
+      <tr><td>Mécanisme d'incitation : les procédures d'entraînement et d'évaluation récompensent la réponse hasardée et pénalisent l'abstention</td><td>Travaux publiés en 2025 sur les causes des hallucinations dans les modèles de langage</td></tr>
+      <tr><td>Méthode A.V.E.C.</td><td>Haute Autorité de santé, recommandations sur l'IA générative en santé, 30 octobre 2025</td></tr>
+    </tbody>
+  </table>
+  <p class="chapeau">Les taux publiés dépendent étroitement de la définition retenue de l'erreur, du modèle testé et de la date du test. Ils servent à comparer des usages entre eux, pas à garantir une performance.</p>
+</section>
+
+<footer>
+  <p><strong>L'IA Minute du Médecin</strong>, Dr Guillaume Zagury et Samuel De Queiroz, Éditions Medicilline.</p>
+  <p>Ressource compagnon de la double page consacrée aux hallucinations. Les ordres de grandeur cités proviennent de publications datées et ne constituent pas une garantie de performance des outils que vous utilisez.</p>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var chips = document.querySelectorAll("nav button[data-cible]");
+  Array.prototype.forEach.call(chips, function(btn){
+    btn.addEventListener("click", function(){
+      var cible = document.getElementById(btn.getAttribute("data-cible"));
+      if(cible){ cible.scrollIntoView({ behavior:"smooth", block:"start" }); }
+    });
+  });
+
+  var controles = document.querySelectorAll("[data-controle]");
+  var barre = document.getElementById("jauge-barre");
+  var compteur = document.getElementById("jauge-compteur");
+  var total = controles.length;
+
+  function maj(){
+    var faits = 0;
+    Array.prototype.forEach.call(controles, function(c){
+      var box = c.querySelector("input[type=checkbox]");
+      if(box && box.checked){ faits++; c.classList.add("fait"); }
+      else { c.classList.remove("fait"); }
+    });
+    barre.style.width = (faits/total*100) + "%";
+    barre.style.background = (faits === total) ? "#27AE60" : "#DC322F";
+    compteur.textContent = faits + " / " + total;
+  }
+
+  Array.prototype.forEach.call(controles, function(c){
+    var box = c.querySelector("input[type=checkbox]");
+    if(box){ box.addEventListener("change", maj); }
+  });
+  maj();
+
+  var boutons = document.querySelectorAll(".copier");
+  Array.prototype.forEach.call(boutons, function(btn){
+    btn.addEventListener("click", function(){
+      var bloc = btn.closest(".bloc");
+      var pre = bloc ? bloc.querySelector("pre") : null;
+      if(!pre){ return; }
+      var texte = pre.textContent;
+      var fini = function(){
+        btn.textContent = "Copié";
+        btn.classList.add("ok");
+        setTimeout(function(){ btn.textContent = "Copier"; btn.classList.remove("ok"); }, 1800);
+      };
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(texte).then(fini, function(){ secours(texte, fini); });
+      } else { secours(texte, fini); }
+    });
+  });
+
+  function secours(texte, fini){
+    var z = document.createElement("textarea");
+    z.value = texte;
+    z.setAttribute("readonly","");
+    z.style.position = "absolute";
+    z.style.left = "-9999px";
+    document.body.appendChild(z);
+    z.select();
+    try { document.execCommand("copy"); fini(); } catch(e){}
+    document.body.removeChild(z);
+  }
+})();
+</script>
+</body>
+</html>

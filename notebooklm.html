@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interroger un corpus, sans perdre la nuance · L'IA Minute du Médecin</title>
+<meta name="description" content="Ressource compagnon du livre L'IA Minute du Médecin : construire un corpus documentaire fiable, les prompts prêts à copier, et la méthode pour vérifier qu'une synthèse n'a pas lissé la nuance clinique.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Fira+Sans+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --rouge:#DC322F;--noir:#1A1A1A;--blanc:#FFFFFF;--jaune:#FFD700;
+  --bleu:#3498DB;--orange:#F39C12;--vert:#27AE60;--violet:#8E44AD;--teal:#1ABC9C;
+  --gris:#BDC3C7;--gris-clair:#F4F5F6;--gris-ligne:#E1E4E6;--gris-texte:#5A6268;
+}
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{margin:0;background:var(--blanc);color:var(--noir);font-family:"Fira Sans Condensed","Roboto Condensed",Arial,sans-serif;font-size:17px;line-height:1.5;}
+.page{max-width:720px;margin:0 auto;padding:0 18px 80px;}
+h1,h2,h3,h4{font-family:"Oswald","Arial Narrow",Arial,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.2px;}
+p{margin:0 0 14px;}
+
+header{padding:26px 0 8px;}
+.eyebrow{display:inline-block;font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:var(--blanc);background:var(--noir);padding:5px 11px;}
+h1{font-size:33px;line-height:1.06;margin:14px 0 0;}
+h1 mark{background:var(--jaune);color:var(--noir);padding:0 5px;}
+.sous-titre{font-family:"Fira Sans Condensed",Arial,sans-serif;font-style:italic;font-weight:600;color:var(--rouge);font-size:19px;margin:10px 0 0;text-transform:none;}
+.trait{height:4px;background:var(--rouge);margin:16px 0 22px;}
+.meta{font-size:14px;color:var(--gris-texte);margin:0 0 22px;}
+
+.flash{border:3px solid var(--rouge);border-radius:14px;padding:16px 18px;margin:0 0 26px;}
+.flash h2{font-size:19px;margin:0 0 10px;color:var(--rouge);}
+.flash ul{margin:0;padding-left:20px;}
+.flash li{margin-bottom:9px;}
+
+nav{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 34px;}
+nav button{font-family:"Oswald",Arial,sans-serif;font-weight:500;font-size:13px;letter-spacing:.6px;text-transform:uppercase;background:var(--gris-clair);color:var(--noir);border:2px solid var(--gris-ligne);border-radius:999px;padding:7px 13px;cursor:pointer;}
+nav button:hover{background:var(--noir);color:var(--blanc);border-color:var(--noir);}
+nav button:focus-visible{outline:3px solid var(--rouge);outline-offset:2px;}
+
+section{border-top:2px solid var(--gris-ligne);padding-top:26px;margin-top:34px;scroll-margin-top:14px;}
+section > h2{font-size:25px;margin:0 0 4px;line-height:1.1;}
+.chapeau{color:var(--gris-texte);font-size:16px;margin:0 0 20px;}
+h3{font-size:19px;margin:26px 0 8px;}
+
+.regle{display:flex;gap:14px;border:2px solid var(--gris-ligne);border-radius:14px;padding:14px;margin-bottom:12px;}
+.pastille{flex:0 0 42px;height:42px;border-radius:50%;color:var(--blanc);font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:19px;display:flex;align-items:center;justify-content:center;}
+.p-bleu{background:var(--bleu);}.p-orange{background:var(--orange);}.p-vert{background:var(--vert);}.p-violet{background:var(--violet);}.p-teal{background:var(--teal);}
+.regle-corps{flex:1;min-width:0;}
+.regle h4{font-size:17px;margin:4px 0 6px;}
+.regle p{font-size:16px;margin:0 0 8px;}
+.regle p:last-child{margin-bottom:0;}
+.piege{font-size:15px;background:var(--gris-clair);border-left:4px solid var(--orange);padding:8px 10px;margin:0;}
+.piege b{font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:13px;letter-spacing:.6px;color:var(--orange);}
+
+.onglets{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px;}
+.onglets button{font-family:"Oswald",Arial,sans-serif;font-weight:500;font-size:13px;letter-spacing:.6px;text-transform:uppercase;background:var(--blanc);color:var(--noir);border:2px solid var(--noir);border-radius:8px;padding:7px 12px;cursor:pointer;}
+.onglets button[aria-selected="true"]{background:var(--noir);color:var(--blanc);}
+.onglets button:focus-visible{outline:3px solid var(--rouge);outline-offset:2px;}
+.panneau[hidden]{display:none;}
+
+.bloc{border:2px solid var(--gris-ligne);border-radius:14px;overflow:hidden;margin:0 0 16px;}
+.bloc-tete{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--gris-clair);padding:10px 12px;border-bottom:2px solid var(--gris-ligne);}
+.bloc-tete h4{margin:0;font-size:15px;}
+.copier{font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:12px;letter-spacing:.8px;text-transform:uppercase;background:var(--rouge);color:var(--blanc);border:none;border-radius:6px;padding:7px 12px;cursor:pointer;white-space:nowrap;}
+.copier.ok{background:var(--vert);}
+.copier:focus-visible{outline:3px solid var(--noir);outline-offset:2px;}
+pre{margin:0;padding:14px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px;line-height:1.5;white-space:pre-wrap;word-wrap:break-word;}
+.badge{display:inline-block;background:var(--gris);color:var(--noir);border-radius:5px;font-family:"Oswald",Arial,sans-serif;font-size:11.5px;letter-spacing:.7px;text-transform:uppercase;padding:3px 8px;margin:0 6px 6px 0;}
+
+.tableau{width:100%;border-collapse:collapse;font-size:15px;margin:0 0 18px;}
+.tableau th,.tableau td{border:1px solid var(--gris-ligne);padding:8px 10px;text-align:left;vertical-align:top;}
+.tableau th{background:var(--noir);color:var(--blanc);font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:13px;letter-spacing:.5px;}
+.tableau tr:nth-child(even) td{background:var(--gris-clair);}
+
+.controle{display:flex;gap:12px;border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;margin-bottom:10px;}
+.controle.fait{border-color:var(--vert);background:#F3FBF6;}
+.controle input{width:22px;height:22px;accent-color:var(--vert);cursor:pointer;flex:0 0 22px;margin-top:2px;}
+.controle h4{margin:0 0 4px;font-size:16px;}
+.controle p{margin:0;font-size:15.5px;}
+.progression{display:flex;align-items:center;gap:12px;margin:0 0 18px;border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;}
+.jauge{flex:1;height:12px;background:var(--gris-ligne);border-radius:999px;overflow:hidden;}
+.jauge span{display:block;height:100%;width:0;background:var(--rouge);transition:width .25s ease;}
+.compteur{font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:16px;white-space:nowrap;}
+
+.zone-rouge{border:3px solid var(--rouge);border-radius:14px;padding:16px 18px;margin:18px 0;}
+.zone-rouge h3{margin-top:0;color:var(--rouge);}
+.interdit{list-style:none;padding:0;margin:0;}
+.interdit li{padding-left:26px;position:relative;margin-bottom:8px;}
+.interdit li::before{content:"\00d7";position:absolute;left:0;top:-2px;color:var(--rouge);font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:22px;line-height:1;}
+
+.banniere{background:var(--rouge);color:var(--blanc);border-radius:14px;padding:18px 20px;margin:26px 0;}
+.banniere p{margin:0;font-family:"Oswald",Arial,sans-serif;font-size:19px;line-height:1.25;text-transform:uppercase;}
+.banniere small{display:block;font-family:"Fira Sans Condensed",Arial,sans-serif;text-transform:none;font-size:15px;margin-top:8px;opacity:.95;}
+
+details{border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;margin-bottom:10px;}
+details[open]{border-color:var(--noir);}
+summary{cursor:pointer;font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:16px;text-transform:uppercase;letter-spacing:.3px;}
+summary::-webkit-details-marker{display:none;}
+summary::before{content:"+ ";color:var(--rouge);font-weight:700;}
+details[open] summary::before{content:"\2212 ";}
+details p{margin:10px 0 0;font-size:16px;}
+
+footer{border-top:4px solid var(--noir);margin-top:44px;padding-top:18px;font-size:14px;color:var(--gris-texte);}
+footer strong{color:var(--noir);}
+
+@media (max-width:520px){
+  body{font-size:16px;}h1{font-size:27px;}section > h2{font-size:21px;}
+  .tableau{font-size:14px;}pre{font-size:12.5px;}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none !important;scroll-behavior:auto !important;}}
+</style>
+</head>
+<body>
+<div class="page">
+
+<header>
+  <span class="eyebrow">Ressource compagnon · L'IA Minute du Médecin</span>
+  <h1>Interroger un corpus <mark>sans perdre la nuance</mark></h1>
+  <p class="sous-titre">Le livre pose la règle : la synthèse ne vaut que ce que valent vos sources. Voici comment on construit ces sources, et comment on vérifie que la nuance a survécu.</p>
+  <div class="trait"></div>
+  <p class="meta">Mise à jour : 25 juillet 2026.</p>
+</header>
+
+<div class="flash">
+  <h2>L'outil a changé de nom, et pas seulement de nom</h2>
+  <ul>
+    <li><strong>NotebookLM s'appelle Gemini Notebook depuis le 16 juillet 2026.</strong> Même produit, même adresse, mêmes carnets. Les liens partagés continuent de fonctionner, les redirections sont automatiques. Le logo change progressivement dans les interfaces, l'application mobile a simplement été renommée. Si vous scannez ce code plusieurs mois après l'achat du livre, ne cherchez pas un nouvel outil.</li>
+    <li><strong>Le moteur change plus vite que l'interface.</strong> Trois bascules en sept mois, la dernière le 8 juin 2026. Conséquence directe pour vous : une même question posée sur le même corpus ne donne pas exactement la même synthèse à trois mois d'intervalle. Ce n'est pas votre mémoire qui flanche.</li>
+    <li><strong>Une capacité nouvelle arrive : l'exécution de code dans le carnet</strong>, déployée d'abord sur les offres payantes. Elle permet de faire calculer sur vos propres tableaux plutôt que de faire raconter. Utile pour un registre de patientèle anonymisé, un recueil d'activité, une série de mesures.</li>
+    <li><strong>Ce qui ne change pas :</strong> l'outil ne répond qu'à partir des documents que vous lui donnez, et chaque affirmation renvoie au passage cité. C'est là que se joue tout l'intérêt clinique, et c'est ce que la suite de cette page exploite.</li>
+  </ul>
+</div>
+
+<nav aria-label="Sommaire">
+  <button type="button" data-cible="corpus">Construire le corpus</button>
+  <button type="button" data-cible="carnets">Vos quatre carnets</button>
+  <button type="button" data-cible="questions">Les questions qui paient</button>
+  <button type="button" data-cible="nuance">Traquer le lissage</button>
+  <button type="button" data-cible="limites">Limites et quotas</button>
+  <button type="button" data-cible="confidentialite">Confidentialité</button>
+  <button type="button" data-cible="controles">Avant de décider</button>
+  <button type="button" data-cible="faq">Questions</button>
+  <button type="button" data-cible="sources">Sources</button>
+</nav>
+
+<!-- CORPUS -->
+<section id="corpus">
+  <h2>Construire un corpus qui tient debout</h2>
+  <p class="chapeau">Une synthèse ne vaut que ce que valent ses sources. Voici les cinq règles qui transforment un tas de PDF en corpus interrogeable.</p>
+
+  <div class="regle">
+    <div class="pastille p-bleu">1</div>
+    <div class="regle-corps">
+      <h4>Un carnet, une question clinique</h4>
+      <p>Ne créez pas le carnet « cardiologie ». Créez le carnet « fibrillation atriale, anticoagulation en ville, 2026 ». Un corpus resserré donne des réponses précises et traçables. Un corpus fourre-tout produit des généralités et fait chuter la qualité du raisonnement à mesure que le nombre de sources augmente.</p>
+      <p class="piege"><b>Piège</b> : empiler cinquante documents parce que la limite le permet. La limite n'est pas un objectif.</p>
+    </div>
+  </div>
+
+  <div class="regle">
+    <div class="pastille p-orange">2</div>
+    <div class="regle-corps">
+      <h4>Datez et hiérarchisez dans le nom du fichier</h4>
+      <p>Renommez avant d'importer : <strong>A1-HAS-2025-reco-complete.pdf</strong>, <strong>B2-ESC-2024-guidelines.pdf</strong>, <strong>C3-article-2026-RCT.pdf</strong>. La lettre encode le niveau de priorité, l'année encode la fraîcheur. Vous pourrez ensuite écrire dans vos questions : « en cas de divergence, la source A1 prime ».</p>
+      <p class="piege"><b>Piège</b> : garder l'ancienne et la nouvelle version d'une recommandation dans le même carnet sans le préciser. La synthèse mélangera les deux sans vous prévenir.</p>
+    </div>
+  </div>
+
+  <div class="regle">
+    <div class="pastille p-vert">3</div>
+    <div class="regle-corps">
+      <h4>Ne mélangez pas les juridictions sans le dire</h4>
+      <p>Une recommandation européenne, une recommandation américaine et un référentiel français ne disent pas la même chose, et ce désaccord est une information clinique. Gardez-les, mais nommez le pays dans le fichier et demandez explicitement les divergences.</p>
+      <p class="piege"><b>Piège</b> : une synthèse harmonieuse construite sur trois référentiels qui se contredisent. L'harmonie est ici le symptôme du problème.</p>
+    </div>
+  </div>
+
+  <div class="regle">
+    <div class="pastille p-violet">4</div>
+    <div class="regle-corps">
+      <h4>Ajoutez vos propres documents, c'est ce qui fait la différence</h4>
+      <p>Vos protocoles de cabinet, votre trame de courrier, vos fiches d'éducation, le compte rendu de votre dernière réunion de concertation. C'est ce mélange entre référentiel public et pratique locale qu'aucun outil généraliste ne peut produire à votre place.</p>
+      <p class="piege"><b>Piège</b> : y verser un document contenant des données de patients. Voir la section confidentialité plus bas, la règle est sans exception.</p>
+    </div>
+  </div>
+
+  <div class="regle">
+    <div class="pastille p-teal">5</div>
+    <div class="regle-corps">
+      <h4>Vérifiez que le document a bien été lu</h4>
+      <p>Premier réflexe après un import : posez une question dont vous connaissez la réponse et qui se trouve à la page 30 du PDF. Un scan non reconnu, un tableau en image ou un document tronqué se repèrent en quinze secondes de cette façon, et pas autrement.</p>
+      <p class="piege"><b>Piège</b> : croire qu'un PDF importé est un PDF exploité. Les recommandations françaises sont souvent riches en tableaux qui passent mal.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CARNETS -->
+<section id="carnets">
+  <h2>Les quatre carnets à créer une fois pour toutes</h2>
+  <p class="chapeau">Le vrai gain n'est pas dans le carnet ponctuel, il est dans les quatre carnets permanents que vous alimentez toute l'année.</p>
+
+  <table class="tableau">
+    <thead><tr><th>Carnet</th><th>Ce qu'on y met</th><th>Ce qu'on lui demande</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Référentiels de ma spécialité</strong></td>
+        <td>Les recommandations en vigueur, dans leur version complète, plus les mises à jour annuelles.</td>
+        <td>Ce qui a changé entre deux versions, la conduite à tenir dans un cas de figure précis, les divergences entre sociétés savantes.</td>
+      </tr>
+      <tr>
+        <td><strong>Mon cabinet</strong></td>
+        <td>Protocoles internes, trames de courrier, procédures d'accueil, conduites à tenir de l'équipe.</td>
+        <td>Rédiger un document conforme à vos propres règles, repérer les incohérences entre vos protocoles et les référentiels.</td>
+      </tr>
+      <tr>
+        <td><strong>Veille et congrès</strong></td>
+        <td>Articles de la période, actes de congrès, diaporamas récupérés, comptes rendus de session.</td>
+        <td>Une synthèse audio à écouter en déplacement, un tri par niveau de preuve, la liste de ce qui ne change rien à votre pratique.</td>
+      </tr>
+      <tr>
+        <td><strong>Supports patients</strong></td>
+        <td>Guides patients institutionnels, fiches d'éducation thérapeutique, votre documentation remise.</td>
+        <td>Une reformulation au bon niveau de littératie, un script d'explication orale, un support imprimable.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>Un carnet bien construit se rentabilise sur des mois. C'est la différence entre utiliser un outil et se doter d'une méthode.</p>
+</section>
+
+<!-- QUESTIONS -->
+<section id="questions">
+  <h2>Les questions qui font vraiment travailler un corpus</h2>
+  <p class="chapeau">Demander un résumé est la question la moins rentable. Voici celles qui produisent une information que vous n'aviez pas.</p>
+
+  <div class="onglets" role="tablist">
+    <button type="button" role="tab" aria-selected="true" data-panneau="p-critique">Lecture critique</button>
+    <button type="button" role="tab" aria-selected="false" data-panneau="p-audio">Cadrer l'audio</button>
+    <button type="button" role="tab" aria-selected="false" data-panneau="p-patient">Support patient</button>
+    <button type="button" role="tab" aria-selected="false" data-panneau="p-equipe">Équipe et cabinet</button>
+  </div>
+
+  <div class="panneau" id="p-critique">
+    <div class="bloc">
+      <div class="bloc-tete"><h4>Les cinq questions de tri</h4><button type="button" class="copier">Copier</button></div>
+      <pre>1. Sur quels points mes sources se contredisent-elles ? Pour chaque divergence, cite la phrase exacte de chaque source et indique l'année.
+
+2. Qu'est-ce qui a changé entre la version [ancienne] et la version [récente] ? Réponds en trois colonnes : ce qui est nouveau, ce qui a disparu, ce qui est resté identique.
+
+3. Quel est le niveau de preuve ou le grade associé à chaque recommandation que tu viens de citer ? Si le grade n'est pas mentionné dans la source, écris "non gradé".
+
+4. Qu'est-ce que ces documents ne traitent pas ? Liste les situations cliniques fréquentes en médecine de ville qui ne sont pas couvertes par ce corpus.
+
+5. Cette recommandation a-t-elle été validée sur une population comparable à ma patientèle [décrire en une ligne] ? Cite les critères d'inclusion tels qu'ils sont écrits.</pre>
+    </div>
+    <div class="bloc">
+      <div class="bloc-tete"><h4>Le cas clinique fictif</h4><button type="button" class="copier">Copier</button></div>
+      <pre>Voici une situation fictive, construite pour tester le corpus : [patient de 68 ans, insuffisance rénale modérée, sous anticoagulant, consultation pour ...].
+
+Réponds en trois parties :
+1. Ce que mes sources disent explicitement de cette situation, avec les citations.
+2. Ce qu'elles laissent à l'appréciation du praticien.
+3. Ce qu'elles ne disent pas du tout, et où il faudrait chercher.
+
+Ne complète jamais avec des connaissances extérieures aux documents fournis. Si une partie de la question sort du corpus, dis-le explicitement.</pre>
+    </div>
+  </div>
+
+  <div class="panneau" id="p-audio" hidden>
+    <div class="bloc">
+      <div class="bloc-tete"><h4>Consigne de cadrage pour la synthèse audio</h4><button type="button" class="copier">Copier</button></div>
+      <pre>Public : deux médecins généralistes qui connaissent déjà le sujet. Pas de vulgarisation, pas de définition des termes de base.
+
+Concentre-toi exclusivement sur : ce qui change en pratique de ville, les seuils décisionnels, et les points où les sources divergent.
+
+Ignore : l'historique de la maladie, l'épidémiologie générale, la physiopathologie.
+
+Structure attendue : commence par les trois messages qui changent une consultation, développe ensuite, termine par ce qui reste incertain.
+
+Ton : direct, sans emphase, sans formule d'accroche. Chaque affirmation doit pouvoir être rattachée à une source.</pre>
+    </div>
+    <p><span class="badge">Le réglage à ne pas oublier</span> La langue de sortie suit par défaut la langue de votre compte. Vérifiez-la avant de lancer une génération : produire vingt minutes d'audio dans la mauvaise langue consomme un quota quotidien pour rien.</p>
+  </div>
+
+  <div class="panneau" id="p-patient" hidden>
+    <div class="bloc">
+      <div class="bloc-tete"><h4>Reformulation au bon niveau de littératie</h4><button type="button" class="copier">Copier</button></div>
+      <pre>À partir des sources fournies uniquement, rédige une explication destinée à [un adulte sans culture médicale / un enfant de 8 ans / un aidant].
+
+Contraintes :
+- Phrases de 15 mots maximum. Aucun terme technique sans traduction immédiate.
+- Aucune donnée de pronostic ni de mortalité.
+- Aucun nom de médicament, aucun dosage : écris "le traitement prescrit".
+- Registre factuel et rassurant, jamais culpabilisant.
+- Termine par "Les trois choses à retenir" et "Quand consulter sans attendre".
+
+Ajoute à la fin la liste des passages sources utilisés, pour que je puisse vérifier avant de remettre le document.</pre>
+    </div>
+  </div>
+
+  <div class="panneau" id="p-equipe" hidden>
+    <div class="bloc">
+      <div class="bloc-tete"><h4>Confronter vos protocoles aux référentiels</h4><button type="button" class="copier">Copier</button></div>
+      <pre>Le corpus contient deux types de documents : les référentiels publiés et nos protocoles internes de cabinet.
+
+Compare-les point par point. Produis un tableau à trois colonnes :
+1. Le point de pratique.
+2. Ce que dit le référentiel, avec la citation.
+3. Ce que dit notre protocole interne, avec la citation.
+
+Signale en particulier : les points où notre protocole est plus restrictif, ceux où il est plus permissif, et ceux qui ne sont pas couverts par le référentiel.
+
+N'invente aucune recommandation. Si un point de notre protocole n'a pas d'équivalent dans les référentiels, écris "non traité par le référentiel".</pre>
+    </div>
+  </div>
+</section>
+
+<!-- NUANCE -->
+<section id="nuance">
+  <h2>Traquer le lissage</h2>
+  <p class="chapeau">Le livre le dit : l'outil n'invente rien hors de vos sources, mais il simplifie, et une formulation prudente peut ressortir en affirmation tranchée. Voici comment le prendre en flagrant délit.</p>
+
+  <h3>Les quatre signaux d'une nuance perdue</h3>
+  <table class="tableau">
+    <thead><tr><th>Ce que vous lisez dans la synthèse</th><th>Ce qu'il faut aller vérifier</th></tr></thead>
+    <tbody>
+      <tr><td>« Il est recommandé de... » sans grade</td><td>La source dit-elle « il est recommandé », « il est suggéré », ou « il peut être envisagé » ? Ces trois formules ne portent pas le même engagement.</td></tr>
+      <tr><td>Une valeur seuil isolée</td><td>Le seuil est presque toujours assorti de conditions : âge, comorbidité, contexte. La synthèse les a-t-elle gardées ?</td></tr>
+      <tr><td>Une affirmation sans réserve sur un traitement</td><td>Cherchez les mots « sauf », « en l'absence de », « après avoir éliminé ». Ce sont eux qui disparaissent en premier.</td></tr>
+      <tr><td>Un consensus apparent entre plusieurs sources</td><td>Demandez explicitement les divergences. Une synthèse cherche la cohérence, pas la contradiction.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="bloc">
+    <div class="bloc-tete"><h4>La contre-question, à poser systématiquement</h4><button type="button" class="copier">Copier</button></div>
+    <pre>Reprends ta réponse précédente. Pour chaque affirmation clinique que tu as formulée :
+
+1. Cite la phrase exacte de la source, entre guillemets, sans la reformuler.
+2. Indique le document et la section.
+3. Indique si la source emploie un verbe d'obligation, de suggestion ou de simple possibilité.
+4. Liste les conditions, réserves et exceptions présentes dans la source que ta synthèse n'a pas reprises.
+
+Si une de tes affirmations ne peut pas être rattachée à une phrase précise, signale-la comme "reformulation" plutôt que comme citation.</pre>
+  </div>
+
+  <p><strong>Le geste manuel qui vaut tous les prompts :</strong> cliquez sur le numéro de citation affiché dans la réponse. Le passage source s'ouvre. Trois secondes, et vous voyez de vos yeux ce que la phrase d'origine disait vraiment. Faites-le sur les deux ou trois affirmations qui pourraient changer une décision, pas sur toutes.</p>
+</section>
+
+<!-- LIMITES -->
+<section id="limites">
+  <h2>Limites, quotas et bonnes surprises</h2>
+  <p class="chapeau">Les chiffres bougent, l'ordre de grandeur reste. Vérifiez dans l'interface avant de bâtir un projet dessus.</p>
+
+  <table class="tableau">
+    <thead><tr><th>Élément</th><th>Ordre de grandeur constaté en juillet 2026</th></tr></thead>
+    <tbody>
+      <tr><td>Carnets par compte</td><td>Une centaine en usage gratuit, davantage sur les offres payantes.</td></tr>
+      <tr><td>Sources par carnet</td><td>50 en gratuit, 100 à 600 selon les offres payantes.</td></tr>
+      <tr><td>Taille par source</td><td>Environ 500 000 mots, et 200 Mo par fichier importé.</td></tr>
+      <tr><td>Synthèses audio</td><td>Un petit nombre par jour en gratuit, quota nettement plus large sur les offres payantes.</td></tr>
+      <tr><td>Partage</td><td>Partage de carnet avec un grand nombre de collaborateurs, en lecture ou en édition. Le lecteur voit toutes vos sources.</td></tr>
+      <tr><td>Types de sources</td><td>PDF, documents et présentations, pages web, vidéos en ligne, fichiers audio, plus vos propres notes.</td></tr>
+      <tr><td>Langues de la synthèse audio</td><td>Très large couverture, dont le français. Certaines options fines de réglage restent d'abord disponibles en anglais.</td></tr>
+    </tbody>
+  </table>
+
+  <p><strong>La bonne surprise à connaître :</strong> au delà de l'audio, un même corpus produit aussi une carte mentale, des questions de révision, un support de présentation et une courte vidéo pédagogique. Le carnet que vous avez construit pour votre veille devient, sans travail supplémentaire, le support de votre prochaine réunion d'équipe.</p>
+</section>
+
+<!-- CONFIDENTIALITE -->
+<section id="confidentialite">
+  <h2>Confidentialité : la règle sans exception</h2>
+  <p class="chapeau">Google indique ne pas utiliser les documents que vous importez pour entraîner ses modèles. Cette garantie, réelle, ne règle pas la question du secret médical.</p>
+
+  <p>Deux choses différentes sont en jeu. La première est l'entraînement des modèles : l'éditeur s'engage à ne pas s'en servir. La seconde est <strong>l'hébergement de données de santé</strong>, qui relève en France d'une certification spécifique, et le <strong>secret médical</strong>, qui n'a pas d'exception pour cause de gain de temps. Un carnet de recherche documentaire n'est pas un environnement destiné à recevoir des données de patients, quel que soit l'engagement commercial de l'éditeur.</p>
+
+  <div class="zone-rouge">
+    <h3>Ce qui n'entre jamais dans un carnet</h3>
+    <ul class="interdit">
+      <li>Un compte rendu, un courrier reçu, un résultat de biologie ou d'imagerie nominatif</li>
+      <li>Un export de votre logiciel de cabinet, même partiel, même sans les noms</li>
+      <li>Une photographie clinique</li>
+      <li>Un enregistrement de consultation</li>
+      <li>Un cas clinique réel dont le contexte permettrait de reconnaître la personne</li>
+    </ul>
+  </div>
+
+  <p><strong>Deux réflexes de partage.</strong> Un carnet partagé expose <em>toutes</em> ses sources à ceux qui y accèdent, y compris les documents que vous aviez oubliés. Et un compte professionnel encadré par votre organisation ne suit pas les mêmes règles qu'un compte personnel : vérifiez lequel vous utilisez avant d'y déposer les protocoles de votre structure.</p>
+
+  <div class="banniere">
+    <p>L'outil ne travaille qu'avec vos sources. C'est vous qui répondez de ces sources, et de ce que vous en faites.
+    <small>La méthode A.V.E.C. de la Haute Autorité de santé le formule ainsi : apprendre, vérifier, estimer, communiquer. Une synthèse est une proposition de lecture, pas une lecture.</small></p>
+  </div>
+</section>
+
+<!-- CONTROLES -->
+<section id="controles">
+  <h2>Avant qu'une synthèse n'entre dans une décision</h2>
+  <p class="chapeau">Cinq contrôles, deux minutes. À faire uniquement quand la synthèse va influencer une conduite à tenir, pas pour une lecture de veille.</p>
+
+  <div class="progression">
+    <div class="jauge"><span id="jauge-barre"></span></div>
+    <div class="compteur" id="jauge-compteur">0 / 5</div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>J'ai ouvert au moins une citation à la source</h4>
+    <p>Sur l'affirmation qui pèse le plus dans la décision. Le passage d'origine dit-il exactement cela ?</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>J'ai vérifié la date de chaque source mobilisée</h4>
+    <p>Une synthèse impeccable construite sur une recommandation périmée reste une erreur, et elle est indétectable à la lecture.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>J'ai demandé les divergences, pas seulement la synthèse</h4>
+    <p>Là où les sources ne s'accordent pas se trouve souvent la vraie décision clinique.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>J'ai vérifié le degré d'obligation</h4>
+    <p>Recommandé, suggéré, envisageable : la synthèse a-t-elle conservé le verbe de la source ?</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Je sais ce que le corpus ne couvre pas</h4>
+    <p>Le silence d'un corpus n'est pas une absence de recommandation. C'est une absence de source.</p></div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <h2>Questions fréquentes</h2>
+
+  <details>
+    <summary>Faut-il payer ?</summary>
+    <p>Non pour l'usage décrit ici. L'offre gratuite couvre largement la veille et les supports patients. Les offres payantes augmentent le nombre de sources par carnet et les quotas quotidiens, et ouvrent en premier les nouveautés comme l'exécution de code.</p>
+  </details>
+
+  <details>
+    <summary>Puis-je importer une vidéo de congrès ou un enregistrement audio ?</summary>
+    <p>Oui, les sources vidéo et audio en ligne sont acceptées, ce qui permet de traiter une session de congrès que vous n'avez pas pu suivre. Attention toutefois aux droits de diffusion du contenu que vous importez.</p>
+  </details>
+
+  <details>
+    <summary>La synthèse audio est-elle utilisable en français ?</summary>
+    <p>Oui, la couverture linguistique est très large. La fluidité reste supérieure en anglais, et certaines options fines de réglage arrivent d'abord en anglais. Vérifiez la langue de sortie avant de lancer la génération.</p>
+  </details>
+
+  <details>
+    <summary>Puis-je partager un carnet avec mon équipe ?</summary>
+    <p>Oui, en lecture ou en édition. Rappel utile : un lecteur accède à l'ensemble des sources du carnet. Faites le ménage avant de partager.</p>
+  </details>
+
+  <details>
+    <summary>Et si Google change encore le nom ou l'interface ?</summary>
+    <p>C'est probable. Ce qui ne changera pas, c'est la méthode : un corpus resserré, daté, hiérarchisé, et la vérification par la citation. Ces réflexes sont transposables à n'importe quel outil ancré sur des sources.</p>
+  </details>
+
+  <details>
+    <summary>Puis-je m'en servir pour préparer un DPC ou une présentation ?</summary>
+    <p>Oui, c'est l'un des meilleurs usages. Le même carnet produit la synthèse, les questions de révision, la carte mentale et un support de présentation exportable. Vérifiez le contenu généré avant diffusion, comme n'importe quel support signé de votre nom.</p>
+  </details>
+</section>
+
+<!-- SOURCES -->
+<section id="sources">
+  <h2>Sources</h2>
+  <table class="tableau">
+    <thead><tr><th>Élément</th><th>Source</th></tr></thead>
+    <tbody>
+      <tr><td>Renommage en Gemini Notebook le 16 juillet 2026, même produit, redirections automatiques, déploiement progressif du nom et du logo</td><td>Blog officiel Google et Google Workspace Updates, 16 juillet 2026</td></tr>
+      <tr><td>Exécution de code dans les carnets, déploiement prioritaire sur les offres payantes</td><td>Annonce Google du 16 juillet 2026, reprise par TechCrunch et la presse spécialisée</td></tr>
+      <tr><td>30 millions d'utilisateurs et plus de 600 000 organisations</td><td>Chiffres communiqués par Google, juillet 2026</td></tr>
+      <tr><td>Changements de moteur, dernier en date le 8 juin 2026</td><td>Suivi des mises à jour produit, 2026</td></tr>
+      <tr><td>Limites : environ 100 carnets, 50 sources par carnet en gratuit, 500 000 mots par source, 200 Mo par fichier</td><td>Documentation Google et recoupements éditoriaux, mai à juillet 2026</td></tr>
+      <tr><td>Non-utilisation des documents importés pour l'entraînement des modèles</td><td>Documentation officielle Google</td></tr>
+      <tr><td>Obligation d'hébergement certifié pour les données de santé</td><td>Agence du Numérique en Santé, référentiel HDS</td></tr>
+      <tr><td>Secret médical</td><td>Code de la santé publique, article L.1110-4 et Code pénal, article 226-13</td></tr>
+      <tr><td>Méthode A.V.E.C.</td><td>Haute Autorité de santé, recommandations sur l'IA générative en santé, 30 octobre 2025</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<footer>
+  <p><strong>L'IA Minute du Médecin</strong>, Dr Guillaume Zagury et Samuel De Queiroz, Éditions Medicilline.</p>
+  <p>Ressource compagnon de la double page consacrée à la synthèse documentaire. Les noms de produit, quotas et interfaces évoluent sans préavis : cette page est révisée, le livre garde la méthode.</p>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var chips = document.querySelectorAll("nav button[data-cible]");
+  Array.prototype.forEach.call(chips, function(btn){
+    btn.addEventListener("click", function(){
+      var cible = document.getElementById(btn.getAttribute("data-cible"));
+      if(cible){ cible.scrollIntoView({ behavior:"smooth", block:"start" }); }
+    });
+  });
+
+  var onglets = document.querySelectorAll(".onglets button[data-panneau]");
+  Array.prototype.forEach.call(onglets, function(btn){
+    btn.addEventListener("click", function(){
+      Array.prototype.forEach.call(onglets, function(autre){
+        autre.setAttribute("aria-selected", autre === btn ? "true" : "false");
+        var p = document.getElementById(autre.getAttribute("data-panneau"));
+        if(p){ p.hidden = (autre !== btn); }
+      });
+    });
+  });
+
+  var controles = document.querySelectorAll("[data-controle]");
+  var barre = document.getElementById("jauge-barre");
+  var compteur = document.getElementById("jauge-compteur");
+  var total = controles.length;
+
+  function maj(){
+    var faits = 0;
+    Array.prototype.forEach.call(controles, function(c){
+      var box = c.querySelector("input[type=checkbox]");
+      if(box && box.checked){ faits++; c.classList.add("fait"); }
+      else { c.classList.remove("fait"); }
+    });
+    barre.style.width = (faits/total*100) + "%";
+    barre.style.background = (faits === total) ? "#27AE60" : "#DC322F";
+    compteur.textContent = faits + " / " + total;
+  }
+
+  Array.prototype.forEach.call(controles, function(c){
+    var box = c.querySelector("input[type=checkbox]");
+    if(box){ box.addEventListener("change", maj); }
+  });
+  maj();
+
+  var boutons = document.querySelectorAll(".copier");
+  Array.prototype.forEach.call(boutons, function(btn){
+    btn.addEventListener("click", function(){
+      var bloc = btn.closest(".bloc");
+      var pre = bloc ? bloc.querySelector("pre") : null;
+      if(!pre){ return; }
+      var texte = pre.textContent;
+      var fini = function(){
+        btn.textContent = "Copié";
+        btn.classList.add("ok");
+        setTimeout(function(){ btn.textContent = "Copier"; btn.classList.remove("ok"); }, 1800);
+      };
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(texte).then(fini, function(){ secours(texte, fini); });
+      } else { secours(texte, fini); }
+    });
+  });
+
+  function secours(texte, fini){
+    var zone = document.createElement("textarea");
+    zone.value = texte;
+    zone.setAttribute("readonly","");
+    zone.style.position = "absolute";
+    zone.style.left = "-9999px";
+    document.body.appendChild(zone);
+    zone.select();
+    try { document.execCommand("copy"); fini(); } catch(e){}
+    document.body.removeChild(zone);
+  }
+})();
+</script>
+</body>
+</html>

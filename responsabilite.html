@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Responsabilité et IA : le dossier de preuve · L'IA Minute du Médecin</title>
+<meta name="description" content="Ressource compagnon du livre L'IA Minute du Médecin : le rapport de l'Académie décrypté, le cas de la radiologue déroulé pas à pas, et le dossier de preuve à constituer.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Fira+Sans+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --rouge:#DC322F;--noir:#1A1A1A;--blanc:#FFFFFF;--jaune:#FFD700;
+  --bleu:#3498DB;--orange:#F39C12;--vert:#27AE60;--violet:#8E44AD;--teal:#1ABC9C;
+  --gris:#BDC3C7;--gris-clair:#F4F5F6;--gris-ligne:#E1E4E6;--gris-texte:#5A6268;
+}
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{margin:0;background:var(--blanc);color:var(--noir);font-family:"Fira Sans Condensed","Roboto Condensed",Arial,sans-serif;font-size:17px;line-height:1.5;}
+.page{max-width:720px;margin:0 auto;padding:0 18px 80px;}
+h1,h2,h3,h4{font-family:"Oswald","Arial Narrow",Arial,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.2px;}
+p{margin:0 0 14px;}
+
+header{padding:26px 0 8px;}
+.eyebrow{display:inline-block;font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:var(--blanc);background:var(--noir);padding:5px 11px;}
+h1{font-size:33px;line-height:1.06;margin:14px 0 0;}
+h1 mark{background:var(--jaune);color:var(--noir);padding:0 5px;}
+.sous-titre{font-family:"Fira Sans Condensed",Arial,sans-serif;font-style:italic;font-weight:600;color:var(--rouge);font-size:19px;margin:10px 0 0;text-transform:none;}
+.trait{height:4px;background:var(--rouge);margin:16px 0 22px;}
+.meta{font-size:14px;color:var(--gris-texte);margin:0 0 22px;}
+
+.flash{border:3px solid var(--rouge);border-radius:14px;padding:16px 18px;margin:0 0 26px;}
+.flash h2{font-size:19px;margin:0 0 10px;color:var(--rouge);}
+.flash ul{margin:0;padding-left:20px;}
+.flash li{margin-bottom:9px;}
+
+nav{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 34px;}
+nav button{font-family:"Oswald",Arial,sans-serif;font-weight:500;font-size:13px;letter-spacing:.6px;text-transform:uppercase;background:var(--gris-clair);color:var(--noir);border:2px solid var(--gris-ligne);border-radius:999px;padding:7px 13px;cursor:pointer;}
+nav button:hover{background:var(--noir);color:var(--blanc);border-color:var(--noir);}
+nav button:focus-visible{outline:3px solid var(--rouge);outline-offset:2px;}
+
+section{border-top:2px solid var(--gris-ligne);padding-top:26px;margin-top:34px;scroll-margin-top:14px;}
+section > h2{font-size:25px;margin:0 0 4px;line-height:1.1;}
+.chapeau{color:var(--gris-texte);font-size:16px;margin:0 0 20px;}
+h3{font-size:19px;margin:26px 0 8px;}
+
+.citation{border-left:5px solid var(--rouge);background:var(--gris-clair);padding:14px 16px;margin:0 0 18px;font-size:17px;font-style:italic;}
+.citation .source{display:block;font-style:normal;font-family:"Oswald",Arial,sans-serif;font-size:12.5px;letter-spacing:.6px;text-transform:uppercase;color:var(--gris-texte);margin-top:8px;}
+
+.acteur{display:flex;gap:14px;border:2px solid var(--gris-ligne);border-radius:14px;padding:14px;margin-bottom:12px;}
+.pastille{flex:0 0 44px;height:44px;border-radius:50%;color:var(--blanc);font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center;}
+.p-bleu{background:var(--bleu);}.p-orange{background:var(--orange);}.p-rouge{background:var(--rouge);}
+.acteur-corps{flex:1;min-width:0;}
+.acteur h4{font-size:17px;margin:4px 0 6px;}
+.acteur p{font-size:16px;margin:0 0 8px;}
+.acteur p:last-child{margin-bottom:0;}
+.obligation{font-size:15px;background:var(--gris-clair);border-left:4px solid var(--noir);padding:8px 10px;}
+.obligation b{font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:12.5px;letter-spacing:.6px;}
+
+.etape{border:2px solid var(--gris-ligne);border-radius:14px;margin-bottom:14px;overflow:hidden;}
+.etape-tete{background:var(--noir);color:var(--blanc);padding:10px 14px;display:flex;align-items:center;gap:10px;}
+.etape-num{background:var(--rouge);color:var(--blanc);width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:14px;flex:0 0 26px;}
+.etape-tete h4{margin:0;font-size:15px;color:var(--blanc);}
+.etape-corps{padding:12px 14px;}
+.etape-corps p{font-size:16px;margin:0 0 10px;}
+.etape-corps p:last-child{margin-bottom:0;}
+.cle{font-size:15.5px;background:#F3FBF6;border-left:4px solid var(--vert);padding:9px 11px;}
+.cle b{font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:12.5px;letter-spacing:.6px;color:var(--vert);}
+
+.bloc{border:2px solid var(--gris-ligne);border-radius:14px;overflow:hidden;margin:0 0 16px;}
+.bloc-tete{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--gris-clair);padding:10px 12px;border-bottom:2px solid var(--gris-ligne);}
+.bloc-tete h4{margin:0;font-size:15px;}
+.copier{font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:12px;letter-spacing:.8px;text-transform:uppercase;background:var(--rouge);color:var(--blanc);border:none;border-radius:6px;padding:7px 12px;cursor:pointer;white-space:nowrap;}
+.copier.ok{background:var(--vert);}
+.copier:focus-visible{outline:3px solid var(--noir);outline-offset:2px;}
+pre{margin:0;padding:14px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px;line-height:1.5;white-space:pre-wrap;word-wrap:break-word;}
+.note{font-size:15.5px;background:var(--gris-clair);border-left:4px solid var(--bleu);padding:9px 11px;margin:0 0 16px;}
+.note b{font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:12.5px;letter-spacing:.6px;color:var(--bleu);}
+
+.tableau{width:100%;border-collapse:collapse;font-size:15px;margin:0 0 18px;}
+.tableau th,.tableau td{border:1px solid var(--gris-ligne);padding:8px 10px;text-align:left;vertical-align:top;}
+.tableau th{background:var(--noir);color:var(--blanc);font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:13px;letter-spacing:.5px;}
+.tableau tr:nth-child(even) td{background:var(--gris-clair);}
+
+.controle{display:flex;gap:12px;border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;margin-bottom:10px;}
+.controle.fait{border-color:var(--vert);background:#F3FBF6;}
+.controle input{width:22px;height:22px;accent-color:var(--vert);cursor:pointer;flex:0 0 22px;margin-top:2px;}
+.controle h4{margin:0 0 4px;font-size:16px;}
+.controle p{margin:0;font-size:15.5px;}
+.progression{display:flex;align-items:center;gap:12px;margin:0 0 18px;border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;}
+.jauge{flex:1;height:12px;background:var(--gris-ligne);border-radius:999px;overflow:hidden;}
+.jauge span{display:block;height:100%;width:0;background:var(--rouge);transition:width .25s ease;}
+.compteur{font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:16px;white-space:nowrap;}
+
+.banniere{background:var(--rouge);color:var(--blanc);border-radius:14px;padding:18px 20px;margin:26px 0;}
+.banniere p{margin:0;font-family:"Oswald",Arial,sans-serif;font-size:19px;line-height:1.25;text-transform:uppercase;}
+.banniere small{display:block;font-family:"Fira Sans Condensed",Arial,sans-serif;text-transform:none;font-size:15px;margin-top:8px;opacity:.95;}
+
+details{border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;margin-bottom:10px;}
+details[open]{border-color:var(--noir);}
+summary{cursor:pointer;font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:16px;text-transform:uppercase;letter-spacing:.3px;}
+summary::-webkit-details-marker{display:none;}
+summary::before{content:"+ ";color:var(--rouge);font-weight:700;}
+details[open] summary::before{content:"\2212 ";}
+details p{margin:10px 0 0;font-size:16px;}
+
+footer{border-top:4px solid var(--noir);margin-top:44px;padding-top:18px;font-size:14px;color:var(--gris-texte);}
+footer strong{color:var(--noir);}
+
+@media (max-width:520px){
+  body{font-size:16px;}h1{font-size:27px;}section > h2{font-size:21px;}
+  .tableau{font-size:14px;}pre{font-size:12.5px;}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none !important;scroll-behavior:auto !important;}}
+</style>
+</head>
+<body>
+<div class="page">
+
+<header>
+  <span class="eyebrow">Ressource compagnon · L'IA Minute du Médecin</span>
+  <h1>Responsabilité : <mark>le dossier de preuve</mark></h1>
+  <p class="sous-titre">Le rapport de l'Académie décrypté, le cas de la radiologue déroulé pas à pas, et les quatre éléments à documenter pour que la question ne se pose jamais dans les pires conditions.</p>
+  <div class="trait"></div>
+  <p class="meta">Mise à jour : 25 juillet 2026. Page pédagogique, qui ne constitue pas une consultation juridique.</p>
+</header>
+
+<div class="flash">
+  <h2>Ce que le rapport dit vraiment</h2>
+  <ul>
+    <li><strong>Les règles ne changent pas.</strong> C'est la conclusion première et la plus rassurante : l'utilisation de l'IA ne modifie pas les règles fondamentales de la responsabilité médicale, qu'elles soient pénales, civiles, administratives ou disciplinaires. Il n'y a pas de régime spécial de l'erreur algorithmique.</li>
+    <li><strong>Ce qui change, c'est l'analyse de la causalité.</strong> Dans un dossier classique, le juge examine l'acte du praticien. Avec un outil d'IA, il doit aussi déterminer si l'algorithme était validé et fiable, et si son interprétation et son usage étaient appropriés. Le débat se déplace de votre geste vers votre méthode.</li>
+    <li><strong>Une obligation est qualifiée d'absolue.</strong> Informer le patient de l'utilisation de l'IA dans la démarche médicale le concernant. Ne pas le faire est présenté comme une faute potentielle, et cette information doit être tracée. C'est la phrase la plus opérationnelle du rapport, et la plus simple à appliquer.</li>
+  </ul>
+</div>
+
+<nav aria-label="Sommaire">
+  <button type="button" data-cible="rapport">Le rapport en bref</button>
+  <button type="button" data-cible="acteurs">Les trois acteurs</button>
+  <button type="button" data-cible="cas">Le cas, pas à pas</button>
+  <button type="button" data-cible="preuve">Le dossier de preuve</button>
+  <button type="button" data-cible="produit">Le logiciel est un produit</button>
+  <button type="button" data-cible="controles">Le contrôle</button>
+  <button type="button" data-cible="faq">Questions</button>
+  <button type="button" data-cible="sources">Sources</button>
+</nav>
+
+<!-- RAPPORT -->
+<section id="rapport">
+  <h2>Le rapport en bref</h2>
+  <p class="chapeau">Les éléments à citer correctement si vous vous y référez.</p>
+
+  <table class="tableau">
+    <thead><tr><th>Élément</th><th>Valeur</th></tr></thead>
+    <tbody>
+      <tr><td>Titre</td><td>« Intelligence artificielle et responsabilité médicale. Quels enjeux ? », rapport 25-12</td></tr>
+      <tr><td>Institution</td><td>Académie nationale de médecine, commission 5</td></tr>
+      <tr><td>Rapporteurs</td><td>Dominique Lecomte et Christian-François Roques-Latrille</td></tr>
+      <tr><td>Adoption</td><td>Séance du mardi 7 octobre 2025, par 81 voix pour, 2 contre et 5 abstentions</td></tr>
+      <tr><td>Publication</td><td>Bulletin de l'Académie nationale de médecine, 2026</td></tr>
+      <tr><td>Portée</td><td>Prise de position officielle de l'Académie. Ce n'est ni une norme ni une jurisprudence, c'est un repère faisant autorité.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="citation">
+    Le médecin a l'obligation absolue d'informer son patient sur l'utilisation de l'IA dans la démarche médicale le concernant. Ne pas le faire est une faute potentielle. Cette information doit être tracée.
+    <span class="source">Académie nationale de médecine, rapport 25-12, 2025</span>
+  </div>
+
+  <p class="note"><b>Pourquoi cette phrase change tout</b> Elle transforme une bonne pratique en obligation, et elle place la charge sur un geste qui prend cinq secondes. C'est le meilleur rapport entre effort et protection de tout ce chapitre, et c'est la première chose à mettre en oeuvre après avoir lu cette page.</p>
+</section>
+
+<!-- ACTEURS -->
+<section id="acteurs">
+  <h2>Les trois acteurs</h2>
+  <p class="chapeau">La responsabilité se répartit, elle ne se dilue pas. Chacun répond de ce qui relève de lui, et personne ne répond à la place d'un autre.</p>
+
+  <div class="acteur">
+    <div class="pastille p-bleu">1</div>
+    <div class="acteur-corps">
+      <h4>Le concepteur</h4>
+      <p>Il conçoit, valide et met sur le marché. Il répond de la conformité de son produit, de ses performances annoncées et de sa sécurité. Depuis la refonte européenne de la responsabilité du fait des produits défectueux, adoptée en octobre 2024, un logiciel est expressément un produit : le régime lui est applicable.</p>
+      <p class="obligation"><b>Ce qu'il vous doit</b> Une notice claire, une destination d'usage explicite, des performances documentées, et l'explicabilité du fonctionnement pour les utilisateurs, qui est une obligation légale à sa charge en droit français.</p>
+    </div>
+  </div>
+
+  <div class="acteur">
+    <div class="pastille p-orange">2</div>
+    <div class="acteur-corps">
+      <h4>Le déployeur</h4>
+      <p>L'établissement, la structure, ou vous-même si vous êtes le décideur de l'équipement. Il choisit l'outil, le met à jour, l'intègre au système d'information et forme ceux qui l'utilisent. Il répond de l'organisation et de l'encadrement de l'usage.</p>
+      <p class="obligation"><b>Ce qu'il doit organiser</b> Le choix documenté de l'outil, sa maintenance, la formation tracée des utilisateurs, et les règles internes d'usage. Sans cela, une erreur individuelle devient une défaillance d'organisation.</p>
+    </div>
+  </div>
+
+  <div class="acteur">
+    <div class="pastille p-rouge">3</div>
+    <div class="acteur-corps">
+      <h4>Le médecin</h4>
+      <p>Il informe, supervise, valide, décide et signe. Il répond de la décision médicale, qui reste personnelle et ne se délègue pas. C'est le seul point de la chaîne où la responsabilité ne peut pas être transférée à un autre.</p>
+      <p class="obligation"><b>Ce que vous devez démontrer</b> Que vous avez informé, que vous avez exercé un regard critique proportionné à l'enjeu, et que votre décision est tracée. Ces trois éléments constituent votre défense, et ils s'écrivent en trois lignes au moment des faits.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CAS -->
+<section id="cas">
+  <h2>Le cas, déroulé pas à pas</h2>
+  <p class="chapeau">Situation fictive, construite pour montrer comment le raisonnement se déploie. Une IA de détection manque une lésion. Six mois plus tard, le diagnostic est porté à un stade plus avancé.</p>
+
+  <div class="etape">
+    <div class="etape-tete"><span class="etape-num">1</span><h4>Y a-t-il un dommage ?</h4></div>
+    <div class="etape-corps">
+      <p>Oui : une perte de chance liée au retard diagnostique. C'est la première question, et elle est indépendante de l'IA. Le raisonnement de la responsabilité médicale commence toujours par là.</p>
+      <p class="cle"><b>Ce qui compte</b> L'évaluation du préjudice ne change pas parce qu'un algorithme est intervenu. Le raisonnement classique s'applique : faute, dommage, lien de causalité.</p>
+    </div>
+  </div>
+
+  <div class="etape">
+    <div class="etape-tete"><span class="etape-num">2</span><h4>L'outil était-il adapté et validé ?</h4></div>
+    <div class="etape-corps">
+      <p>Certifié pour cet usage précis, pour cette population, sur ce type d'examen ? Utilisé dans les conditions prévues par le fabricant ? Un outil validé sur une tranche d'âge et utilisé au delà sort de sa destination.</p>
+      <p class="cle"><b>Ce qui compte</b> C'est ici que la question du choix de l'outil apparaît, et elle concerne autant le déployeur que le médecin. Si l'outil n'était pas adapté, la discussion se déplace vers celui qui l'a choisi.</p>
+    </div>
+  </div>
+
+  <div class="etape">
+    <div class="etape-tete"><span class="etape-num">3</span><h4>Y a-t-il un défaut du produit ?</h4></div>
+    <div class="etape-corps">
+      <p>Le système présentait-il une défaillance rendant son usage dangereux dans des conditions normales ? Les performances réelles correspondaient-elles à ce qui était annoncé ? La version utilisée avait-elle fait l'objet d'un signalement ?</p>
+      <p class="cle"><b>Ce qui compte</b> C'est le terrain de la responsabilité du fait des produits défectueux, qui vise le producteur. Elle suppose de savoir quelle version était en service, ce qui est rarement documenté et devrait l'être.</p>
+    </div>
+  </div>
+
+  <div class="etape">
+    <div class="etape-tete"><span class="etape-num">4</span><h4>Quel regard le médecin a-t-il porté ?</h4></div>
+    <div class="etape-corps">
+      <p>La sortie a-t-elle été relue, confrontée à la clinique, discutée ? Un résultat négatif d'un système de détection dispense-t-il d'une lecture attentive ? Non : l'outil assiste, il ne se substitue pas à l'examen.</p>
+      <p class="cle"><b>Ce qui compte</b> C'est le point décisif pour vous. Le risque n'est pas d'avoir utilisé l'outil, il est d'avoir cessé de regarder parce que l'outil regardait. La supervision doit rester effective, et se démontrer.</p>
+    </div>
+  </div>
+
+  <div class="etape">
+    <div class="etape-tete"><span class="etape-num">5</span><h4>Le patient avait-il été informé ?</h4></div>
+    <div class="etape-corps">
+      <p>L'usage de l'IA dans la démarche médicale avait-il été porté à sa connaissance, et cette information était-elle tracée ? Ce point est autonome : il peut être reproché même si la prise en charge était par ailleurs conforme.</p>
+      <p class="cle"><b>Ce qui compte</b> C'est le manquement le plus facile à établir, et le plus facile à éviter. Une phrase dite, une ligne écrite.</p>
+    </div>
+  </div>
+
+  <div class="etape">
+    <div class="etape-tete"><span class="etape-num">6</span><h4>Qui répond, au bout du compte ?</h4></div>
+    <div class="etape-corps">
+      <p>Selon les réponses précédentes : le producteur si le défaut est établi, la structure si l'organisation était défaillante, le médecin si la supervision ou l'information ont manqué. Souvent plusieurs, chacun pour sa part. Rarement un seul.</p>
+      <p class="cle"><b>Ce qui compte</b> Dans tous les cas de figure, ce qui départage est la trace. Celui qui a documenté sa diligence est en position de la démontrer. Celui qui n'a rien écrit laisse le juge apprécier ce qu'il aurait dû faire.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PREUVE -->
+<section id="preuve">
+  <h2>Le dossier de preuve, en quatre éléments</h2>
+  <p class="chapeau">Le rapport insiste sur ce point : documenter le choix de l'outil, sa version, ses performances, et les éléments cliniques ayant conduit à la décision. Voici comment le faire sans y passer de temps.</p>
+
+  <table class="tableau">
+    <thead><tr><th>À documenter</th><th>Où, et à quelle fréquence</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Le choix de l'outil</strong></td><td>Une fois, dans un document de structure : pourquoi celui-là, sur quels critères, avec quelles alternatives écartées. Une page, mise à jour au changement.</td></tr>
+      <tr><td><strong>La version en service</strong></td><td>Une fois par mise à jour, dans un registre simple : date, version, changement notable annoncé. C'est l'élément le moins documenté et le plus déterminant en cas de litige sur un défaut.</td></tr>
+      <tr><td><strong>Les performances annoncées</strong></td><td>Une fois, en conservant la documentation du fournisseur et les conditions de validation : population, type d'examen, limites déclarées.</td></tr>
+      <tr><td><strong>Les éléments cliniques de la décision</strong></td><td>À chaque acte concerné, en trois lignes dans le dossier. C'est le seul élément qui se documente au fil de l'eau, et il ne prend pas plus de temps qu'une phrase de compte rendu.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="bloc">
+    <div class="bloc-tete"><h4>Registre des outils, à copier dans un tableur</h4><button type="button" class="copier">Copier</button></div>
+    <pre>Outil | Éditeur | Destination d'usage déclarée | Statut réglementaire et référence de certification | Version en service | Date de mise en service | Performances annoncées et population de validation | Formation des utilisateurs (date, participants) | Dernière vérification
+
+Exemple :
+[Nom de l'outil] | [Éditeur] | Aide à la détection sur [type d'examen] chez [population] | Dispositif médical classe [x], organisme notifié [nom], certificat [numéro] | v[x.y] | 12/03/2026 | Sensibilité et spécificité déclarées sur [population], limites déclarées : [texte] | 04/03/2026, [liste des fonctions] | 01/07/2026</pre>
+  </div>
+
+  <div class="bloc">
+    <div class="bloc-tete"><h4>Mentions à porter dans le dossier patient</h4><button type="button" class="copier">Copier</button></div>
+    <pre>INFORMATION DU PATIENT
+"Patient informé de l'utilisation d'un dispositif d'aide [au diagnostic / à la décision] dans la démarche le concernant, et de l'interprétation qui en résulte. Information donnée oralement le [date]."
+
+DÉCISION VALIDÉE
+"Sortie du dispositif : [résultat]. Confrontée à l'examen clinique et aux éléments suivants : [éléments]. Conclusion retenue : [conclusion]."
+
+DÉCISION DIVERGENTE
+"Sortie du dispositif : [résultat]. Non retenue, au motif de [raison clinique précise]. Conduite retenue : [décision]. Examens complémentaires demandés : [liste]."
+
+INCIDENT
+"Comportement anormal du dispositif le [date] : [description factuelle]. Version en service : [version]. Signalé à [éditeur / référent / matériovigilance] le [date]."</pre>
+  </div>
+
+  <p class="note"><b>Le réflexe le plus rentable</b> La mention de décision divergente. C'est celle qui vous protège le mieux, parce qu'elle démontre que vous avez lu la sortie, que vous l'avez évaluée et que vous avez décidé. Un désaccord tracé est une preuve de supervision. Un désaccord silencieux ressemble à un signal non vu.</p>
+</section>
+
+<!-- PRODUIT -->
+<section id="produit">
+  <h2>Le logiciel est devenu un produit</h2>
+  <p class="chapeau">C'est l'évolution la plus concrète pour répondre à la question du titre, et elle est passée inaperçue.</p>
+
+  <p>La refonte européenne de la responsabilité du fait des produits défectueux, adoptée le 23 octobre 2024, remplace un texte de 1985 conçu pour des objets physiques. Elle vise désormais expressément les <strong>logiciels</strong>, y compris ceux qui évoluent après leur mise sur le marché, ce qui est exactement le cas des systèmes d'IA mis à jour en continu.</p>
+
+  <table class="tableau">
+    <thead><tr><th>Avant</th><th>Depuis la refonte</th></tr></thead>
+    <tbody>
+      <tr><td>Un logiciel n'était pas clairement un produit, ce qui compliquait toute action contre son éditeur</td><td>Le logiciel entre dans le champ, et l'éditeur peut être recherché comme producteur</td></tr>
+      <tr><td>Le défaut devait être prouvé par la victime, dans un domaine technique opaque</td><td>Des aménagements de la charge de la preuve sont prévus lorsque la complexité technique rend la démonstration excessivement difficile</td></tr>
+      <tr><td>Une mise à jour ultérieure échappait largement au raisonnement</td><td>Les modifications apportées après la mise sur le marché sont prises en compte</td></tr>
+    </tbody>
+  </table>
+
+  <p><strong>Ce que cela change pour vous :</strong> le recours contre un éditeur devient plus praticable, à une condition. Il faut pouvoir dire quelle version était en service au moment des faits, et ce que le fournisseur annonçait comme performances. Autrement dit, le registre décrit plus haut. C'est un document administratif ennuyeux, et c'est votre meilleur allié si le sujet devient un jour sérieux.</p>
+</section>
+
+<!-- CONTROLES -->
+<section id="controles">
+  <h2>Le contrôle en six points</h2>
+  <p class="chapeau">À passer une fois par outil d'aide au diagnostic ou à la décision que vous utilisez.</p>
+
+  <div class="progression">
+    <div class="jauge"><span id="jauge-barre"></span></div>
+    <div class="compteur" id="jauge-compteur">0 / 6</div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>J'informe mes patients de l'usage de l'IA, et je le trace</h4>
+    <p>Obligation qualifiée d'absolue par l'Académie. Une phrase, une ligne au dossier.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Je connais la destination d'usage déclarée de l'outil</h4>
+    <p>Et je n'en sors pas. Le détournement d'usage est la situation la plus défavorable.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Je sais quelle version est en service</h4>
+    <p>Et cette information est écrite quelque part, avec sa date de mise en service.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Ma supervision reste effective</h4>
+    <p>Je n'ai pas cessé de regarder parce que l'outil regarde. Un résultat négatif ne dispense pas de l'examen.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Mes décisions divergentes sont motivées et tracées</h4>
+    <p>C'est la preuve de supervision la plus solide dont vous puissiez disposer.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Je signale les comportements anormaux</h4>
+    <p>À l'éditeur et, le cas échéant, à la matériovigilance. C'est ce qui distingue l'utilisateur diligent.</p></div>
+  </div>
+
+  <div class="banniere">
+    <p>La responsabilité se répartit. Elle ne se dilue pas. Et au bout de la chaîne, quelqu'un signe.
+    <small>Selon l'Académie nationale de médecine, l'usage de l'IA ne modifie pas les règles fondamentales de la responsabilité médicale. Ce qui change, c'est ce qu'il faut être capable de démontrer.</small></p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <h2>Questions fréquentes</h2>
+
+  <details>
+    <summary>Suis-je couvert par mon assurance en responsabilité civile professionnelle ?</summary>
+    <p>En principe oui pour votre activité de soin, y compris avec les outils que vous employez. Les zones grises apparaissent en cas d'usage hors de la destination prévue ou de traitement de données non conforme. Posez la question par écrit à votre assureur, et conservez la réponse : elle vaut mieux qu'une conviction.</p>
+  </details>
+
+  <details>
+    <summary>Dois-je informer le patient même pour une aide à la documentation ?</summary>
+    <p>L'obligation décrite par l'Académie vise l'usage de l'IA dans la démarche médicale le concernant. Un assistant qui vous aide à rédiger un courrier ne relève pas du même registre qu'un système d'aide au diagnostic. Dans le doute, le dire coûte moins cher que de devoir expliquer pourquoi on ne l'a pas dit.</p>
+  </details>
+
+  <details>
+    <summary>Que faire si l'outil se trompe et que je m'en aperçois après coup ?</summary>
+    <p>Vous corrigez la prise en charge, vous en informez le patient, et vous signalez le dysfonctionnement à l'éditeur ainsi qu'à la matériovigilance si le cadre s'applique. Un incident tracé et signalé se traite. Un incident tu devient un problème.</p>
+  </details>
+
+  <details>
+    <summary>La responsabilité du fabricant m'exonère-t-elle ?</summary>
+    <p>Non, elle s'ajoute. Vous restez tenu de votre propre diligence : information, supervision, décision. Le recours contre le producteur concerne le défaut du produit, pas la qualité de votre supervision.</p>
+  </details>
+
+  <details>
+    <summary>Un outil non certifié peut-il être utilisé ?</summary>
+    <p>Pour un usage d'aide au diagnostic ou à la décision, la certification est le cadre. Pour un usage documentaire ou rédactionnel, la question ne se pose pas dans les mêmes termes. Le point de bascule est simple : dès que la sortie influence une décision clinique, la question du statut réglementaire devient centrale.</p>
+  </details>
+
+  <details>
+    <summary>Faut-il en parler à mon conseil départemental ?</summary>
+    <p>Ce n'est pas obligatoire, et c'est souvent utile avant un déploiement structurant. Les conseils départementaux sont sollicités sur ces sujets et disposent d'éléments de réponse. Un échange en amont vaut mieux qu'une explication après.</p>
+  </details>
+</section>
+
+<!-- SOURCES -->
+<section id="sources">
+  <h2>Sources</h2>
+  <table class="tableau">
+    <thead><tr><th>Élément</th><th>Source</th></tr></thead>
+    <tbody>
+      <tr><td>Rapport 25-12 « Intelligence artificielle et responsabilité médicale. Quels enjeux ? », rapporteurs Dominique Lecomte et Christian-François Roques-Latrille, adopté le 7 octobre 2025 par 81 voix pour, 2 contre et 5 abstentions</td><td>Académie nationale de médecine, commission 5</td></tr>
+      <tr><td>L'utilisation de l'IA ne modifie pas les règles fondamentales de la responsabilité médicale, pénales, civiles, administratives ou disciplinaires</td><td>Rapport 25-12, Académie nationale de médecine</td></tr>
+      <tr><td>Obligation absolue d'informer le patient de l'utilisation de l'IA, faute potentielle en cas d'omission, information devant être tracée</td><td>Rapport 25-12, Académie nationale de médecine</td></tr>
+      <tr><td>Complexification de l'analyse de la causalité, et nécessité de documenter le choix de l'outil, sa version, ses performances et les éléments cliniques de la décision</td><td>Rapport 25-12, Académie nationale de médecine</td></tr>
+      <tr><td>Refonte de la responsabilité du fait des produits défectueux, incluant expressément les logiciels et les modifications postérieures à la mise sur le marché</td><td>Directive (UE) 2024/2853 du 23 octobre 2024, abrogeant la directive 85/374/CEE</td></tr>
+      <tr><td>Garantie humaine, information du patient et explicabilité à la charge du concepteur</td><td>Code de la santé publique, article L.4001-3</td></tr>
+      <tr><td>Exercice personnel de la médecine</td><td>Code de la santé publique, article R.4127-69</td></tr>
+      <tr><td>Calendrier d'application du règlement européen sur l'IA, pleinement effectif en 2027 pour les dispositifs concernés</td><td>Règlement (UE) 2024/1689</td></tr>
+    </tbody>
+  </table>
+  <p class="chapeau">La transposition de la directive de 2024 en droit français, la jurisprudence et les textes d'application évoluent. Vérifiez l'état du droit avant toute décision engageante.</p>
+</section>
+
+<footer>
+  <p><strong>L'IA Minute du Médecin</strong>, Dr Guillaume Zagury et Samuel De Queiroz, Éditions Medicilline.</p>
+  <p>Ressource compagnon de la double page consacrée à la responsabilité. Le cas décrit est fictif et destiné à illustrer un raisonnement. Cette page ne constitue pas un conseil juridique : en cas de difficulté réelle, adressez-vous sans délai à votre assureur en responsabilité civile professionnelle et à votre conseil départemental de l'Ordre.</p>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var chips = document.querySelectorAll("nav button[data-cible]");
+  Array.prototype.forEach.call(chips, function(btn){
+    btn.addEventListener("click", function(){
+      var cible = document.getElementById(btn.getAttribute("data-cible"));
+      if(cible){ cible.scrollIntoView({ behavior:"smooth", block:"start" }); }
+    });
+  });
+
+  var controles = document.querySelectorAll("[data-controle]");
+  var barre = document.getElementById("jauge-barre");
+  var compteur = document.getElementById("jauge-compteur");
+  var total = controles.length;
+
+  function maj(){
+    var faits = 0;
+    Array.prototype.forEach.call(controles, function(c){
+      var box = c.querySelector("input[type=checkbox]");
+      if(box && box.checked){ faits++; c.classList.add("fait"); }
+      else { c.classList.remove("fait"); }
+    });
+    barre.style.width = (faits/total*100) + "%";
+    barre.style.background = (faits === total) ? "#27AE60" : "#DC322F";
+    compteur.textContent = faits + " / " + total;
+  }
+
+  Array.prototype.forEach.call(controles, function(c){
+    var box = c.querySelector("input[type=checkbox]");
+    if(box){ box.addEventListener("change", maj); }
+  });
+  maj();
+
+  var boutons = document.querySelectorAll(".copier");
+  Array.prototype.forEach.call(boutons, function(btn){
+    btn.addEventListener("click", function(){
+      var bloc = btn.closest(".bloc");
+      var pre = bloc ? bloc.querySelector("pre") : null;
+      if(!pre){ return; }
+      var texte = pre.textContent;
+      var fini = function(){
+        btn.textContent = "Copié";
+        btn.classList.add("ok");
+        setTimeout(function(){ btn.textContent = "Copier"; btn.classList.remove("ok"); }, 1800);
+      };
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(texte).then(fini, function(){ secours(texte, fini); });
+      } else { secours(texte, fini); }
+    });
+  });
+
+  function secours(texte, fini){
+    var z = document.createElement("textarea");
+    z.value = texte;
+    z.setAttribute("readonly","");
+    z.style.position = "absolute";
+    z.style.left = "-9999px";
+    document.body.appendChild(z);
+    z.select();
+    try { document.execCommand("copy"); fini(); } catch(e){}
+    document.body.removeChild(z);
+  }
+})();
+</script>
+</body>
+</html>

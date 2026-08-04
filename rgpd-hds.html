@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RGPD et HDS : la check-list du cabinet · L'IA Minute du Médecin</title>
+<meta name="description" content="Ressource compagnon du livre L'IA Minute du Médecin : le test d'anonymisation, ce que vous risquez vraiment, le protocole des 72 heures et le registre de vos outils.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Fira+Sans+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --rouge:#DC322F;--noir:#1A1A1A;--blanc:#FFFFFF;--jaune:#FFD700;
+  --bleu:#3498DB;--orange:#F39C12;--vert:#27AE60;--violet:#8E44AD;--teal:#1ABC9C;
+  --gris:#BDC3C7;--gris-clair:#F4F5F6;--gris-ligne:#E1E4E6;--gris-texte:#5A6268;
+}
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{margin:0;background:var(--blanc);color:var(--noir);font-family:"Fira Sans Condensed","Roboto Condensed",Arial,sans-serif;font-size:17px;line-height:1.5;}
+.page{max-width:720px;margin:0 auto;padding:0 18px 80px;}
+h1,h2,h3,h4{font-family:"Oswald","Arial Narrow",Arial,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.2px;}
+p{margin:0 0 14px;}
+
+header{padding:26px 0 8px;}
+.eyebrow{display:inline-block;font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:var(--blanc);background:var(--noir);padding:5px 11px;}
+h1{font-size:33px;line-height:1.06;margin:14px 0 0;}
+h1 mark{background:var(--jaune);color:var(--noir);padding:0 5px;}
+.sous-titre{font-family:"Fira Sans Condensed",Arial,sans-serif;font-style:italic;font-weight:600;color:var(--rouge);font-size:19px;margin:10px 0 0;text-transform:none;}
+.trait{height:4px;background:var(--rouge);margin:16px 0 22px;}
+.meta{font-size:14px;color:var(--gris-texte);margin:0 0 22px;}
+
+.flash{border:3px solid var(--rouge);border-radius:14px;padding:16px 18px;margin:0 0 26px;}
+.flash h2{font-size:19px;margin:0 0 10px;color:var(--rouge);}
+.flash ul{margin:0;padding-left:20px;}
+.flash li{margin-bottom:9px;}
+
+nav{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 34px;}
+nav button{font-family:"Oswald",Arial,sans-serif;font-weight:500;font-size:13px;letter-spacing:.6px;text-transform:uppercase;background:var(--gris-clair);color:var(--noir);border:2px solid var(--gris-ligne);border-radius:999px;padding:7px 13px;cursor:pointer;}
+nav button:hover{background:var(--noir);color:var(--blanc);border-color:var(--noir);}
+nav button:focus-visible{outline:3px solid var(--rouge);outline-offset:2px;}
+
+section{border-top:2px solid var(--gris-ligne);padding-top:26px;margin-top:34px;scroll-margin-top:14px;}
+section > h2{font-size:25px;margin:0 0 4px;line-height:1.1;}
+.chapeau{color:var(--gris-texte);font-size:16px;margin:0 0 20px;}
+h3{font-size:19px;margin:26px 0 8px;}
+
+/* COMPARATEUR */
+.comparateur{border:3px solid var(--noir);border-radius:16px;padding:16px 18px;margin:0 0 18px;}
+.ligne-comp{display:flex;gap:12px;border-bottom:1px solid var(--gris-ligne);padding:12px 0;align-items:flex-start;}
+.ligne-comp:last-of-type{border-bottom:none;}
+.etiquette{flex:0 0 92px;font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:12px;letter-spacing:.6px;text-transform:uppercase;color:var(--blanc);padding:5px 8px;border-radius:6px;text-align:center;}
+.e-non{background:var(--rouge);}
+.e-oui{background:var(--vert);}
+.comp-corps{flex:1;min-width:0;}
+.comp-corps p{margin:0 0 4px;font-size:16px;}
+.comp-corps p:last-child{margin-bottom:0;}
+.comp-corps .exemple{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:14.5px;background:var(--gris-clair);padding:8px 10px;border-radius:6px;margin-bottom:6px;}
+.comp-corps .motif{font-size:15px;color:var(--gris-texte);}
+
+.reflexe{display:flex;gap:14px;border:2px solid var(--gris-ligne);border-radius:14px;padding:14px;margin-bottom:12px;}
+.num{flex:0 0 40px;height:40px;border-radius:50%;background:var(--rouge);color:var(--blanc);font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:18px;display:flex;align-items:center;justify-content:center;}
+.reflexe h4{font-size:16px;margin:3px 0 6px;}
+.reflexe p{font-size:15.5px;margin:0 0 6px;}
+.reflexe p:last-child{margin-bottom:0;}
+.geste{font-size:15px;background:#F3FBF6;border-left:4px solid var(--vert);padding:8px 10px;}
+.geste b{font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:12.5px;letter-spacing:.6px;color:var(--vert);}
+
+.heure{display:flex;gap:14px;border:2px solid var(--gris-ligne);border-radius:14px;padding:14px;margin-bottom:12px;}
+.chrono{flex:0 0 74px;height:40px;border-radius:8px;background:var(--noir);color:var(--blanc);font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center;letter-spacing:.5px;}
+.heure h4{font-size:16px;margin:3px 0 6px;}
+.heure p{font-size:15.5px;margin:0;}
+
+.bloc{border:2px solid var(--gris-ligne);border-radius:14px;overflow:hidden;margin:0 0 16px;}
+.bloc-tete{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--gris-clair);padding:10px 12px;border-bottom:2px solid var(--gris-ligne);}
+.bloc-tete h4{margin:0;font-size:15px;}
+.copier{font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:12px;letter-spacing:.8px;text-transform:uppercase;background:var(--rouge);color:var(--blanc);border:none;border-radius:6px;padding:7px 12px;cursor:pointer;white-space:nowrap;}
+.copier.ok{background:var(--vert);}
+.copier:focus-visible{outline:3px solid var(--noir);outline-offset:2px;}
+pre{margin:0;padding:14px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px;line-height:1.5;white-space:pre-wrap;word-wrap:break-word;}
+.note{font-size:15.5px;background:var(--gris-clair);border-left:4px solid var(--bleu);padding:9px 11px;margin:0 0 16px;}
+.note b{font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:12.5px;letter-spacing:.6px;color:var(--bleu);}
+
+.tableau{width:100%;border-collapse:collapse;font-size:15px;margin:0 0 18px;}
+.tableau th,.tableau td{border:1px solid var(--gris-ligne);padding:8px 10px;text-align:left;vertical-align:top;}
+.tableau th{background:var(--noir);color:var(--blanc);font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:13px;letter-spacing:.5px;}
+.tableau tr:nth-child(even) td{background:var(--gris-clair);}
+
+.controle{display:flex;gap:12px;border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;margin-bottom:10px;}
+.controle.fait{border-color:var(--vert);background:#F3FBF6;}
+.controle input{width:22px;height:22px;accent-color:var(--vert);cursor:pointer;flex:0 0 22px;margin-top:2px;}
+.controle h4{margin:0 0 4px;font-size:16px;}
+.controle p{margin:0;font-size:15.5px;}
+.progression{display:flex;align-items:center;gap:12px;margin:0 0 18px;border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;}
+.jauge{flex:1;height:12px;background:var(--gris-ligne);border-radius:999px;overflow:hidden;}
+.jauge span{display:block;height:100%;width:0;background:var(--rouge);transition:width .25s ease;}
+.compteur{font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:16px;white-space:nowrap;}
+
+.banniere{background:var(--rouge);color:var(--blanc);border-radius:14px;padding:18px 20px;margin:26px 0;}
+.banniere p{margin:0;font-family:"Oswald",Arial,sans-serif;font-size:19px;line-height:1.25;text-transform:uppercase;}
+.banniere small{display:block;font-family:"Fira Sans Condensed",Arial,sans-serif;text-transform:none;font-size:15px;margin-top:8px;opacity:.95;}
+
+details{border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;margin-bottom:10px;}
+details[open]{border-color:var(--noir);}
+summary{cursor:pointer;font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:16px;text-transform:uppercase;letter-spacing:.3px;}
+summary::-webkit-details-marker{display:none;}
+summary::before{content:"+ ";color:var(--rouge);font-weight:700;}
+details[open] summary::before{content:"\2212 ";}
+details p{margin:10px 0 0;font-size:16px;}
+
+footer{border-top:4px solid var(--noir);margin-top:44px;padding-top:18px;font-size:14px;color:var(--gris-texte);}
+footer strong{color:var(--noir);}
+
+@media (max-width:520px){
+  body{font-size:16px;}h1{font-size:27px;}section > h2{font-size:21px;}
+  .tableau{font-size:14px;}pre{font-size:12.5px;}
+  .ligne-comp{flex-direction:column;}
+  .etiquette{flex:0 0 auto;align-self:flex-start;}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none !important;scroll-behavior:auto !important;}}
+</style>
+</head>
+<body>
+<div class="page">
+
+<header>
+  <span class="eyebrow">Ressource compagnon · L'IA Minute du Médecin</span>
+  <h1>RGPD et HDS : <mark>ce que vous risquez vraiment</mark></h1>
+  <p class="sous-titre">Le test d'anonymisation avec ses exemples, le vrai barème des sanctions, le protocole des 72 heures, et le registre de vos outils.</p>
+  <div class="trait"></div>
+  <p class="meta">Mise à jour : 25 juillet 2026. Page pédagogique, qui ne constitue pas une consultation juridique.</p>
+</header>
+
+<div class="flash">
+  <h2>Trois précisions qui remettent les choses en place</h2>
+  <ul>
+    <li><strong>Les trois ans de prison ne sont pas pour vous.</strong> L'article L.1115-1 du Code de la santé publique punit de trois ans et 45 000 euros la <em>prestation d'hébergement</em> de données de santé sans certificat. Il vise l'hébergeur qui exerce sans titre, pas le professionnel qui lui confie des données. Ce que vous risquez, vous, figure dans le tableau plus bas, et c'est déjà largement suffisant.</li>
+    <li><strong>Retirer le nom ne suffit pas à anonymiser.</strong> Un âge exact, une date, une commune, une singularité : chacun de ces éléments est un identifiant partiel, et trois d'entre eux réunis désignent souvent une personne. Un texte dont vous avez seulement enlevé le patronyme reste une donnée personnelle, soumise au règlement. Le comparateur ci-dessous en donne des exemples concrets.</li>
+    <li><strong>Le manquement le plus sanctionné n'est pas celui qu'on croit.</strong> Dans l'affaire française la plus citée concernant des médecins libéraux, la CNIL a retenu deux griefs : le défaut de sécurité, et le fait de <em>ne pas avoir notifié la violation</em>. Le second se répare en soixante-douze heures, à condition de savoir quoi faire. C'est l'objet d'une section entière de cette page.</li>
+  </ul>
+</div>
+
+<nav aria-label="Sommaire">
+  <button type="button" data-cible="anonymiser">Anonymiser vraiment</button>
+  <button type="button" data-cible="risques">Ce que vous risquez</button>
+  <button type="button" data-cible="reflexes">Les 5 réflexes</button>
+  <button type="button" data-cible="fuite">Le protocole 72 heures</button>
+  <button type="button" data-cible="registre">Le registre</button>
+  <button type="button" data-cible="controles">Le contrôle annuel</button>
+  <button type="button" data-cible="faq">Questions</button>
+  <button type="button" data-cible="sources">Sources</button>
+</nav>
+
+<!-- ANONYMISER -->
+<section id="anonymiser">
+  <h2>Anonymiser vraiment : le comparateur</h2>
+  <p class="chapeau">Huit formulations réelles, avec ce qui cloche et la version qui passe. La réponse du modèle est identique dans les deux colonnes : vous ne perdez rien.</p>
+
+  <div class="comparateur">
+
+    <div class="ligne-comp">
+      <span class="etiquette e-non">À éviter</span>
+      <div class="comp-corps">
+        <p class="exemple">Homme, 67 ans, HTA, DT2, vu ce matin</p>
+        <p class="motif">L'âge exact et la date de consultation sont deux identifiants partiels. Croisés avec la pathologie, ils désignent souvent une seule personne de votre patientèle.</p>
+      </div>
+    </div>
+    <div class="ligne-comp">
+      <span class="etiquette e-oui">À écrire</span>
+      <div class="comp-corps">
+        <p class="exemple">Un homme de la soixantaine, hypertendu, diabétique de type 2</p>
+        <p class="motif">Même information clinique utile, aucun identifiant.</p>
+      </div>
+    </div>
+
+    <div class="ligne-comp">
+      <span class="etiquette e-non">À éviter</span>
+      <div class="comp-corps">
+        <p class="exemple">Mme B., 34 ans, enseignante à [commune]</p>
+        <p class="motif">Initiale, âge exact, profession et commune. Quatre éléments, dont un suffisamment rare localement.</p>
+      </div>
+    </div>
+    <div class="ligne-comp">
+      <span class="etiquette e-oui">À écrire</span>
+      <div class="comp-corps">
+        <p class="exemple">Une patiente d'une trentaine d'années, en activité</p>
+        <p class="motif">La profession n'apporte rien, sauf si elle est cliniquement décisive. Dans ce cas, écrivez la catégorie d'exposition, pas le métier.</p>
+      </div>
+    </div>
+
+    <div class="ligne-comp">
+      <span class="etiquette e-non">À éviter</span>
+      <div class="comp-corps">
+        <p class="exemple">Patient opéré le 12 mars à [établissement]</p>
+        <p class="motif">Une date d'intervention et un établissement identifient une personne dans un registre opératoire.</p>
+      </div>
+    </div>
+    <div class="ligne-comp">
+      <span class="etiquette e-oui">À écrire</span>
+      <div class="comp-corps">
+        <p class="exemple">Patient opéré il y a environ quatre mois, en établissement</p>
+        <p class="motif">Les délais relatifs conservent la chronologie clinique sans donner de repère.</p>
+      </div>
+    </div>
+
+    <div class="ligne-comp">
+      <span class="etiquette e-non">À éviter</span>
+      <div class="comp-corps">
+        <p class="exemple">Enfant de 8 ans, maladie rare [nom], scolarisé à [ville]</p>
+        <p class="motif">Le cas le plus dangereux. Une pathologie rare associée à un âge et à un lieu ne laisse aucun doute.</p>
+      </div>
+    </div>
+    <div class="ligne-comp">
+      <span class="etiquette e-oui">À écrire</span>
+      <div class="comp-corps">
+        <p class="exemple">Enfant d'âge scolaire, atteint d'une maladie rare du groupe [catégorie]</p>
+        <p class="motif">Sur les pathologies rares, renoncez au détail ou renoncez à l'outil. Il n'y a pas de troisième voie.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <p class="note"><b>Le test qui tranche</b> Montrez votre formulation à un confrère de votre structure. S'il devine de qui il s'agit, recommencez. S'il répond « ça pourrait être plusieurs de mes patients », vous y êtes. Ce test vaut mieux que n'importe quelle règle écrite, parce qu'il tient compte de votre patientèle réelle.</p>
+</section>
+
+<!-- RISQUES -->
+<section id="risques">
+  <h2>Ce que vous risquez vraiment</h2>
+  <p class="chapeau">Le barème exact, par nature de manquement et par autorité. À lire une fois, pour cesser de craindre la mauvaise chose.</p>
+
+  <table class="tableau">
+    <thead><tr><th>Le manquement</th><th>Qui sanctionne, et quoi</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Révéler une information couverte par le secret</strong></td>
+        <td><strong>Juge pénal</strong> : un an d'emprisonnement et 15 000 euros d'amende. C'est la sanction qui vous concerne le plus directement, et elle ne suppose aucun préjudice démontré.</td>
+      </tr>
+      <tr>
+        <td><strong>Défaut de sécurité des données, ou absence de notification d'une violation</strong></td>
+        <td><strong>CNIL</strong> : mesures correctrices et amendes administratives. Le plafond théorique est très élevé, mais les sanctions prononcées contre des praticiens libéraux se sont situées à quelques milliers d'euros, assorties d'une publication.</td>
+      </tr>
+      <tr>
+        <td><strong>Préjudice subi par un patient</strong></td>
+        <td><strong>Juge civil</strong> : indemnisation. Le préjudice moral lié à une divulgation de données de santé est indemnisable même sans conséquence matérielle.</td>
+      </tr>
+      <tr>
+        <td><strong>Manquement déontologique</strong></td>
+        <td><strong>Chambre disciplinaire de l'Ordre</strong> : de l'avertissement à l'interdiction d'exercer. C'est la sanction la plus lourde en pratique, et celle dont on parle le moins.</td>
+      </tr>
+      <tr>
+        <td><strong>Héberger des données de santé sans certificat</strong></td>
+        <td><strong>Juge pénal</strong> : trois ans et 45 000 euros. Cette infraction vise <strong>celui qui fournit la prestation d'hébergement</strong>. Un médecin qui confie ses données à un prestataire non certifié engage sa responsabilité, mais pas sur ce fondement.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p class="note"><b>Ce que dit l'affaire de référence</b> Deux radiologues libéraux, sanctionnés par la CNIL en décembre 2020. Origine : une box internet mal configurée et un logiciel d'imagerie mal paramétré. Des milliers d'images accessibles en ligne, avec les noms, prénoms et dates de naissance. Deux griefs retenus : le défaut de sécurité, et le fait de ne pas avoir notifié la violation. Aucun des deux ne suppose une intention, ni même une négligence spectaculaire.</p>
+</section>
+
+<!-- REFLEXES -->
+<section id="reflexes">
+  <h2>Les cinq réflexes, en détail</h2>
+  <p class="chapeau">L'infographie du livre les résume. Voici pour chacun le geste précis, celui qui prend dix secondes et qui change la situation.</p>
+
+  <div class="reflexe">
+    <div class="num">1</div>
+    <div>
+      <h4>Aucune donnée patient dans un outil non conforme</h4>
+      <p>La règle ne dépend pas de l'outil mais du contenu. Un assistant généraliste peut servir à énormément de choses, à condition que rien de ce que vous tapez ne désigne quelqu'un.</p>
+      <p class="geste"><b>Le geste</b> Avant d'envoyer, relisez votre message en cherchant uniquement les chiffres et les noms propres. Deux secondes, et vous attrapez l'essentiel.</p>
+    </div>
+  </div>
+
+  <div class="reflexe">
+    <div class="num">2</div>
+    <div>
+      <h4>Anonymiser, pas pseudonymiser</h4>
+      <p>Remplacer un nom par une initiale ne fait pas sortir du champ du règlement. Il faut retirer ce qui permet de reconnaître, y compris par recoupement.</p>
+      <p class="geste"><b>Le geste</b> Remplacez systématiquement l'âge exact par une décennie et la date par un délai relatif. À elles deux, ces substitutions règlent la majorité des situations.</p>
+    </div>
+  </div>
+
+  <div class="reflexe">
+    <div class="num">3</div>
+    <div>
+      <h4>Vérifier la certification, pas la localisation</h4>
+      <p>« Nos serveurs sont en Europe » ne répond pas à la question. Le référentiel en vigueur impose déjà la localisation européenne : la certification est l'exigence, l'Europe en est une composante.</p>
+      <p class="geste"><b>Le geste</b> Demandez le certificat par écrit, avec sa version et sa date d'expiration. Un fournisseur conforme l'envoie en vingt-quatre heures.</p>
+    </div>
+  </div>
+
+  <div class="reflexe">
+    <div class="num">4</div>
+    <div>
+      <h4>Informer le patient, et le tracer</h4>
+      <p>L'Académie nationale de médecine qualifie cette obligation d'absolue et précise que l'omission constitue une faute potentielle. L'information doit être tracée.</p>
+      <p class="geste"><b>Le geste</b> Une phrase à l'oral, une ligne au dossier la première fois. Elle vaut ensuite pour la suite du suivi.</p>
+    </div>
+  </div>
+
+  <div class="reflexe">
+    <div class="num">5</div>
+    <div>
+      <h4>Rester le décideur, et pouvoir le montrer</h4>
+      <p>La supervision humaine n'est effective que si elle laisse une trace. Un clic de validation ne démontre rien.</p>
+      <p class="geste"><b>Le geste</b> Quand une sortie a pesé sur une conduite, trois lignes au dossier : ce qu'elle proposait, ce que vous avez retenu, pourquoi.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FUITE -->
+<section id="fuite">
+  <h2>Le protocole des 72 heures</h2>
+  <p class="chapeau">Ce que personne ne prépare, et qui décide de la gravité des suites. Une violation notifiée dans les délais et corrigée n'a presque jamais les mêmes conséquences qu'une violation découverte par un tiers.</p>
+
+  <div class="heure">
+    <div class="chrono">H+0</div>
+    <div>
+      <h4>Arrêter et constater</h4>
+      <p>Coupez l'accès, supprimez ce qui peut l'être, et notez immédiatement par écrit : que s'est-il passé, quand, quelles données, combien de personnes concernées, et comment vous l'avez découvert. Cette note écrite au moment des faits vaut plus que tout ce que vous reconstituerez ensuite.</p>
+    </div>
+  </div>
+
+  <div class="heure">
+    <div class="chrono">H+2</div>
+    <div>
+      <h4>Évaluer le risque</h4>
+      <p>Les données étaient-elles accessibles à des tiers, et lesquelles ? Y a-t-il un risque pour les personnes concernées, et de quelle nature : divulgation d'un état de santé, usurpation, préjudice moral ? Cette évaluation détermine la suite.</p>
+    </div>
+  </div>
+
+  <div class="heure">
+    <div class="chrono">H+24</div>
+    <div>
+      <h4>Notifier à l'autorité</h4>
+      <p>La notification à la CNIL doit intervenir dans les meilleurs délais et au plus tard soixante-douze heures après la prise de connaissance, sauf si la violation est peu susceptible d'engendrer un risque. En cas de doute, on notifie : une notification de trop ne coûte rien, une notification manquante est un manquement autonome.</p>
+    </div>
+  </div>
+
+  <div class="heure">
+    <div class="chrono">H+48</div>
+    <div>
+      <h4>Informer les personnes, si le risque est élevé</h4>
+      <p>Lorsque la violation est susceptible d'engendrer un risque élevé, les personnes concernées doivent être informées dans les meilleurs délais, en termes clairs et simples. Pour un cabinet, cela signifie un courrier, pas une mention sur un site.</p>
+    </div>
+  </div>
+
+  <div class="heure">
+    <div class="chrono">APRÈS</div>
+    <div>
+      <h4>Corriger et consigner</h4>
+      <p>Toute violation doit être documentée dans un registre interne, y compris celles qui ne sont pas notifiées, avec les faits, les effets et les mesures prises. Ce registre est ce que l'autorité demandera en premier en cas de contrôle.</p>
+    </div>
+  </div>
+
+  <div class="bloc">
+    <div class="bloc-tete"><h4>Fiche d'incident, à remplir dans l'heure</h4><button type="button" class="copier">Copier</button></div>
+    <pre>FICHE D'INCIDENT · VIOLATION DE DONNÉES
+
+Date et heure de découverte :
+Découvert par :
+Comment :
+
+NATURE DE L'INCIDENT
+Type : perte / accès non autorisé / divulgation / altération / indisponibilité
+Description factuelle en cinq lignes :
+
+DONNÉES CONCERNÉES
+Catégories : identité / coordonnées / données de santé / autres
+Volume estimé :
+Nombre de personnes concernées :
+Période pendant laquelle les données ont été exposées :
+
+ÉVALUATION DU RISQUE
+Risque pour les personnes : faible / modéré / élevé
+Justification :
+
+MESURES IMMÉDIATES PRISES
+Heure :
+Nature :
+
+DÉCISIONS
+Notification à l'autorité : oui / non · Date et heure :
+Information des personnes concernées : oui / non · Date et modalité :
+Motif si absence de notification :
+
+SUITES
+Cause identifiée :
+Mesures correctives durables :
+Date de clôture :
+
+Rédigé par :</pre>
+  </div>
+</section>
+
+<!-- REGISTRE -->
+<section id="registre">
+  <h2>Le registre de vos outils</h2>
+  <p class="chapeau">Un tableau de dix lignes, tenu une fois par an. C'est ce qui transforme une conviction en preuve.</p>
+
+  <div class="bloc">
+    <div class="bloc-tete"><h4>Registre des outils, à copier dans un tableur</h4><button type="button" class="copier">Copier</button></div>
+    <pre>Outil | Éditeur | Usage au cabinet | Données traitées (aucune donnée de santé / données de santé) | Hébergeur | Certificat HDS : numéro, version, expiration | Contrat de sous-traitance signé (oui/non, date) | Engagement de non-entraînement (référence contractuelle) | Utilisateurs formés (noms de fonction, date) | Dernière vérification
+
+Exemple :
+[Nom] | [Éditeur] | Rédaction de courriers administratifs | Aucune donnée de santé | Sans objet | Sans objet | Non applicable | Conditions générales du [date], archivées | Médecin, secrétariat, 12/03/2026 | 01/07/2026</pre>
+  </div>
+
+  <p class="note"><b>Pourquoi la colonne « données traitées » est la première à remplir</b> Parce qu'elle détermine toutes les autres. Un outil qui ne voit jamais de donnée de santé n'appelle ni certificat ni hébergeur, et cela représente la majorité des usages décrits dans ce livre. Le distinguer explicitement évite d'appliquer des exigences là où elles ne s'imposent pas, et de les oublier là où elles s'imposent.</p>
+</section>
+
+<!-- CONTROLES -->
+<section id="controles">
+  <h2>Le contrôle annuel</h2>
+  <p class="chapeau">Une heure, à date fixe. Le premier janvier ou le jour de votre anniversaire d'installation, peu importe, pourvu que ce soit une date.</p>
+
+  <div class="progression">
+    <div class="jauge"><span id="jauge-barre"></span></div>
+    <div class="compteur" id="jauge-compteur">0 / 6</div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Mon registre des outils est à jour</h4>
+    <p>Y compris les outils ajoutés en cours d'année, et ceux que j'ai cessé d'utiliser.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Les certificats de mes prestataires sont valides</h4>
+    <p>Version et date d'expiration vérifiées, pas seulement l'existence du certificat.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Mon équipe a été formée, et c'est tracé</h4>
+    <p>Une attestation datée. C'est une obligation depuis février 2025 pour les organisations qui déploient ces outils.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Mes règles internes sont écrites et connues</h4>
+    <p>Une page, datée, que quelqu'un pourrait lire à ma place.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Je sais quoi faire en cas de violation</h4>
+    <p>La fiche d'incident est imprimée et rangée à un endroit connu. Pas à chercher le jour où il faudra la remplir.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Ma sécurité de base a été vérifiée</h4>
+    <p>Configuration du réseau, chiffrement des postes, sauvegardes. C'est précisément là que se situait la faute des deux radiologues sanctionnés.</p></div>
+  </div>
+
+  <div class="banniere">
+    <p>Un courrier parti par erreur se rattrape. Une donnée partie se duplique.
+    <small>C'est l'irréversibilité qui fonde la règle. Aucune sanction, aussi lourde soit-elle, ne rend à un patient la confidentialité qu'il a perdue.</small></p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <h2>Questions fréquentes</h2>
+
+  <details>
+    <summary>Dois-je désigner un délégué à la protection des données ?</summary>
+    <p>Pour un cabinet libéral traitant des données de santé dans le cadre normal du soin, la désignation n'est pas systématiquement obligatoire, mais elle est fortement recommandée dès que la structure grandit. En cas de doute, la mutualisation entre plusieurs cabinets ou au sein d'une maison de santé est la solution la plus simple.</p>
+  </details>
+
+  <details>
+    <summary>Un assistant qui ne voit aucune donnée de santé impose-t-il un hébergeur certifié ?</summary>
+    <p>Non. La certification concerne l'hébergement de données de santé. Si vous rédigez des courriers administratifs, préparez de la veille ou créez des supports d'information, la question ne se pose pas. Elle se pose dès qu'un élément identifiant entre dans l'outil.</p>
+  </details>
+
+  <details>
+    <summary>Que faire si je découvre qu'un outil déjà en place n'est pas conforme ?</summary>
+    <p>Restreignez immédiatement l'usage aux tâches sans donnée de santé, demandez les pièces par écrit à l'éditeur, et documentez la date à laquelle vous avez découvert le problème et ce que vous avez fait. Une réaction tracée change tout si la question revient plus tard.</p>
+  </details>
+
+  <details>
+    <summary>Faut-il notifier même une petite fuite ?</summary>
+    <p>La notification s'impose sauf si la violation est peu susceptible d'engendrer un risque pour les personnes. Avec des données de santé, ce cas est rare. En pratique, dans le doute, on notifie et on documente le raisonnement.</p>
+  </details>
+
+  <details>
+    <summary>Mon secrétariat est-il concerné par ces règles ?</summary>
+    <p>Entièrement, et c'est souvent par là que les incidents arrivent. Le secret couvre l'ensemble des personnes qui participent à la prise en charge. Une page de règles écrite et une heure de formation protègent d'abord vos collaborateurs.</p>
+  </details>
+
+  <details>
+    <summary>Les sanctions de la CNIL sont-elles publiques ?</summary>
+    <p>Elles peuvent l'être, et la publication est souvent perçue comme plus lourde que le montant. Dans les affaires concernant des praticiens libéraux, les décisions ont été publiées de manière anonymisée, mais commentées largement dans la presse professionnelle.</p>
+  </details>
+</section>
+
+<!-- SOURCES -->
+<section id="sources">
+  <h2>Sources</h2>
+  <table class="tableau">
+    <thead><tr><th>Élément</th><th>Source</th></tr></thead>
+    <tbody>
+      <tr><td>Obligation de certification pour l'hébergement de données de santé pour le compte d'un tiers, et exigence de localisation dans l'Espace économique européen</td><td>Code de la santé publique, article L.1111-8, et référentiel de certification en vigueur</td></tr>
+      <tr><td>Sanction pénale de la prestation d'hébergement sans certificat : trois ans d'emprisonnement et 45 000 euros, visant le prestataire d'hébergement</td><td>Code de la santé publique, article L.1115-1</td></tr>
+      <tr><td>Violation du secret professionnel : un an d'emprisonnement et 15 000 euros</td><td>Code pénal, article 226-13, et Code de la santé publique, article L.1110-4</td></tr>
+      <tr><td>Sécurité des traitements et notification des violations de données à l'autorité dans un délai maximal de soixante-douze heures, information des personnes en cas de risque élevé, documentation interne des violations</td><td>RGPD, articles 32, 33 et 34</td></tr>
+      <tr><td>Sanction de deux médecins radiologues libéraux en décembre 2020 pour défaut de sécurité et absence de notification, à la suite d'un contrôle en ligne, amendes de 3 000 et 6 000 euros, l'une réduite à 2 500 euros par le Conseil d'État en juillet 2022</td><td>CNIL, délibérations de la formation restreinte du 7 décembre 2020</td></tr>
+      <tr><td>Obligation absolue d'informer le patient de l'utilisation de l'IA, et traçabilité de cette information</td><td>Académie nationale de médecine, rapport adopté le 7 octobre 2025</td></tr>
+      <tr><td>Obligation de maîtrise des outils d'IA pour les organisations qui les déploient</td><td>Règlement (UE) 2024/1689</td></tr>
+    </tbody>
+  </table>
+  <p class="chapeau">Les montants de sanction cités correspondent aux textes en vigueur et aux décisions publiées. Les plafonds administratifs prévus par le règlement européen sont beaucoup plus élevés, mais les sanctions prononcées contre des praticiens libéraux se sont situées à un tout autre niveau.</p>
+</section>
+
+<footer>
+  <p><strong>L'IA Minute du Médecin</strong>, Dr Guillaume Zagury et Samuel De Queiroz, Éditions Medicilline.</p>
+  <p>Ressource compagnon de la double page consacrée à la conformité. Cette page ne constitue pas un conseil juridique. En cas d'incident réel, contactez sans délai votre délégué à la protection des données s'il en existe un, votre assureur, et le cas échéant votre conseil départemental de l'Ordre.</p>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var chips = document.querySelectorAll("nav button[data-cible]");
+  Array.prototype.forEach.call(chips, function(btn){
+    btn.addEventListener("click", function(){
+      var cible = document.getElementById(btn.getAttribute("data-cible"));
+      if(cible){ cible.scrollIntoView({ behavior:"smooth", block:"start" }); }
+    });
+  });
+
+  var controles = document.querySelectorAll("[data-controle]");
+  var barre = document.getElementById("jauge-barre");
+  var compteur = document.getElementById("jauge-compteur");
+  var total = controles.length;
+
+  function maj(){
+    var faits = 0;
+    Array.prototype.forEach.call(controles, function(c){
+      var box = c.querySelector("input[type=checkbox]");
+      if(box && box.checked){ faits++; c.classList.add("fait"); }
+      else { c.classList.remove("fait"); }
+    });
+    barre.style.width = (faits/total*100) + "%";
+    barre.style.background = (faits === total) ? "#27AE60" : "#DC322F";
+    compteur.textContent = faits + " / " + total;
+  }
+
+  Array.prototype.forEach.call(controles, function(c){
+    var box = c.querySelector("input[type=checkbox]");
+    if(box){ box.addEventListener("change", maj); }
+  });
+  maj();
+
+  var boutons = document.querySelectorAll(".copier");
+  Array.prototype.forEach.call(boutons, function(btn){
+    btn.addEventListener("click", function(){
+      var bloc = btn.closest(".bloc");
+      var pre = bloc ? bloc.querySelector("pre") : null;
+      if(!pre){ return; }
+      var texte = pre.textContent;
+      var fini = function(){
+        btn.textContent = "Copié";
+        btn.classList.add("ok");
+        setTimeout(function(){ btn.textContent = "Copier"; btn.classList.remove("ok"); }, 1800);
+      };
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(texte).then(fini, function(){ secours(texte, fini); });
+      } else { secours(texte, fini); }
+    });
+  });
+
+  function secours(texte, fini){
+    var z = document.createElement("textarea");
+    z.value = texte;
+    z.setAttribute("readonly","");
+    z.style.position = "absolute";
+    z.style.left = "-9999px";
+    document.body.appendChild(z);
+    z.select();
+    try { document.execCommand("copy"); fini(); } catch(e){}
+    document.body.removeChild(z);
+  }
+})();
+</script>
+</body>
+</html>

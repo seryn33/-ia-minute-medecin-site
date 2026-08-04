@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Le diaporama médical · L'IA Minute du Médecin</title>
+<meta name="description" content="Ressource compagnon du livre L'IA Minute du Médecin : la trame d'une présentation médicale, les prompts par type d'intervention, et les contrôles à passer avant de projeter.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Fira+Sans+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --rouge:#DC322F;--noir:#1A1A1A;--blanc:#FFFFFF;--jaune:#FFD700;
+  --bleu:#3498DB;--orange:#F39C12;--vert:#27AE60;--violet:#8E44AD;--teal:#1ABC9C;
+  --gris:#BDC3C7;--gris-clair:#F4F5F6;--gris-ligne:#E1E4E6;--gris-texte:#5A6268;
+}
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{margin:0;background:var(--blanc);color:var(--noir);font-family:"Fira Sans Condensed","Roboto Condensed",Arial,sans-serif;font-size:17px;line-height:1.5;}
+.page{max-width:720px;margin:0 auto;padding:0 18px 80px;}
+h1,h2,h3,h4{font-family:"Oswald","Arial Narrow",Arial,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.2px;}
+p{margin:0 0 14px;}
+
+header{padding:26px 0 8px;}
+.eyebrow{display:inline-block;font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:var(--blanc);background:var(--noir);padding:5px 11px;}
+h1{font-size:33px;line-height:1.06;margin:14px 0 0;}
+h1 mark{background:var(--jaune);color:var(--noir);padding:0 5px;}
+.sous-titre{font-family:"Fira Sans Condensed",Arial,sans-serif;font-style:italic;font-weight:600;color:var(--rouge);font-size:19px;margin:10px 0 0;text-transform:none;}
+.trait{height:4px;background:var(--rouge);margin:16px 0 22px;}
+.meta{font-size:14px;color:var(--gris-texte);margin:0 0 22px;}
+
+.flash{border:3px solid var(--rouge);border-radius:14px;padding:16px 18px;margin:0 0 26px;}
+.flash h2{font-size:19px;margin:0 0 10px;color:var(--rouge);}
+.flash ul{margin:0;padding-left:20px;}
+.flash li{margin-bottom:9px;}
+
+nav{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 34px;}
+nav button{font-family:"Oswald",Arial,sans-serif;font-weight:500;font-size:13px;letter-spacing:.6px;text-transform:uppercase;background:var(--gris-clair);color:var(--noir);border:2px solid var(--gris-ligne);border-radius:999px;padding:7px 13px;cursor:pointer;}
+nav button:hover{background:var(--noir);color:var(--blanc);border-color:var(--noir);}
+nav button:focus-visible{outline:3px solid var(--rouge);outline-offset:2px;}
+
+section{border-top:2px solid var(--gris-ligne);padding-top:26px;margin-top:34px;scroll-margin-top:14px;}
+section > h2{font-size:25px;margin:0 0 4px;line-height:1.1;}
+.chapeau{color:var(--gris-texte);font-size:16px;margin:0 0 20px;}
+h3{font-size:19px;margin:26px 0 8px;}
+
+.regle{display:flex;gap:14px;border:2px solid var(--gris-ligne);border-radius:14px;padding:14px;margin-bottom:12px;}
+.pastille{flex:0 0 42px;height:42px;border-radius:50%;color:var(--blanc);font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:19px;display:flex;align-items:center;justify-content:center;}
+.p-bleu{background:var(--bleu);}.p-orange{background:var(--orange);}.p-vert{background:var(--vert);}.p-violet{background:var(--violet);}
+.regle-corps{flex:1;min-width:0;}
+.regle h4{font-size:17px;margin:4px 0 6px;}
+.regle p{font-size:16px;margin:0 0 8px;}
+.regle p:last-child{margin-bottom:0;}
+.piege{font-size:15px;background:var(--gris-clair);border-left:4px solid var(--orange);padding:8px 10px;margin:0;}
+.piege b{font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:13px;letter-spacing:.6px;color:var(--orange);}
+
+.onglets{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px;}
+.onglets button{font-family:"Oswald",Arial,sans-serif;font-weight:500;font-size:13px;letter-spacing:.6px;text-transform:uppercase;background:var(--blanc);color:var(--noir);border:2px solid var(--noir);border-radius:8px;padding:7px 12px;cursor:pointer;}
+.onglets button[aria-selected="true"]{background:var(--noir);color:var(--blanc);}
+.onglets button:focus-visible{outline:3px solid var(--rouge);outline-offset:2px;}
+.panneau[hidden]{display:none;}
+
+.bloc{border:2px solid var(--gris-ligne);border-radius:14px;overflow:hidden;margin:0 0 16px;}
+.bloc-tete{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--gris-clair);padding:10px 12px;border-bottom:2px solid var(--gris-ligne);}
+.bloc-tete h4{margin:0;font-size:15px;}
+.copier{font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:12px;letter-spacing:.8px;text-transform:uppercase;background:var(--rouge);color:var(--blanc);border:none;border-radius:6px;padding:7px 12px;cursor:pointer;white-space:nowrap;}
+.copier.ok{background:var(--vert);}
+.copier:focus-visible{outline:3px solid var(--noir);outline-offset:2px;}
+pre{margin:0;padding:14px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px;line-height:1.5;white-space:pre-wrap;word-wrap:break-word;}
+.badge{display:inline-block;background:var(--gris);color:var(--noir);border-radius:5px;font-family:"Oswald",Arial,sans-serif;font-size:11.5px;letter-spacing:.7px;text-transform:uppercase;padding:3px 8px;margin:0 6px 6px 0;}
+
+.tableau{width:100%;border-collapse:collapse;font-size:15px;margin:0 0 18px;}
+.tableau th,.tableau td{border:1px solid var(--gris-ligne);padding:8px 10px;text-align:left;vertical-align:top;}
+.tableau th{background:var(--noir);color:var(--blanc);font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:13px;letter-spacing:.5px;}
+.tableau tr:nth-child(even) td{background:var(--gris-clair);}
+
+.controle{display:flex;gap:12px;border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;margin-bottom:10px;}
+.controle.fait{border-color:var(--vert);background:#F3FBF6;}
+.controle input{width:22px;height:22px;accent-color:var(--vert);cursor:pointer;flex:0 0 22px;margin-top:2px;}
+.controle h4{margin:0 0 4px;font-size:16px;}
+.controle p{margin:0;font-size:15.5px;}
+.progression{display:flex;align-items:center;gap:12px;margin:0 0 18px;border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;}
+.jauge{flex:1;height:12px;background:var(--gris-ligne);border-radius:999px;overflow:hidden;}
+.jauge span{display:block;height:100%;width:0;background:var(--rouge);transition:width .25s ease;}
+.compteur{font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:16px;white-space:nowrap;}
+
+.zone-rouge{border:3px solid var(--rouge);border-radius:14px;padding:16px 18px;margin:18px 0;}
+.zone-rouge h3{margin-top:0;color:var(--rouge);}
+.interdit{list-style:none;padding:0;margin:0;}
+.interdit li{padding-left:26px;position:relative;margin-bottom:8px;}
+.interdit li::before{content:"\00d7";position:absolute;left:0;top:-2px;color:var(--rouge);font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:22px;line-height:1;}
+
+.banniere{background:var(--rouge);color:var(--blanc);border-radius:14px;padding:18px 20px;margin:26px 0;}
+.banniere p{margin:0;font-family:"Oswald",Arial,sans-serif;font-size:19px;line-height:1.25;text-transform:uppercase;}
+.banniere small{display:block;font-family:"Fira Sans Condensed",Arial,sans-serif;text-transform:none;font-size:15px;margin-top:8px;opacity:.95;}
+
+details{border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;margin-bottom:10px;}
+details[open]{border-color:var(--noir);}
+summary{cursor:pointer;font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:16px;text-transform:uppercase;letter-spacing:.3px;}
+summary::-webkit-details-marker{display:none;}
+summary::before{content:"+ ";color:var(--rouge);font-weight:700;}
+details[open] summary::before{content:"\2212 ";}
+details p{margin:10px 0 0;font-size:16px;}
+
+footer{border-top:4px solid var(--noir);margin-top:44px;padding-top:18px;font-size:14px;color:var(--gris-texte);}
+footer strong{color:var(--noir);}
+
+@media (max-width:520px){
+  body{font-size:16px;}h1{font-size:27px;}section > h2{font-size:21px;}
+  .tableau{font-size:14px;}pre{font-size:12.5px;}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none !important;scroll-behavior:auto !important;}}
+</style>
+</head>
+<body>
+<div class="page">
+
+<header>
+  <span class="eyebrow">Ressource compagnon · L'IA Minute du Médecin</span>
+  <h1>Le diaporama médical, <mark>fond et forme</mark></h1>
+  <p class="sous-titre">La trame qui tient debout, les prompts par type d'intervention, et les contrôles à passer avant de projeter devant des confrères.</p>
+  <div class="trait"></div>
+  <p class="meta">Mise à jour : 25 juillet 2026.</p>
+</header>
+
+<div class="flash">
+  <h2>Trois choses à savoir avant de générer votre premier deck</h2>
+  <ul>
+    <li><strong>Les crédits gratuits ne se rechargent pas.</strong> C'est le piège que découvrent tous les nouveaux utilisateurs : la dotation offerte à l'inscription est unique, pas mensuelle. Une dizaine de présentations complètes, et il faut passer à une formule payante. Le premier palier tourne autour de huit à douze dollars par mois selon l'engagement, et retire le filigrane de la plateforme.</li>
+    <li><strong>L'export PowerPoint mérite un test avant de compter dessus.</strong> Il est proposé, mais la conversion depuis un format en cartes vers des diapositives classiques déplace parfois les polices et les mises en page. Faites l'export dès la première présentation, ouvrez-le dans PowerPoint, et vous saurez à quoi vous en tenir avant le jour de la conférence.</li>
+    <li><strong>Trois approches, pas trois concurrents.</strong> Un générateur visuel produit un support qui impressionne. Un assistant conversationnel produit un fichier sobre, dense et directement modifiable. Un espace documentaire produit un diaporama dont chaque diapositive renvoie à vos sources. Le bon outil dépend de qui est dans la salle, et l'infographie du livre le résume.</li>
+  </ul>
+</div>
+
+<nav aria-label="Sommaire">
+  <button type="button" data-cible="avant">Avant de générer</button>
+  <button type="button" data-cible="prompts">Les prompts</button>
+  <button type="button" data-cible="chiffres">Vérifier les chiffres</button>
+  <button type="button" data-cible="projection">Tenir la projection</button>
+  <button type="button" data-cible="interets">Liens d'intérêts</button>
+  <button type="button" data-cible="controles">Avant de projeter</button>
+  <button type="button" data-cible="faq">Questions</button>
+  <button type="button" data-cible="sources">Sources</button>
+</nav>
+
+<!-- AVANT -->
+<section id="avant">
+  <h2>Ce qui se décide avant de taper le prompt</h2>
+  <p class="chapeau">Un générateur transforme un texte en diapositives. Il ne transforme pas un texte en démonstration. Quatre décisions, cinq minutes, et le résultat n'a plus rien à voir.</p>
+
+  <div class="regle">
+    <div class="pastille p-bleu">1</div>
+    <div class="regle-corps">
+      <h4>Les trois messages</h4>
+      <p>Écrivez, avant tout, les trois phrases que l'auditoire doit pouvoir répéter le lendemain. Si vous n'arrivez pas à les écrire, aucun outil ne le fera à votre place, et votre présentation sera une revue de littérature déguisée.</p>
+      <p class="piege"><b>Piège</b> : générer un diaporama à partir d'un article. Le support suivra le plan de l'article, qui n'est pas le plan de votre démonstration.</p>
+    </div>
+  </div>
+
+  <div class="regle">
+    <div class="pastille p-orange">2</div>
+    <div class="regle-corps">
+      <h4>Le nombre de diapositives</h4>
+      <p>Une minute par diapositive, c'est la règle qui ne trompe pas. Dix minutes de staff donnent dix diapositives, pas vingt-cinq. Fixez ce nombre dans le prompt, sinon le générateur produira systématiquement plus.</p>
+      <p class="piege"><b>Piège</b> : accepter les quinze diapositives proposées parce qu'elles sont belles. Vous parlerez trop vite, et l'auditoire ne retiendra rien.</p>
+    </div>
+  </div>
+
+  <div class="regle">
+    <div class="pastille p-vert">3</div>
+    <div class="regle-corps">
+      <h4>Le niveau de l'auditoire</h4>
+      <p>Des confrères de votre spécialité, des généralistes, des internes, des paramédicaux, des patients : ce ne sont pas cinq versions du même exposé, ce sont cinq exposés. Précisez-le, et précisez ce qui est acquis pour eux et qu'il ne faut donc pas rappeler.</p>
+      <p class="piege"><b>Piège</b> : le rappel physiopathologique de trois diapositives devant des gens qui l'enseignent.</p>
+    </div>
+  </div>
+
+  <div class="regle">
+    <div class="pastille p-violet">4</div>
+    <div class="regle-corps">
+      <h4>La densité par diapositive</h4>
+      <p>Une idée par diapositive, six lignes maximum, une seule figure. Ce qui ne tient pas va dans vos notes orales, pas dans un corps de texte que personne ne lira pendant que vous parlez.</p>
+      <p class="piege"><b>Piège</b> : la diapositive qui contient tout, pour servir aussi de document à distribuer. Faites deux versions, celle qu'on projette et celle qu'on envoie.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROMPTS -->
+<section id="prompts">
+  <h2>Les prompts par type d'intervention</h2>
+  <p class="chapeau">Quatre situations réelles. Chaque prompt fixe le nombre de diapositives, le niveau et la structure, ce qui évite les trois quarts des retouches.</p>
+
+  <div class="onglets" role="tablist">
+    <button type="button" role="tab" aria-selected="true" data-panneau="p-staff">Staff, 10 min</button>
+    <button type="button" role="tab" aria-selected="false" data-panneau="p-congres">Congrès, 12 min</button>
+    <button type="button" role="tab" aria-selected="false" data-panneau="p-internes">Cours aux internes</button>
+    <button type="button" role="tab" aria-selected="false" data-panneau="p-public">Grand public</button>
+  </div>
+
+  <div class="panneau" id="p-staff">
+    <div class="bloc">
+      <div class="bloc-tete"><h4>Présentation de staff, dix diapositives</h4><button type="button" class="copier">Copier</button></div>
+      <pre>Crée une présentation de 10 diapositives, pas une de plus, pour un staff de 10 minutes.
+
+Auditoire : médecins [spécialité] du service. Ils connaissent le sujet. Aucun rappel physiopathologique, aucune définition de base.
+
+Sujet : [sujet].
+Les trois messages que l'auditoire doit retenir : [message 1], [message 2], [message 3].
+
+Structure imposée :
+1. Le problème, sous forme d'une situation clinique type rencontrée dans le service.
+2. Ce que nous faisons aujourd'hui.
+3 à 6. Les données, une idée par diapositive, avec pour chacune l'effet absolu et l'intervalle de confiance.
+7. Les limites et ce qui empêche de généraliser.
+8. Ce que cela change dans notre pratique, ou ce que cela ne change pas.
+9. Ce qui reste à trancher, formulé en questions ouvertes.
+10. Références.
+
+Contraintes : six lignes maximum par diapositive, une seule figure par diapositive, aucun texte décoratif, aucune image d'illustration générique. Pour chaque diapositive, ajoute une note orale de quatre phrases.
+
+N'invente aucun chiffre. Si une donnée manque dans ce que je t'ai fourni, écris [à compléter].</pre>
+    </div>
+  </div>
+
+  <div class="panneau" id="p-congres" hidden>
+    <div class="bloc">
+      <div class="bloc-tete"><h4>Communication de congrès, douze diapositives</h4><button type="button" class="copier">Copier</button></div>
+      <pre>Crée une présentation de 12 diapositives pour une communication orale de 12 minutes en congrès, suivie de 3 minutes de questions.
+
+Auditoire : spécialistes du domaine, dont certains sont auteurs sur le sujet.
+
+Sujet : [sujet]. Type de travail : [étude, série de cas, retour d'expérience, revue].
+
+Structure imposée :
+1. Titre, auteurs, affiliations.
+2. Déclaration de liens d'intérêts. Laisse cette diapositive vide, je la remplis moi-même.
+3. Contexte, en trois lignes maximum.
+4. Objectif, formulé en une seule phrase.
+5. Méthode : population, critères, critère de jugement principal.
+6 à 9. Résultats, un résultat par diapositive, chiffres exacts, effectifs, intervalles.
+10. Limites, sans les minimiser.
+11. Conclusion, qui répond exactement à l'objectif de la diapositive 4.
+12. Références.
+
+Contraintes : aucune animation, aucune transition, police lisible à quinze mètres, tout tableau converti en figure simple. Pour chaque diapositive, une note orale calibrée pour tenir en une minute.
+
+Ajoute à la fin, hors présentation, les trois questions les plus probables du public et leur réponse en trois lignes.</pre>
+    </div>
+  </div>
+
+  <div class="panneau" id="p-internes" hidden>
+    <div class="bloc">
+      <div class="bloc-tete"><h4>Cours aux internes, format pédagogique</h4><button type="button" class="copier">Copier</button></div>
+      <pre>Crée une présentation de 20 diapositives pour un cours de 45 minutes destiné à des internes de [spécialité], en [semestre].
+
+Objectif pédagogique : à la fin, ils savent [compétence précise, formulée par un verbe d'action].
+
+Structure imposée :
+1. Un cas clinique d'ouverture, avec une question posée au groupe.
+2. Ce qu'il faut savoir pour y répondre, découpé en trois parties de quatre diapositives.
+3. Retour au cas d'ouverture, résolu.
+4. Trois pièges classiques, avec pour chacun ce qui les fait commettre.
+5. Une diapositive de synthèse tenant sur une page imprimable.
+6. Références et pour aller plus loin.
+
+Contraintes : intercale une question au groupe toutes les cinq diapositives. Les réponses figurent dans les notes orales, jamais sur la diapositive projetée.
+
+Pas de rappel encyclopédique : ce qui est dans le référentiel qu'ils ont déjà, tu ne le répètes pas, tu y renvoies.</pre>
+    </div>
+  </div>
+
+  <div class="panneau" id="p-public" hidden>
+    <div class="bloc">
+      <div class="bloc-tete"><h4>Intervention grand public ou association de patients</h4><button type="button" class="copier">Copier</button></div>
+      <pre>Crée une présentation de 15 diapositives pour une intervention de 30 minutes devant un public non médical [préciser : association de patients, forum santé, personnel d'une entreprise].
+
+Auditoire : adultes sans culture médicale, dont certains sont concernés personnellement par le sujet.
+
+Structure imposée :
+1. Une question que tout le monde se pose.
+2 à 5. Ce qu'il faut comprendre, avec une image mentale concrète par diapositive.
+6 à 10. Ce qui est en votre pouvoir, sous forme de gestes, pas de recommandations abstraites.
+11 à 13. Ce qui relève du médecin et pas de vous.
+14. Quand consulter sans attendre.
+15. Où trouver une information fiable, avec des sources publiques.
+
+Contraintes de langage : phrases de quinze mots maximum, aucun terme technique sans traduction immédiate, aucune statistique de mortalité, aucun ton culpabilisant. Une seule idée par diapositive, écrite en toutes lettres et lisible de loin.
+
+Rappelle en dernière diapositive que cette intervention ne remplace pas une consultation.</pre>
+    </div>
+  </div>
+</section>
+
+<!-- CHIFFRES -->
+<section id="chiffres">
+  <h2>Vérifier ce que la machine a mis dans vos diapositives</h2>
+  <p class="chapeau">C'est le point de vigilance propre à ce format : un diaporama a l'air fini, donc on le relit moins qu'un texte.</p>
+
+  <table class="tableau">
+    <thead><tr><th>Ce qu'il faut ouvrir</th><th>Ce que vous cherchez</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Chaque chiffre</strong></td><td>Vient-il de vos données, ou a-t-il été complété ? Un générateur qui manque une valeur en propose une plausible plutôt que de laisser un vide.</td></tr>
+      <tr><td><strong>Chaque graphique</strong></td><td>Les axes sont-ils légendés, l'échelle commence-t-elle à zéro, les effectifs sont-ils indiqués ? Une figure générée est souvent jolie et muette.</td></tr>
+      <tr><td><strong>Chaque référence</strong></td><td>Existe-t-elle, et dit-elle ce que la diapositive lui fait dire ? Une référence inventée dans un congrès se remarque, et elle ne se rattrape pas.</td></tr>
+      <tr><td><strong>Chaque unité</strong></td><td>Milligrammes ou microgrammes, pourcentage relatif ou absolu, par an ou sur la durée de l'étude. C'est l'erreur la plus fréquente et la plus silencieuse.</td></tr>
+      <tr><td><strong>Chaque image générée</strong></td><td>Un schéma anatomique produit par une IA comporte régulièrement une erreur de structure. Devant des confrères, une seule suffit à emporter le reste de la présentation.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="bloc">
+    <div class="bloc-tete"><h4>La relance de contrôle, après génération</h4><button type="button" class="copier">Copier</button></div>
+    <pre>Reprends la présentation que tu viens de produire et liste, sans la reformuler :
+
+1. Tous les chiffres présents dans les diapositives, avec pour chacun la source exacte dans le document que je t'ai fourni.
+2. Ceux que tu as calculés toi-même, en indiquant le calcul.
+3. Ceux que tu as complétés ou estimés, s'il y en a.
+4. Toutes les références citées, avec pour chacune la mention "présente dans les documents fournis" ou "non vérifiable".
+5. Toute affirmation figurant sur une diapositive qui ne provient pas directement des documents fournis.
+
+Présente-le en tableau. Si une catégorie est vide, écris-le explicitement plutôt que de l'omettre.</pre>
+  </div>
+</section>
+
+<!-- PROJECTION -->
+<section id="projection">
+  <h2>Tenir la projection</h2>
+  <p class="chapeau">Le beau deck qui s'effondre sur le vidéoprojecteur de la salle est un classique. Quatre précautions suffisent.</p>
+
+  <table class="tableau">
+    <thead><tr><th>Le risque</th><th>La parade</th></tr></thead>
+    <tbody>
+      <tr><td>Les polices ne sont pas installées sur l'ordinateur de la salle</td><td>Exportez toujours un PDF en plus du fichier de présentation, et emportez les deux sur une clé. Le PDF ne bouge jamais.</td></tr>
+      <tr><td>Le contraste passe mal en salle éclairée</td><td>Texte foncé sur fond clair, jamais de gris clair sur blanc. Évitez les fonds photographiques sous du texte.</td></tr>
+      <tr><td>Le texte est illisible du fond de la salle</td><td>Rien en dessous de vingt-quatre points. Testez en vous plaçant à trois mètres de votre écran d'ordinateur : ce que vous ne lisez pas là, personne ne le lira.</td></tr>
+      <tr><td>Le format ne correspond pas à l'écran</td><td>Demandez le format à l'organisateur avant de générer. Reformater après coup casse les mises en page bien plus qu'on ne le croit.</td></tr>
+    </tbody>
+  </table>
+
+  <p><strong>Le geste qui sauve :</strong> envoyez-vous le PDF par messagerie avant de partir. Le jour où la clé n'est pas reconnue, vous le récupérez depuis n'importe quel poste.</p>
+</section>
+
+<!-- INTERETS -->
+<section id="interets">
+  <h2>La diapositive que le générateur n'écrira pas</h2>
+  <p class="chapeau">Celle des liens d'intérêts. Elle est attendue dans toute intervention devant un public professionnel, et elle vous appartient.</p>
+
+  <p>Le médecin doit faire connaître ses liens avec les entreprises produisant ou exploitant des produits de santé lorsqu'il s'exprime en public sur ces produits. Concrètement, en congrès comme en soirée de formation, cette diapositive figure en deuxième position, juste après le titre. Un générateur ne peut ni la deviner, ni l'écrire : laissez-la vide dans le prompt et remplissez-la vous-même.</p>
+
+  <div class="bloc">
+    <div class="bloc-tete"><h4>Gabarit de diapositive de liens d'intérêts</h4><button type="button" class="copier">Copier</button></div>
+    <pre>LIENS D'INTÉRÊTS
+
+Au cours des [trois] dernières années, j'ai perçu une rémunération, une prise en charge ou un avantage de la part des entreprises suivantes :
+
+- [Entreprise], au titre de [interventions, conseil, essai clinique, prise en charge de congrès].
+- [Entreprise], au titre de [...].
+
+Cette présentation n'a fait l'objet d'aucun financement.
+[ou] Cette présentation a été réalisée avec le soutien de [entité], qui n'est intervenue ni dans le choix du contenu, ni dans sa rédaction.
+
+[Si aucun lien] Je n'ai aucun lien d'intérêts en rapport avec le sujet de cette présentation.</pre>
+  </div>
+
+  <p><strong>Si vous mentionnez l'usage de l'IA :</strong> une ligne suffit, en dernière diapositive plutôt qu'en première. « Mise en forme réalisée avec un outil d'IA générative. Contenu, données et références vérifiés par l'auteur. » Ce n'est pas une obligation dans un cadre confraternel, c'est une manière de désamorcer la question avant qu'elle ne soit posée.</p>
+</section>
+
+<!-- CONTROLES -->
+<section id="controles">
+  <h2>Avant de projeter</h2>
+  <p class="chapeau">Six contrôles. Le deuxième est celui qui coûte le plus cher quand on l'oublie.</p>
+
+  <div class="progression">
+    <div class="jauge"><span id="jauge-barre"></span></div>
+    <div class="compteur" id="jauge-compteur">0 / 6</div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Chaque chiffre a été retrouvé dans la source</h4>
+    <p>Pas dans la présentation, dans le document d'origine.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Aucune donnée de patient ne figure dans le fichier</h4>
+    <p>Ni dans une diapositive, ni dans une capture d'écran, ni dans une image d'imagerie non expurgée, ni dans les métadonnées du fichier.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Les références existent et disent ce qu'on leur fait dire</h4>
+    <p>Vérification par sondage sur trois d'entre elles au minimum, dont celle qui porte le message principal.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>La diapositive de liens d'intérêts est remplie</h4>
+    <p>Y compris pour dire qu'il n'y en a pas.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Le PDF de secours est prêt et accessible</h4>
+    <p>Sur la clé, et envoyé par messagerie.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Le temps a été chronométré à voix haute</h4>
+    <p>Une fois, en entier. C'est le seul moyen de savoir si vos dix diapositives tiennent en dix minutes.</p></div>
+  </div>
+
+  <div class="zone-rouge">
+    <h3>Ce qui n'entre pas dans un générateur de présentations</h3>
+    <ul class="interdit">
+      <li>Un compte rendu, une imagerie ou un tracé permettant d'identifier un patient</li>
+      <li>Un cas clinique réel avec ses dates, son établissement et sa singularité</li>
+      <li>Des résultats non publiés soumis à embargo par une revue ou un congrès</li>
+      <li>Un document interne de votre structure soumis à confidentialité</li>
+      <li>Un logo d'entreprise du secteur, sauf si le partenariat est déclaré sur la diapositive prévue</li>
+    </ul>
+  </div>
+
+  <div class="banniere">
+    <p>L'outil met en forme. Vous répondez du contenu, des chiffres et des références.
+    <small>Une présentation projetée engage son auteur, en congrès comme en staff. La rapidité de production ne modifie ni la responsabilité, ni les règles de déclaration des liens d'intérêts.</small></p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <h2>Questions fréquentes</h2>
+
+  <details>
+    <summary>Faut-il payer pour un usage régulier ?</summary>
+    <p>Oui, si vous présentez plusieurs fois par an. La dotation gratuite est unique et non renouvelée, et le filigrane de la plateforme est peu adapté à une communication en congrès. Le premier palier payant suffit largement pour un usage individuel.</p>
+  </details>
+
+  <details>
+    <summary>Quel outil pour quel contexte ?</summary>
+    <p>Un générateur visuel pour ce qui doit accrocher un auditoire large. Un assistant conversationnel quand vous voulez un fichier sobre et dense, que vous retoucherez ensuite dans votre logiciel habituel. Un espace documentaire quand chaque diapositive doit renvoyer à une source précise, ce qui est le cas d'une revue de littérature.</p>
+  </details>
+
+  <details>
+    <summary>L'export PowerPoint conserve-t-il la mise en page ?</summary>
+    <p>Pas toujours à l'identique. Faites l'export dès votre première présentation et ouvrez-le dans PowerPoint : vous saurez immédiatement combien de nettoyage prévoir, et vous ne le découvrirez pas la veille d'un congrès.</p>
+  </details>
+
+  <details>
+    <summary>Puis-je réutiliser mes anciens diaporamas ?</summary>
+    <p>Oui, l'import d'un fichier existant est possible et c'est souvent le meilleur point de départ : vous gardez votre contenu et vous laissez l'outil refaire la forme. Vérifiez ensuite que rien n'a été résumé au passage.</p>
+  </details>
+
+  <details>
+    <summary>Comment garder une identité visuelle constante ?</summary>
+    <p>Créez un modèle une fois, avec vos deux couleurs et votre police, et réutilisez-le. Les fonctions de charte graphique sont réservées aux formules payantes, mais un modèle enregistré manuellement produit le même effet.</p>
+  </details>
+
+  <details>
+    <summary>Dois-je indiquer que le diaporama a été généré ?</summary>
+    <p>Ce n'est pas exigé dans un cadre confraternel dès lors que vous assumez le contenu. Une ligne en dernière diapositive est néanmoins une bonne pratique, et elle vous évite d'avoir à répondre à la question en séance.</p>
+  </details>
+</section>
+
+<!-- SOURCES -->
+<section id="sources">
+  <h2>Sources</h2>
+  <table class="tableau">
+    <thead><tr><th>Élément</th><th>Source</th></tr></thead>
+    <tbody>
+      <tr><td>Dotation de crédits gratuits unique et non renouvelée, filigrane sur les partages et exports en formule gratuite, premier palier payant autour de huit à douze dollars par mois selon l'engagement</td><td>Pages tarifaires et analyses comparatives, consultées en juillet 2026</td></tr>
+      <tr><td>Export vers PowerPoint et PDF, conversion imparfaite des mises en page complexes</td><td>Documentation éditeur et retours d'usage documentés, 2026</td></tr>
+      <tr><td>Production de fichiers de présentation directement par un assistant conversationnel, et génération de diaporamas sourcés depuis un espace documentaire</td><td>Documentation des éditeurs concernés, 2026</td></tr>
+      <tr><td>Obligation de faire connaître ses liens avec les entreprises produisant ou exploitant des produits de santé lors d'une expression publique sur ces produits</td><td>Code de la santé publique, article R.4127-13 et dispositions relatives à la transparence des liens d'intérêts</td></tr>
+      <tr><td>Secret médical et protection des données de santé</td><td>Code de la santé publique, article L.1110-4 et RGPD, article 9</td></tr>
+    </tbody>
+  </table>
+  <p class="chapeau">Les formules, quotas et fonctions d'export des plateformes changent souvent. Vérifiez la page tarifaire avant de vous engager, en particulier avant une échéance de congrès.</p>
+</section>
+
+<footer>
+  <p><strong>L'IA Minute du Médecin</strong>, Dr Guillaume Zagury et Samuel De Queiroz, Éditions Medicilline.</p>
+  <p>Ressource compagnon de la double page consacrée aux présentations. Cette page décrit une méthode de production de supports. Le contenu scientifique, les données et les références relèvent de la responsabilité de l'auteur de la présentation.</p>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var chips = document.querySelectorAll("nav button[data-cible]");
+  Array.prototype.forEach.call(chips, function(btn){
+    btn.addEventListener("click", function(){
+      var cible = document.getElementById(btn.getAttribute("data-cible"));
+      if(cible){ cible.scrollIntoView({ behavior:"smooth", block:"start" }); }
+    });
+  });
+
+  var onglets = document.querySelectorAll(".onglets button[data-panneau]");
+  Array.prototype.forEach.call(onglets, function(btn){
+    btn.addEventListener("click", function(){
+      Array.prototype.forEach.call(onglets, function(autre){
+        autre.setAttribute("aria-selected", autre === btn ? "true" : "false");
+        var p = document.getElementById(autre.getAttribute("data-panneau"));
+        if(p){ p.hidden = (autre !== btn); }
+      });
+    });
+  });
+
+  var controles = document.querySelectorAll("[data-controle]");
+  var barre = document.getElementById("jauge-barre");
+  var compteur = document.getElementById("jauge-compteur");
+  var total = controles.length;
+
+  function maj(){
+    var faits = 0;
+    Array.prototype.forEach.call(controles, function(c){
+      var box = c.querySelector("input[type=checkbox]");
+      if(box && box.checked){ faits++; c.classList.add("fait"); }
+      else { c.classList.remove("fait"); }
+    });
+    barre.style.width = (faits/total*100) + "%";
+    barre.style.background = (faits === total) ? "#27AE60" : "#DC322F";
+    compteur.textContent = faits + " / " + total;
+  }
+
+  Array.prototype.forEach.call(controles, function(c){
+    var box = c.querySelector("input[type=checkbox]");
+    if(box){ box.addEventListener("change", maj); }
+  });
+  maj();
+
+  var boutons = document.querySelectorAll(".copier");
+  Array.prototype.forEach.call(boutons, function(btn){
+    btn.addEventListener("click", function(){
+      var bloc = btn.closest(".bloc");
+      var pre = bloc ? bloc.querySelector("pre") : null;
+      if(!pre){ return; }
+      var texte = pre.textContent;
+      var fini = function(){
+        btn.textContent = "Copié";
+        btn.classList.add("ok");
+        setTimeout(function(){ btn.textContent = "Copier"; btn.classList.remove("ok"); }, 1800);
+      };
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(texte).then(fini, function(){ secours(texte, fini); });
+      } else { secours(texte, fini); }
+    });
+  });
+
+  function secours(texte, fini){
+    var z = document.createElement("textarea");
+    z.value = texte;
+    z.setAttribute("readonly","");
+    z.style.position = "absolute";
+    z.style.left = "-9999px";
+    document.body.appendChild(z);
+    z.select();
+    try { document.execCommand("copy"); fini(); } catch(e){}
+    document.body.removeChild(z);
+  }
+})();
+</script>
+</body>
+</html>

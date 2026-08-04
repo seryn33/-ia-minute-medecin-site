@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La bibliothèque ORCF · L'IA Minute du Médecin</title>
+<meta name="description" content="Ressource compagnon du livre L'IA Minute du Médecin : dix prompts ORCF prêts à copier, les trois relances qui changent tout, les sept erreurs fréquentes et la méthode pour constituer votre bibliothèque.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Fira+Sans+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --rouge:#DC322F;--noir:#1A1A1A;--blanc:#FFFFFF;--jaune:#FFD700;
+  --bleu:#3498DB;--orange:#F39C12;--vert:#27AE60;--violet:#8E44AD;--teal:#1ABC9C;
+  --gris:#BDC3C7;--gris-clair:#F4F5F6;--gris-ligne:#E1E4E6;--gris-texte:#5A6268;
+}
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{margin:0;background:var(--blanc);color:var(--noir);font-family:"Fira Sans Condensed","Roboto Condensed",Arial,sans-serif;font-size:17px;line-height:1.5;}
+.page{max-width:720px;margin:0 auto;padding:0 18px 80px;}
+h1,h2,h3,h4{font-family:"Oswald","Arial Narrow",Arial,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.2px;}
+p{margin:0 0 14px;}
+
+header{padding:26px 0 8px;}
+.eyebrow{display:inline-block;font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:var(--blanc);background:var(--noir);padding:5px 11px;}
+h1{font-size:33px;line-height:1.06;margin:14px 0 0;}
+h1 mark{background:var(--jaune);color:var(--noir);padding:0 5px;}
+.sous-titre{font-family:"Fira Sans Condensed",Arial,sans-serif;font-style:italic;font-weight:600;color:var(--rouge);font-size:19px;margin:10px 0 0;text-transform:none;}
+.trait{height:4px;background:var(--rouge);margin:16px 0 22px;}
+.meta{font-size:14px;color:var(--gris-texte);margin:0 0 22px;}
+
+.flash{border:3px solid var(--rouge);border-radius:14px;padding:16px 18px;margin:0 0 26px;}
+.flash h2{font-size:19px;margin:0 0 10px;color:var(--rouge);}
+.flash ul{margin:0;padding-left:20px;}
+.flash li{margin-bottom:9px;}
+
+nav{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 34px;}
+nav button{font-family:"Oswald",Arial,sans-serif;font-weight:500;font-size:13px;letter-spacing:.6px;text-transform:uppercase;background:var(--gris-clair);color:var(--noir);border:2px solid var(--gris-ligne);border-radius:999px;padding:7px 13px;cursor:pointer;}
+nav button:hover{background:var(--noir);color:var(--blanc);border-color:var(--noir);}
+nav button:focus-visible{outline:3px solid var(--rouge);outline-offset:2px;}
+
+section{border-top:2px solid var(--gris-ligne);padding-top:26px;margin-top:34px;scroll-margin-top:14px;}
+section > h2{font-size:25px;margin:0 0 4px;line-height:1.1;}
+.chapeau{color:var(--gris-texte);font-size:16px;margin:0 0 20px;}
+h3{font-size:19px;margin:26px 0 8px;}
+
+.lettre{display:flex;gap:14px;border:2px solid var(--gris-ligne);border-radius:14px;padding:14px;margin-bottom:12px;}
+.pastille{flex:0 0 46px;height:46px;border-radius:50%;color:var(--blanc);font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:24px;display:flex;align-items:center;justify-content:center;}
+.p-o{background:var(--rouge);}.p-r{background:var(--bleu);}.p-c{background:var(--vert);}.p-f{background:var(--violet);}
+.lettre-corps{flex:1;min-width:0;}
+.lettre h4{font-size:17px;margin:6px 0 6px;}
+.lettre p{font-size:16px;margin:0 0 8px;}
+.lettre p:last-child{margin-bottom:0;}
+.piege{font-size:15px;background:var(--gris-clair);border-left:4px solid var(--orange);padding:8px 10px;margin:0;}
+.piege b{font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:13px;letter-spacing:.6px;color:var(--orange);}
+
+.onglets{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px;}
+.onglets button{font-family:"Oswald",Arial,sans-serif;font-weight:500;font-size:12.5px;letter-spacing:.5px;text-transform:uppercase;background:var(--blanc);color:var(--noir);border:2px solid var(--noir);border-radius:8px;padding:7px 11px;cursor:pointer;}
+.onglets button[aria-selected="true"]{background:var(--noir);color:var(--blanc);}
+.onglets button:focus-visible{outline:3px solid var(--rouge);outline-offset:2px;}
+.panneau[hidden]{display:none;}
+
+.bloc{border:2px solid var(--gris-ligne);border-radius:14px;overflow:hidden;margin:0 0 16px;}
+.bloc-tete{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--gris-clair);padding:10px 12px;border-bottom:2px solid var(--gris-ligne);}
+.bloc-tete h4{margin:0;font-size:15px;}
+.copier{font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:12px;letter-spacing:.8px;text-transform:uppercase;background:var(--rouge);color:var(--blanc);border:none;border-radius:6px;padding:7px 12px;cursor:pointer;white-space:nowrap;}
+.copier.ok{background:var(--vert);}
+.copier:focus-visible{outline:3px solid var(--noir);outline-offset:2px;}
+pre{margin:0;padding:14px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px;line-height:1.5;white-space:pre-wrap;word-wrap:break-word;}
+.badge{display:inline-block;background:var(--gris);color:var(--noir);border-radius:5px;font-family:"Oswald",Arial,sans-serif;font-size:11.5px;letter-spacing:.7px;text-transform:uppercase;padding:3px 8px;margin:0 6px 6px 0;}
+.note{font-size:15.5px;background:var(--gris-clair);border-left:4px solid var(--bleu);padding:9px 11px;margin:0 0 16px;}
+.note b{font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:12.5px;letter-spacing:.6px;color:var(--bleu);}
+
+.tableau{width:100%;border-collapse:collapse;font-size:15px;margin:0 0 18px;}
+.tableau th,.tableau td{border:1px solid var(--gris-ligne);padding:8px 10px;text-align:left;vertical-align:top;}
+.tableau th{background:var(--noir);color:var(--blanc);font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:13px;letter-spacing:.5px;}
+.tableau tr:nth-child(even) td{background:var(--gris-clair);}
+
+.erreur{display:flex;gap:14px;border:2px solid var(--gris-ligne);border-radius:14px;padding:14px;margin-bottom:12px;}
+.erreur .num{flex:0 0 38px;height:38px;border-radius:50%;background:var(--rouge);color:var(--blanc);font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:17px;display:flex;align-items:center;justify-content:center;}
+.erreur h4{font-size:16px;margin:3px 0 6px;}
+.erreur p{font-size:15.5px;margin:0 0 6px;}
+.erreur p:last-child{margin-bottom:0;}
+.correctif{font-size:15px;background:#F3FBF6;border-left:4px solid var(--vert);padding:8px 10px;}
+.correctif b{font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:12.5px;letter-spacing:.6px;color:var(--vert);}
+
+.controle{display:flex;gap:12px;border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;margin-bottom:10px;}
+.controle.fait{border-color:var(--vert);background:#F3FBF6;}
+.controle input{width:22px;height:22px;accent-color:var(--vert);cursor:pointer;flex:0 0 22px;margin-top:2px;}
+.controle h4{margin:0 0 4px;font-size:16px;}
+.controle p{margin:0;font-size:15.5px;}
+.progression{display:flex;align-items:center;gap:12px;margin:0 0 18px;border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;}
+.jauge{flex:1;height:12px;background:var(--gris-ligne);border-radius:999px;overflow:hidden;}
+.jauge span{display:block;height:100%;width:0;background:var(--rouge);transition:width .25s ease;}
+.compteur{font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:16px;white-space:nowrap;}
+
+.banniere{background:var(--rouge);color:var(--blanc);border-radius:14px;padding:18px 20px;margin:26px 0;}
+.banniere p{margin:0;font-family:"Oswald",Arial,sans-serif;font-size:19px;line-height:1.25;text-transform:uppercase;}
+.banniere small{display:block;font-family:"Fira Sans Condensed",Arial,sans-serif;text-transform:none;font-size:15px;margin-top:8px;opacity:.95;}
+
+details{border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;margin-bottom:10px;}
+details[open]{border-color:var(--noir);}
+summary{cursor:pointer;font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:16px;text-transform:uppercase;letter-spacing:.3px;}
+summary::-webkit-details-marker{display:none;}
+summary::before{content:"+ ";color:var(--rouge);font-weight:700;}
+details[open] summary::before{content:"\2212 ";}
+details p{margin:10px 0 0;font-size:16px;}
+
+footer{border-top:4px solid var(--noir);margin-top:44px;padding-top:18px;font-size:14px;color:var(--gris-texte);}
+footer strong{color:var(--noir);}
+
+@media (max-width:520px){
+  body{font-size:16px;}h1{font-size:27px;}section > h2{font-size:21px;}
+  .tableau{font-size:14px;}pre{font-size:12.5px;}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none !important;scroll-behavior:auto !important;}}
+</style>
+</head>
+<body>
+<div class="page">
+
+<header>
+  <span class="eyebrow">Ressource compagnon · L'IA Minute du Médecin</span>
+  <h1>La bibliothèque <mark>ORCF</mark></h1>
+  <p class="sous-titre">Dix prompts prêts à copier, les trois relances qui changent tout, les sept erreurs fréquentes, et la méthode pour que vous n'ayez plus jamais à réécrire la même demande.</p>
+  <div class="trait"></div>
+  <p class="meta">Mise à jour : 25 juillet 2026.</p>
+</header>
+
+<div class="flash">
+  <h2>Trois idées reçues à évacuer d'abord</h2>
+  <ul>
+    <li><strong>Il n'existe pas de mots magiques.</strong> Les formules du type « respire un grand coup », « ta carrière en dépend » ou « tu es le meilleur expert mondial » circulent beaucoup et n'apportent rien de mesurable. Ce qui change une réponse, c'est l'information que vous donnez et la contrainte que vous posez, pas l'incantation.</li>
+    <li><strong>Long ne veut pas dire bon.</strong> Un prompt de deux pages qui empile trois demandes produit une réponse moyenne sur les trois. Quatre lignes précises sur une seule demande produisent une réponse utilisable. La contrainte est un outil, pas une limite.</li>
+    <li><strong>Le gain n'est pas dans le prompt, il est dans la bibliothèque.</strong> Écrire une bonne demande prend deux minutes. La réécrire cinquante fois dans l'année en prend cent. Tout l'intérêt de la méthode est de transformer vos dix situations récurrentes en dix textes que vous collez. La dernière section explique comment.</li>
+  </ul>
+</div>
+
+<nav aria-label="Sommaire">
+  <button type="button" data-cible="lettres">Les 4 lettres en pratique</button>
+  <button type="button" data-cible="bibliotheque">Les 10 prompts</button>
+  <button type="button" data-cible="relances">Les 3 relances</button>
+  <button type="button" data-cible="erreurs">Les 7 erreurs</button>
+  <button type="button" data-cible="construire">Votre bibliothèque</button>
+  <button type="button" data-cible="controles">Le contrôle</button>
+  <button type="button" data-cible="faq">Questions</button>
+  <button type="button" data-cible="sources">Sources</button>
+</nav>
+
+<!-- LETTRES -->
+<section id="lettres">
+  <h2>Les quatre lettres, en pratique</h2>
+  <p class="chapeau">Le schéma du livre donne la structure. Voici ce qui, dans chaque bloc, fait réellement la différence entre une réponse moyenne et une réponse utilisable.</p>
+
+  <div class="lettre">
+    <div class="pastille p-o">O</div>
+    <div class="lettre-corps">
+      <h4>Objectif : dites ce que vous en ferez</h4>
+      <p>La question n'est pas seulement « que doit-elle produire », c'est <strong>à quoi cela va servir</strong>. « Explique-moi la fibrillation atriale » et « explique-moi la fibrillation atriale pour que je l'explique à un patient de 78 ans dans dix minutes » ne produisent pas le même texte, et c'est la seconde partie qui fait tout.</p>
+      <p class="piege"><b>Le geste</b> : terminer l'objectif par « pour que je puisse... ». Cette formule oblige à dire l'usage réel, et l'usage réel oriente mieux que n'importe quel adjectif.</p>
+    </div>
+  </div>
+
+  <div class="lettre">
+    <div class="pastille p-r">R</div>
+    <div class="lettre-corps">
+      <h4>Rôle : précisez le lieu d'exercice, pas seulement la spécialité</h4>
+      <p>« Tu es cardiologue » ne dit presque rien. « Tu es cardiologue libéral en cabinet de ville, sans plateau technique sur place » change les propositions, les délais et les orientations. La spécialité indique le savoir, le <strong>contexte d'exercice</strong> indique le réalisme.</p>
+      <p class="piege"><b>Le geste</b> : ajouter systématiquement le milieu d'exercice et l'accès aux moyens. Deux mots, et vous éliminez les réponses hospitalo-centrées.</p>
+    </div>
+  </div>
+
+  <div class="lettre">
+    <div class="pastille p-c">C</div>
+    <div class="lettre-corps">
+      <h4>Contexte : ce qui compte, c'est ce qui exclut</h4>
+      <p>Un bon contexte n'est pas un contexte long, c'est un contexte qui <strong>élimine</strong>. Les contre-indications, les échecs antérieurs, les contraintes du patient et les vôtres. Ce sont ces éléments qui écartent les propositions inapplicables, et donc qui raccourcissent la réponse.</p>
+      <p class="piege"><b>Le geste</b> : écrire une ligne « ce qui est déjà exclu, et pourquoi ». C'est l'ajout qui améliore le plus une réponse, et personne ne le fait.</p>
+    </div>
+  </div>
+
+  <div class="lettre">
+    <div class="pastille p-f">F</div>
+    <div class="lettre-corps">
+      <h4>Format : une structure et une longueur, toujours</h4>
+      <p>Sans contrainte de forme, vous obtiendrez la forme moyenne : des paragraphes tièdes, une conclusion générale, aucune décision. Imposez la <strong>structure</strong> (tableau, colonnes, rubriques) et la <strong>longueur</strong> (nombre de lignes, de mots, de points). La longueur est la contrainte la plus efficace de toutes.</p>
+      <p class="piege"><b>Le geste</b> : dire ce que vous ne voulez pas dans la sortie. « Pas d'introduction, pas de conclusion, pas de rappel de cours » vous fait gagner un tiers du texte.</p>
+    </div>
+  </div>
+
+  <p class="note"><b>Le cinquième élément, implicite</b> L'autorisation de ne pas savoir. Ajoutez à la fin : « si tu n'as pas l'information, écris-le au lieu de l'estimer ». Ce n'est pas une lettre de plus, c'est ce qui rend les quatre autres fiables.</p>
+</section>
+
+<!-- BIBLIOTHEQUE -->
+<section id="bibliotheque">
+  <h2>Les dix prompts</h2>
+  <p class="chapeau">Rangés par usage. Remplacez les crochets, collez, gardez. Aucun ne contient de donnée identifiante, et aucun ne doit en contenir.</p>
+
+  <div class="onglets" role="tablist">
+    <button type="button" role="tab" aria-selected="true" data-panneau="p-clinique">Clinique</button>
+    <button type="button" role="tab" aria-selected="false" data-panneau="p-patient">Patient</button>
+    <button type="button" role="tab" aria-selected="false" data-panneau="p-ecrit">Écrits</button>
+    <button type="button" role="tab" aria-selected="false" data-panneau="p-peda">Pédagogie</button>
+  </div>
+
+  <!-- CLINIQUE -->
+  <div class="panneau" id="p-clinique">
+    <div class="bloc">
+      <div class="bloc-tete"><h4>1. Conduite à tenir dans une situation type</h4><button type="button" class="copier">Copier</button></div>
+      <pre>Tu es [spécialité] exerçant en [cabinet de ville / structure], sans accès immédiat à [plateau technique].
+Dans un contexte de [type de consultation], face à une situation type : [description en 3 lignes, sans aucun élément identifiant].
+Ce qui est déjà exclu : [éléments écartés, et pourquoi].
+Ta tâche est de proposer les conduites à tenir envisageables, pour que je puisse préparer ma décision avant de rouvrir les référentiels.
+Présente sous forme d'un tableau : option, ce qui la soutient, ce qui l'écarte, ce qu'elle suppose de vérifier.
+Pas d'introduction, pas de conclusion. Si tu n'as pas l'information, écris-le au lieu de l'estimer.</pre>
+    </div>
+    <div class="bloc">
+      <div class="bloc-tete"><h4>2. Élargir un diagnostic différentiel</h4><button type="button" class="copier">Copier</button></div>
+      <pre>Tu es [spécialité] en [milieu d'exercice].
+Dans un contexte de [consultation non programmée / suivi], voici un tableau clinique type : [description, sans identité, sans date].
+J'ai déjà pensé à : [liste de mes hypothèses].
+Ta tâche est de me proposer ce que je n'ai pas listé, pour que je vérifie que je ne passe pas à côté.
+Présente sous forme de trois listes : les hypothèses fréquentes que j'ai omises, les hypothèses rares mais graves à ne pas manquer, les éléments qui permettraient de trancher entre elles.
+Ne hiérarchise pas à ma place et ne conclus pas. Si un élément manque pour raisonner, dis lequel.</pre>
+    </div>
+    <div class="bloc">
+      <div class="bloc-tete"><h4>3. Lire un article avec une grille constante</h4><button type="button" class="copier">Copier</button></div>
+      <pre>Tu es lecteur critique pour un [spécialité] de ville.
+Dans un contexte de veille, à partir de l'article joint et de lui seul.
+Ta tâche est de me dire ce que cet article change ou ne change pas pour ma pratique.
+Présente sous forme de rubriques : question posée, type d'étude, population et ce qui limite l'extrapolation, critère principal et s'il est clinique ou intermédiaire, résultat en absolu et en relatif avec l'intervalle, limites énoncées par les auteurs, ce que ça change en une phrase.
+Une page maximum, style télégraphique. Si une rubrique n'est pas renseignée dans l'article, écris "non rapporté".</pre>
+    </div>
+  </div>
+
+  <!-- PATIENT -->
+  <div class="panneau" id="p-patient" hidden>
+    <div class="bloc">
+      <div class="bloc-tete"><h4>4. Expliquer une pathologie à un patient</h4><button type="button" class="copier">Copier</button></div>
+      <pre>Tu es pédagogue en éducation thérapeutique.
+Dans un contexte de consultation de ville, face à [un adulte sans culture médicale / un aidant / un adolescent].
+Ta tâche est d'expliquer [pathologie ou traitement], pour que je puisse le dire à l'oral en cinq minutes et lui laisser une trace écrite.
+Présente sous forme de : trois paragraphes de cinq lignes, puis "Les trois choses à retenir", puis "Quand consulter sans attendre".
+Contraintes : phrases de quinze mots maximum, aucun terme technique sans traduction immédiate, aucun nom de médicament, aucune donnée de pronostic. Registre factuel et rassurant, jamais culpabilisant.</pre>
+    </div>
+    <div class="bloc">
+      <div class="bloc-tete"><h4>5. Préparer une annonce difficile</h4><button type="button" class="copier">Copier</button></div>
+      <pre>Tu es formateur en communication médicale.
+Dans un contexte de consultation programmée, je dois annoncer [nature de l'information, sans aucun élément identifiant] à [profil général de la personne].
+Ta tâche est de me préparer, pour que je choisisse mes mots avant d'entrer dans la pièce.
+Présente sous forme de : une phrase d'ouverture possible, trois formulations à éviter et pourquoi, les deux questions les plus probables et une réponse honnête à chacune, une phrase de clôture qui laisse une porte ouverte.
+Tu ne rédiges pas un script à lire. Tu me donnes des appuis. Pas de pathos, pas de formule toute faite.</pre>
+    </div>
+  </div>
+
+  <!-- ECRITS -->
+  <div class="panneau" id="p-ecrit" hidden>
+    <div class="bloc">
+      <div class="bloc-tete"><h4>6. Courrier d'adressage à partir de notes</h4><button type="button" class="copier">Copier</button></div>
+      <pre>Tu es assistant de rédaction d'un [spécialité] de ville.
+Dans un contexte d'adressage à un [spécialité du destinataire], à partir de mes notes brutes ci-dessous, sans y ajouter quoi que ce soit.
+Notes : [coller les notes, sans identité, sans date de naissance].
+Ta tâche est de rédiger le courrier, pour que le confrère comprenne ma question en dix secondes.
+Présente sous forme de : formule d'appel, une phrase de motif, antécédents utiles en trois lignes, histoire chronologique en cinq lignes, examens déjà réalisés, traitement en DCI, la question posée isolée sur sa ligne, formule de politesse.
+Une page maximum. Si une donnée manque, écris [à compléter] plutôt que de deviner.</pre>
+    </div>
+    <div class="bloc">
+      <div class="bloc-tete"><h4>7. Refuser une demande, par écrit</h4><button type="button" class="copier">Copier</button></div>
+      <pre>Tu es assistant de rédaction d'un médecin.
+Dans un contexte de relation de soin à préserver, je dois refuser : [nature de la demande].
+Ta tâche est de rédiger une réponse, pour que le refus soit clair sans être blessant et sans ouvrir une négociation.
+Présente sous forme de : le refus en première phrase, la raison en une phrase compréhensible, ce que je peux faire à la place s'il existe une alternative, vers qui se tourner le cas échéant.
+Ton : ferme et respectueux. Pas d'excuse, pas de justification longue, pas de ton défensif. Six lignes maximum.
+Donne-moi ensuite, séparément, ce qu'il ne faut surtout pas écrire dans cette situation.</pre>
+    </div>
+    <div class="bloc">
+      <div class="bloc-tete"><h4>8. Synthétiser un document long</h4><button type="button" class="copier">Copier</button></div>
+      <pre>Tu es analyste documentaire.
+Dans un contexte de préparation professionnelle, à partir du document joint et de lui seul.
+Ta tâche est d'en extraire ce qui m'est utile, pour que je décide si je dois le lire en entier.
+Présente sous forme de : cinq points clés avec pour chacun la section d'origine, puis "ce qui change en pratique", puis "ce que ce document ne traite pas".
+Contraintes : tu n'ajoutes aucune connaissance extérieure au document. Tu signales toute affirmation que tu as construite en recoupant plusieurs passages. Une page maximum.</pre>
+    </div>
+  </div>
+
+  <!-- PEDAGOGIE -->
+  <div class="panneau" id="p-peda" hidden>
+    <div class="bloc">
+      <div class="bloc-tete"><h4>9. Construire un cas clinique d'enseignement</h4><button type="button" class="copier">Copier</button></div>
+      <pre>Tu es concepteur pédagogique en formation médicale.
+Dans un contexte de cours à des [internes de spécialité / étudiants / confrères], sur le thème [thème].
+Ta tâche est de construire un cas clinique entièrement fictif, pour que je fasse raisonner le groupe plutôt que de réciter.
+Présente sous forme de : la situation initiale en cinq lignes, trois questions posées au groupe dans l'ordre, les éléments à révéler après chaque question, les deux pièges de raisonnement classiques sur ce thème, la synthèse en cinq lignes.
+Contraintes : le cas est fictif et invraisemblable à identifier. Les réponses ne figurent jamais dans ce qui est projeté au groupe.</pre>
+    </div>
+    <div class="bloc">
+      <div class="bloc-tete"><h4>10. Tester ce que j'ai réellement retenu</h4><button type="button" class="copier">Copier</button></div>
+      <pre>Tu es concepteur d'évaluation.
+Dans un contexte d'auto-évaluation après lecture, à partir du document joint et de lui seul.
+Ta tâche est de rédiger dix questions à choix multiple, pour que je vérifie ma compréhension plutôt que ma mémoire.
+Répartition imposée : trois sur les faits et les chiffres, quatre sur l'application à un cas de ville, deux sur les limites méthodologiques, une dont la bonne réponse est "le document ne permet pas de conclure".
+Présente sous forme de : question, quatre propositions, puis la bonne réponse, une explication de deux lignes et la référence exacte dans le document.
+Pas de distracteur absurde, pas de "toutes les réponses ci-dessus".</pre>
+    </div>
+  </div>
+</section>
+
+<!-- RELANCES -->
+<section id="relances">
+  <h2>Les trois relances qui changent tout</h2>
+  <p class="chapeau">À envoyer après la réponse. Elles coûtent dix secondes et améliorent davantage le résultat qu'une réécriture complète du prompt.</p>
+
+  <div class="bloc">
+    <div class="bloc-tete"><h4>Relance 1 · Avant de répondre, dis-moi ce qui te manque</h4><button type="button" class="copier">Copier</button></div>
+    <pre>Avant de répondre, ne réponds pas encore.
+
+Reformule ma demande en une phrase, pour que je vérifie que tu l'as comprise.
+Puis liste les trois informations qui te manquent et qui changeraient le plus ta réponse.
+Puis attends que je te les donne.</pre>
+  </div>
+
+  <div class="bloc">
+    <div class="bloc-tete"><h4>Relance 2 · Qu'est-ce qui plaide contre</h4><button type="button" class="copier">Copier</button></div>
+    <pre>Reprends ta réponse. Sans la réécrire, dis-moi :
+
+1. Quels arguments existent contre la conclusion que tu proposes.
+2. Dans quelles situations cette réponse serait inadaptée, voire dangereuse.
+3. Ce que tu as simplifié pour rendre la réponse lisible.
+
+Si tu ne trouves rien à ces trois questions, explique-moi pourquoi.</pre>
+  </div>
+
+  <div class="bloc">
+    <div class="bloc-tete"><h4>Relance 3 · Montre-moi d'où ça vient</h4><button type="button" class="copier">Copier</button></div>
+    <pre>Pour chaque affirmation de ta réponse, indique :
+
+- Si elle provient d'un document que je t'ai fourni, avec la citation exacte entre guillemets.
+- Si elle provient de tes connaissances générales, sans source vérifiable.
+- Si elle résulte d'une déduction de ta part.
+
+Marque chaque ligne en conséquence. Ne reformule pas ta réponse, produis seulement ce tableau.</pre>
+  </div>
+
+  <p class="note"><b>Laquelle utiliser</b> La première quand la demande est complexe et que vous n'êtes pas sûr d'avoir tout dit. La deuxième quand la réponse vous plaît trop. La troisième dès qu'une décision est en jeu. Les trois ensemble sur un sujet qui compte : cela prend une minute et vous évite l'erreur qui aurait pris une heure à réparer.</p>
+</section>
+
+<!-- ERREURS -->
+<section id="erreurs">
+  <h2>Les sept erreurs les plus fréquentes</h2>
+  <p class="chapeau">Observées en formation, dans cet ordre de fréquence.</p>
+
+  <div class="erreur">
+    <div class="num">1</div>
+    <div>
+      <h4>Empiler trois demandes dans un seul prompt</h4>
+      <p>« Explique-moi ça, fais-moi un tableau, et rédige un courrier au patient. » Vous obtenez trois réponses médiocres au lieu d'une bonne.</p>
+      <p class="correctif"><b>Correctif</b> : une demande, une réponse. Enchaînez ensuite, le contexte est conservé.</p>
+    </div>
+  </div>
+
+  <div class="erreur">
+    <div class="num">2</div>
+    <div>
+      <h4>Glisser une affirmation fausse dans la question</h4>
+      <p>« Depuis que le seuil est passé à X... » alors qu'il n'a pas bougé. Le modèle construira une réponse cohérente autour de votre erreur, et elle vous confortera.</p>
+      <p class="correctif"><b>Correctif</b> : posez la question ouverte avant la question fermée, et ne citez pas de chiffre que vous voulez faire vérifier.</p>
+    </div>
+  </div>
+
+  <div class="erreur">
+    <div class="num">3</div>
+    <div>
+      <h4>Ne pas imposer de format</h4>
+      <p>Sans contrainte, vous recevez la forme moyenne : longue, tiède, sans décision. Et vous passez plus de temps à la retailler qu'il n'en aurait fallu pour la cadrer.</p>
+      <p class="correctif"><b>Correctif</b> : structure et longueur, dans chaque prompt, sans exception.</p>
+    </div>
+  </div>
+
+  <div class="erreur">
+    <div class="num">4</div>
+    <div>
+      <h4>Corriger au lieu de recommencer</h4>
+      <p>Après trois allers-retours sur une réponse mal partie, le contexte est encombré et la qualité plafonne. On s'acharne parce qu'on a déjà investi du temps.</p>
+      <p class="correctif"><b>Correctif</b> : si deux relances n'ont pas redressé la trajectoire, repartez d'une conversation neuve avec un prompt corrigé.</p>
+    </div>
+  </div>
+
+  <div class="erreur">
+    <div class="num">5</div>
+    <div>
+      <h4>Accepter la première réponse</h4>
+      <p>Elle est presque toujours la plus consensuelle, donc la moins utile. C'est la deuxième, après une relance exigeante, qui vaut quelque chose.</p>
+      <p class="correctif"><b>Correctif</b> : considérez la première sortie comme un brouillon de cadrage, pas comme un résultat.</p>
+    </div>
+  </div>
+
+  <div class="erreur">
+    <div class="num">6</div>
+    <div>
+      <h4>Décrire un patient réel</h4>
+      <p>Par réflexe de précision, on donne l'âge exact, la date, la ville, la profession. Ces quatre éléments réunis suffisent souvent à identifier une personne.</p>
+      <p class="correctif"><b>Correctif</b> : décrivez la situation, jamais la personne. Une tranche d'âge, un contexte, pas de date, pas de lieu.</p>
+    </div>
+  </div>
+
+  <div class="erreur">
+    <div class="num">7</div>
+    <div>
+      <h4>Ne rien garder</h4>
+      <p>L'erreur la plus coûteuse sur l'année. Un bon prompt trouvé un mardi soir est perdu le jeudi matin, et vous le réécrivez.</p>
+      <p class="correctif"><b>Correctif</b> : la section suivante. Dix minutes une fois, et le problème disparaît.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONSTRUIRE -->
+<section id="construire">
+  <h2>Construire votre bibliothèque</h2>
+  <p class="chapeau">C'est le vrai sujet de cette page, et il se règle en une soirée.</p>
+
+  <table class="tableau">
+    <thead><tr><th>Le geste</th><th>Comment le faire</th></tr></thead>
+    <tbody>
+      <tr><td><strong>1. Lister vos dix situations</strong></td><td>Celles qui reviennent chaque semaine, pas celles qui vous intéressent. Prenez votre agenda de la semaine passée : elles y sont toutes.</td></tr>
+      <tr><td><strong>2. Écrire un ORCF par situation</strong></td><td>Dix minutes chacun la première fois. Les prompts de cette page couvrent déjà la moitié des cas courants.</td></tr>
+      <tr><td><strong>3. Les stocker là où vous les retrouverez</strong></td><td>Un document unique, une note épinglée, un dossier de textes enregistrés. Peu importe l'outil, l'important est qu'il soit ouvrable en trois secondes pendant une consultation.</td></tr>
+      <tr><td><strong>4. Les nommer par le déclencheur</strong></td><td>Pas « prompt courrier » mais « quand j'adresse à un spécialiste ». Vous cherchez par la situation, jamais par le nom technique.</td></tr>
+      <tr><td><strong>5. Les corriger au fil de l'eau</strong></td><td>Chaque fois qu'une réponse vous déçoit, corrigez le prompt correspondant plutôt que la réponse. En un mois, votre bibliothèque devient nettement meilleure que celle d'un manuel.</td></tr>
+      <tr><td><strong>6. La revoir une fois par an</strong></td><td>Les modèles changent, vos besoins aussi. Une heure en janvier suffit.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="bloc">
+    <div class="bloc-tete"><h4>Gabarit vierge, à dupliquer pour chaque situation</h4><button type="button" class="copier">Copier</button></div>
+    <pre>SITUATION : [le déclencheur, formulé comme je le reconnaîtrai en consultation]
+DERNIÈRE MISE À JOUR : [date]
+
+Tu es [RÔLE : spécialité + milieu d'exercice + moyens disponibles].
+Dans un contexte de [CONTEXTE : type de situation, ce qui est déjà exclu et pourquoi].
+Ta tâche est de [OBJECTIF : le livrable], pour que je puisse [l'usage réel que j'en ferai].
+Présente sous forme de [FORMAT : structure exacte, longueur maximale, ce que je ne veux pas].
+
+Si tu n'as pas l'information, écris-le au lieu de l'estimer.
+
+CE QUI MARCHE BIEN AVEC CE PROMPT : [à remplir après quelques usages]
+CE QU'IL FAUT ENCORE CORRIGER : [à remplir au fil de l'eau]</pre>
+  </div>
+</section>
+
+<!-- CONTROLES -->
+<section id="controles">
+  <h2>Le contrôle en cinq points</h2>
+  <p class="chapeau">Avant d'envoyer un prompt qui compte, et avant d'utiliser la réponse.</p>
+
+  <div class="progression">
+    <div class="jauge"><span id="jauge-barre"></span></div>
+    <div class="compteur" id="jauge-compteur">0 / 5</div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Une seule demande</h4>
+    <p>Si mon prompt contient un « et aussi », je le coupe en deux.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Aucune donnée identifiante</h4>
+    <p>Ni nom, ni date de naissance, ni ville, ni date de consultation, ni profession singulière.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Aucune affirmation non vérifiée dans ma question</h4>
+    <p>Je ne fais pas dire au modèle ce que je crois savoir.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Un format et une longueur imposés</h4>
+    <p>Et ce que je ne veux pas voir apparaître dans la sortie.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>L'autorisation de ne pas savoir</h4>
+    <p>La phrase qui rend tout le reste fiable, et qui tient en une ligne.</p></div>
+  </div>
+
+  <div class="banniere">
+    <p>Un prompt, c'est une consultation. Une bibliothèque de prompts, c'est un cabinet organisé.
+    <small>Le temps que vous passez à cadrer une demande une fois vous est rendu à chaque fois que la situation revient. C'est la seule compétence de ce livre qui survivra à tous les changements d'outils.</small></p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <h2>Questions fréquentes</h2>
+
+  <details>
+    <summary>Faut-il vouvoyer ou tutoyer le modèle ?</summary>
+    <p>Aucune importance sur la qualité de la réponse. Le tutoiement est simplement plus court à écrire, c'est la seule raison pour laquelle les prompts de cette page l'emploient.</p>
+  </details>
+
+  <details>
+    <summary>Faut-il dire merci ?</summary>
+    <p>Cela ne change rien au résultat. Certains le font par habitude, d'autres non. Ce qui compte est ailleurs : dans l'information donnée et la contrainte posée.</p>
+  </details>
+
+  <details>
+    <summary>Les prompts vendus en ligne valent-ils quelque chose ?</summary>
+    <p>Rarement. Un bon prompt contient votre contexte d'exercice, vos contraintes et votre format habituel : par construction, il ne peut pas être générique. Achetez du temps de formation plutôt que des fichiers de prompts.</p>
+  </details>
+
+  <details>
+    <summary>Le même prompt donne-t-il toujours la même réponse ?</summary>
+    <p>Non, et c'est normal : ces systèmes comportent une part d'aléa. Une bonne structure réduit fortement la variabilité, elle ne l'annule pas. Sur un sujet qui compte, relancez une seconde fois et comparez.</p>
+  </details>
+
+  <details>
+    <summary>Faut-il adapter ses prompts à chaque outil ?</summary>
+    <p>Marginalement. Un ORCF bien écrit fonctionne partout, parce qu'il repose sur la clarté de la demande et non sur une particularité technique. C'est aussi ce qui rend votre bibliothèque durable.</p>
+  </details>
+
+  <details>
+    <summary>Combien de temps avant que ce soit un réflexe ?</summary>
+    <p>Deux à trois semaines d'usage quotidien. Le signe que c'est acquis : vous vous surprenez à structurer une demande à un confrère de la même manière.</p>
+  </details>
+</section>
+
+<!-- SOURCES -->
+<section id="sources">
+  <h2>Sources et méthode</h2>
+  <table class="tableau">
+    <thead><tr><th>Élément</th><th>Origine</th></tr></thead>
+    <tbody>
+      <tr><td>La méthode ORCF et l'analogie de la consultation</td><td>Cadre pédagogique proposé par les auteurs de cet ouvrage. Il n'a pas de valeur normative, il sert à structurer une demande.</td></tr>
+      <tr><td>Effet des consignes de structure et de longueur sur la qualité des réponses</td><td>Guides de rédaction de prompts publiés par les éditeurs de modèles, 2025 et 2026</td></tr>
+      <tr><td>Absence d'effet démontré des formules d'insistance et des mises en scène émotionnelles</td><td>Travaux d'évaluation publiés sur l'ingénierie de prompt, 2024 à 2026</td></tr>
+      <tr><td>Reprise par le modèle d'une prémisse fausse contenue dans la question</td><td>Étude sur cas cliniques comportant un détail fabriqué, 2025</td></tr>
+      <tr><td>Variabilité des réponses à consigne identique</td><td>Documentation des éditeurs sur les paramètres de génération</td></tr>
+      <tr><td>Méthode A.V.E.C.</td><td>Haute Autorité de santé, recommandations sur l'IA générative en santé, 30 octobre 2025</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<footer>
+  <p><strong>L'IA Minute du Médecin</strong>, Dr Guillaume Zagury et Samuel De Queiroz, Éditions Medicilline.</p>
+  <p>Ressource compagnon de la double page consacrée à la méthode ORCF. Les prompts de cette page structurent une demande, ils ne garantissent pas l'exactitude de la réponse. La vérification des contenus produits reste à la charge du médecin.</p>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var chips = document.querySelectorAll("nav button[data-cible]");
+  Array.prototype.forEach.call(chips, function(btn){
+    btn.addEventListener("click", function(){
+      var cible = document.getElementById(btn.getAttribute("data-cible"));
+      if(cible){ cible.scrollIntoView({ behavior:"smooth", block:"start" }); }
+    });
+  });
+
+  var onglets = document.querySelectorAll(".onglets button[data-panneau]");
+  Array.prototype.forEach.call(onglets, function(btn){
+    btn.addEventListener("click", function(){
+      Array.prototype.forEach.call(onglets, function(autre){
+        autre.setAttribute("aria-selected", autre === btn ? "true" : "false");
+        var p = document.getElementById(autre.getAttribute("data-panneau"));
+        if(p){ p.hidden = (autre !== btn); }
+      });
+    });
+  });
+
+  var controles = document.querySelectorAll("[data-controle]");
+  var barre = document.getElementById("jauge-barre");
+  var compteur = document.getElementById("jauge-compteur");
+  var total = controles.length;
+
+  function maj(){
+    var faits = 0;
+    Array.prototype.forEach.call(controles, function(c){
+      var box = c.querySelector("input[type=checkbox]");
+      if(box && box.checked){ faits++; c.classList.add("fait"); }
+      else { c.classList.remove("fait"); }
+    });
+    barre.style.width = (faits/total*100) + "%";
+    barre.style.background = (faits === total) ? "#27AE60" : "#DC322F";
+    compteur.textContent = faits + " / " + total;
+  }
+
+  Array.prototype.forEach.call(controles, function(c){
+    var box = c.querySelector("input[type=checkbox]");
+    if(box){ box.addEventListener("change", maj); }
+  });
+  maj();
+
+  var boutons = document.querySelectorAll(".copier");
+  Array.prototype.forEach.call(boutons, function(btn){
+    btn.addEventListener("click", function(){
+      var bloc = btn.closest(".bloc");
+      var pre = bloc ? bloc.querySelector("pre") : null;
+      if(!pre){ return; }
+      var texte = pre.textContent;
+      var fini = function(){
+        btn.textContent = "Copié";
+        btn.classList.add("ok");
+        setTimeout(function(){ btn.textContent = "Copier"; btn.classList.remove("ok"); }, 1800);
+      };
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(texte).then(fini, function(){ secours(texte, fini); });
+      } else { secours(texte, fini); }
+    });
+  });
+
+  function secours(texte, fini){
+    var z = document.createElement("textarea");
+    z.value = texte;
+    z.setAttribute("readonly","");
+    z.style.position = "absolute";
+    z.style.left = "-9999px";
+    document.body.appendChild(z);
+    z.select();
+    try { document.execCommand("copy"); fini(); } catch(e){}
+    document.body.removeChild(z);
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bibliothèque de prompts de veille · L'IA Minute du Médecin</title>
+<meta name="description" content="Ressource compagnon du livre L'IA Minute du Médecin : le prompt maître de veille, une bibliothèque par spécialité, le filtre de fiabilité et les cinq signaux d'alerte d'un rapport de recherche IA.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Fira+Sans+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --rouge:#DC322F;--noir:#1A1A1A;--blanc:#FFFFFF;--jaune:#FFD700;
+  --bleu:#3498DB;--orange:#F39C12;--vert:#27AE60;--violet:#8E44AD;--teal:#1ABC9C;
+  --gris:#BDC3C7;--gris-clair:#F4F5F6;--gris-ligne:#E1E4E6;--gris-texte:#5A6268;
+}
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{margin:0;background:var(--blanc);color:var(--noir);font-family:"Fira Sans Condensed","Roboto Condensed",Arial,sans-serif;font-size:17px;line-height:1.5;}
+.page{max-width:720px;margin:0 auto;padding:0 18px 80px;}
+h1,h2,h3,h4{font-family:"Oswald","Arial Narrow",Arial,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.2px;}
+p{margin:0 0 14px;}
+
+header{padding:26px 0 8px;}
+.eyebrow{display:inline-block;font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:var(--blanc);background:var(--noir);padding:5px 11px;}
+h1{font-size:33px;line-height:1.06;margin:14px 0 0;}
+h1 mark{background:var(--jaune);color:var(--noir);padding:0 5px;}
+.sous-titre{font-family:"Fira Sans Condensed",Arial,sans-serif;font-style:italic;font-weight:600;color:var(--rouge);font-size:19px;margin:10px 0 0;text-transform:none;}
+.trait{height:4px;background:var(--rouge);margin:16px 0 22px;}
+.meta{font-size:14px;color:var(--gris-texte);margin:0 0 22px;}
+
+.flash{border:3px solid var(--rouge);border-radius:14px;padding:16px 18px;margin:0 0 26px;}
+.flash h2{font-size:19px;margin:0 0 10px;color:var(--rouge);}
+.flash ul{margin:0;padding-left:20px;}
+.flash li{margin-bottom:9px;}
+
+nav{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 34px;}
+nav button{font-family:"Oswald",Arial,sans-serif;font-weight:500;font-size:13px;letter-spacing:.6px;text-transform:uppercase;background:var(--gris-clair);color:var(--noir);border:2px solid var(--gris-ligne);border-radius:999px;padding:7px 13px;cursor:pointer;}
+nav button:hover{background:var(--noir);color:var(--blanc);border-color:var(--noir);}
+nav button:focus-visible{outline:3px solid var(--rouge);outline-offset:2px;}
+
+section{border-top:2px solid var(--gris-ligne);padding-top:26px;margin-top:34px;scroll-margin-top:14px;}
+section > h2{font-size:25px;margin:0 0 4px;line-height:1.1;}
+.chapeau{color:var(--gris-texte);font-size:16px;margin:0 0 20px;}
+h3{font-size:19px;margin:26px 0 8px;}
+
+.onglets{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px;}
+.onglets button{font-family:"Oswald",Arial,sans-serif;font-weight:500;font-size:13px;letter-spacing:.6px;text-transform:uppercase;background:var(--blanc);color:var(--noir);border:2px solid var(--noir);border-radius:8px;padding:7px 12px;cursor:pointer;}
+.onglets button[aria-selected="true"]{background:var(--noir);color:var(--blanc);}
+.onglets button:focus-visible{outline:3px solid var(--rouge);outline-offset:2px;}
+.panneau[hidden]{display:none;}
+
+.bloc{border:2px solid var(--gris-ligne);border-radius:14px;overflow:hidden;margin:0 0 16px;}
+.bloc-tete{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--gris-clair);padding:10px 12px;border-bottom:2px solid var(--gris-ligne);}
+.bloc-tete h4{margin:0;font-size:15px;}
+.copier{font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:12px;letter-spacing:.8px;text-transform:uppercase;background:var(--rouge);color:var(--blanc);border:none;border-radius:6px;padding:7px 12px;cursor:pointer;white-space:nowrap;}
+.copier.ok{background:var(--vert);}
+.copier:focus-visible{outline:3px solid var(--noir);outline-offset:2px;}
+pre{margin:0;padding:14px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px;line-height:1.5;white-space:pre-wrap;word-wrap:break-word;}
+.badge{display:inline-block;background:var(--gris);color:var(--noir);border-radius:5px;font-family:"Oswald",Arial,sans-serif;font-size:11.5px;letter-spacing:.7px;text-transform:uppercase;padding:3px 8px;margin:0 6px 6px 0;}
+
+.tableau{width:100%;border-collapse:collapse;font-size:15px;margin:0 0 18px;}
+.tableau th,.tableau td{border:1px solid var(--gris-ligne);padding:8px 10px;text-align:left;vertical-align:top;}
+.tableau th{background:var(--noir);color:var(--blanc);font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:13px;letter-spacing:.5px;}
+.tableau tr:nth-child(even) td{background:var(--gris-clair);}
+
+.signal{display:flex;gap:14px;border:2px solid var(--gris-ligne);border-radius:14px;padding:14px;margin-bottom:12px;}
+.pastille{flex:0 0 40px;height:40px;border-radius:50%;color:var(--blanc);font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:18px;display:flex;align-items:center;justify-content:center;background:var(--orange);}
+.signal h4{font-size:16px;margin:3px 0 6px;}
+.signal p{font-size:15.5px;margin:0 0 6px;}
+.signal p:last-child{margin-bottom:0;}
+.reflexe{font-size:15px;background:#F3FBF6;border-left:4px solid var(--vert);padding:8px 10px;}
+.reflexe b{font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:12.5px;letter-spacing:.6px;color:var(--vert);}
+
+.controle{display:flex;gap:12px;border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;margin-bottom:10px;}
+.controle.fait{border-color:var(--vert);background:#F3FBF6;}
+.controle input{width:22px;height:22px;accent-color:var(--vert);cursor:pointer;flex:0 0 22px;margin-top:2px;}
+.controle h4{margin:0 0 4px;font-size:16px;}
+.controle p{margin:0;font-size:15.5px;}
+.progression{display:flex;align-items:center;gap:12px;margin:0 0 18px;border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;}
+.jauge{flex:1;height:12px;background:var(--gris-ligne);border-radius:999px;overflow:hidden;}
+.jauge span{display:block;height:100%;width:0;background:var(--rouge);transition:width .25s ease;}
+.compteur{font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:16px;white-space:nowrap;}
+
+.zone-rouge{border:3px solid var(--rouge);border-radius:14px;padding:16px 18px;margin:18px 0;}
+.zone-rouge h3{margin-top:0;color:var(--rouge);}
+.interdit{list-style:none;padding:0;margin:0;}
+.interdit li{padding-left:26px;position:relative;margin-bottom:8px;}
+.interdit li::before{content:"\00d7";position:absolute;left:0;top:-2px;color:var(--rouge);font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:22px;line-height:1;}
+
+.banniere{background:var(--rouge);color:var(--blanc);border-radius:14px;padding:18px 20px;margin:26px 0;}
+.banniere p{margin:0;font-family:"Oswald",Arial,sans-serif;font-size:19px;line-height:1.25;text-transform:uppercase;}
+.banniere small{display:block;font-family:"Fira Sans Condensed",Arial,sans-serif;text-transform:none;font-size:15px;margin-top:8px;opacity:.95;}
+
+details{border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;margin-bottom:10px;}
+details[open]{border-color:var(--noir);}
+summary{cursor:pointer;font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:16px;text-transform:uppercase;letter-spacing:.3px;}
+summary::-webkit-details-marker{display:none;}
+summary::before{content:"+ ";color:var(--rouge);font-weight:700;}
+details[open] summary::before{content:"\2212 ";}
+details p{margin:10px 0 0;font-size:16px;}
+
+footer{border-top:4px solid var(--noir);margin-top:44px;padding-top:18px;font-size:14px;color:var(--gris-texte);}
+footer strong{color:var(--noir);}
+
+@media (max-width:520px){
+  body{font-size:16px;}h1{font-size:27px;}section > h2{font-size:21px;}
+  .tableau{font-size:14px;}pre{font-size:12.5px;}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none !important;scroll-behavior:auto !important;}}
+</style>
+</head>
+<body>
+<div class="page">
+
+<header>
+  <span class="eyebrow">Ressource compagnon · L'IA Minute du Médecin</span>
+  <h1>Vos prompts de veille, <mark>par spécialité</mark></h1>
+  <p class="sous-titre">Le prompt maître, six déclinaisons prêtes à copier, et le filtre qui empêche un rapport bien écrit de vous faire changer de pratique pour de mauvaises raisons.</p>
+  <div class="trait"></div>
+  <p class="meta">Mise à jour : 25 juillet 2026.</p>
+</header>
+
+<div class="flash">
+  <h2>Trois précisions avant de lancer votre première recherche</h2>
+  <ul>
+    <li><strong>La recherche approfondie n'est plus réservée aux offres les plus chères.</strong> Elle existe désormais chez tous les grands assistants, avec des quotas mensuels très différents selon les formules, y compris un usage gratuit limité. Vérifiez votre quota avant de lancer : une requête mal cadrée consomme le même quota qu'une bonne.</li>
+    <li><strong>Le format du rapport est votre principal ennemi.</strong> Plan structuré, citations numérotées, ton neutre : tout dit « ceci est fiable ». Or l'agent traite souvent au même niveau une recommandation de société savante, un préprint et un communiqué de presse industriel. La hiérarchie des sources ne s'impose pas toute seule, elle s'écrit dans le prompt. C'est l'objet de cette page.</li>
+    <li><strong>Un rapport n'est pas une source.</strong> Il ne se cite pas dans un courrier, une présentation ou un dossier. Il vous conduit à la source primaire, que vous ouvrez, et c'est elle que vous citez. Cette règle n'a aucune exception.</li>
+  </ul>
+</div>
+
+<nav aria-label="Sommaire">
+  <button type="button" data-cible="maitre">Le prompt maître</button>
+  <button type="button" data-cible="specialites">Par spécialité</button>
+  <button type="button" data-cible="filtre">Le filtre de fiabilité</button>
+  <button type="button" data-cible="signaux">Les 5 signaux d'alerte</button>
+  <button type="button" data-cible="rythme">Votre routine</button>
+  <button type="button" data-cible="controles">Avant d'agir</button>
+  <button type="button" data-cible="faq">Questions</button>
+  <button type="button" data-cible="sources">Sources</button>
+</nav>
+
+<!-- PROMPT MAITRE -->
+<section id="maitre">
+  <h2>Le prompt maître</h2>
+  <p class="chapeau">Tous les prompts de cette page en dérivent. Il tient en cinq blocs, et le quatrième est celui que personne n'écrit.</p>
+
+  <div class="bloc">
+    <div class="bloc-tete"><h4>Structure universelle, à adapter</h4><button type="button" class="copier">Copier</button></div>
+    <pre>QUI JE SUIS
+Médecin [spécialité] exerçant en France, en [ville ou milieu]. Patientèle : [caractéristiques utiles : âge moyen, comorbidités fréquentes, contraintes d'accès aux plateaux techniques].
+
+CE QUE JE CHERCHE
+Ce qui a changé sur [sujet précis] depuis [date de ma dernière mise à jour].
+Pas un état de l'art complet : uniquement les évolutions et ce qu'elles impliquent en pratique de ville.
+
+HIÉRARCHIE DES SOURCES, DANS CET ORDRE
+1. Recommandations françaises en vigueur et textes des autorités sanitaires françaises.
+2. Recommandations européennes et internationales des sociétés savantes de la spécialité.
+3. Méta-analyses et essais randomisés publiés dans des revues à comité de lecture.
+4. Le reste, uniquement s'il est signalé comme tel.
+Tu indiques pour chaque affirmation à quel niveau elle appartient. Tu exclus les communiqués de presse industriels, les résumés de congrès non publiés et les sites commerciaux.
+
+CE QUE TU DOIS ME SIGNALER EXPLICITEMENT
+- Les points où les sources se contredisent, avec la position de chacune.
+- Les recommandations françaises plus restrictives que les internationales, et l'inverse.
+- Les préprints et les études non encore publiées, marqués comme tels.
+- Les données qui reposent sur un critère de jugement intermédiaire plutôt que clinique.
+- Ce que tu n'as pas trouvé, plutôt que de combler le vide.
+
+FORMAT
+Rapport de deux pages maximum, en français.
+Trois parties : CE QUI CHANGE EN CONSULTATION, CE QUI RESTE DÉBATTU, CE QUI NE CHANGE RIEN POUR MOI.
+Chaque affirmation porte un lien vers la source primaire, pas vers un article qui en parle.
+Termine par un tableau : affirmation, niveau de source, date de la source, lien.</pre>
+  </div>
+
+  <p><strong>Le bloc qui fait la différence :</strong> celui qui demande explicitement les contradictions et les manques. Sans lui, l'agent produit une synthèse harmonieuse, parce que c'est ce qu'on lui demande implicitement. L'harmonie sur un sujet clinique débattu est un symptôme, pas un résultat.</p>
+</section>
+
+<!-- SPECIALITES -->
+<section id="specialites">
+  <h2>La bibliothèque par spécialité</h2>
+  <p class="chapeau">Six prompts complets. Remplacez la date et le sujet, lancez, puis appliquez le filtre de la section suivante.</p>
+
+  <div class="onglets" role="tablist">
+    <button type="button" role="tab" aria-selected="true" data-panneau="p-cardio">Cardio</button>
+    <button type="button" role="tab" aria-selected="false" data-panneau="p-diabete">Diabète</button>
+    <button type="button" role="tab" aria-selected="false" data-panneau="p-bpco">BPCO</button>
+    <button type="button" role="tab" aria-selected="false" data-panneau="p-gyneco">Gynéco</button>
+    <button type="button" role="tab" aria-selected="false" data-panneau="p-pediatrie">Pédiatrie</button>
+    <button type="button" role="tab" aria-selected="false" data-panneau="p-alertes">Alertes</button>
+  </div>
+
+  <div class="panneau" id="p-cardio">
+    <div class="bloc">
+      <div class="bloc-tete"><h4>Cardiovasculaire, veille trimestrielle</h4><button type="button" class="copier">Copier</button></div>
+      <pre>Je suis médecin généraliste en France. Patientèle âgée, forte prévalence d'hypertension, de fibrillation atriale et de diabète de type 2.
+
+Recherche ce qui a changé depuis [date] sur : [hypertension artérielle / fibrillation atriale / prévention du risque cardiovasculaire / insuffisance cardiaque].
+
+Sources à privilégier, dans cet ordre : autorités sanitaires françaises, société européenne de cardiologie et société française de cardiologie, puis méta-analyses et essais randomisés publiés.
+
+Pour chaque évolution, réponds à quatre questions :
+1. Quel seuil, quelle molécule ou quelle conduite change exactement.
+2. Chez quel profil de patient, avec les critères d'inclusion de l'étude ou le périmètre de la recommandation.
+3. Ce que cela implique en consultation de ville, en une phrase.
+4. Ce qui reste inchangé, pour que je ne modifie pas ce qui n'a pas à l'être.
+
+Signale séparément : les divergences entre recommandations françaises et européennes, les évolutions portant sur un critère intermédiaire plutôt que clinique, et tout ce qui n'est pas encore publié.
+
+Format : deux pages, en français, avec un tableau final affirmation, niveau de source, date, lien vers la source primaire.</pre>
+    </div>
+  </div>
+
+  <div class="panneau" id="p-diabete" hidden>
+    <div class="bloc">
+      <div class="bloc-tete"><h4>Diabète de type 2, veille trimestrielle</h4><button type="button" class="copier">Copier</button></div>
+      <pre>Je suis médecin généraliste en France. Je suis des patients diabétiques de type 2 en ville, dont une part avec insuffisance rénale ou maladie cardiovasculaire.
+
+Recherche ce qui a changé depuis [date] sur la prise en charge du diabète de type 2 : stratégie thérapeutique, objectifs glycémiques, dépistage des complications, place des nouvelles classes.
+
+Sources à privilégier, dans cet ordre : recommandations et avis des autorités sanitaires françaises, sociétés savantes françaises de diabétologie, recommandations internationales de référence, puis essais randomisés et méta-analyses publiés.
+
+Attention particulière :
+- Distingue systématiquement ce qui est remboursé en France de ce qui est recommandé ailleurs. C'est le point qui rend la plupart des synthèses inutilisables en ville.
+- Signale les évolutions de conditions de prescription et de prise en charge, pas seulement les évolutions scientifiques.
+- Pour chaque bénéfice annoncé, donne le bénéfice absolu et la durée de suivi, pas seulement le relatif.
+
+Format : deux pages, en français, avec un tableau final affirmation, niveau de source, date, lien vers la source primaire, et une colonne remboursement en France.</pre>
+    </div>
+  </div>
+
+  <div class="panneau" id="p-bpco" hidden>
+    <div class="bloc">
+      <div class="bloc-tete"><h4>BPCO et asthme, veille semestrielle</h4><button type="button" class="copier">Copier</button></div>
+      <pre>Je suis médecin généraliste en France. Je suis des patients atteints de BPCO et d'asthme, adultes et enfants.
+
+Recherche ce qui a changé depuis [date] sur : [BPCO / asthme de l'adulte / asthme de l'enfant].
+
+Sources à privilégier : rapports annuels des initiatives internationales de référence pour l'asthme et la BPCO, recommandations françaises et sociétés savantes de pneumologie, puis essais publiés.
+
+Points d'attention imposés :
+- Précise la version et l'année du rapport de référence sur lequel tu t'appuies, et si une version plus récente existe.
+- Distingue clairement les recommandations pour l'adulte, l'adolescent et l'enfant : elles diffèrent, et c'est la première source d'erreur dans les synthèses.
+- Signale tout changement concernant les traitements de secours et les stratégies de fond.
+- Indique ce qui a disparu des recommandations, pas seulement ce qui a été ajouté.
+
+Format : deux pages, en français, avec un tableau final affirmation, tranche d'âge concernée, niveau de source, date, lien.</pre>
+    </div>
+  </div>
+
+  <div class="panneau" id="p-gyneco" hidden>
+    <div class="bloc">
+      <div class="bloc-tete"><h4>Gynécologie médicale, veille semestrielle</h4><button type="button" class="copier">Copier</button></div>
+      <pre>Je suis médecin généraliste en France et j'assure un suivi gynécologique de premier recours.
+
+Recherche ce qui a changé depuis [date] sur : [contraception / dépistage du cancer du col / ménopause / suivi de grossesse de premier recours].
+
+Sources à privilégier : autorités sanitaires françaises et programmes nationaux de dépistage, collège national des gynécologues et obstétriciens français, puis recommandations internationales et essais publiés.
+
+Points d'attention imposés :
+- Sépare ce qui relève du programme national organisé de ce qui relève d'une pratique individuelle.
+- Signale les évolutions d'âge, de rythme et de technique de dépistage, qui sont les plus fréquentes et les plus mal suivies.
+- Pour la contraception et le traitement de la ménopause, distingue les contre-indications absolues des précautions d'emploi.
+- Indique les évolutions de remboursement et de gratuité, qui changent la pratique autant que la science.
+
+Format : deux pages, en français, avec un tableau final affirmation, niveau de source, date, lien.</pre>
+    </div>
+  </div>
+
+  <div class="panneau" id="p-pediatrie" hidden>
+    <div class="bloc">
+      <div class="bloc-tete"><h4>Pédiatrie de ville, veille semestrielle</h4><button type="button" class="copier">Copier</button></div>
+      <pre>Je suis médecin généraliste en France et je vois des enfants de 0 à 15 ans en consultation de ville.
+
+Recherche ce qui a changé depuis [date] sur : [calendrier vaccinal / infections respiratoires de l'enfant / dépistages du développement / troubles du neurodéveloppement].
+
+Sources à privilégier : calendrier vaccinal et avis officiels français, autorités sanitaires françaises, sociétés savantes françaises de pédiatrie, puis recommandations internationales et essais publiés.
+
+Points d'attention imposés :
+- Le calendrier vaccinal français prime sur toute recommandation étrangère : signale explicitement toute divergence.
+- Précise systématiquement la tranche d'âge concernée par chaque évolution.
+- Distingue ce qui relève de l'obligation, de la recommandation et du possible.
+- Signale toute évolution des seuils d'alerte et des critères d'adressage en urgence.
+
+Format : deux pages, en français, avec un tableau final affirmation, tranche d'âge, niveau de source, date, lien.</pre>
+    </div>
+  </div>
+
+  <div class="panneau" id="p-alertes" hidden>
+    <div class="bloc">
+      <div class="bloc-tete"><h4>Veille de sécurité, mensuelle et transversale</h4><button type="button" class="copier">Copier</button></div>
+      <pre>Je suis médecin généraliste en France. Cette recherche porte uniquement sur la sécurité des produits de santé.
+
+Recherche les alertes, retraits, restrictions d'usage, ruptures d'approvisionnement et modifications d'autorisation publiés depuis [date] concernant les médicaments et dispositifs que je prescris couramment : [liste de 10 classes ou produits].
+
+Sources : exclusivement les autorités sanitaires françaises et européennes compétentes en matière de sécurité des produits de santé. Aucune source secondaire, aucun article de presse, aucun site commercial.
+
+Pour chaque alerte :
+- La date de publication et l'autorité qui l'émet.
+- Le produit et la population concernés.
+- La conduite à tenir demandée aux prescripteurs, telle qu'elle est écrite.
+- Ce que je dois faire pour mes patients déjà sous traitement.
+- Le lien direct vers le document officiel.
+
+Classe par ordre d'urgence pour un médecin de ville. Si aucune alerte ne concerne ma liste, dis-le explicitement plutôt que d'élargir le périmètre.</pre>
+    </div>
+  </div>
+</section>
+
+<!-- FILTRE -->
+<section id="filtre">
+  <h2>Le filtre de fiabilité</h2>
+  <p class="chapeau">À appliquer sur le rapport reçu, avant toute lecture de fond. Cinq minutes, et vous savez ce qui mérite votre attention.</p>
+
+  <table class="tableau">
+    <thead><tr><th>Étage</th><th>Ce que vous en faites</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Texte d'une autorité sanitaire française</strong></td><td>Opposable, applicable. C'est ce qui vaut en cas de contrôle et de contentieux. Vous ouvrez et vous lisez.</td></tr>
+      <tr><td><strong>Recommandation d'une société savante</strong></td><td>Référence de pratique. Vous vérifiez l'année et la version, puis vous lisez le passage cité, pas le résumé.</td></tr>
+      <tr><td><strong>Méta-analyse ou essai randomisé publié</strong></td><td>Élément de discussion. Un essai ne fait pas une recommandation. Vous regardez la population, le critère principal, l'effet absolu.</td></tr>
+      <tr><td><strong>Préprint, résumé de congrès, communiqué</strong></td><td>Information à surveiller, jamais à appliquer. Si le rapport ne l'a pas signalé comme tel, votre prompt était incomplet.</td></tr>
+      <tr><td><strong>Article de presse, blog, site commercial</strong></td><td>Aucune valeur dans une veille professionnelle. Leur présence dans un rapport signale un cadrage trop lâche : relancez la recherche.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="bloc">
+    <div class="bloc-tete"><h4>La relance de contrôle, à envoyer après réception du rapport</h4><button type="button" class="copier">Copier</button></div>
+    <pre>Reprends ton rapport et produis un tableau de contrôle, sans reformuler ton analyse.
+
+Pour chaque affirmation que tu as avancée :
+1. La citation exacte de la source, entre guillemets, telle qu'elle est écrite.
+2. Le type de source : texte d'autorité sanitaire, recommandation de société savante, essai publié, préprint, autre.
+3. La date de publication de la source, et non celle de l'article qui en parle.
+4. Le lien vers le document primaire.
+5. Une colonne "vérifiable" avec oui ou non : réponds non si tu n'as pas pu accéder directement au document source.
+
+Ensuite, liste séparément :
+- Les affirmations que tu as construites en recoupant plusieurs sources, sans qu'aucune ne le dise textuellement.
+- Les sources dont tu n'as lu que le résumé.
+- Les points où ta synthèse a lissé une divergence entre sources.</pre>
+  </div>
+</section>
+
+<!-- SIGNAUX -->
+<section id="signaux">
+  <h2>Les cinq signaux d'alerte d'un rapport</h2>
+  <p class="chapeau">Ils se repèrent en survolant, avant même de lire le fond.</p>
+
+  <div class="signal">
+    <div class="pastille">1</div>
+    <div>
+      <h4>Un lien qui ne s'ouvre pas, ou qui ouvre autre chose</h4>
+      <p>Adresse inventée, identifiant d'article erroné, page d'accueil au lieu du document. C'est le signal le plus fréquent et le plus simple à tester.</p>
+      <p class="reflexe"><b>Réflexe</b> : ouvrez trois liens au hasard. Si l'un des trois échoue, contrôlez tous les autres.</p>
+    </div>
+  </div>
+
+  <div class="signal">
+    <div class="pastille">2</div>
+    <div>
+      <h4>Une recommandation citée sans son année</h4>
+      <p>Les référentiels sont révisés régulièrement. Une recommandation sans millésime est une recommandation dont vous ne savez pas si elle est en vigueur.</p>
+      <p class="reflexe"><b>Réflexe</b> : exigez l'année dans le prompt, et vérifiez qu'aucune version plus récente n'existe.</p>
+    </div>
+  </div>
+
+  <div class="signal">
+    <div class="pastille">3</div>
+    <div>
+      <h4>Un effet en pourcentage sans dénominateur</h4>
+      <p>Une réduction de 30 % ne veut rien dire sans le risque de départ, la durée de suivi et l'intervalle de confiance. C'est ce que la synthèse coupe en premier.</p>
+      <p class="reflexe"><b>Réflexe</b> : redemandez le risque absolu et le nombre de sujets à traiter, ou ouvrez le tableau de résultats de l'étude.</p>
+    </div>
+  </div>
+
+  <div class="signal">
+    <div class="pastille">4</div>
+    <div>
+      <h4>Un consensus parfait sur un sujet que vous savez débattu</h4>
+      <p>Si vous connaissez la controverse et que le rapport l'ignore, c'est qu'il a harmonisé. Un agent cherche la cohérence, il ne cherche pas le désaccord si on ne le lui demande pas.</p>
+      <p class="reflexe"><b>Réflexe</b> : posez la question inverse, « où mes sources se contredisent-elles », et comparez.</p>
+    </div>
+  </div>
+
+  <div class="signal">
+    <div class="pastille">5</div>
+    <div>
+      <h4>Une réponse qui ne dit jamais « je n'ai pas trouvé »</h4>
+      <p>Sur un sujet précis, l'absence de données est fréquente et informative. Un rapport qui couvre tout, toujours, comble les trous.</p>
+      <p class="reflexe"><b>Réflexe</b> : imposez dans le prompt une section « ce que je n'ai pas trouvé ». Si elle revient vide systématiquement, méfiez-vous.</p>
+    </div>
+  </div>
+</section>
+
+<!-- RYTHME -->
+<section id="rythme">
+  <h2>Votre routine de veille</h2>
+  <p class="chapeau">La veille ne se rattrape pas, elle se ritualise. Trois rythmes suffisent.</p>
+
+  <table class="tableau">
+    <thead><tr><th>Rythme</th><th>Objet</th><th>Temps</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Mensuel</strong></td><td>La veille de sécurité : alertes, retraits, restrictions, ruptures sur vos dix produits les plus prescrits. C'est la seule veille qui ne souffre aucun retard.</td><td>10 minutes</td></tr>
+      <tr><td><strong>Trimestriel</strong></td><td>Une pathologie parmi vos dix plus fréquentes, en rotation. En un an, vous avez fait le tour de votre activité réelle.</td><td>30 minutes</td></tr>
+      <tr><td><strong>Annuel</strong></td><td>La revue des référentiels qui structurent votre pratique : les versions ont-elles changé, et qu'est-ce qui a disparu.</td><td>2 heures</td></tr>
+    </tbody>
+  </table>
+
+  <p><strong>Le geste qui rend la routine tenable :</strong> conservez chaque rapport avec sa date dans un dossier unique. Au trimestre suivant, votre première question devient « qu'est-ce qui a changé depuis mon rapport du [date] », ce qui divise par trois la longueur de la réponse et vous évite de relire ce que vous savez déjà.</p>
+
+  <p><strong>Le prolongement utile :</strong> un rapport validé et ses sources primaires constituent un corpus prêt à être versé dans un espace documentaire, pour en tirer une synthèse audio à écouter en déplacement ou un support de présentation pour votre groupe de pairs.</p>
+</section>
+
+<!-- CONTROLES -->
+<section id="controles">
+  <h2>Avant de changer quoi que ce soit à votre pratique</h2>
+  <p class="chapeau">Cinq contrôles. Ils ne prennent que quelques minutes, et ils portent sur la seule chose qui compte : la source.</p>
+
+  <div class="progression">
+    <div class="jauge"><span id="jauge-barre"></span></div>
+    <div class="compteur" id="jauge-compteur">0 / 5</div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>J'ai ouvert la source primaire de l'affirmation décisive</h4>
+    <p>Pas le résumé, pas l'article qui en parle : le document lui-même, et le passage précis.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>J'ai vérifié qu'il s'agit de la version en vigueur</h4>
+    <p>Une recommandation périmée citée fidèlement produit une erreur parfaitement documentée.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>J'ai regardé la population de l'étude</h4>
+    <p>Critères d'inclusion, âge, comorbidités, pays. La question n'est pas si le résultat est vrai, mais s'il concerne mes patients.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>J'ai demandé les divergences, pas seulement la synthèse</h4>
+    <p>Et j'ai regardé si la recommandation française dit la même chose que l'internationale.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Je cite la source, jamais le rapport</h4>
+    <p>Dans un courrier, une présentation, un dossier : la référence est le document primaire, avec son année.</p></div>
+  </div>
+
+  <div class="zone-rouge">
+    <h3>Ce qui n'entre pas dans une requête de veille</h3>
+    <ul class="interdit">
+      <li>Le cas clinique réel qui a déclenché votre question, avec ses éléments identifiants</li>
+      <li>Un document de votre établissement soumis à confidentialité</li>
+      <li>Le texte intégral d'un article sous licence, que vous n'avez pas le droit de rediffuser</li>
+      <li>Une question formulée de façon à obtenir la réponse que vous espérez, ce qui est le meilleur moyen de l'obtenir</li>
+    </ul>
+  </div>
+
+  <div class="banniere">
+    <p>Un rapport de recherche est un point de départ. La source primaire est le point d'arrivée.
+    <small>La méthode A.V.E.C. de la Haute Autorité de santé le formule en quatre verbes : apprendre, vérifier, estimer, communiquer.</small></p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <h2>Questions fréquentes</h2>
+
+  <details>
+    <summary>Faut-il payer pour utiliser la recherche approfondie ?</summary>
+    <p>Pas nécessairement. Un usage gratuit limité existe chez plusieurs éditeurs, avec quelques requêtes par mois, suffisant pour une veille de sécurité mensuelle. Les formules payantes augmentent surtout le nombre de requêtes et la profondeur d'exploration.</p>
+  </details>
+
+  <details>
+    <summary>Combien de sources un rapport explore-t-il réellement ?</summary>
+    <p>Selon les outils et la profondeur demandée, de quelques dizaines à plusieurs centaines, en quelques minutes à une demi-heure. Le nombre importe moins que leur nature : cent sources secondaires valent moins qu'une recommandation ouverte au bon paragraphe.</p>
+  </details>
+
+  <details>
+    <summary>Faut-il lancer la même recherche sur deux outils différents ?</summary>
+    <p>Sur un sujet décisif, oui, et pour une raison précise : les divergences entre deux rapports vous indiquent où le sujet est réellement incertain. En revanche, leur accord ne prouve rien, deux agents pouvant se tromper de la même manière.</p>
+  </details>
+
+  <details>
+    <summary>Puis-je m'appuyer sur un rapport pour une présentation en groupe de pairs ?</summary>
+    <p>Oui, comme point de départ. Le support que vous présentez, lui, cite les sources primaires que vous avez ouvertes. Mentionner que la recherche a été préparée avec un agent est une bonne pratique, et cela répond par avance à la question qui viendra.</p>
+  </details>
+
+  <details>
+    <summary>Le rapport peut-il inventer une référence ?</summary>
+    <p>Il peut proposer un lien invalide, attribuer un résultat à la mauvaise étude, ou citer une version périmée. Le contrôle des liens est le test le plus rapide et le plus rentable.</p>
+  </details>
+
+  <details>
+    <summary>Et si je veux une veille en français uniquement ?</summary>
+    <p>Précisez-le, mais sachez ce que vous perdez : l'essentiel de la littérature primaire est en anglais. La bonne consigne est de chercher dans les deux langues et de restituer en français, ce que font correctement les agents actuels.</p>
+  </details>
+</section>
+
+<!-- SOURCES -->
+<section id="sources">
+  <h2>Sources</h2>
+  <table class="tableau">
+    <thead><tr><th>Élément</th><th>Source</th></tr></thead>
+    <tbody>
+      <tr><td>Doublement de la connaissance médicale : 50 ans en 1950, 7 ans en 1980, 3,5 ans en 2010, et 73 jours en 2020 <strong>en projection</strong></td><td>Densen P., Challenges and opportunities facing medical education, Trans Am Clin Climatol Assoc, 2011. La valeur de 73 jours est une projection faite en 2011, non une mesure</td></tr>
+      <tr><td>Généralisation des modes de recherche approfondie à l'ensemble des grands assistants en 2026, quotas variables selon les formules, usage gratuit limité</td><td>Documentation des éditeurs et analyses comparatives, juillet 2026</td></tr>
+      <tr><td>Durées et volumes de sources constatés : de quelques dizaines à plusieurs centaines de sources, de quelques minutes à une demi-heure</td><td>Analyses comparatives des modes de recherche approfondie, 2026</td></tr>
+      <tr><td>Méthode A.V.E.C.</td><td>Haute Autorité de santé, recommandations sur l'IA générative en santé, 30 octobre 2025</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<footer>
+  <p><strong>L'IA Minute du Médecin</strong>, Dr Guillaume Zagury et Samuel De Queiroz, Éditions Medicilline.</p>
+  <p>Ressource compagnon de la double page consacrée à la veille médico-scientifique. Les prompts de cette page organisent une recherche, ils ne valident aucune information. La décision clinique appartient au médecin, à partir des sources primaires qu'il a lues.</p>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var chips = document.querySelectorAll("nav button[data-cible]");
+  Array.prototype.forEach.call(chips, function(btn){
+    btn.addEventListener("click", function(){
+      var cible = document.getElementById(btn.getAttribute("data-cible"));
+      if(cible){ cible.scrollIntoView({ behavior:"smooth", block:"start" }); }
+    });
+  });
+
+  var onglets = document.querySelectorAll(".onglets button[data-panneau]");
+  Array.prototype.forEach.call(onglets, function(btn){
+    btn.addEventListener("click", function(){
+      Array.prototype.forEach.call(onglets, function(autre){
+        autre.setAttribute("aria-selected", autre === btn ? "true" : "false");
+        var p = document.getElementById(autre.getAttribute("data-panneau"));
+        if(p){ p.hidden = (autre !== btn); }
+      });
+    });
+  });
+
+  var controles = document.querySelectorAll("[data-controle]");
+  var barre = document.getElementById("jauge-barre");
+  var compteur = document.getElementById("jauge-compteur");
+  var total = controles.length;
+
+  function maj(){
+    var faits = 0;
+    Array.prototype.forEach.call(controles, function(c){
+      var box = c.querySelector("input[type=checkbox]");
+      if(box && box.checked){ faits++; c.classList.add("fait"); }
+      else { c.classList.remove("fait"); }
+    });
+    barre.style.width = (faits/total*100) + "%";
+    barre.style.background = (faits === total) ? "#27AE60" : "#DC322F";
+    compteur.textContent = faits + " / " + total;
+  }
+
+  Array.prototype.forEach.call(controles, function(c){
+    var box = c.querySelector("input[type=checkbox]");
+    if(box){ box.addEventListener("change", maj); }
+  });
+  maj();
+
+  var boutons = document.querySelectorAll(".copier");
+  Array.prototype.forEach.call(boutons, function(btn){
+    btn.addEventListener("click", function(){
+      var bloc = btn.closest(".bloc");
+      var pre = bloc ? bloc.querySelector("pre") : null;
+      if(!pre){ return; }
+      var texte = pre.textContent;
+      var fini = function(){
+        btn.textContent = "Copié";
+        btn.classList.add("ok");
+        setTimeout(function(){ btn.textContent = "Copier"; btn.classList.remove("ok"); }, 1800);
+      };
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(texte).then(fini, function(){ secours(texte, fini); });
+      } else { secours(texte, fini); }
+    });
+  });
+
+  function secours(texte, fini){
+    var z = document.createElement("textarea");
+    z.value = texte;
+    z.setAttribute("readonly","");
+    z.style.position = "absolute";
+    z.style.left = "-9999px";
+    document.body.appendChild(z);
+    z.select();
+    try { document.execCommand("copy"); fini(); } catch(e){}
+    document.body.removeChild(z);
+  }
+})();
+</script>
+</body>
+</html>
