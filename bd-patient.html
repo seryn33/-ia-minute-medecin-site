@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La BD patient, case par case · L'IA Minute du Médecin</title>
+<meta name="description" content="Ressource compagnon du livre L'IA Minute du Médecin : le scénario complet de la BD asthme, les prompts image prêts à copier, le kit de personnalisation et les contrôles avant impression.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Fira+Sans+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --rouge:#DC322F;
+  --noir:#1A1A1A;
+  --blanc:#FFFFFF;
+  --jaune:#FFD700;
+  --bleu:#3498DB;
+  --orange:#F39C12;
+  --vert:#27AE60;
+  --violet:#8E44AD;
+  --teal:#1ABC9C;
+  --gris:#BDC3C7;
+  --gris-clair:#F4F5F6;
+  --gris-ligne:#E1E4E6;
+  --gris-texte:#5A6268;
+}
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{
+  margin:0;background:var(--blanc);color:var(--noir);
+  font-family:"Fira Sans Condensed","Roboto Condensed",Arial,sans-serif;
+  font-size:17px;line-height:1.5;
+}
+.page{max-width:720px;margin:0 auto;padding:0 18px 80px;}
+h1,h2,h3,h4,.oswald{font-family:"Oswald","Arial Narrow",Arial,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.2px;}
+p{margin:0 0 14px;}
+.rouge{color:var(--rouge);}
+
+header{padding:26px 0 8px;}
+.eyebrow{
+  display:inline-block;font-family:"Oswald",Arial,sans-serif;font-weight:600;
+  font-size:13px;letter-spacing:1.4px;text-transform:uppercase;
+  color:var(--blanc);background:var(--noir);padding:5px 11px;
+}
+h1{font-size:33px;line-height:1.06;margin:14px 0 0;}
+h1 mark{background:var(--jaune);color:var(--noir);padding:0 5px;}
+.sous-titre{
+  font-family:"Fira Sans Condensed",Arial,sans-serif;font-style:italic;font-weight:600;
+  color:var(--rouge);font-size:19px;margin:10px 0 0;text-transform:none;
+}
+.trait{height:4px;background:var(--rouge);margin:16px 0 22px;}
+.meta{font-size:14px;color:var(--gris-texte);margin:0 0 22px;}
+
+.flash{border:3px solid var(--rouge);border-radius:14px;padding:16px 18px;margin:0 0 26px;}
+.flash h2{font-size:19px;margin:0 0 10px;color:var(--rouge);}
+.flash ul{margin:0;padding-left:20px;}
+.flash li{margin-bottom:9px;}
+
+nav{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 34px;}
+nav button{
+  font-family:"Oswald",Arial,sans-serif;font-weight:500;font-size:13px;letter-spacing:.6px;
+  text-transform:uppercase;background:var(--gris-clair);color:var(--noir);
+  border:2px solid var(--gris-ligne);border-radius:999px;padding:7px 13px;cursor:pointer;
+}
+nav button:hover{background:var(--noir);color:var(--blanc);border-color:var(--noir);}
+nav button:focus-visible{outline:3px solid var(--rouge);outline-offset:2px;}
+
+section{border-top:2px solid var(--gris-ligne);padding-top:26px;margin-top:34px;scroll-margin-top:14px;}
+section > h2{font-size:25px;margin:0 0 4px;line-height:1.1;}
+.chapeau{color:var(--gris-texte);font-size:16px;margin:0 0 20px;}
+h3{font-size:19px;margin:26px 0 8px;}
+
+/* MOUVEMENTS */
+.mouvement{display:flex;gap:14px;border:2px solid var(--gris-ligne);border-radius:14px;padding:14px;margin-bottom:12px;}
+.pastille{
+  flex:0 0 42px;height:42px;border-radius:50%;color:var(--blanc);
+  font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:19px;
+  display:flex;align-items:center;justify-content:center;
+}
+.p-bleu{background:var(--bleu);} .p-orange{background:var(--orange);}
+.p-vert{background:var(--vert);} .p-violet{background:var(--violet);}
+.mouvement h4{font-size:17px;margin:4px 0 6px;}
+.mouvement p{font-size:16px;margin:0 0 8px;}
+.mouvement p:last-child{margin-bottom:0;}
+.piege{font-size:15px;background:var(--gris-clair);border-left:4px solid var(--orange);padding:8px 10px;margin:0;}
+.piege b{font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:13px;letter-spacing:.6px;color:var(--orange);}
+
+/* BLOCS COPIABLES */
+.bloc{border:2px solid var(--gris-ligne);border-radius:14px;overflow:hidden;margin:0 0 16px;}
+.bloc-tete{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--gris-clair);padding:10px 12px;border-bottom:2px solid var(--gris-ligne);}
+.bloc-tete h4{margin:0;font-size:15px;}
+.copier{
+  font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:12px;letter-spacing:.8px;
+  text-transform:uppercase;background:var(--rouge);color:var(--blanc);border:none;border-radius:6px;
+  padding:7px 12px;cursor:pointer;white-space:nowrap;
+}
+.copier.ok{background:var(--vert);}
+.copier:focus-visible{outline:3px solid var(--noir);outline-offset:2px;}
+pre{margin:0;padding:14px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px;line-height:1.5;white-space:pre-wrap;word-wrap:break-word;}
+.badge{
+  display:inline-block;background:var(--gris);color:var(--noir);border-radius:5px;
+  font-family:"Oswald",Arial,sans-serif;font-size:11.5px;letter-spacing:.7px;text-transform:uppercase;
+  padding:3px 8px;margin:0 6px 6px 0;
+}
+
+/* CASES */
+.case{border:2px solid var(--gris-ligne);border-radius:14px;margin-bottom:14px;overflow:hidden;}
+.case-tete{display:flex;align-items:center;gap:10px;background:var(--noir);color:var(--blanc);padding:9px 12px;}
+.case-num{
+  background:var(--rouge);color:var(--blanc);width:26px;height:26px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:15px;flex:0 0 26px;
+}
+.case-tete h4{margin:0;font-size:15px;color:var(--blanc);}
+.case-corps{padding:12px 14px;}
+.case-corps p{font-size:16px;}
+.bulle{border-left:4px solid var(--bleu);background:var(--gris-clair);padding:8px 10px;margin:0 0 10px;font-style:italic;}
+.intention{font-size:15px;color:var(--gris-texte);margin:0 0 10px;}
+.intention b{font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:12.5px;letter-spacing:.6px;color:var(--noir);font-style:normal;}
+
+/* TABLEAU */
+.tableau{width:100%;border-collapse:collapse;font-size:15px;margin:0 0 18px;}
+.tableau th,.tableau td{border:1px solid var(--gris-ligne);padding:8px 10px;text-align:left;vertical-align:top;}
+.tableau th{background:var(--noir);color:var(--blanc);font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:13px;letter-spacing:.5px;}
+.tableau tr:nth-child(even) td{background:var(--gris-clair);}
+
+/* CONTROLES */
+.controle{display:flex;gap:12px;border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;margin-bottom:10px;}
+.controle.fait{border-color:var(--vert);background:#F3FBF6;}
+.controle input{width:22px;height:22px;accent-color:var(--vert);cursor:pointer;flex:0 0 22px;margin-top:2px;}
+.controle h4{margin:0 0 4px;font-size:16px;}
+.controle p{margin:0;font-size:15.5px;}
+.progression{display:flex;align-items:center;gap:12px;margin:0 0 18px;border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;}
+.jauge{flex:1;height:12px;background:var(--gris-ligne);border-radius:999px;overflow:hidden;}
+.jauge span{display:block;height:100%;width:0;background:var(--rouge);transition:width .25s ease;}
+.compteur{font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:16px;white-space:nowrap;}
+
+/* ZONE ROUGE */
+.zone-rouge{border:3px solid var(--rouge);border-radius:14px;padding:16px 18px;margin:18px 0;}
+.zone-rouge h3{margin-top:0;color:var(--rouge);}
+.interdit{list-style:none;padding:0;margin:0;}
+.interdit li{padding-left:26px;position:relative;margin-bottom:8px;}
+.interdit li::before{content:"\00d7";position:absolute;left:0;top:-2px;color:var(--rouge);font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:22px;line-height:1;}
+
+.banniere{background:var(--rouge);color:var(--blanc);border-radius:14px;padding:18px 20px;margin:26px 0;}
+.banniere p{margin:0;font-family:"Oswald",Arial,sans-serif;font-size:19px;line-height:1.25;text-transform:uppercase;}
+.banniere small{display:block;font-family:"Fira Sans Condensed",Arial,sans-serif;text-transform:none;font-size:15px;margin-top:8px;opacity:.95;}
+
+details{border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;margin-bottom:10px;}
+details[open]{border-color:var(--noir);}
+summary{cursor:pointer;font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:16px;text-transform:uppercase;letter-spacing:.3px;}
+summary::-webkit-details-marker{display:none;}
+summary::before{content:"+ ";color:var(--rouge);font-weight:700;}
+details[open] summary::before{content:"\2212 ";}
+details p{margin:10px 0 0;font-size:16px;}
+
+footer{border-top:4px solid var(--noir);margin-top:44px;padding-top:18px;font-size:14px;color:var(--gris-texte);}
+footer strong{color:var(--noir);}
+
+@media (max-width:520px){
+  body{font-size:16px;}
+  h1{font-size:27px;}
+  section > h2{font-size:21px;}
+  .tableau{font-size:14px;}
+  pre{font-size:12.5px;}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none !important;scroll-behavior:auto !important;}}
+</style>
+</head>
+<body>
+<div class="page">
+
+<header>
+  <span class="eyebrow">Ressource compagnon · L'IA Minute du Médecin</span>
+  <h1>La BD patient, <mark>case par case</mark></h1>
+  <p class="sous-titre">Le scénario complet, les prompts image prêts à copier, et les six contrôles à passer avant de tendre la feuille à la famille.</p>
+  <div class="trait"></div>
+  <p class="meta">Mise à jour : 25 juillet 2026. Contenu clinique aligné sur le rapport GINA 2026.</p>
+</header>
+
+<div class="flash">
+  <h2>À lire avant de générer quoi que ce soit</h2>
+  <ul>
+    <li><strong>Le rapport GINA a été actualisé en mai 2026.</strong> Chez l'enfant de 6 à 11 ans, le traitement par bêta-2 de courte durée seul n'est pas recommandé : tout enfant asthmatique doit recevoir un traitement contenant un corticoïde inhalé. Le traitement de secours, quel qu'il soit, peut être pris avant l'effort. Dans la BD, ne nommez donc jamais une molécule : écrivez « mon traitement de secours », et c'est votre ordonnance qui dit lequel.</li>
+    <li><strong>Les seuils viennent de votre plan d'action, pas du modèle.</strong> Nombre de bouffées, délai avant d'appeler, numéro à composer : ces valeurs sont personnelles. La dernière case comporte volontairement un espace laissé vide, que vous remplissez à la main devant la famille.</li>
+    <li><strong>Toute image générée porte un marquage.</strong> Les modèles d'images de Google intègrent un filigrane invisible SynthID, et les obligations de transparence du règlement européen sur l'IA s'appliquent à partir du 2 août 2026. Mentionnez en pied de page « illustration générée par IA, validée par le Dr [nom] ».</li>
+  </ul>
+</div>
+
+<nav aria-label="Sommaire">
+  <button type="button" data-cible="pourquoi">Pourquoi ça marche</button>
+  <button type="button" data-cible="fabrication">La fabrication</button>
+  <button type="button" data-cible="scenario">Le scénario</button>
+  <button type="button" data-cible="prompts">Les prompts image</button>
+  <button type="button" data-cible="personnaliser">Personnaliser</button>
+  <button type="button" data-cible="controles">Les 6 contrôles</button>
+  <button type="button" data-cible="ailleurs">Autres pathologies</button>
+  <button type="button" data-cible="faq">Questions</button>
+  <button type="button" data-cible="sources">Sources</button>
+</nav>
+
+<!-- POURQUOI -->
+<section id="pourquoi">
+  <h2>Pourquoi une bande dessinée, et pas une fiche de plus</h2>
+  <p class="chapeau">Ce n'est pas une coquetterie graphique. C'est le format qui résiste le mieux à l'oubli.</p>
+  <p>Entre 40 et 80 % de l'information médicale donnée en consultation est oubliée immédiatement, et près de la moitié de ce qui est retenu l'est de travers (Kessels, Journal of the Royal Society of Medicine, 2003). Quand des pictogrammes accompagnent des consignes orales, le rappel correct passe de 14 % à 85 % dans les travaux de Houts (Patient Education and Counseling, 1998 et 2001), avec un bénéfice d'autant plus net que le niveau de littératie est bas.</p>
+  <p>Un enfant de 8 ans, lui, ne lit pas une fiche. Il regarde. Et il montre : à ses parents, à la maîtresse, à l'animateur du centre de loisirs. La BD circule là où votre consultation ne va pas.</p>
+  <p>Enjeu concret : l'asthme représente environ 43 % des projets d'accueil individualisé, et un tiers des enfants asthmatiques connaissent une limitation de l'activité sportive (Revue du Praticien, 2026). Le document que vous fabriquez ici n'est pas un gadget, c'est le support de compréhension qui accompagne le PAI établi dans le cadre de la circulaire du 10 février 2021.</p>
+  <p><strong>Ce que la BD ne remplace pas :</strong> ni le plan d'action écrit, ni l'ordonnance, ni la démonstration de la technique d'inhalation avec la chambre. Elle les rend mémorisables.</p>
+</section>
+
+<!-- FABRICATION -->
+<section id="fabrication">
+  <h2>La fabrication, en quatre mouvements</h2>
+  <p class="chapeau">Comptez dix minutes la première fois, trois minutes ensuite, une fois votre gabarit enregistré.</p>
+
+  <div class="mouvement">
+    <div class="pastille p-bleu">1</div>
+    <div>
+      <h4>Le brief : ce qu'il doit avoir compris en sortant</h4>
+      <p>Avant d'ouvrir un outil, écrivez une seule phrase : « À la fin, cet enfant sait reconnaître le début d'une crise, sait quoi faire dans l'ordre, et sait quand un adulte doit appeler. » Tout le reste découle de là. Une BD qui essaie d'expliquer la physiopathologie, les traitements de fond, les allergènes et le sport rate les trois.</p>
+      <p class="piege"><b>Piège</b> : partir de ce que vous voulez dire plutôt que de ce qu'il doit retenir. Trois messages maximum, c'est la contrainte qui fait la qualité.</p>
+    </div>
+  </div>
+
+  <div class="mouvement">
+    <div class="pastille p-orange">2</div>
+    <div>
+      <h4>Le fond : vos sources, pas la mémoire du modèle</h4>
+      <p>Chargez dans un espace de travail documentaire (NotebookLM ou l'équivalent) les documents qui font foi : le rapport GINA en vigueur, le guide patient de la Haute Autorité de santé, votre trame de plan d'action, le formulaire de PAI. Le modèle rédige ensuite en s'appuyant sur ces documents et vous pouvez lui demander d'indiquer d'où vient chaque affirmation.</p>
+      <p class="piege"><b>Piège</b> : demander directement le scénario à un assistant généraliste sans sources. Vous obtiendrez un texte plausible, avec des seuils inventés.</p>
+    </div>
+  </div>
+
+  <div class="mouvement">
+    <div class="pastille p-vert">3</div>
+    <div>
+      <h4>Le fil : six cases, une idée par case</h4>
+      <p>Le scénario ci-dessous est déjà écrit et validé dans sa structure. Vous n'avez qu'à remplacer les éléments entre crochets. Si vous préférez le faire régénérer, le prompt de scénario est fourni juste après, avec les contraintes de langage qui évitent le registre anxiogène.</p>
+      <p class="piege"><b>Piège</b> : les bulles trop longues. Dix mots par bulle, quinze au maximum. Un enfant de 8 ans décroche au-delà.</p>
+    </div>
+  </div>
+
+  <div class="mouvement">
+    <div class="pastille p-violet">4</div>
+    <div>
+      <h4>Le trait : une image par case, un personnage constant</h4>
+      <p>Générez d'abord la fiche de personnage, puis les six cases en réutilisant la même description. C'est ce qui évite que l'enfant change de visage entre la case 2 et la case 5. Générez au format vertical, imprimez en A4, deux exemplaires : un pour le cartable, un pour l'école.</p>
+      <p class="piege"><b>Piège</b> : laisser le modèle écrire le texte des bulles en autonomie. Il fait des fautes en français et invente des chiffres. Demandez les bulles vides et composez le texte par-dessus, ou relisez chaque caractère.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SCENARIO -->
+<section id="scenario">
+  <h2>Le scénario des six cases</h2>
+  <p class="chapeau">Prêt à copier. Les crochets sont les seuls éléments à modifier devant la famille.</p>
+
+  <div class="bloc">
+    <div class="bloc-tete">
+      <h4>Scénario complet, version enfant de 8 à 11 ans</h4>
+      <button type="button" class="copier">Copier</button>
+    </div>
+    <pre>BD ASTHME, 6 CASES, ENFANT DE [8] ANS
+
+CASE 1 : MES TUYAUX À AIR
+Décor : chambre, l'enfant debout, souriant, respire calmement.
+Bulle : "Dans mes poumons, l'air passe par des petits tuyaux."
+Note : poumons en bleu clair, tuyaux bien ouverts.
+
+CASE 2 : QUAND ÇA SE SERRE
+Décor : même enfant, main sur la poitrine, sourcils froncés, pas de panique.
+Bulle : "Quand je fais une crise, les tuyaux se serrent et gonflent."
+Note : mêmes poumons, tuyaux rétrécis, paroi épaissie. Pas de visage terrifié.
+
+CASE 3 : CE QUI DÉCLENCHE CHEZ MOI
+Décor : trois vignettes rondes autour de l'enfant : [effort], [air froid], [poussière].
+Bulle : "Moi, ça arrive surtout quand [je cours dans la cour]."
+Note : trois déclencheurs maximum, choisis avec l'enfant.
+
+CASE 4 : GESTE 1, JE M'ARRÊTE ET JE PRÉVIENS
+Décor : l'enfant s'assoit, lève la main vers un adulte au second plan.
+Bulle : "J'arrête tout, je m'assois, et je préviens un grand."
+Note : la présence de l'adulte est le message principal de la case.
+
+CASE 5 : GESTE 2, JE PRENDS MON TRAITEMENT DE SECOURS
+Décor : l'enfant utilise son inhalateur avec sa chambre d'inhalation, un adulte à côté.
+Bulle : "Je prends mon traitement de secours, comme on me l'a montré."
+Note : chambre d'inhalation obligatoire à cet âge. Aucun nom de médicament dans la bulle.
+
+CASE 6 : GESTE 3, ON APPELLE SI ÇA NE PASSE PAS
+Décor : l'adulte au téléphone, l'enfant assis à côté, calme. Encadré d'urgence à droite.
+Bulle : "Si je ne vais pas mieux, le grand appelle."
+Encadré : "SI ______________________ , APPELER LE ______"
+Note : encadré laissé VIDE à l'impression. Le médecin le remplit à la main avec les seuils du plan d'action personnalisé.
+
+PIED DE PAGE
+"Document remis par le Dr [nom] le [date]. Illustrations générées par IA, contenu validé par le médecin. Ne remplace pas le plan d'action personnalisé."</pre>
+  </div>
+
+  <p><span class="badge">Variante</span> Si vous préférez faire régénérer le scénario avec vos propres sources, voici le prompt à utiliser dans votre espace documentaire.</p>
+
+  <div class="bloc">
+    <div class="bloc-tete">
+      <h4>Prompt de scénario, à lancer sur vos sources</h4>
+      <button type="button" class="copier">Copier</button>
+    </div>
+    <pre>Rôle : tu es un pédagogue en éducation thérapeutique de l'enfant. Tu ne prescris pas et tu ne donnes aucune posologie.
+
+Tâche : rédige le scénario d'une bande dessinée de 6 cases destinée à un enfant de [8] ans asthmatique, à partir uniquement des documents que je t'ai fournis.
+
+Contenu imposé, une idée par case :
+1. Ce qu'est une bronche, image simple.
+2. Ce qui se passe pendant une crise.
+3. Les déclencheurs propres à cet enfant : [liste].
+4. Premier geste : s'arrêter et prévenir un adulte.
+5. Deuxième geste : prendre son traitement de secours avec la chambre d'inhalation.
+6. Troisième geste : l'adulte appelle si l'état ne s'améliore pas.
+
+Contraintes de langage :
+- Bulles de 10 mots maximum, à la première personne, vocabulaire d'enfant.
+- Registre rassurant. Jamais de mot qui fait peur (étouffer, grave, danger, mourir).
+- Aucun nom de médicament, aucun dosage, aucun délai chiffré : tu écris "mon traitement de secours" et tu laisses les seuils en blanc.
+- Aucun prénom, aucun élément permettant d'identifier l'enfant.
+
+Format de sortie : pour chaque case, trois lignes : DÉCOR, BULLE, NOTE PÉDAGOGIQUE. Puis une ligne "Sources utilisées" citant les documents et sections dont tu t'es servi.</pre>
+  </div>
+</section>
+
+<!-- PROMPTS IMAGE -->
+<section id="prompts">
+  <h2>Les prompts image, case par case</h2>
+  <p class="chapeau">Rédigés en anglais, ce qui reste le plus fiable pour les modèles d'images. Le texte français des bulles est indiqué entre guillemets et doit être relu caractère par caractère.</p>
+
+  <p><span class="badge">À lancer en premier</span><span class="badge">Constance du personnage</span></p>
+  <div class="bloc">
+    <div class="bloc-tete">
+      <h4>Fiche de personnage, à générer avant les cases</h4>
+      <button type="button" class="copier">Copier</button>
+    </div>
+    <pre>Character sheet for a children's educational comic. Single character, three views: front, three quarter, side.
+
+Character: a [8]-year-old child, [short brown hair], [blue t-shirt and shorts], friendly round face, cheerful expression, no accessories, no stethoscope, no medical uniform.
+
+Style: clean manga-inspired line art for children, bold black outlines, flat colours, soft pastel palette, white background, no shading, no gradients, no photorealism, no text anywhere in the image.
+
+Purpose: this sheet will be reused as a visual reference so the same child appears identical in six comic panels.</pre>
+  </div>
+
+  <div class="case">
+    <div class="case-tete"><span class="case-num">1</span><h4>Mes tuyaux à air</h4></div>
+    <div class="case-corps">
+      <p class="bulle">« Dans mes poumons, l'air passe par des petits tuyaux. »</p>
+      <p class="intention"><b>Intention</b> : poser le normal avant l'anormal. Sans cette case, la case 2 n'a pas de point de comparaison.</p>
+      <div class="bloc">
+        <div class="bloc-tete"><h4>Prompt case 1</h4><button type="button" class="copier">Copier</button></div>
+        <pre>Single comic panel, vertical format, white background, same child as the reference sheet, standing and breathing calmly, smiling.
+
+Beside the child, a simple friendly diagram of two lungs in light blue, with wide open airways shown as clear tubes. Small blue airflow arrows entering the tubes.
+
+One empty speech bubble at the top left, large enough for a short sentence, left blank.
+
+Style: clean manga-inspired line art for children, bold black outlines, flat colours, soft pastel palette, no shading, no gradients, no photorealism, no watermark, no text.</pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="case">
+    <div class="case-tete"><span class="case-num">2</span><h4>Quand ça se serre</h4></div>
+    <div class="case-corps">
+      <p class="bulle">« Quand je fais une crise, les tuyaux se serrent et gonflent. »</p>
+      <p class="intention"><b>Intention</b> : nommer le mécanisme sans effrayer. Le visage exprime la gêne, jamais la panique. Un enfant qui a peur de sa maladie retarde ses gestes.</p>
+      <div class="bloc">
+        <div class="bloc-tete"><h4>Prompt case 2</h4><button type="button" class="copier">Copier</button></div>
+        <pre>Single comic panel, vertical format, white background, same child as the reference sheet, one hand on the chest, mildly uncomfortable expression, calm posture, seated or standing still. Not frightened, not crying.
+
+Beside the child, the same lung diagram as panel 1, now showing narrowed airways: tightened tubes, slightly thickened walls, in soft orange rather than alarming red.
+
+One empty speech bubble at the top right, left blank.
+
+Style: clean manga-inspired line art for children, bold black outlines, flat colours, soft pastel palette, no shading, no gradients, no photorealism, no watermark, no text, no dramatic effects, no explosion lines.</pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="case">
+    <div class="case-tete"><span class="case-num">3</span><h4>Ce qui déclenche chez moi</h4></div>
+    <div class="case-corps">
+      <p class="bulle">« Moi, ça arrive surtout quand [je cours dans la cour]. »</p>
+      <p class="intention"><b>Intention</b> : la seule case réellement personnalisée. Choisissez les déclencheurs avec l'enfant pendant la consultation, c'est le moment où il devient acteur.</p>
+      <div class="bloc">
+        <div class="bloc-tete"><h4>Prompt case 3</h4><button type="button" class="copier">Copier</button></div>
+        <pre>Single comic panel, vertical format, white background, same child as the reference sheet, standing in the centre, pointing at three round vignettes arranged around them.
+
+Vignette 1: [a child running in a schoolyard]. Vignette 2: [cold winter air with snowflakes]. Vignette 3: [dust and a rug being shaken].
+
+Each vignette is a simple circular illustration with a thin black outline. No crossed-out symbols, no warning signs.
+
+One empty speech bubble at the top, left blank.
+
+Style: clean manga-inspired line art for children, bold black outlines, flat colours, soft pastel palette, no shading, no gradients, no photorealism, no watermark, no text.</pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="case">
+    <div class="case-tete"><span class="case-num">4</span><h4>Geste 1, je m'arrête et je préviens</h4></div>
+    <div class="case-corps">
+      <p class="bulle">« J'arrête tout, je m'assois, et je préviens un grand. »</p>
+      <p class="intention"><b>Intention</b> : c'est la case la plus importante de la planche. Le geste qui sauve du temps n'est pas médicamenteux, c'est l'alerte donnée à un adulte.</p>
+      <div class="bloc">
+        <div class="bloc-tete"><h4>Prompt case 4</h4><button type="button" class="copier">Copier</button></div>
+        <pre>Single comic panel, vertical format, white background, same child as the reference sheet, sitting down on a bench in a schoolyard, calm, one hand raised towards an adult standing a few steps behind.
+
+The adult is a friendly teacher figure, neutral clothing, attentive posture, no medical uniform, no stethoscope.
+
+One empty speech bubble at the top left, left blank.
+
+Style: clean manga-inspired line art for children, bold black outlines, flat colours, soft pastel palette, no shading, no gradients, no photorealism, no watermark, no text.</pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="case">
+    <div class="case-tete"><span class="case-num">5</span><h4>Geste 2, je prends mon traitement de secours</h4></div>
+    <div class="case-corps">
+      <p class="bulle">« Je prends mon traitement de secours, comme on me l'a montré. »</p>
+      <p class="intention"><b>Intention</b> : montrer le bon dispositif. À cet âge, l'inhalateur pressurisé se prend avec une chambre d'inhalation. Une image qui montre l'inhalateur seul enseigne une technique inefficace.</p>
+      <div class="bloc">
+        <div class="bloc-tete"><h4>Prompt case 5</h4><button type="button" class="copier">Copier</button></div>
+        <pre>Single comic panel, vertical format, white background, same child as the reference sheet, seated, using a pressurised inhaler attached to a transparent spacer chamber with a mouthpiece, held horizontally, lips sealed around the mouthpiece, calm and focused.
+
+An adult stands beside the child, one hand on their shoulder, supportive.
+
+The inhaler and spacer are drawn as generic unbranded devices, plain colours, no brand name, no label, no text on the device.
+
+One empty speech bubble at the top right, left blank.
+
+Style: clean manga-inspired line art for children, bold black outlines, flat colours, soft pastel palette, no shading, no gradients, no photorealism, no watermark, no text.</pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="case">
+    <div class="case-tete"><span class="case-num">6</span><h4>Geste 3, on appelle si ça ne passe pas</h4></div>
+    <div class="case-corps">
+      <p class="bulle">« Si je ne vais pas mieux, le grand appelle. »</p>
+      <p class="intention"><b>Intention</b> : la décision d'appeler revient à l'adulte, jamais à l'enfant. L'encadré reste vide à l'impression : vous y écrivez à la main le critère et le numéro convenus dans le plan d'action.</p>
+      <div class="bloc">
+        <div class="bloc-tete"><h4>Prompt case 6</h4><button type="button" class="copier">Copier</button></div>
+        <pre>Single comic panel, vertical format, white background, same child as the reference sheet, sitting calmly, while the adult beside them speaks on a mobile phone, reassuring expression on both faces.
+
+On the right side of the panel, an empty rounded rectangle frame with a thin red outline, completely blank inside, reserved for handwriting. No icon inside, no exclamation mark, no siren.
+
+One empty speech bubble at the top left, left blank.
+
+Style: clean manga-inspired line art for children, bold black outlines, flat colours, soft pastel palette, no shading, no gradients, no photorealism, no watermark, no text, nothing alarming.</pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PERSONNALISER -->
+<section id="personnaliser">
+  <h2>Personnaliser en consultation</h2>
+  <p class="chapeau">Six variables, changées en trente secondes. C'est la personnalisation qui fait la différence entre une affiche et un document que l'enfant garde.</p>
+
+  <table class="tableau">
+    <thead><tr><th>Variable</th><th>Où elle apparaît</th><th>Ce qui change</th></tr></thead>
+    <tbody>
+      <tr><td>Âge et apparence</td><td>Fiche de personnage</td><td>Cheveux, tenue, morphologie. L'enfant doit se reconnaître.</td></tr>
+      <tr><td>Déclencheurs</td><td>Case 3</td><td>Effort, air froid, acariens, animal, tabagisme passif, infection virale, pollens. Trois maximum, choisis avec lui.</td></tr>
+      <tr><td>Lieu de vie</td><td>Cases 3 et 4</td><td>Cour d'école, gymnase, terrain de foot, chambre. Le décor qu'il fréquente réellement.</td></tr>
+      <tr><td>Dispositif</td><td>Case 5</td><td>Chambre d'inhalation avec embout ou avec masque, inhalateur de poudre si c'est ce qui est prescrit.</td></tr>
+      <tr><td>Adulte référent</td><td>Cases 4 et 6</td><td>Enseignant, animateur, entraîneur, parent. Celui qui sera là au moment où ça arrive.</td></tr>
+      <tr><td>Seuils et numéro</td><td>Case 6, encadré</td><td>Rempli à la main, jamais généré. Ce sont les valeurs de votre plan d'action.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Le geste qui change tout</h3>
+  <p>Faites choisir les déclencheurs et le décor par l'enfant lui-même pendant que vous rédigez l'ordonnance. Deux minutes. Il repart avec un document dont il a été coauteur, ce qui n'est pas la même chose qu'un document qu'on lui a donné.</p>
+</section>
+
+<!-- CONTROLES -->
+<section id="controles">
+  <h2>Les six contrôles avant impression</h2>
+  <p class="chapeau">Ce que vous imprimez et signez engage votre responsabilité, pas celle du modèle.</p>
+
+  <div class="progression">
+    <div class="jauge"><span id="jauge-barre"></span></div>
+    <div class="compteur" id="jauge-compteur">0 / 6</div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div>
+      <h4>Le dispositif dessiné est celui que vous avez prescrit</h4>
+      <p>Chambre d'inhalation présente si l'aérosol-doseur est prescrit, embout ou masque selon l'âge, position du dispositif correcte. C'est l'erreur d'image la plus fréquente et la plus lourde de conséquences.</p>
+    </div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div>
+      <h4>Aucun nom de médicament, aucun dosage, aucun délai chiffré</h4>
+      <p>Une BD circule pendant des mois et se photocopie. Un chiffre imprimé devient une consigne figée, alors que le traitement, lui, évolue.</p>
+    </div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div>
+      <h4>L'ordre des gestes correspond à votre plan d'action</h4>
+      <p>S'arrêter, prévenir, traiter, appeler. Si votre plan d'action prévoit un autre enchaînement, c'est le plan d'action qui fait foi et la BD qui s'aligne.</p>
+    </div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div>
+      <h4>Aucune donnée identifiante n'est entrée dans les outils</h4>
+      <p>Ni prénom, ni date de naissance, ni photo de l'enfant, ni nom de l'école dans les prompts. « Un enfant de 8 ans » suffit à obtenir le même résultat.</p>
+    </div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div>
+      <h4>Chaque bulle a été relue caractère par caractère</h4>
+      <p>Les modèles d'images produisent encore des fautes en français et des mots inventés. Une bulle fausse dans un document signé de votre main est une erreur qui vous appartient.</p>
+    </div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div>
+      <h4>Le pied de page mentionne l'origine et la limite du document</h4>
+      <p>« Document remis par le Dr [nom] le [date]. Illustrations générées par IA, contenu validé par le médecin. Ne remplace pas le plan d'action personnalisé. »</p>
+    </div>
+  </div>
+
+  <div class="banniere">
+    <p>L'IA dessine. Le médecin valide, remplit les seuils à la main, et signe.
+    <small>La Haute Autorité de santé résume la démarche en quatre lettres, A.V.E.C. : apprendre, vérifier, estimer, communiquer. Une planche générée est une proposition, jamais un support validé.</small></p>
+  </div>
+</section>
+
+<!-- ZONE ROUGE -->
+<section id="ailleurs">
+  <h2>Décliner sur d'autres pathologies</h2>
+  <p class="chapeau">Le gabarit des six cases ne doit rien à l'asthme. Il vaut pour toute maladie chronique de l'enfant où une conduite à tenir doit être exécutée sans vous.</p>
+
+  <table class="tableau">
+    <thead><tr><th>Situation</th><th>Cases 1 et 2</th><th>Cases 4, 5 et 6</th></tr></thead>
+    <tbody>
+      <tr><td>Diabète de type 1</td><td>Ce que fait le sucre dans le corps. Ce qui se passe quand il descend trop bas.</td><td>Reconnaître les signes, prendre le resucrage, prévenir un adulte.</td></tr>
+      <tr><td>Allergie alimentaire sévère</td><td>Ce qu'est une allergie. Ce qui se passe après l'aliment interdit.</td><td>Signaler tout de suite, ne pas rester seul, l'adulte utilise la trousse d'urgence.</td></tr>
+      <tr><td>Épilepsie</td><td>Ce qu'est une crise, sans dramatiser. Ce que l'enfant ressent avant.</td><td>Se mettre en sécurité, l'entourage protège la tête, l'adulte chronomètre et appelle.</td></tr>
+      <tr><td>Suites de fracture ou de plâtre</td><td>Ce qui est réparé, combien de temps ça prend.</td><td>Ce qui est autorisé, ce qui est interdit, quand reconsulter.</td></tr>
+    </tbody>
+  </table>
+
+  <p>Dans tous les cas, la règle de la case 6 tient : le critère de gravité et le numéro à composer sont écrits à la main par le prescripteur, jamais générés.</p>
+
+  <div class="zone-rouge">
+    <h3>Ce qui ne rentre jamais dans un outil d'IA</h3>
+    <ul class="interdit">
+      <li>Le prénom, le nom, la date de naissance ou l'école de l'enfant</li>
+      <li>Une photographie de l'enfant, y compris pour « faire ressemblant »</li>
+      <li>Le compte rendu, l'ordonnance ou le PAI numérisés tels quels</li>
+      <li>Une pathologie rare associée à une commune ou à un établissement, qui rend l'enfant identifiable</li>
+    </ul>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <h2>Questions fréquentes</h2>
+
+  <details>
+    <summary>Combien de temps cela prend-il vraiment ?</summary>
+    <p>Dix à quinze minutes la première fois, le temps de générer la fiche de personnage et de calibrer le style. Ensuite trois minutes, puisque vous ne régénérez que les cases 3 et 6 et que vous réutilisez les autres.</p>
+  </details>
+
+  <details>
+    <summary>Puis-je réutiliser la même planche pour plusieurs patients ?</summary>
+    <p>Oui pour les cases 1, 2, 4 et 5, qui sont génériques. Non pour les cases 3 et 6, qui portent toute la personnalisation. Une planche entièrement générique redevient une affiche.</p>
+  </details>
+
+  <details>
+    <summary>Ai-je le droit de remettre une image générée par IA à un patient ?</summary>
+    <p>Oui, à condition d'en assumer le contenu. Vous êtes l'auteur du document que vous signez. Les obligations européennes de transparence sur les contenus générés artificiellement, applicables à partir du 2 août 2026, invitent en outre à le mentionner, ce que fait le pied de page proposé.</p>
+  </details>
+
+  <details>
+    <summary>Le modèle peut-il dessiner un geste médicalement faux ?</summary>
+    <p>Oui, régulièrement. Inhalateur tenu à l'envers, chambre d'inhalation absente, position assise remplacée par une position allongée. C'est précisément l'objet des six contrôles.</p>
+  </details>
+
+  <details>
+    <summary>Faut-il un abonnement payant ?</summary>
+    <p>Les modèles d'images grand public proposent un usage gratuit limité en nombre de générations par jour. Pour un usage régulier en consultation, un abonnement est plus confortable, mais la méthode ne change pas.</p>
+  </details>
+
+  <details>
+    <summary>Et si je préfère un autre outil que celui cité dans le livre ?</summary>
+    <p>Les prompts de cette page sont volontairement génériques : ils fonctionnent sur n'importe quel modèle d'images capable de tenir un personnage constant. C'est la structure des six cases qui porte la valeur, pas la marque de l'outil.</p>
+  </details>
+</section>
+
+<!-- SOURCES -->
+<section id="sources">
+  <h2>Sources</h2>
+  <table class="tableau">
+    <thead><tr><th>Élément</th><th>Source</th></tr></thead>
+    <tbody>
+      <tr><td>40 à 80 % de l'information médicale oubliée immédiatement, environ la moitié du reste mémorisé de façon erronée</td><td>Kessels RPC, Journal of the Royal Society of Medicine, 2003</td></tr>
+      <tr><td>Rappel des consignes orales de 14 % seul, jusqu'à 85 % avec pictogrammes</td><td>Houts PS et coll., Patient Education and Counseling, 1998 et 2001</td></tr>
+      <tr><td>Enfant de 6 à 11 ans : pas de bêta-2 de courte durée seul, traitement contenant un corticoïde inhalé pour tous. Traitement de secours possible avant l'effort</td><td>Global Initiative for Asthma, rapport 2026 et guide de synthèse</td></tr>
+      <tr><td>Cadre du projet d'accueil individualisé</td><td>Circulaire du 10 février 2021, Bulletin officiel de l'Éducation nationale n° 9</td></tr>
+      <tr><td>L'asthme représente environ 43 % des PAI, un tiers des enfants asthmatiques ont une limitation de l'activité sportive</td><td>La Revue du Praticien, 2026</td></tr>
+      <tr><td>Filigrane invisible SynthID sur les images générées par les modèles Google</td><td>Google DeepMind, documentation produit</td></tr>
+      <tr><td>Transparence des contenus générés par IA, application à partir du 2 août 2026</td><td>Règlement (UE) 2024/1689</td></tr>
+      <tr><td>Méthode A.V.E.C.</td><td>Haute Autorité de santé, recommandations sur l'IA générative en santé, 30 octobre 2025</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<footer>
+  <p><strong>L'IA Minute du Médecin</strong>, Dr Guillaume Zagury et Samuel De Queiroz, Éditions Medicilline.</p>
+  <p>Ressource compagnon de la double page consacrée aux supports patients illustrés. Contenu clinique aligné sur les recommandations en vigueur à la date de mise à jour indiquée en haut de page. Cette ressource ne se substitue ni au plan d'action personnalisé, ni à l'ordonnance, ni à l'éducation thérapeutique délivrée en consultation.</p>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var chips = document.querySelectorAll("nav button[data-cible]");
+  Array.prototype.forEach.call(chips, function(btn){
+    btn.addEventListener("click", function(){
+      var cible = document.getElementById(btn.getAttribute("data-cible"));
+      if(cible){ cible.scrollIntoView({ behavior:"smooth", block:"start" }); }
+    });
+  });
+
+  var controles = document.querySelectorAll("[data-controle]");
+  var barre = document.getElementById("jauge-barre");
+  var compteur = document.getElementById("jauge-compteur");
+  var total = controles.length;
+
+  function maj(){
+    var faits = 0;
+    Array.prototype.forEach.call(controles, function(c){
+      var box = c.querySelector("input[type=checkbox]");
+      if(box && box.checked){ faits++; c.classList.add("fait"); }
+      else { c.classList.remove("fait"); }
+    });
+    barre.style.width = (faits/total*100) + "%";
+    barre.style.background = (faits === total) ? "#27AE60" : "#DC322F";
+    compteur.textContent = faits + " / " + total;
+  }
+
+  Array.prototype.forEach.call(controles, function(c){
+    var box = c.querySelector("input[type=checkbox]");
+    if(box){ box.addEventListener("change", maj); }
+  });
+  maj();
+
+  var boutons = document.querySelectorAll(".copier");
+  Array.prototype.forEach.call(boutons, function(btn){
+    btn.addEventListener("click", function(){
+      var bloc = btn.closest(".bloc");
+      var pre = bloc ? bloc.querySelector("pre") : null;
+      if(!pre){ return; }
+      var texte = pre.textContent;
+      var fini = function(){
+        btn.textContent = "Copié";
+        btn.classList.add("ok");
+        setTimeout(function(){ btn.textContent = "Copier"; btn.classList.remove("ok"); }, 1800);
+      };
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(texte).then(fini, function(){ secours(texte, fini); });
+      } else { secours(texte, fini); }
+    });
+  });
+
+  function secours(texte, fini){
+    var zone = document.createElement("textarea");
+    zone.value = texte;
+    zone.setAttribute("readonly","");
+    zone.style.position = "absolute";
+    zone.style.left = "-9999px";
+    document.body.appendChild(zone);
+    zone.select();
+    try { document.execCommand("copy"); fini(); } catch(e){}
+    document.body.removeChild(zone);
+  }
+})();
+</script>
+</body>
+</html>

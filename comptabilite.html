@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Le tableau de bord du cabinet · L'IA Minute du Médecin</title>
+<meta name="description" content="Ressource compagnon du livre L'IA Minute du Médecin : préparer son fichier comptable, les prompts d'analyse prêts à copier, le prompt d'infographie et les contrôles avant de croire un chiffre.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Fira+Sans+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --rouge:#DC322F;--noir:#1A1A1A;--blanc:#FFFFFF;--jaune:#FFD700;
+  --bleu:#3498DB;--orange:#F39C12;--vert:#27AE60;--violet:#8E44AD;--teal:#1ABC9C;
+  --gris:#BDC3C7;--gris-clair:#F4F5F6;--gris-ligne:#E1E4E6;--gris-texte:#5A6268;
+}
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{margin:0;background:var(--blanc);color:var(--noir);font-family:"Fira Sans Condensed","Roboto Condensed",Arial,sans-serif;font-size:17px;line-height:1.5;}
+.page{max-width:720px;margin:0 auto;padding:0 18px 80px;}
+h1,h2,h3,h4{font-family:"Oswald","Arial Narrow",Arial,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.2px;}
+p{margin:0 0 14px;}
+
+header{padding:26px 0 8px;}
+.eyebrow{display:inline-block;font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:var(--blanc);background:var(--noir);padding:5px 11px;}
+h1{font-size:33px;line-height:1.06;margin:14px 0 0;}
+h1 mark{background:var(--jaune);color:var(--noir);padding:0 5px;}
+.sous-titre{font-family:"Fira Sans Condensed",Arial,sans-serif;font-style:italic;font-weight:600;color:var(--rouge);font-size:19px;margin:10px 0 0;text-transform:none;}
+.trait{height:4px;background:var(--rouge);margin:16px 0 22px;}
+.meta{font-size:14px;color:var(--gris-texte);margin:0 0 22px;}
+
+.flash{border:3px solid var(--rouge);border-radius:14px;padding:16px 18px;margin:0 0 26px;}
+.flash h2{font-size:19px;margin:0 0 10px;color:var(--rouge);}
+.flash ul{margin:0;padding-left:20px;}
+.flash li{margin-bottom:9px;}
+
+nav{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 34px;}
+nav button{font-family:"Oswald",Arial,sans-serif;font-weight:500;font-size:13px;letter-spacing:.6px;text-transform:uppercase;background:var(--gris-clair);color:var(--noir);border:2px solid var(--gris-ligne);border-radius:999px;padding:7px 13px;cursor:pointer;}
+nav button:hover{background:var(--noir);color:var(--blanc);border-color:var(--noir);}
+nav button:focus-visible{outline:3px solid var(--rouge);outline-offset:2px;}
+
+section{border-top:2px solid var(--gris-ligne);padding-top:26px;margin-top:34px;scroll-margin-top:14px;}
+section > h2{font-size:25px;margin:0 0 4px;line-height:1.1;}
+.chapeau{color:var(--gris-texte);font-size:16px;margin:0 0 20px;}
+h3{font-size:19px;margin:26px 0 8px;}
+
+.etape{display:flex;gap:14px;border:2px solid var(--gris-ligne);border-radius:14px;padding:14px;margin-bottom:12px;}
+.pastille{flex:0 0 42px;height:42px;border-radius:50%;color:var(--blanc);font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:19px;display:flex;align-items:center;justify-content:center;}
+.p-bleu{background:var(--bleu);}.p-orange{background:var(--orange);}.p-vert{background:var(--vert);}.p-violet{background:var(--violet);}
+.etape-corps{flex:1;min-width:0;}
+.etape h4{font-size:17px;margin:4px 0 6px;}
+.etape p{font-size:16px;margin:0 0 8px;}
+.etape p:last-child{margin-bottom:0;}
+.piege{font-size:15px;background:var(--gris-clair);border-left:4px solid var(--orange);padding:8px 10px;margin:0;}
+.piege b{font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:13px;letter-spacing:.6px;color:var(--orange);}
+
+.onglets{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px;}
+.onglets button{font-family:"Oswald",Arial,sans-serif;font-weight:500;font-size:13px;letter-spacing:.6px;text-transform:uppercase;background:var(--blanc);color:var(--noir);border:2px solid var(--noir);border-radius:8px;padding:7px 12px;cursor:pointer;}
+.onglets button[aria-selected="true"]{background:var(--noir);color:var(--blanc);}
+.onglets button:focus-visible{outline:3px solid var(--rouge);outline-offset:2px;}
+.panneau[hidden]{display:none;}
+
+.bloc{border:2px solid var(--gris-ligne);border-radius:14px;overflow:hidden;margin:0 0 16px;}
+.bloc-tete{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--gris-clair);padding:10px 12px;border-bottom:2px solid var(--gris-ligne);}
+.bloc-tete h4{margin:0;font-size:15px;}
+.copier{font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:12px;letter-spacing:.8px;text-transform:uppercase;background:var(--rouge);color:var(--blanc);border:none;border-radius:6px;padding:7px 12px;cursor:pointer;white-space:nowrap;}
+.copier.ok{background:var(--vert);}
+.copier:focus-visible{outline:3px solid var(--noir);outline-offset:2px;}
+pre{margin:0;padding:14px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px;line-height:1.5;white-space:pre-wrap;word-wrap:break-word;}
+.badge{display:inline-block;background:var(--gris);color:var(--noir);border-radius:5px;font-family:"Oswald",Arial,sans-serif;font-size:11.5px;letter-spacing:.7px;text-transform:uppercase;padding:3px 8px;margin:0 6px 6px 0;}
+
+.tableau{width:100%;border-collapse:collapse;font-size:15px;margin:0 0 18px;}
+.tableau th,.tableau td{border:1px solid var(--gris-ligne);padding:8px 10px;text-align:left;vertical-align:top;}
+.tableau th{background:var(--noir);color:var(--blanc);font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:13px;letter-spacing:.5px;}
+.tableau tr:nth-child(even) td{background:var(--gris-clair);}
+
+.controle{display:flex;gap:12px;border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;margin-bottom:10px;}
+.controle.fait{border-color:var(--vert);background:#F3FBF6;}
+.controle input{width:22px;height:22px;accent-color:var(--vert);cursor:pointer;flex:0 0 22px;margin-top:2px;}
+.controle h4{margin:0 0 4px;font-size:16px;}
+.controle p{margin:0;font-size:15.5px;}
+.progression{display:flex;align-items:center;gap:12px;margin:0 0 18px;border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;}
+.jauge{flex:1;height:12px;background:var(--gris-ligne);border-radius:999px;overflow:hidden;}
+.jauge span{display:block;height:100%;width:0;background:var(--rouge);transition:width .25s ease;}
+.compteur{font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:16px;white-space:nowrap;}
+
+.zone-rouge{border:3px solid var(--rouge);border-radius:14px;padding:16px 18px;margin:18px 0;}
+.zone-rouge h3{margin-top:0;color:var(--rouge);}
+.interdit{list-style:none;padding:0;margin:0;}
+.interdit li{padding-left:26px;position:relative;margin-bottom:8px;}
+.interdit li::before{content:"\00d7";position:absolute;left:0;top:-2px;color:var(--rouge);font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:22px;line-height:1;}
+
+.banniere{background:var(--rouge);color:var(--blanc);border-radius:14px;padding:18px 20px;margin:26px 0;}
+.banniere p{margin:0;font-family:"Oswald",Arial,sans-serif;font-size:19px;line-height:1.25;text-transform:uppercase;}
+.banniere small{display:block;font-family:"Fira Sans Condensed",Arial,sans-serif;text-transform:none;font-size:15px;margin-top:8px;opacity:.95;}
+
+details{border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;margin-bottom:10px;}
+details[open]{border-color:var(--noir);}
+summary{cursor:pointer;font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:16px;text-transform:uppercase;letter-spacing:.3px;}
+summary::-webkit-details-marker{display:none;}
+summary::before{content:"+ ";color:var(--rouge);font-weight:700;}
+details[open] summary::before{content:"\2212 ";}
+details p{margin:10px 0 0;font-size:16px;}
+
+footer{border-top:4px solid var(--noir);margin-top:44px;padding-top:18px;font-size:14px;color:var(--gris-texte);}
+footer strong{color:var(--noir);}
+
+@media (max-width:520px){
+  body{font-size:16px;}h1{font-size:27px;}section > h2{font-size:21px;}
+  .tableau{font-size:14px;}pre{font-size:12.5px;}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none !important;scroll-behavior:auto !important;}}
+</style>
+</head>
+<body>
+<div class="page">
+
+<header>
+  <span class="eyebrow">Ressource compagnon · L'IA Minute du Médecin</span>
+  <h1>Le tableau de bord <mark>de votre cabinet</mark></h1>
+  <p class="sous-titre">Préparer le fichier, poser les bonnes questions, produire la page de synthèse. Et savoir ce que vous transmettez au moment où vous déposez le document.</p>
+  <div class="trait"></div>
+  <p class="meta">Mise à jour : 25 juillet 2026.</p>
+</header>
+
+<div class="flash">
+  <h2>À lire avant de déposer votre fichier</h2>
+  <ul>
+    <li><strong>Déposer un fichier, c'est le transmettre.</strong> Vos écritures partent chez un prestataire. Deux options, pas trois : soit vous utilisez un compte professionnel dont le contrat interdit l'utilisation de vos contenus pour l'entraînement des modèles, soit vous nettoyez le fichier avant de le déposer. Le compte grand public gratuit n'est pas une option pour un fichier de cabinet.</li>
+    <li><strong>Le danger n'est pas dans les montants, il est dans les noms.</strong> Un total de charges n'identifie personne. Un livre de recettes nominatif, si. Et selon la doctrine de la CNIL, une donnée devient une donnée de santé par simple croisement : le nom d'une personne associé à la patientèle d'un spécialiste peut révéler sa pathologie. La colonne des noms se supprime avant, pas après.</li>
+    <li><strong>Une échéance à ne pas manquer :</strong> depuis le 1er septembre 2026, tout assujetti à la TVA établi en France doit être en mesure de <strong>recevoir</strong> des factures électroniques, y compris les cabinets dont les actes sont exonérés. L'obligation d'émettre concerne les activités assujetties et arrive au 1er septembre 2027 pour les petites structures. Vos fournisseurs, eux, basculent maintenant.</li>
+  </ul>
+</div>
+
+<nav aria-label="Sommaire">
+  <button type="button" data-cible="preparer">Préparer le fichier</button>
+  <button type="button" data-cible="analyses">Les prompts d'analyse</button>
+  <button type="button" data-cible="infographie">L'infographie</button>
+  <button type="button" data-cible="verifier">Vérifier les chiffres</button>
+  <button type="button" data-cible="comptable">Votre comptable</button>
+  <button type="button" data-cible="controles">Avant de déposer</button>
+  <button type="button" data-cible="faq">Questions</button>
+  <button type="button" data-cible="sources">Sources</button>
+</nav>
+
+<!-- PREPARER -->
+<section id="preparer">
+  <h2>Préparer le fichier : dix minutes qui décident de tout</h2>
+  <p class="chapeau">La qualité de l'analyse dépend entièrement de la propreté du tableau déposé. Un export brut de logiciel donne une analyse brouillonne.</p>
+
+  <div class="etape">
+    <div class="pastille p-bleu">1</div>
+    <div class="etape-corps">
+      <h4>Partez de l'export, pas du PDF</h4>
+      <p>Demandez à votre comptable, ou exportez depuis votre logiciel de gestion, le <strong>grand livre ou le journal des écritures au format tableur</strong>. Le bilan en PDF sert à contrôler les totaux à la fin, il ne sert pas à analyser : il ne contient que des agrégats déjà figés.</p>
+      <p class="piege"><b>Piège</b> : déposer les deux exercices dans deux fichiers différents et espérer une comparaison. Une seule feuille, avec une colonne exercice, donne de bien meilleurs résultats.</p>
+    </div>
+  </div>
+
+  <div class="etape">
+    <div class="pastille p-orange">2</div>
+    <div class="etape-corps">
+      <h4>Supprimez quatre colonnes, systématiquement</h4>
+      <p>Avant tout dépôt : la colonne des <strong>noms de patients</strong>, les <strong>coordonnées bancaires</strong> quelles qu'elles soient, les <strong>identifiants de salariés</strong> ou de remplaçants (numéro de sécurité sociale, adresse, date de naissance), et toute colonne de commentaire libre, qui contient souvent bien plus que ce que vous croyez.</p>
+      <p class="piege"><b>Piège</b> : masquer une colonne au lieu de la supprimer. Une colonne masquée reste dans le fichier et sera lue. Supprimez, puis enregistrez sous un nouveau nom.</p>
+    </div>
+  </div>
+
+  <div class="etape">
+    <div class="pastille p-vert">3</div>
+    <div class="etape-corps">
+      <h4>Une ligne par écriture, une colonne par information</h4>
+      <p>La structure qui fonctionne : <strong>date, libellé, catégorie, montant, sens, exercice</strong>. Rien de plus. Pas de ligne de sous-total au milieu du tableau, pas de cellule fusionnée, pas de titre sur trois lignes en haut. Les totaux se recalculent, ils ne se déposent pas.</p>
+      <p class="piege"><b>Piège</b> : les montants stockés en texte, avec un espace ou un symbole monétaire dans la cellule. Ils faussent tous les calculs sans provoquer d'erreur visible.</p>
+    </div>
+  </div>
+
+  <div class="etape">
+    <div class="pastille p-violet">4</div>
+    <div class="etape-corps">
+      <h4>Nommez le fichier pour ce qu'il est</h4>
+      <p><strong>cabinet-ecritures-2025-anonymise.xlsx</strong>. Le mot anonymisé dans le nom du fichier n'est pas décoratif : c'est ce qui vous évitera, dans six mois, de déposer par erreur la version d'origine restée dans le même dossier.</p>
+      <p class="piege"><b>Piège</b> : conserver l'original et la version nettoyée au même endroit sans les distinguer. Rangez la version nettoyée dans un dossier dédié.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ANALYSES -->
+<section id="analyses">
+  <h2>Les prompts d'analyse</h2>
+  <p class="chapeau">Dans l'ordre. Le premier contrôle le fichier, les suivants l'exploitent. Ils fonctionnent avec tout assistant capable de lire un tableur et d'exécuter des calculs.</p>
+
+  <div class="onglets" role="tablist">
+    <button type="button" role="tab" aria-selected="true" data-panneau="p-controle">Contrôle</button>
+    <button type="button" role="tab" aria-selected="false" data-panneau="p-bord">Tableau de bord</button>
+    <button type="button" role="tab" aria-selected="false" data-panneau="p-derive">Ce qui dérive</button>
+    <button type="button" role="tab" aria-selected="false" data-panneau="p-treso">Trésorerie</button>
+  </div>
+
+  <div class="panneau" id="p-controle">
+    <div class="bloc">
+      <div class="bloc-tete"><h4>1. Vérifier le fichier avant de l'exploiter</h4><button type="button" class="copier">Copier</button></div>
+      <pre>Voici le fichier des écritures comptables de mon cabinet. Avant toute analyse, contrôle-le et rends-moi un rapport court.
+
+Vérifie et signale :
+- Le nombre de lignes lues, et la période réellement couverte (première et dernière date).
+- Les montants stockés en texte plutôt qu'en nombre.
+- Les doublons exacts, et les doublons probables (même date, même montant, libellé proche).
+- Les lignes sans catégorie, sans date ou sans montant.
+- Les valeurs aberrantes : montants isolés d'un ordre de grandeur inhabituel, montants négatifs dans une colonne de recettes.
+- Les libellés qui contiennent un nom de personne, une adresse ou un numéro : je veux les repérer pour les retirer.
+
+Ne corrige rien de toi-même. Liste les anomalies avec le numéro de ligne, je décide de ce que je fais.</pre>
+    </div>
+  </div>
+
+  <div class="panneau" id="p-bord" hidden>
+    <div class="bloc">
+      <div class="bloc-tete"><h4>2. Le tableau de bord de l'exercice</h4><button type="button" class="copier">Copier</button></div>
+      <pre>À partir de ce fichier uniquement, construis le tableau de bord de mon cabinet pour l'exercice [année].
+
+Produis, dans cet ordre :
+1. RECETTES : total, et répartition par catégorie en euros et en pourcentage.
+2. CHARGES : total, et les postes classés du plus lourd au plus léger, en euros et en pourcentage des recettes.
+3. RÉSULTAT : recettes moins charges, et taux de marge.
+4. COMPARAISON avec [année précédente] : variation en euros et en pourcentage, poste par poste.
+5. RATIOS : charges sur recettes, poids des charges fixes, poids des charges sociales, recettes par mois travaillé.
+
+Règles :
+- Tous les montants en euros, arrondis à l'euro, sans symbole dans les cellules de calcul.
+- Précise pour chaque total le nombre de lignes agrégées, pour que je puisse recouper.
+- Si une catégorie est ambiguë, tu me demandes avant de la ranger quelque part.
+- Tu n'inventes aucune donnée manquante. Une case sans information reste vide, jamais estimée.
+
+Termine par un encadré "Ce que je ne peux pas calculer avec ce fichier".</pre>
+    </div>
+  </div>
+
+  <div class="panneau" id="p-derive" hidden>
+    <div class="bloc">
+      <div class="bloc-tete"><h4>3. Les postes qui dérivent</h4><button type="button" class="copier">Copier</button></div>
+      <pre>Compare les deux exercices présents dans le fichier et identifie les trois postes de charges qui ont le plus augmenté, en valeur absolue puis en pourcentage. Les deux classements ne donnent pas les mêmes postes : montre-moi les deux.
+
+Pour chacun des trois :
+- Le montant des deux exercices et l'écart.
+- Le détail des lignes qui composent l'écart, avec les dates.
+- L'hypothèse la plus probable pour expliquer la hausse, formulée comme une hypothèse à vérifier, pas comme une conclusion.
+
+Ensuite seulement, propose des pistes d'optimisation. Pour chaque piste, indique l'économie annuelle estimée et ce qu'elle suppose de renoncer. Signale explicitement celles qui relèvent d'un arbitrage fiscal ou juridique : je les soumettrai à mon comptable, pas à toi.</pre>
+    </div>
+  </div>
+
+  <div class="panneau" id="p-treso" hidden>
+    <div class="bloc">
+      <div class="bloc-tete"><h4>4. Saisonnalité et trésorerie</h4><button type="button" class="copier">Copier</button></div>
+      <pre>À partir des dates du fichier, analyse la saisonnalité de mon activité.
+
+1. Recettes par mois, sur les deux exercices, avec le pourcentage que chaque mois représente dans l'année.
+2. Les mois où les charges dépassent les recettes.
+3. Le décalage entre les pics de charges (cotisations, échéances, achats) et les creux de recettes.
+4. Le montant de trésorerie qu'il faudrait avoir constitué avant chaque mois difficile pour absorber le décalage, sur la base des deux années observées.
+
+Présente le tout dans un tableau mensuel unique, plus trois phrases de lecture. Aucune projection au delà des données fournies : si tu extrapoles, tu le signales sur la ligne concernée.</pre>
+    </div>
+  </div>
+</section>
+
+<!-- INFOGRAPHIE -->
+<section id="infographie">
+  <h2>La page de synthèse</h2>
+  <p class="chapeau">Une fois les chiffres validés, la restitution visuelle se génère en une fois. Le principe : vous ne redonnez pas le fichier, vous donnez les chiffres déjà vérifiés.</p>
+
+  <div class="bloc">
+    <div class="bloc-tete"><h4>Prompt d'infographie, chiffres à injecter</h4><button type="button" class="copier">Copier</button></div>
+    <pre>Create a single-page financial dashboard infographic, vertical format, for a French medical practice. All text in French, exactly as written below, no other text.
+
+Title: "RÉCAPITULATIF EXERCICE [année]", subtitle "[type de cabinet]".
+
+Section 1, "CHIFFRE D'AFFAIRES": a donut chart showing [montant] euros, and next to it a breakdown panel with [catégorie 1] [x] percent, [catégorie 2] [x] percent, [catégorie 3] [x] percent. Show the year on year change as [+/- x] percent with an arrow.
+
+Section 2, "CHARGES D'EXPLOITATION": a donut chart with the total [montant] euros at its centre, surrounded by labelled items: [poste 1] [montant] euros, [poste 2] [montant] euros, [poste 3] [montant] euros, [poste 4] [montant] euros.
+
+Section 3, "RÉSULTAT": a horizontal flow of four boxes connected by arrows: "RÉSULTAT BRUT [montant]", "CHARGES SOCIALES [montant]", "IMPÔT ESTIMÉ [montant]", "REVENU NET [montant]".
+
+Section 4, "TRÉSORERIE": two figures side by side, current and projected.
+
+Section 5, "OBJECTIFS [année suivante]": three short labelled items with check icons.
+
+Style: flat 2D vector, bold condensed sans-serif, dark navy background with white text, one accent colour per section, simple line icons, no photographs, no gradients, no 3D, no drop shadows, print ready.
+
+Important: reproduce the figures exactly as given. Do not compute, do not round, do not add any figure that is not in this brief.</pre>
+  </div>
+
+  <p><strong>La règle qui évite le pire :</strong> ne demandez jamais à un générateur d'images de calculer quoi que ce soit. Il dessine des chiffres, il ne les vérifie pas. Les montants sortent de votre analyse validée, et vous relisez chacun d'eux sur l'image finale, un par un.</p>
+
+  <p><strong>Où l'afficher :</strong> dans votre bureau, pas en salle d'attente. Ces chiffres regardent votre associé, votre comptable et vous.</p>
+</section>
+
+<!-- VERIFIER -->
+<section id="verifier">
+  <h2>Les cinq contrôles avant de croire un chiffre</h2>
+  <p class="chapeau">Un assistant qui exécute du code se trompe rarement de calcul. Il se trompe de colonne, de période ou de convention. Ces erreurs-là sont invisibles dans une belle présentation.</p>
+
+  <table class="tableau">
+    <thead><tr><th>Contrôle</th><th>Comment le faire en dix secondes</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Le total</strong></td><td>Comparez le total des recettes annoncé avec celui du bilan de votre comptable. S'ils diffèrent, tout le reste est faux.</td></tr>
+      <tr><td><strong>La période</strong></td><td>Demandez la première et la dernière date lues. Un exercice tronqué de deux mois produit des ratios parfaitement cohérents et parfaitement faux.</td></tr>
+      <tr><td><strong>Le nombre de lignes</strong></td><td>Comparez le nombre de lignes lues au nombre de lignes du fichier. Un tableur mal fermé, une ligne de titre prise pour une donnée, et l'écart apparaît ici.</td></tr>
+      <tr><td><strong>Les conventions</strong></td><td>Hors taxes ou toutes taxes comprises, charges sociales incluses ou non dans les charges, prélèvements personnels comptés ou non. Faites expliciter chaque convention retenue.</td></tr>
+      <tr><td><strong>Un poste au hasard</strong></td><td>Prenez une catégorie et demandez le détail des lignes qui la composent. Recoupez trois d'entre elles dans le fichier d'origine. C'est le contrôle qui attrape les erreurs de rangement.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- COMPTABLE -->
+<section id="comptable">
+  <h2>Ce qui reste au comptable</h2>
+  <p class="chapeau">L'analyse vous rend lecteur de vos chiffres. Elle ne vous rend ni comptable, ni fiscaliste, et elle n'engage personne.</p>
+
+  <table class="tableau">
+    <thead><tr><th>Vous, avec l'IA</th><th>Votre comptable</th></tr></thead>
+    <tbody>
+      <tr><td>Comprendre la structure de vos charges et leur évolution</td><td>La tenue, la déclaration, et la responsabilité de ce qui est déposé</td></tr>
+      <tr><td>Repérer un poste qui dérive et poser la question</td><td>Le traitement fiscal correct de ce poste</td></tr>
+      <tr><td>Simuler l'effet d'une décision sur votre trésorerie</td><td>Les arbitrages de statut, d'amortissement, de rémunération</td></tr>
+      <tr><td>Arriver au rendez-vous annuel avec des questions précises</td><td>Les réponses, et l'engagement professionnel qui va avec</td></tr>
+    </tbody>
+  </table>
+
+  <div class="bloc">
+    <div class="bloc-tete"><h4>Préparer votre rendez-vous annuel</h4><button type="button" class="copier">Copier</button></div>
+    <pre>À partir de l'analyse que tu viens de produire, prépare-moi une liste de 8 questions à poser à mon expert-comptable lors du bilan annuel.
+
+Critères :
+- Chaque question porte sur un chiffre précis de mon analyse, que tu rappelles entre parenthèses.
+- Quatre questions sur les charges et leur traitement.
+- Deux questions sur ma rémunération et ma trésorerie.
+- Deux questions sur ce que je pourrais anticiper pour l'exercice suivant.
+- Formulation directe, une phrase par question, sans jargon comptable approximatif.
+
+N'y mets aucune recommandation fiscale. Ce sont des questions, pas des réponses.</pre>
+  </div>
+</section>
+
+<!-- CONTROLES -->
+<section id="controles">
+  <h2>Avant de déposer le fichier</h2>
+  <p class="chapeau">Cinq vérifications. La deuxième est celle que tout le monde oublie.</p>
+
+  <div class="progression">
+    <div class="jauge"><span id="jauge-barre"></span></div>
+    <div class="compteur" id="jauge-compteur">0 / 5</div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Aucune colonne de noms de personnes</h4>
+    <p>Patients, salariés, remplaçants, prêteurs. Supprimées, pas masquées.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Les libellés d'écritures ont été relus</h4>
+    <p>C'est là que se cachent les noms oubliés : « chèque Mme X », « virement cabinet Y ». La colonne des libellés est le point aveugle du nettoyage.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Aucune coordonnée bancaire, aucun identifiant</h4>
+    <p>Ni le vôtre, ni celui d'un tiers. Un fichier comptable en contient plus souvent qu'on ne l'imagine.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Je sais sur quel compte je dépose</h4>
+    <p>Compte professionnel avec engagement contractuel, ou compte grand public sans garantie. Ce n'est pas la même décision, et elle se prend avant le dépôt.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Les onglets cachés du classeur ont été vérifiés</h4>
+    <p>Un classeur déposé emporte tous ses onglets, y compris celui que vous aviez oublié.</p></div>
+  </div>
+
+  <div class="zone-rouge">
+    <h3>Ce qui ne se dépose jamais</h3>
+    <ul class="interdit">
+      <li>Le livre des recettes nominatif, avec les noms des patients en regard des montants</li>
+      <li>Un export de votre logiciel de cabinet, quel qu'il soit</li>
+      <li>Les bulletins de salaire de votre secrétaire ou de vos remplaçants</li>
+      <li>Vos relevés bancaires complets, qui identifient à la fois vos patients et vos dépenses privées</li>
+    </ul>
+  </div>
+
+  <div class="banniere">
+    <p>Les totaux ne trahissent personne. Les noms, si.
+    <small>Selon la CNIL, une information devient une donnée de santé dès lors qu'elle permet, par croisement, de tirer une conclusion sur l'état de santé d'une personne. Le nom d'un patient en face d'un montant, dans le fichier d'un spécialiste, entre dans ce cas.</small></p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <h2>Questions fréquentes</h2>
+
+  <details>
+    <summary>Puis-je simplement déposer le PDF du bilan que m'envoie mon comptable ?</summary>
+    <p>Oui, et c'est même le dépôt le plus sûr : un bilan ne contient que des agrégats, aucun nom. L'analyse sera en revanche plus pauvre, puisque vous n'aurez pas le détail des écritures. Beaucoup de médecins commencent par là, ce qui est une bonne façon de tester la méthode sans risque.</p>
+  </details>
+
+  <details>
+    <summary>Mes données comptables sont-elles des données de santé ?</summary>
+    <p>Les montants, non. Le détail nominatif des recettes, oui, par croisement. C'est la raison pour laquelle le nettoyage porte sur les noms et les libellés, et pas sur les chiffres.</p>
+  </details>
+
+  <details>
+    <summary>Le compte gratuit suffit-il si le fichier est bien anonymisé ?</summary>
+    <p>Un fichier réellement anonymisé sort du champ des données personnelles. Restent vos données d'entreprise, qui n'ont rien à faire dans un service où vos contenus peuvent alimenter l'amélioration des modèles. Pour un usage régulier, l'offre professionnelle est le bon niveau.</p>
+  </details>
+
+  <details>
+    <summary>L'assistant peut-il se tromper dans les calculs ?</summary>
+    <p>Rarement dans l'opération elle-même quand il exécute du code, régulièrement dans le choix de la colonne, de la période ou de la convention. D'où les cinq contrôles, qui portent tous sur le cadrage et non sur l'arithmétique.</p>
+  </details>
+
+  <details>
+    <summary>Puis-je faire la même chose sur un cabinet de groupe ?</summary>
+    <p>Oui, et l'intérêt est plus grand encore : la répartition des charges communes et la contribution de chacun deviennent lisibles. Prévenez vos associés avant de déposer un fichier qui les concerne, c'est aussi leur activité qui est dans le tableau.</p>
+  </details>
+
+  <details>
+    <summary>Cela remplace-t-il un logiciel de gestion ?</summary>
+    <p>Non. Un logiciel tient vos comptes en continu et produit des documents opposables. Cette méthode produit une lecture, une fois par an ou par trimestre. Les deux ne jouent pas au même endroit.</p>
+  </details>
+</section>
+
+<!-- SOURCES -->
+<section id="sources">
+  <h2>Sources</h2>
+  <table class="tableau">
+    <thead><tr><th>Élément</th><th>Source</th></tr></thead>
+    <tbody>
+      <tr><td>Trois catégories de données de santé, dont celles qui le deviennent par croisement</td><td>CNIL, « Qu'est-ce qu'une donnée de santé ? »</td></tr>
+      <tr><td>Données de santé, catégorie particulière</td><td>RGPD, article 9</td></tr>
+      <tr><td>Obligation de réception des factures électroniques pour tous les assujettis à la TVA au 1er septembre 2026, y compris en cas d'opérations exonérées</td><td>Réforme de la facturation électronique, calendrier officiel</td></tr>
+      <tr><td>Obligation d'émission au 1er septembre 2027 pour les petites structures, sur les activités assujetties</td><td>Réforme de la facturation électronique, calendrier officiel</td></tr>
+      <tr><td>Cas des activités mixtes : expertise judiciaire, formation, prestations hors soins</td><td>Doctrine fiscale applicable aux professions libérales de santé, 2026</td></tr>
+      <tr><td>Non-utilisation des contenus déposés pour l'entraînement sur les offres professionnelles sous contrat</td><td>Conditions et engagements contractuels des éditeurs concernés, 2026</td></tr>
+    </tbody>
+  </table>
+  <p class="chapeau">Les modalités de la facturation électronique et la liste des plateformes agréées évoluent. Vérifiez auprès de votre comptable ou du portail officiel avant toute décision d'équipement.</p>
+</section>
+
+<footer>
+  <p><strong>L'IA Minute du Médecin</strong>, Dr Guillaume Zagury et Samuel De Queiroz, Éditions Medicilline.</p>
+  <p>Ressource compagnon de la double page consacrée au pilotage du cabinet. Cette page décrit une méthode de lecture de vos propres chiffres. Elle ne constitue ni un conseil comptable, ni un conseil fiscal, et ne se substitue pas à votre expert-comptable.</p>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var chips = document.querySelectorAll("nav button[data-cible]");
+  Array.prototype.forEach.call(chips, function(btn){
+    btn.addEventListener("click", function(){
+      var cible = document.getElementById(btn.getAttribute("data-cible"));
+      if(cible){ cible.scrollIntoView({ behavior:"smooth", block:"start" }); }
+    });
+  });
+
+  var onglets = document.querySelectorAll(".onglets button[data-panneau]");
+  Array.prototype.forEach.call(onglets, function(btn){
+    btn.addEventListener("click", function(){
+      Array.prototype.forEach.call(onglets, function(autre){
+        autre.setAttribute("aria-selected", autre === btn ? "true" : "false");
+        var p = document.getElementById(autre.getAttribute("data-panneau"));
+        if(p){ p.hidden = (autre !== btn); }
+      });
+    });
+  });
+
+  var controles = document.querySelectorAll("[data-controle]");
+  var barre = document.getElementById("jauge-barre");
+  var compteur = document.getElementById("jauge-compteur");
+  var total = controles.length;
+
+  function maj(){
+    var faits = 0;
+    Array.prototype.forEach.call(controles, function(c){
+      var box = c.querySelector("input[type=checkbox]");
+      if(box && box.checked){ faits++; c.classList.add("fait"); }
+      else { c.classList.remove("fait"); }
+    });
+    barre.style.width = (faits/total*100) + "%";
+    barre.style.background = (faits === total) ? "#27AE60" : "#DC322F";
+    compteur.textContent = faits + " / " + total;
+  }
+
+  Array.prototype.forEach.call(controles, function(c){
+    var box = c.querySelector("input[type=checkbox]");
+    if(box){ box.addEventListener("change", maj); }
+  });
+  maj();
+
+  var boutons = document.querySelectorAll(".copier");
+  Array.prototype.forEach.call(boutons, function(btn){
+    btn.addEventListener("click", function(){
+      var bloc = btn.closest(".bloc");
+      var pre = bloc ? bloc.querySelector("pre") : null;
+      if(!pre){ return; }
+      var texte = pre.textContent;
+      var fini = function(){
+        btn.textContent = "Copié";
+        btn.classList.add("ok");
+        setTimeout(function(){ btn.textContent = "Copier"; btn.classList.remove("ok"); }, 1800);
+      };
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(texte).then(fini, function(){ secours(texte, fini); });
+      } else { secours(texte, fini); }
+    });
+  });
+
+  function secours(texte, fini){
+    var zone = document.createElement("textarea");
+    zone.value = texte;
+    zone.setAttribute("readonly","");
+    zone.style.position = "absolute";
+    zone.style.left = "-9999px";
+    document.body.appendChild(zone);
+    zone.select();
+    try { document.execCommand("copy"); fini(); } catch(e){}
+    document.body.removeChild(zone);
+  }
+})();
+</script>
+</body>
+</html>

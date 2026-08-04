@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Votre identité sonore · L'IA Minute du Médecin</title>
+<meta name="description" content="Ressource compagnon du livre L'IA Minute du Médecin : cinq prompts audio prêts à copier, le dossier de preuve des droits, et le cadre français de la diffusion en salle d'attente.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Fira+Sans+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --rouge:#DC322F;--noir:#1A1A1A;--blanc:#FFFFFF;--jaune:#FFD700;
+  --bleu:#3498DB;--orange:#F39C12;--vert:#27AE60;--violet:#8E44AD;--teal:#1ABC9C;
+  --gris:#BDC3C7;--gris-clair:#F4F5F6;--gris-ligne:#E1E4E6;--gris-texte:#5A6268;
+}
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{margin:0;background:var(--blanc);color:var(--noir);font-family:"Fira Sans Condensed","Roboto Condensed",Arial,sans-serif;font-size:17px;line-height:1.5;}
+.page{max-width:720px;margin:0 auto;padding:0 18px 80px;}
+h1,h2,h3,h4{font-family:"Oswald","Arial Narrow",Arial,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.2px;}
+p{margin:0 0 14px;}
+
+header{padding:26px 0 8px;}
+.eyebrow{display:inline-block;font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:var(--blanc);background:var(--noir);padding:5px 11px;}
+h1{font-size:33px;line-height:1.06;margin:14px 0 0;}
+h1 mark{background:var(--jaune);color:var(--noir);padding:0 5px;}
+.sous-titre{font-family:"Fira Sans Condensed",Arial,sans-serif;font-style:italic;font-weight:600;color:var(--rouge);font-size:19px;margin:10px 0 0;text-transform:none;}
+.trait{height:4px;background:var(--rouge);margin:16px 0 22px;}
+.meta{font-size:14px;color:var(--gris-texte);margin:0 0 22px;}
+
+.flash{border:3px solid var(--rouge);border-radius:14px;padding:16px 18px;margin:0 0 26px;}
+.flash h2{font-size:19px;margin:0 0 10px;color:var(--rouge);}
+.flash ul{margin:0;padding-left:20px;}
+.flash li{margin-bottom:9px;}
+
+nav{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 34px;}
+nav button{font-family:"Oswald",Arial,sans-serif;font-weight:500;font-size:13px;letter-spacing:.6px;text-transform:uppercase;background:var(--gris-clair);color:var(--noir);border:2px solid var(--gris-ligne);border-radius:999px;padding:7px 13px;cursor:pointer;}
+nav button:hover{background:var(--noir);color:var(--blanc);border-color:var(--noir);}
+nav button:focus-visible{outline:3px solid var(--rouge);outline-offset:2px;}
+
+section{border-top:2px solid var(--gris-ligne);padding-top:26px;margin-top:34px;scroll-margin-top:14px;}
+section > h2{font-size:25px;margin:0 0 4px;line-height:1.1;}
+.chapeau{color:var(--gris-texte);font-size:16px;margin:0 0 20px;}
+h3{font-size:19px;margin:26px 0 8px;}
+
+.onglets{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px;}
+.onglets button{font-family:"Oswald",Arial,sans-serif;font-weight:500;font-size:13px;letter-spacing:.6px;text-transform:uppercase;background:var(--blanc);color:var(--noir);border:2px solid var(--noir);border-radius:8px;padding:7px 12px;cursor:pointer;}
+.onglets button[aria-selected="true"]{background:var(--noir);color:var(--blanc);}
+.onglets button:focus-visible{outline:3px solid var(--rouge);outline-offset:2px;}
+.panneau[hidden]{display:none;}
+
+.bloc{border:2px solid var(--gris-ligne);border-radius:14px;overflow:hidden;margin:0 0 16px;}
+.bloc-tete{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--gris-clair);padding:10px 12px;border-bottom:2px solid var(--gris-ligne);}
+.bloc-tete h4{margin:0;font-size:15px;}
+.copier{font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:12px;letter-spacing:.8px;text-transform:uppercase;background:var(--rouge);color:var(--blanc);border:none;border-radius:6px;padding:7px 12px;cursor:pointer;white-space:nowrap;}
+.copier.ok{background:var(--vert);}
+.copier:focus-visible{outline:3px solid var(--noir);outline-offset:2px;}
+pre{margin:0;padding:14px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px;line-height:1.5;white-space:pre-wrap;word-wrap:break-word;}
+.badge{display:inline-block;background:var(--gris);color:var(--noir);border-radius:5px;font-family:"Oswald",Arial,sans-serif;font-size:11.5px;letter-spacing:.7px;text-transform:uppercase;padding:3px 8px;margin:0 6px 6px 0;}
+
+.tableau{width:100%;border-collapse:collapse;font-size:15px;margin:0 0 18px;}
+.tableau th,.tableau td{border:1px solid var(--gris-ligne);padding:8px 10px;text-align:left;vertical-align:top;}
+.tableau th{background:var(--noir);color:var(--blanc);font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:13px;letter-spacing:.5px;}
+.tableau tr:nth-child(even) td{background:var(--gris-clair);}
+
+.controle{display:flex;gap:12px;border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;margin-bottom:10px;}
+.controle.fait{border-color:var(--vert);background:#F3FBF6;}
+.controle input{width:22px;height:22px;accent-color:var(--vert);cursor:pointer;flex:0 0 22px;margin-top:2px;}
+.controle h4{margin:0 0 4px;font-size:16px;}
+.controle p{margin:0;font-size:15.5px;}
+.progression{display:flex;align-items:center;gap:12px;margin:0 0 18px;border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;}
+.jauge{flex:1;height:12px;background:var(--gris-ligne);border-radius:999px;overflow:hidden;}
+.jauge span{display:block;height:100%;width:0;background:var(--rouge);transition:width .25s ease;}
+.compteur{font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:16px;white-space:nowrap;}
+
+.zone-rouge{border:3px solid var(--rouge);border-radius:14px;padding:16px 18px;margin:18px 0;}
+.zone-rouge h3{margin-top:0;color:var(--rouge);}
+.interdit{list-style:none;padding:0;margin:0;}
+.interdit li{padding-left:26px;position:relative;margin-bottom:8px;}
+.interdit li::before{content:"\00d7";position:absolute;left:0;top:-2px;color:var(--rouge);font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:22px;line-height:1;}
+.obligatoire{list-style:none;padding:0;margin:0;}
+.obligatoire li{padding-left:26px;position:relative;margin-bottom:7px;}
+.obligatoire li::before{content:"\2713";position:absolute;left:0;top:0;color:var(--vert);font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:18px;line-height:1.1;}
+
+.banniere{background:var(--rouge);color:var(--blanc);border-radius:14px;padding:18px 20px;margin:26px 0;}
+.banniere p{margin:0;font-family:"Oswald",Arial,sans-serif;font-size:19px;line-height:1.25;text-transform:uppercase;}
+.banniere small{display:block;font-family:"Fira Sans Condensed",Arial,sans-serif;text-transform:none;font-size:15px;margin-top:8px;opacity:.95;}
+
+details{border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;margin-bottom:10px;}
+details[open]{border-color:var(--noir);}
+summary{cursor:pointer;font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:16px;text-transform:uppercase;letter-spacing:.3px;}
+summary::-webkit-details-marker{display:none;}
+summary::before{content:"+ ";color:var(--rouge);font-weight:700;}
+details[open] summary::before{content:"\2212 ";}
+details p{margin:10px 0 0;font-size:16px;}
+
+footer{border-top:4px solid var(--noir);margin-top:44px;padding-top:18px;font-size:14px;color:var(--gris-texte);}
+footer strong{color:var(--noir);}
+
+@media (max-width:520px){
+  body{font-size:16px;}h1{font-size:27px;}section > h2{font-size:21px;}
+  .tableau{font-size:14px;}pre{font-size:12.5px;}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none !important;scroll-behavior:auto !important;}}
+</style>
+</head>
+<body>
+<div class="page">
+
+<header>
+  <span class="eyebrow">Ressource compagnon · L'IA Minute du Médecin</span>
+  <h1>Votre identité sonore, <mark>et vos droits dessus</mark></h1>
+  <p class="sous-titre">Cinq prompts prêts à copier, le dossier de preuve à constituer, et la règle française que presque personne ne connaît sur la musique en salle d'attente.</p>
+  <div class="trait"></div>
+  <p class="meta">Mise à jour : 25 juillet 2026.</p>
+</header>
+
+<div class="flash">
+  <h2>Le vrai enjeu n'est pas la musique, c'est la redevance</h2>
+  <ul>
+    <li><strong>Diffuser de la musique en salle d'attente est soumis à redevance en France.</strong> La diffusion dans un lieu accueillant du public relève de la communication au public au sens du Code de la propriété intellectuelle. Le tarif dépend du nombre de praticiens du cabinet, et une déclaration préalable ouvre droit à une réduction. Une décision européenne concernant un cabinet italien est régulièrement citée pour affirmer le contraire : elle ne s'applique pas en France.</li>
+    <li><strong>C'est là que la musique générée devient intéressante.</strong> Un morceau dont vous détenez les droits et qui ne figure au répertoire d'aucune société de gestion sort de la redevance de droits d'auteur, à une condition : être en mesure de le prouver. D'où le dossier de preuve détaillé plus bas, qui est le vrai livrable de cette page.</li>
+    <li><strong>Le plan gratuit ne convient pas.</strong> Les morceaux générés en formule gratuite ne comportent pas de droits d'usage commercial, et diffuser dans un lieu professionnel en est un. Le premier palier payant ouvre ces droits. Sans lui, vous cumulez les deux problèmes : la redevance et l'absence de droits.</li>
+  </ul>
+</div>
+
+<nav aria-label="Sommaire">
+  <button type="button" data-cible="prompts">Les 5 prompts</button>
+  <button type="button" data-cible="preuve">Le dossier de preuve</button>
+  <button type="button" data-cible="cadre">Le cadre français</button>
+  <button type="button" data-cible="juridique">Où en est le droit</button>
+  <button type="button" data-cible="erreurs">Les erreurs</button>
+  <button type="button" data-cible="controles">Avant diffusion</button>
+  <button type="button" data-cible="faq">Questions</button>
+  <button type="button" data-cible="sources">Sources</button>
+</nav>
+
+<!-- PROMPTS -->
+<section id="prompts">
+  <h2>Les cinq prompts</h2>
+  <p class="chapeau">Un par usage. Décrivez le genre, les instruments, le tempo et l'intention, et surtout précisez ce que vous ne voulez pas.</p>
+
+  <div class="onglets" role="tablist">
+    <button type="button" role="tab" aria-selected="true" data-panneau="p-attente">Salle d'attente</button>
+    <button type="button" role="tab" aria-selected="false" data-panneau="p-jingle">Jingle podcast</button>
+    <button type="button" role="tab" aria-selected="false" data-panneau="p-video">Vidéo patient</button>
+    <button type="button" role="tab" aria-selected="false" data-panneau="p-tel">Attente téléphonique</button>
+    <button type="button" role="tab" aria-selected="false" data-panneau="p-fmc">Diaporama FMC</button>
+  </div>
+
+  <div class="panneau" id="p-attente">
+    <p><span class="badge">Sans paroles</span><span class="badge">Boucle longue</span></p>
+    <div class="bloc">
+      <div class="bloc-tete"><h4>Fond sonore de salle d'attente</h4><button type="button" class="copier">Copier</button></div>
+      <pre>Instrumental only, no vocals, no lyrics, no spoken word.
+
+Style: calm ambient piano with soft sustained strings, very slow evolution, warm and neutral. Tempo around 60 to 70 beats per minute. Major or modal harmony, no minor key, no tension, no resolution that draws attention.
+
+Instrumentation: felt piano, soft string pad, light acoustic guitar harmonics. No drums, no percussion, no bass line that pulses.
+
+Dynamics: flat and consistent from start to finish. No build-up, no crescendo, no dramatic moment, no silence longer than one second.
+
+Purpose: background music for a medical waiting room. It must never draw attention, never feel sad, never feel cinematic. Someone anxious should feel calmer without noticing why.
+
+Avoid: minor keys, cinematic swells, choir, church organ, harp glissando, wind chimes, whale sounds, spa clichés, anything that suggests meditation or hypnosis.</pre>
+    </div>
+    <p><strong>Le réglage qui compte :</strong> générez trois à cinq morceaux dans la même consigne pour obtenir une boucle d'une vingtaine de minutes sans répétition audible. Un même morceau qui tourne toutes les trois minutes devient insupportable pour votre secrétariat bien avant de gêner les patients.</p>
+  </div>
+
+  <div class="panneau" id="p-jingle" hidden>
+    <p><span class="badge">10 à 15 secondes</span><span class="badge">Reconnaissable</span></p>
+    <div class="bloc">
+      <div class="bloc-tete"><h4>Jingle d'intro et d'outro de podcast</h4><button type="button" class="copier">Copier</button></div>
+      <pre>Short instrumental jingle, 12 seconds, no vocals.
+
+Style: clean modern minimal, sober and professional, suitable for a health podcast aimed at an adult audience. Not corporate, not upbeat, not playful.
+
+Structure: a simple three note motif stated once, answered once, then a clean ending on a single sustained note. The motif must be memorable enough to be recognised after three episodes.
+
+Instrumentation: warm electric piano, one soft synth pad, light brushed percussion. No orchestral hit, no riser, no whoosh.
+
+Ending: clean and definitive, so a voice can start immediately after, with no fade needed.
+
+Avoid: news broadcast urgency, dramatic tension, medical drama clichés, heartbeat sounds, hospital monitor beeps.</pre>
+    </div>
+    <p><strong>Astuce :</strong> demandez ensuite une version de trois secondes du même motif, pour la transition entre deux parties, et une version de huit secondes en fin d'épisode. Vous obtenez une famille sonore cohérente à partir d'une seule idée.</p>
+  </div>
+
+  <div class="panneau" id="p-video" hidden>
+    <p><span class="badge">Sous la voix</span><span class="badge">Volume bas</span></p>
+    <div class="bloc">
+      <div class="bloc-tete"><h4>Habillage musical d'une vidéo patient</h4><button type="button" class="copier">Copier</button></div>
+      <pre>Instrumental only, no vocals. Duration around 2 minutes.
+
+Style: light, clear and reassuring, designed to sit under a spoken voice-over without competing with it. Mid frequencies deliberately sparse so speech stays intelligible.
+
+Tempo: steady, around 80 beats per minute, no tempo change, no rubato.
+
+Instrumentation: soft marimba or plucked strings for the pulse, warm pad underneath, no lead melody that draws the ear.
+
+Structure: a neutral introduction of 5 seconds, then a constant texture, then a simple ending.
+
+Purpose: background for an educational health video explaining a treatment or a technique to a patient. It must feel calm and competent, never emotional, never inspirational, never sad.
+
+Avoid: inspirational piano crescendos, epic drums, sentimental strings, anything that sounds like a charity campaign.</pre>
+    </div>
+  </div>
+
+  <div class="panneau" id="p-tel" hidden>
+    <p><span class="badge">Boucle courte</span><span class="badge">Basse qualité assumée</span></p>
+    <div class="bloc">
+      <div class="bloc-tete"><h4>Musique d'attente téléphonique</h4><button type="button" class="copier">Copier</button></div>
+      <pre>Instrumental only, no vocals. Duration around 90 seconds, designed to loop seamlessly.
+
+Style: simple, friendly, low complexity. It will be heard through a telephone line, so the arrangement must stay clear when high and low frequencies are cut.
+
+Instrumentation: two or three instruments maximum, mid-range focused: electric piano, clean guitar, light pad. No sub bass, no cymbals, no wide stereo effects.
+
+Dynamics: constant volume, no quiet passage that would make the caller think the line has dropped. That is the most important requirement.
+
+Ending: designed so the last second flows naturally back into the first.
+
+Avoid: silence, long pauses, sudden accents, anything that could be mistaken for the call being answered or cut off.</pre>
+    </div>
+    <p><strong>Le détail qui fait tout :</strong> l'absence de silence. Un passage calme de deux secondes dans une attente téléphonique fait raccrocher, parce que l'appelant croit que la ligne a coupé.</p>
+  </div>
+
+  <div class="panneau" id="p-fmc" hidden>
+    <p><span class="badge">Discret</span><span class="badge">Sans émotion</span></p>
+    <div class="bloc">
+      <div class="bloc-tete"><h4>Fond sonore de diaporama de formation</h4><button type="button" class="copier">Copier</button></div>
+      <pre>Instrumental only, no vocals. Duration around 3 minutes.
+
+Style: neutral, sober, slightly rhythmic to sustain attention without creating emotion. Suitable for a professional audience of physicians during a slide presentation.
+
+Tempo: around 90 beats per minute, absolutely constant.
+
+Instrumentation: muted piano chords, subtle synth texture, very light rhythmic element. No melody line at all.
+
+Dynamics: uniform, no highlight, no transition effect. The listener should be unable to describe the music afterwards.
+
+Purpose: background for a medical training presentation. It supports concentration, it does not comment on the content.
+
+Avoid: any melodic hook, any emotional colour, any change that would coincide with a slide transition and appear intentional.</pre>
+    </div>
+  </div>
+</section>
+
+<!-- PREUVE -->
+<section id="preuve">
+  <h2>Le dossier de preuve</h2>
+  <p class="chapeau">C'est ce qui transforme un morceau généré en actif dont vous pouvez démontrer la titularité. Dix minutes une seule fois, puis deux minutes par morceau.</p>
+
+  <p>Si un jour on vous demande de justifier la musique diffusée dans votre salle d'attente, vous devez pouvoir montrer deux choses : que ce morceau n'appartient au répertoire d'aucune société de gestion, et que vous en détenez les droits d'usage. Voici ce qui l'établit.</p>
+
+  <ul class="obligatoire">
+    <li>La <strong>capture d'écran</strong> de la page du morceau dans votre compte, avec son identifiant et sa date de création</li>
+    <li>Le <strong>prompt exact</strong> utilisé, copié dans un document daté</li>
+    <li>Le <strong>fichier audio exporté</strong>, conservé dans un dossier dédié, jamais renommé</li>
+    <li>La <strong>facture d'abonnement</strong> couvrant la période de création du morceau, puisque ce sont les formules payantes qui ouvrent les droits</li>
+    <li>La <strong>copie datée des conditions d'utilisation</strong> en vigueur au moment de la création, enregistrée en PDF</li>
+    <li>Un <strong>tableau de suivi</strong> listant chaque morceau, sa date, son usage au cabinet et l'emplacement de ses preuves</li>
+  </ul>
+
+  <div class="bloc">
+    <div class="bloc-tete"><h4>Ligne de tableau de suivi, à copier dans un tableur</h4><button type="button" class="copier">Copier</button></div>
+    <pre>Titre du morceau | Identifiant sur la plateforme | Date de création | Formule d'abonnement active à cette date | Usage au cabinet (salle d'attente, téléphone, vidéo, podcast) | Emplacement du fichier audio | Emplacement de la capture d'écran | Conditions d'utilisation archivées le
+
+Exemple :
+Ambiance salle attente 01 | [identifiant] | 12/03/2026 | Formule payante, facture du 01/03/2026 | Salle d'attente, boucle principale | Dossier Cabinet/Audio/2026 | Dossier Cabinet/Audio/Preuves | 12/03/2026</pre>
+  </div>
+
+  <p><strong>Pourquoi archiver les conditions d'utilisation :</strong> parce qu'elles évoluent. Ce qui compte est ce qu'elles disaient au moment où vous avez créé le morceau, et vous seul pouvez en garder la trace.</p>
+</section>
+
+<!-- CADRE -->
+<section id="cadre">
+  <h2>Le cadre français de la diffusion</h2>
+  <p class="chapeau">Trois situations, trois réponses différentes. Beaucoup de cabinets paient sans le savoir, d'autres diffusent sans le savoir.</p>
+
+  <table class="tableau">
+    <thead><tr><th>Ce que vous diffusez</th><th>Ce que cela implique</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>La radio, une playlist de streaming, vos disques</td>
+        <td>Déclaration et redevance de droits d'auteur, calculée selon le nombre de praticiens du cabinet, à laquelle s'ajoute la rémunération due aux artistes-interprètes et producteurs pour les enregistrements du commerce. La déclaration préalable ouvre une réduction sur le tarif annuel.</td>
+      </tr>
+      <tr>
+        <td>De la musique dont vous détenez les droits, jamais publiée commercialement</td>
+        <td>Vous sortez du répertoire des sociétés de gestion pour les droits d'auteur, à condition de pouvoir le démontrer. Sur la rémunération des enregistrements, la situation d'un fichier qui n'a jamais été publié à des fins de commerce mérite d'être confirmée auprès de l'organisme collecteur : posez la question par écrit et gardez la réponse.</td>
+      </tr>
+      <tr>
+        <td>Un téléviseur allumé en salle d'attente</td>
+        <td>C'est une situation distincte, qui relève de la contribution due par les professionnels détenant un poste de télévision, en plus des droits liés au contenu diffusé.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Le conseil pratique :</strong> quelle que soit votre situation, faites la démarche par écrit et conservez la réponse. Une déclaration spontanée coûte moins cher qu'un rappel, et une réponse écrite vaut mieux qu'une conviction.</p>
+</section>
+
+<!-- JURIDIQUE -->
+<section id="juridique">
+  <h2>Où en est le droit sur la musique générée</h2>
+  <p class="chapeau">Le sujet bouge, et un livre imprimé ne peut pas le suivre. Voici l'état à la date de mise à jour de cette page.</p>
+
+  <p>Des poursuites ont été engagées aux États-Unis en juin 2024 par l'industrie du disque contre les principaux générateurs de musique, sur la question de l'entraînement des modèles à partir de catalogues protégés. Depuis, la situation s'est fragmentée : un grand label a conclu un accord et un partenariat de licence en novembre 2025, un autre a réglé avec un concurrent, un troisième poursuit la procédure. Une audience déterminante sur la question de l'usage équitable était attendue à l'été 2026. Les éditeurs annoncent par ailleurs des modèles entraînés exclusivement sur des catalogues sous licence, qui remplaceront les modèles actuels.</p>
+
+  <table class="tableau">
+    <thead><tr><th>Votre usage</th><th>Le niveau de prudence</th></tr></thead>
+    <tbody>
+      <tr><td>Fond sonore de salle d'attente, attente téléphonique</td><td>Usage interne, faible exposition. Le dossier de preuve suffit.</td></tr>
+      <tr><td>Habillage d'une vidéo publiée sur votre site</td><td>Exposition modérée. Conservez les preuves et mentionnez que la musique est générée.</td></tr>
+      <tr><td>Jingle d'un podcast distribué sur les plateformes</td><td>Exposition publique. Déclarez le caractère généré dans les métadonnées de distribution, comme le demandent désormais les plateformes.</td></tr>
+      <tr><td>Toute utilisation commerciale à fort enjeu</td><td>Attendez la clarification judiciaire, ou prenez un avis. Une identité sonore n'est jamais assez urgente pour prendre ce risque.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ERREURS -->
+<section id="erreurs">
+  <h2>Les erreurs à ne pas commettre</h2>
+
+  <div class="zone-rouge">
+    <h3>Sur le contenu</h3>
+    <ul class="interdit">
+      <li>Des paroles qui parlent de soins, de guérison, de votre cabinet ou de votre spécialité : vous entrez alors dans le champ de la communication professionnelle, avec ses règles</li>
+      <li>Une voix ou un style qui imite un artiste identifiable, même sans le nommer</li>
+      <li>Le nom d'une marque, d'un médicament ou d'un dispositif dans un titre ou des paroles</li>
+      <li>Une musique en tonalité mineure avec des nappes cinématographiques en salle d'attente : c'est le meilleur moyen d'augmenter l'anxiété d'un patient qui attend un résultat</li>
+      <li>Un morceau généré en formule gratuite diffusé dans un lieu professionnel</li>
+    </ul>
+  </div>
+
+  <p><strong>Sur la mise en oeuvre :</strong> le volume est le paramètre le plus négligé. Une musique de fond doit rester couverte par une conversation normale à deux mètres. Si un patient doit élever la voix au guichet, elle est trop forte. Et prévoyez un interrupteur accessible au secrétariat, parce qu'il existe des jours où le silence vaut mieux.</p>
+</section>
+
+<!-- CONTROLES -->
+<section id="controles">
+  <h2>Avant de diffuser</h2>
+  <p class="chapeau">Cinq contrôles, une seule fois, au moment de mettre la boucle en place.</p>
+
+  <div class="progression">
+    <div class="jauge"><span id="jauge-barre"></span></div>
+    <div class="compteur" id="jauge-compteur">0 / 5</div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Les morceaux ont été créés sous une formule payante</h4>
+    <p>Et la facture correspondante couvre bien la date de création.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Le dossier de preuve est constitué</h4>
+    <p>Captures, prompts, fichiers, factures, conditions archivées, tableau de suivi.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Ma situation vis-à-vis des sociétés de gestion est clarifiée par écrit</h4>
+    <p>Soit vous êtes déclaré et vous payez, soit vous diffusez exclusivement vos propres morceaux et vous avez posé la question.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>La boucle dure au moins vingt minutes</h4>
+    <p>Testez-la une demi-journée depuis le poste du secrétariat avant de la valider. Ce sont eux qui l'entendent le plus.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Aucune parole, aucun message, aucune promesse</h4>
+    <p>Une salle d'attente n'est pas un support de communication. C'est un lieu où l'on attend, souvent inquiet.</p></div>
+  </div>
+
+  <div class="banniere">
+    <p>Une musique que vous avez créée vous appartient. Encore faut-il pouvoir le prouver.
+    <small>La diffusion de musique dans un lieu accueillant du public relève de la communication au public au sens du Code de la propriété intellectuelle. La démarche de déclaration se fait auprès de la société de gestion, qui collecte également pour les artistes-interprètes et producteurs.</small></p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <h2>Questions fréquentes</h2>
+
+  <details>
+    <summary>La musique classique ancienne échappe-t-elle à la redevance ?</summary>
+    <p>Non, contrairement à une idée répandue. L'oeuvre est peut-être dans le domaine public, mais l'enregistrement que vous diffusez a été interprété par des musiciens et produit par un éditeur, qui sont rémunérés à ce titre.</p>
+  </details>
+
+  <details>
+    <summary>Et la décision européenne sur les cabinets médicaux ?</summary>
+    <p>Elle concernait un cabinet dentaire italien et le droit italien. Elle n'a pas d'effet sur l'application du droit français, qui reste seul applicable en France. C'est l'erreur la plus fréquente sur ce sujet.</p>
+  </details>
+
+  <details>
+    <summary>Combien de temps pour créer une boucle complète ?</summary>
+    <p>Une heure pour la salle d'attente en comptant les écoutes et les régénérations, une demi-heure pour un jingle, une fois que vous avez trouvé la bonne consigne. La consigne, elle, se réutilise indéfiniment.</p>
+  </details>
+
+  <details>
+    <summary>Puis-je faire un morceau avec des paroles pour mes patients ?</summary>
+    <p>Techniquement oui. Sur le fond, dès que des paroles parlent de votre exercice, vous produisez de la communication professionnelle, soumise aux règles déontologiques : loyauté, absence de promesse, absence de comparaison. Pour un usage au cabinet, l'instrumental évite tous ces débats.</p>
+  </details>
+
+  <details>
+    <summary>La qualité est-elle suffisante en français ?</summary>
+    <p>Pour de l'instrumental, la langue ne se pose pas. Pour des paroles chantées, le rendu reste meilleur en anglais, et la prononciation française demande plusieurs essais. Raison de plus, pour un usage professionnel, de rester sur l'instrumental.</p>
+  </details>
+
+  <details>
+    <summary>Que se passe-t-il si la plateforme change ses modèles ou ses conditions ?</summary>
+    <p>Vos fichiers déjà exportés restent sur votre disque, et c'est la raison pour laquelle il faut les exporter et les archiver dès la création. Les conditions applicables sont celles en vigueur au moment de la création, d'où l'archivage daté.</p>
+  </details>
+</section>
+
+<!-- SOURCES -->
+<section id="sources">
+  <h2>Sources</h2>
+  <table class="tableau">
+    <thead><tr><th>Élément</th><th>Source</th></tr></thead>
+    <tbody>
+      <tr><td>La diffusion de musique dans un lieu accueillant du public constitue une communication au public soumise à autorisation et rémunération</td><td>Code de la propriété intellectuelle</td></tr>
+      <tr><td>Redevance calculée selon le nombre de praticiens du cabinet, réduction en cas de déclaration préalable, rémunération complémentaire due pour les enregistrements du commerce</td><td>Analyses professionnelles publiées à destination des professionnels de santé, 2024 à 2026</td></tr>
+      <tr><td>La décision de la Cour de justice de l'Union européenne concernant un cabinet dentaire italien n'exonère pas les praticiens en France</td><td>Analyses juridiques concordantes, dont celles publiées par les assureurs professionnels du secteur médical</td></tr>
+      <tr><td>Possibilité de diffuser des oeuvres hors répertoire des sociétés de gestion, sous réserve de pouvoir en justifier</td><td>Information publique aux entreprises sur la diffusion de musique</td></tr>
+      <tr><td>Droits d'usage commercial ouverts par les formules payantes, absents de la formule gratuite</td><td>Documentation et conditions d'utilisation de l'éditeur, 2026</td></tr>
+      <tr><td>Procédures engagées en juin 2024 par l'industrie du disque, accord et partenariat de licence avec un grand label en novembre 2025, audience sur l'usage équitable attendue à l'été 2026</td><td>Presse spécialisée et analyses sectorielles, 2025 et 2026</td></tr>
+      <tr><td>Déclaration du caractère généré dans les métadonnées lors d'une distribution sur les plateformes</td><td>Règles des distributeurs et des organismes de gestion, 2026</td></tr>
+    </tbody>
+  </table>
+  <p class="chapeau">Les tarifs de redevance, les formules d'abonnement et l'état des procédures évoluent. Vérifiez avant de vous engager, et conservez une trace écrite de chaque réponse obtenue.</p>
+</section>
+
+<footer>
+  <p><strong>L'IA Minute du Médecin</strong>, Dr Guillaume Zagury et Samuel De Queiroz, Éditions Medicilline.</p>
+  <p>Ressource compagnon de la double page consacrée au contenu audio. Cette page décrit une méthode et rappelle un cadre. Elle ne constitue pas un conseil juridique : pour une situation particulière, adressez-vous à la société de gestion concernée ou à un conseil spécialisé en propriété intellectuelle.</p>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var chips = document.querySelectorAll("nav button[data-cible]");
+  Array.prototype.forEach.call(chips, function(btn){
+    btn.addEventListener("click", function(){
+      var cible = document.getElementById(btn.getAttribute("data-cible"));
+      if(cible){ cible.scrollIntoView({ behavior:"smooth", block:"start" }); }
+    });
+  });
+
+  var onglets = document.querySelectorAll(".onglets button[data-panneau]");
+  Array.prototype.forEach.call(onglets, function(btn){
+    btn.addEventListener("click", function(){
+      Array.prototype.forEach.call(onglets, function(autre){
+        autre.setAttribute("aria-selected", autre === btn ? "true" : "false");
+        var p = document.getElementById(autre.getAttribute("data-panneau"));
+        if(p){ p.hidden = (autre !== btn); }
+      });
+    });
+  });
+
+  var controles = document.querySelectorAll("[data-controle]");
+  var barre = document.getElementById("jauge-barre");
+  var compteur = document.getElementById("jauge-compteur");
+  var total = controles.length;
+
+  function maj(){
+    var faits = 0;
+    Array.prototype.forEach.call(controles, function(c){
+      var box = c.querySelector("input[type=checkbox]");
+      if(box && box.checked){ faits++; c.classList.add("fait"); }
+      else { c.classList.remove("fait"); }
+    });
+    barre.style.width = (faits/total*100) + "%";
+    barre.style.background = (faits === total) ? "#27AE60" : "#DC322F";
+    compteur.textContent = faits + " / " + total;
+  }
+
+  Array.prototype.forEach.call(controles, function(c){
+    var box = c.querySelector("input[type=checkbox]");
+    if(box){ box.addEventListener("change", maj); }
+  });
+  maj();
+
+  var boutons = document.querySelectorAll(".copier");
+  Array.prototype.forEach.call(boutons, function(btn){
+    btn.addEventListener("click", function(){
+      var bloc = btn.closest(".bloc");
+      var pre = bloc ? bloc.querySelector("pre") : null;
+      if(!pre){ return; }
+      var texte = pre.textContent;
+      var fini = function(){
+        btn.textContent = "Copié";
+        btn.classList.add("ok");
+        setTimeout(function(){ btn.textContent = "Copier"; btn.classList.remove("ok"); }, 1800);
+      };
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(texte).then(fini, function(){ secours(texte, fini); });
+      } else { secours(texte, fini); }
+    });
+  });
+
+  function secours(texte, fini){
+    var z = document.createElement("textarea");
+    z.value = texte;
+    z.setAttribute("readonly","");
+    z.style.position = "absolute";
+    z.style.left = "-9999px";
+    document.body.appendChild(z);
+    z.select();
+    try { document.execCommand("copy"); fini(); } catch(e){}
+    document.body.removeChild(z);
+  }
+})();
+</script>
+</body>
+</html>

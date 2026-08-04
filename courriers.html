@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Courriers et mails : les modèles et le bon canal · L'IA Minute du Médecin</title>
+<meta name="description" content="Ressource compagnon du livre L'IA Minute du Médecin : sept modèles de réponses médicales prêts à copier, le choix du canal (MSSanté, Mon espace santé, mail ordinaire) et la grille de relecture en quatre contrôles.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Fira+Sans+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --rouge:#DC322F;--noir:#1A1A1A;--blanc:#FFFFFF;--jaune:#FFD700;
+  --bleu:#3498DB;--orange:#F39C12;--vert:#27AE60;--violet:#8E44AD;--teal:#1ABC9C;
+  --gris:#BDC3C7;--gris-clair:#F4F5F6;--gris-ligne:#E1E4E6;--gris-texte:#5A6268;
+}
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{margin:0;background:var(--blanc);color:var(--noir);font-family:"Fira Sans Condensed","Roboto Condensed",Arial,sans-serif;font-size:17px;line-height:1.5;}
+.page{max-width:720px;margin:0 auto;padding:0 18px 80px;}
+h1,h2,h3,h4{font-family:"Oswald","Arial Narrow",Arial,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.2px;}
+p{margin:0 0 14px;}
+
+header{padding:26px 0 8px;}
+.eyebrow{display:inline-block;font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:var(--blanc);background:var(--noir);padding:5px 11px;}
+h1{font-size:33px;line-height:1.06;margin:14px 0 0;}
+h1 mark{background:var(--jaune);color:var(--noir);padding:0 5px;}
+.sous-titre{font-family:"Fira Sans Condensed",Arial,sans-serif;font-style:italic;font-weight:600;color:var(--rouge);font-size:19px;margin:10px 0 0;text-transform:none;}
+.trait{height:4px;background:var(--rouge);margin:16px 0 22px;}
+.meta{font-size:14px;color:var(--gris-texte);margin:0 0 22px;}
+
+.flash{border:3px solid var(--rouge);border-radius:14px;padding:16px 18px;margin:0 0 26px;}
+.flash h2{font-size:19px;margin:0 0 10px;color:var(--rouge);}
+.flash ul{margin:0;padding-left:20px;}
+.flash li{margin-bottom:9px;}
+
+nav{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 34px;}
+nav button{font-family:"Oswald",Arial,sans-serif;font-weight:500;font-size:13px;letter-spacing:.6px;text-transform:uppercase;background:var(--gris-clair);color:var(--noir);border:2px solid var(--gris-ligne);border-radius:999px;padding:7px 13px;cursor:pointer;}
+nav button:hover{background:var(--noir);color:var(--blanc);border-color:var(--noir);}
+nav button:focus-visible{outline:3px solid var(--rouge);outline-offset:2px;}
+
+section{border-top:2px solid var(--gris-ligne);padding-top:26px;margin-top:34px;scroll-margin-top:14px;}
+section > h2{font-size:25px;margin:0 0 4px;line-height:1.1;}
+.chapeau{color:var(--gris-texte);font-size:16px;margin:0 0 20px;}
+h3{font-size:19px;margin:26px 0 8px;}
+
+.onglets{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px;}
+.onglets button{font-family:"Oswald",Arial,sans-serif;font-weight:500;font-size:13px;letter-spacing:.6px;text-transform:uppercase;background:var(--blanc);color:var(--noir);border:2px solid var(--noir);border-radius:8px;padding:7px 12px;cursor:pointer;}
+.onglets button[aria-selected="true"]{background:var(--noir);color:var(--blanc);}
+.onglets button:focus-visible{outline:3px solid var(--rouge);outline-offset:2px;}
+.panneau[hidden]{display:none;}
+
+.bloc{border:2px solid var(--gris-ligne);border-radius:14px;overflow:hidden;margin:0 0 16px;}
+.bloc-tete{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--gris-clair);padding:10px 12px;border-bottom:2px solid var(--gris-ligne);}
+.bloc-tete h4{margin:0;font-size:15px;}
+.copier{font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:12px;letter-spacing:.8px;text-transform:uppercase;background:var(--rouge);color:var(--blanc);border:none;border-radius:6px;padding:7px 12px;cursor:pointer;white-space:nowrap;}
+.copier.ok{background:var(--vert);}
+.copier:focus-visible{outline:3px solid var(--noir);outline-offset:2px;}
+pre{margin:0;padding:14px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px;line-height:1.5;white-space:pre-wrap;word-wrap:break-word;}
+.badge{display:inline-block;background:var(--gris);color:var(--noir);border-radius:5px;font-family:"Oswald",Arial,sans-serif;font-size:11.5px;letter-spacing:.7px;text-transform:uppercase;padding:3px 8px;margin:0 6px 6px 0;}
+
+.tableau{width:100%;border-collapse:collapse;font-size:15px;margin:0 0 18px;}
+.tableau th,.tableau td{border:1px solid var(--gris-ligne);padding:8px 10px;text-align:left;vertical-align:top;}
+.tableau th{background:var(--noir);color:var(--blanc);font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:13px;letter-spacing:.5px;}
+.tableau tr:nth-child(even) td{background:var(--gris-clair);}
+
+.controle{display:flex;gap:12px;border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;margin-bottom:10px;}
+.controle.fait{border-color:var(--vert);background:#F3FBF6;}
+.controle input{width:22px;height:22px;accent-color:var(--vert);cursor:pointer;flex:0 0 22px;margin-top:2px;}
+.controle h4{margin:0 0 4px;font-size:16px;}
+.controle p{margin:0;font-size:15.5px;}
+.progression{display:flex;align-items:center;gap:12px;margin:0 0 18px;border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;}
+.jauge{flex:1;height:12px;background:var(--gris-ligne);border-radius:999px;overflow:hidden;}
+.jauge span{display:block;height:100%;width:0;background:var(--rouge);transition:width .25s ease;}
+.compteur{font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:16px;white-space:nowrap;}
+
+.zone-rouge{border:3px solid var(--rouge);border-radius:14px;padding:16px 18px;margin:18px 0;}
+.zone-rouge h3{margin-top:0;color:var(--rouge);}
+.interdit{list-style:none;padding:0;margin:0;}
+.interdit li{padding-left:26px;position:relative;margin-bottom:8px;}
+.interdit li::before{content:"\00d7";position:absolute;left:0;top:-2px;color:var(--rouge);font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:22px;line-height:1;}
+
+.banniere{background:var(--rouge);color:var(--blanc);border-radius:14px;padding:18px 20px;margin:26px 0;}
+.banniere p{margin:0;font-family:"Oswald",Arial,sans-serif;font-size:19px;line-height:1.25;text-transform:uppercase;}
+.banniere small{display:block;font-family:"Fira Sans Condensed",Arial,sans-serif;text-transform:none;font-size:15px;margin-top:8px;opacity:.95;}
+
+details{border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;margin-bottom:10px;}
+details[open]{border-color:var(--noir);}
+summary{cursor:pointer;font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:16px;text-transform:uppercase;letter-spacing:.3px;}
+summary::-webkit-details-marker{display:none;}
+summary::before{content:"+ ";color:var(--rouge);font-weight:700;}
+details[open] summary::before{content:"\2212 ";}
+details p{margin:10px 0 0;font-size:16px;}
+
+footer{border-top:4px solid var(--noir);margin-top:44px;padding-top:18px;font-size:14px;color:var(--gris-texte);}
+footer strong{color:var(--noir);}
+
+@media (max-width:520px){
+  body{font-size:16px;}h1{font-size:27px;}section > h2{font-size:21px;}
+  .tableau{font-size:14px;}pre{font-size:12.5px;}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none !important;scroll-behavior:auto !important;}}
+</style>
+</head>
+<body>
+<div class="page">
+
+<header>
+  <span class="eyebrow">Ressource compagnon · L'IA Minute du Médecin</span>
+  <h1>Vos courriers : <mark>les modèles et le bon canal</mark></h1>
+  <p class="sous-titre">Sept réponses types prêtes à copier, la grille de relecture en quatre contrôles, et la question qu'il faut trancher avant même d'ouvrir un outil : par où passe ce message.</p>
+  <div class="trait"></div>
+  <p class="meta">Mise à jour : 25 juillet 2026.</p>
+</header>
+
+<div class="flash">
+  <h2>Trois choses à savoir avant de laisser une IA approcher votre boîte</h2>
+  <ul>
+    <li><strong>Le vrai sujet n'est pas l'outil, c'est le canal.</strong> Un brouillon parfait envoyé sur un canal inadapté reste une faute. L'échange de données de santé entre professionnels relève de l'espace de confiance MSSanté, encadré par l'Agence du Numérique en Santé, et les échanges avec le patient passent par la messagerie de Mon espace santé.</li>
+    <li><strong>Compte personnel et compte professionnel ne se valent pas.</strong> Sur un compte grand public gratuit, vos échanges peuvent alimenter l'amélioration des services, sauf désactivation, et vous n'avez aucune garantie contractuelle. Sur une offre professionnelle avec contrat de traitement des données, l'éditeur s'engage à ne pas utiliser vos contenus pour entraîner ses modèles et à ne pas conserver les requêtes au delà de la session. Vérifiez lequel des deux vous utilisez, aujourd'hui, avant de lire la suite.</li>
+    <li><strong>Deux usages très différents sont vendus sous le même mot.</strong> Rédiger un brouillon dans un outil séparé, c'est vous qui choisissez ce que vous collez. Brancher un assistant sur votre boîte, c'est lui donner accès à tout ce qui s'y trouve, y compris les messages que vous n'auriez jamais choisi de lui montrer. Le second usage n'a rien d'anodin sur une boîte professionnelle.</li>
+  </ul>
+</div>
+
+<nav aria-label="Sommaire">
+  <button type="button" data-cible="canal">Quel canal</button>
+  <button type="button" data-cible="modeles">Les 7 modèles</button>
+  <button type="button" data-cible="style">Votre style</button>
+  <button type="button" data-cible="comparatif">Comparatif</button>
+  <button type="button" data-cible="relecture">La relecture</button>
+  <button type="button" data-cible="controles">Avant d'envoyer</button>
+  <button type="button" data-cible="faq">Questions</button>
+  <button type="button" data-cible="sources">Sources</button>
+</nav>
+
+<!-- CANAL -->
+<section id="canal">
+  <h2>La question à trancher en premier</h2>
+  <p class="chapeau">Avant de rédiger, décidez par où part le message. Cette décision commande tout le reste, y compris ce que vous avez le droit d'écrire.</p>
+
+  <table class="tableau">
+    <thead><tr><th>Vous écrivez à</th><th>Contenu</th><th>Canal</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Un confrère, un établissement, un professionnel du parcours</td>
+        <td>Éléments cliniques, résultats, compte rendu</td>
+        <td><strong>Messagerie sécurisée MSSanté</strong>, boîte nominative rattachée à votre identifiant professionnel ou boîte organisationnelle de la structure.</td>
+      </tr>
+      <tr>
+        <td>Un patient</td>
+        <td>Résultat, conseil, document</td>
+        <td><strong>Messagerie de Mon espace santé.</strong> À noter : c'est le professionnel qui initie l'échange, le patient ne peut pas en prendre l'initiative.</td>
+      </tr>
+      <tr>
+        <td>Un patient</td>
+        <td>Organisation pure, sans aucun élément de santé</td>
+        <td>Mail ordinaire acceptable, à condition qu'aucune information ne révèle une pathologie, un motif, ni même un rendez-vous dans un service identifiant.</td>
+      </tr>
+      <tr>
+        <td>Un fournisseur, un bailleur, un organisme, la maintenance informatique</td>
+        <td>Administratif sans donnée de santé</td>
+        <td>Mail ordinaire. C'est là que l'assistance à la rédaction est la plus simple à utiliser, et la moins risquée.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Le réflexe qui évite 90 % des ennuis :</strong> écrivez le brouillon dans un outil séparé, sans aucun élément identifiant, puis collez-le dans le bon canal et ajoutez-y les éléments cliniques à la main. L'outil vous fait gagner la mise en forme, il n'a pas besoin de connaître votre patient pour cela.</p>
+</section>
+
+<!-- MODELES -->
+<section id="modeles">
+  <h2>Les sept réponses types</h2>
+  <p class="chapeau">Chaque bloc est un prompt complet. Remplacez ce qui est entre crochets. Aucun ne contient d'élément identifiant, et aucun ne doit en contenir.</p>
+
+  <div class="onglets" role="tablist">
+    <button type="button" role="tab" aria-selected="true" data-panneau="p-confrere">Confrères</button>
+    <button type="button" role="tab" aria-selected="false" data-panneau="p-patient">Patients</button>
+    <button type="button" role="tab" aria-selected="false" data-panneau="p-refus">Refus et tensions</button>
+    <button type="button" role="tab" aria-selected="false" data-panneau="p-cabinet">Cabinet</button>
+  </div>
+
+  <div class="panneau" id="p-confrere">
+    <div class="bloc">
+      <div class="bloc-tete"><h4>1. Demander un avis, sans faire perdre de temps</h4><button type="button" class="copier">Copier</button></div>
+      <pre>Rédige un message court à un confrère [spécialité] pour une demande d'avis.
+
+Éléments à intégrer, tels que je te les donne, sans rien ajouter :
+[situation résumée en 3 lignes, sans identité]
+[ce qui a déjà été fait]
+[la question précise que je pose]
+
+Structure imposée :
+- Objet du message : 8 mots maximum, qui annonce la demande.
+- Une phrase de contexte.
+- La question posée, isolée sur sa propre ligne.
+- Ce que j'attends précisément : un avis écrit, un rendez-vous, une prise en charge.
+- Le délai souhaité, formulé sans pression.
+
+Contraintes : pas de formule de politesse longue, pas de rappel de cours, pas de reformulation de ce que le confrère sait déjà. Dix lignes maximum. Tu n'ajoutes aucune donnée clinique que je ne t'ai pas fournie.</pre>
+    </div>
+    <div class="bloc">
+      <div class="bloc-tete"><h4>2. Relancer pour un compte rendu qui n'arrive pas</h4><button type="button" class="copier">Copier</button></div>
+      <pre>Rédige une relance courtoise à [un service / un confrère] pour un document attendu depuis [durée].
+
+Ton : confraternel, factuel, sans reproche, sans ironie. Le but est d'obtenir le document, pas d'avoir raison.
+
+Structure :
+- Rappel de la demande initiale et de sa date.
+- Pourquoi le document est nécessaire maintenant, en une phrase orientée patient.
+- Une proposition qui facilite la réponse : un envoi partiel, un appel de deux minutes, un contact de secrétariat.
+- Une phrase de clôture qui laisse la porte ouverte.
+
+Six lignes maximum. Propose-moi aussi une version plus ferme, à garder en réserve si cette relance reste sans réponse.</pre>
+    </div>
+  </div>
+
+  <div class="panneau" id="p-patient" hidden>
+    <div class="bloc">
+      <div class="bloc-tete"><h4>3. Un patient demande ses résultats par mail ordinaire</h4><button type="button" class="copier">Copier</button></div>
+      <pre>Rédige une réponse à un patient qui me demande de lui envoyer [un résultat d'examen] par mail ordinaire.
+
+Message à faire passer, sans donner le résultat :
+- Je ne transmets pas de résultat par ce canal, pour protéger la confidentialité de ses informations, pas par excès de prudence administrative.
+- Le canal prévu pour cela, que je lui indique.
+- La solution immédiate que je lui propose : [rendez-vous, appel, transmission via l'espace sécurisé].
+
+Ton : bienveillant, non condescendant, sans jargon réglementaire. Le patient ne doit pas se sentir soupçonné ni renvoyé à une procédure.
+
+Cinq lignes maximum. N'écris aucune information clinique, aucun nom d'examen, aucune date d'examen.</pre>
+    </div>
+    <div class="bloc">
+      <div class="bloc-tete"><h4>4. Explication de suivi après une consultation</h4><button type="button" class="copier">Copier</button></div>
+      <pre>Rédige un message de suivi destiné à un patient, à envoyer via le canal sécurisé, à partir de mes notes ci-dessous.
+
+Notes : [ce qui a été décidé, ce qui est attendu de lui, le prochain rendez-vous]
+
+Contraintes :
+- Phrases de 15 mots maximum, aucun terme technique sans traduction immédiate.
+- Aucun nom de médicament, aucun dosage : tu écris "le traitement prescrit".
+- Tu termines par deux blocs courts : "Ce que vous faites d'ici là" et "Quand me recontacter sans attendre".
+- Registre rassurant, jamais culpabilisant.
+
+Tu n'ajoutes aucune consigne médicale qui ne figure pas dans mes notes. Si une information manque, tu écris [à compléter] plutôt que de deviner.</pre>
+    </div>
+  </div>
+
+  <div class="panneau" id="p-refus" hidden>
+    <div class="bloc">
+      <div class="bloc-tete"><h4>5. Refuser une demande de certificat non justifiée</h4><button type="button" class="copier">Copier</button></div>
+      <pre>Rédige une réponse à une demande de certificat que je ne peux pas établir : [nature de la demande].
+
+Message à faire passer :
+- Le refus, clair, dès la première phrase, sans détour.
+- La raison, en une phrase compréhensible : je ne peux attester que ce que j'ai personnellement constaté.
+- Ce que je peux faire à la place, s'il y a une alternative.
+- Vers qui se tourner si un document est réellement exigé.
+
+Ton : ferme et respectueux. Pas d'excuse, pas de justification longue, pas de ton défensif. Le refus n'est pas une faveur qu'on retire.
+
+Six lignes maximum.</pre>
+    </div>
+    <div class="bloc">
+      <div class="bloc-tete"><h4>6. Répondre à un message mécontent</h4><button type="button" class="copier">Copier</button></div>
+      <pre>Voici un message de mécontentement que j'ai reçu : [coller le message, après avoir retiré toute donnée identifiante].
+
+Rédige une réponse qui :
+- Accuse réception du mécontentement sans le qualifier et sans le minimiser.
+- Rétablit les faits, uniquement ceux que je te donne : [faits].
+- Ne reconnaît aucune faute que je n'ai pas explicitement mentionnée.
+- Propose un temps d'échange, en consultation ou par téléphone, plutôt qu'un débat écrit.
+- Se termine sans formule qui invite à poursuivre par écrit.
+
+Ton : calme, respectueux, non défensif, sans ironie, sans excès d'excuses. Huit lignes maximum.
+
+Donne-moi ensuite, séparément, une liste de ce qu'il ne faut surtout pas écrire dans cette situation.</pre>
+    </div>
+  </div>
+
+  <div class="panneau" id="p-cabinet" hidden>
+    <div class="bloc">
+      <div class="bloc-tete"><h4>7. Message d'absence et de réorientation</h4><button type="button" class="copier">Copier</button></div>
+      <pre>Rédige un message d'absence automatique pour un cabinet médical, du [date] au [date].
+
+Il doit contenir, dans cet ordre :
+- La période d'absence.
+- La conduite à tenir en cas d'urgence vitale, en une ligne, en premier plan.
+- L'organisation de la continuité des soins pendant l'absence.
+- Le délai de traitement des messages au retour.
+- Une phrase indiquant qu'aucun renouvellement ni certificat ne sera traité par ce canal pendant la période.
+
+Contraintes : quatre lignes maximum, aucune information personnelle sur le motif de l'absence, aucun numéro de téléphone personnel. Le message doit rester compréhensible par un patient inquiet qui le lit sur un téléphone.</pre>
+    </div>
+  </div>
+</section>
+
+<!-- STYLE -->
+<section id="style">
+  <h2>Lui apprendre votre style, sans lui donner vos patients</h2>
+  <p class="chapeau">C'est la manipulation la plus utile de toute cette page, et celle où l'on commet le plus d'imprudences.</p>
+
+  <div class="bloc">
+    <div class="bloc-tete"><h4>Extraire votre style à partir de vos anciens messages</h4><button type="button" class="copier">Copier</button></div>
+    <pre>Voici trois messages que j'ai écrits moi-même, dont j'ai retiré toute information identifiante et tout élément clinique.
+
+[message 1]
+[message 2]
+[message 3]
+
+Analyse-les et produis une fiche de style réutilisable, en 10 lignes maximum :
+- Longueur moyenne des phrases et des messages.
+- Formules d'ouverture et de clôture que j'emploie réellement.
+- Niveau de formalité, usage du vouvoiement, place des formules de politesse.
+- Tics à conserver, tournures à éviter.
+- Ce que je ne fais jamais.
+
+Je réutiliserai cette fiche en tête de mes prochaines demandes. Ne me rends pas les messages d'origine, seulement la fiche.</pre>
+  </div>
+
+  <p><strong>Le point de prudence :</strong> nettoyez les trois messages avant de les coller. Un ancien courrier contient presque toujours un âge, une date, une pathologie et une ville, et ces quatre éléments réunis suffisent souvent à identifier une personne. La fiche de style, elle, ne contient rien de tout cela et se réutilise indéfiniment.</p>
+</section>
+
+<!-- COMPARATIF -->
+<section id="comparatif">
+  <h2>Comparatif, sur les critères qui comptent vraiment</h2>
+  <p class="chapeau">Les trois grands assistants savent tous rédiger un message correct. La différence utile est ailleurs : où passe la donnée, et dans quel compte.</p>
+
+  <table class="tableau">
+    <thead><tr><th>Le critère</th><th>Ce qu'il faut regarder</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Intégré ou séparé</strong></td>
+        <td>Un assistant intégré à la messagerie lit le fil pour vous répondre : très fluide, mais il accède au contenu de la boîte. Un assistant séparé n'a que ce que vous collez. Sur une boîte professionnelle, le second est plus facile à défendre.</td>
+      </tr>
+      <tr>
+        <td><strong>Type de compte</strong></td>
+        <td>Le même outil ne présente pas les mêmes garanties selon qu'il tourne sur un compte grand public ou sur un compte professionnel sous contrat. C'est le critère numéro un, avant toute considération de qualité rédactionnelle.</td>
+      </tr>
+      <tr>
+        <td><strong>Entraînement sur vos contenus</strong></td>
+        <td>Cherchez l'engagement écrit de non-utilisation pour l'entraînement, et la durée de conservation des requêtes. Une offre professionnelle sérieuse répond aux deux questions par écrit.</td>
+      </tr>
+      <tr>
+        <td><strong>Localisation et sous-traitance</strong></td>
+        <td>Où sont traitées les données, sous quel droit, avec quel sous-traitant. Aucun de ces outils grand public ne relève du cadre applicable à l'hébergement de données de santé.</td>
+      </tr>
+      <tr>
+        <td><strong>Style et longueur</strong></td>
+        <td>Là où les différences réelles se voient : certains produisent des textes plus longs et plus prudents, d'autres plus secs. Testez le même message sur deux outils avec votre fiche de style, et gardez celui qui vous demande le moins de retouches.</td>
+      </tr>
+      <tr>
+        <td><strong>Traçabilité</strong></td>
+        <td>Pouvez-vous retrouver ce que vous avez soumis, et le supprimer ? Une fonction d'historique et de suppression est un critère professionnel, pas un détail.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Le test en trois minutes, à faire vous-même :</strong> prenez un message administratif réel sans aucune donnée de santé, soumettez-le au même prompt sur deux outils, et comparez trois choses : le nombre de retouches nécessaires, la longueur, et la tentation d'inventer une information que vous n'avez pas donnée. Ce dernier point départage plus sûrement que n'importe quel comparatif publié.</p>
+</section>
+
+<!-- RELECTURE -->
+<section id="relecture">
+  <h2>La relecture, en quatre contrôles</h2>
+  <p class="chapeau">Un brouillon généré est bien écrit par construction. C'est précisément ce qui rend la relecture difficile : rien n'accroche l'œil.</p>
+
+  <table class="tableau">
+    <thead><tr><th>Contrôle</th><th>Ce que vous cherchez</th></tr></thead>
+    <tbody>
+      <tr><td><strong>1. Les nombres</strong></td><td>Âge, dates, durées, valeurs biologiques, posologies. Chaque nombre présent dans le brouillon doit provenir de vous. Un nombre que vous n'avez pas dicté est une invention, jusqu'à preuve du contraire.</td></tr>
+      <tr><td><strong>2. Les affirmations</strong></td><td>Cherchez les phrases qui affirment un lien, une évolution ou un diagnostic. Le modèle comble les vides avec du vraisemblable. Relisez en vous demandant, phrase par phrase : est-ce que j'ai dit cela ?</td></tr>
+      <tr><td><strong>3. Les noms propres</strong></td><td>Destinataire, service, établissement, et surtout : ne reste-t-il pas un élément identifiant que vous aviez oublié de retirer avant de coller ?</td></tr>
+      <tr><td><strong>4. Le canal et les pièces jointes</strong></td><td>Le message part-il par le bon canal, avec les bonnes pièces, et sans une pièce jointe de trop ? C'est le contrôle qu'on saute quand on est pressé, et celui qui coûte le plus cher.</td></tr>
+    </tbody>
+  </table>
+
+  <p><strong>Une astuce de relecture :</strong> lisez le brouillon à voix basse. La fluidité artificielle qui endort l'œil ne résiste pas à l'oreille, et les phrases que vous n'auriez jamais écrites sautent immédiatement.</p>
+</section>
+
+<!-- CONTROLES -->
+<section id="controles">
+  <h2>Avant d'envoyer</h2>
+  <p class="chapeau">Cinq secondes chacun. À faire sur tout message contenant le moindre élément clinique.</p>
+
+  <div class="progression">
+    <div class="jauge"><span id="jauge-barre"></span></div>
+    <div class="compteur" id="jauge-compteur">0 / 5</div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Le canal est le bon</h4>
+    <p>Données de santé entre professionnels : messagerie sécurisée. Vers le patient : espace sécurisé prévu pour cela.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Aucun élément identifiant n'a été collé dans l'outil de rédaction</h4>
+    <p>Ni nom, ni date de naissance, ni adresse, ni numéro de dossier, ni établissement associé à une pathologie.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Chaque nombre du message vient de moi</h4>
+    <p>Contrôle unitaire, pas global. Un seul nombre inventé suffit.</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Aucune phrase n'affirme ce que je n'ai pas dit</h4>
+    <p>Y compris les formules qui semblent anodines : « comme convenu », « il n'y a pas de contre-indication », « le bilan est rassurant ».</p></div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Le destinataire et les pièces jointes sont vérifiés</h4>
+    <p>Une pièce jointe destinée à un autre patient est l'incident le plus fréquent en cabinet, et l'un des plus difficiles à rattraper.</p></div>
+  </div>
+
+  <div class="zone-rouge">
+    <h3>Ce qui n'entre jamais dans un outil de rédaction</h3>
+    <ul class="interdit">
+      <li>Le message d'origine du patient collé tel quel, avec sa signature et ses coordonnées</li>
+      <li>Un compte rendu, une ordonnance ou un résultat, même pour « aider l'outil à comprendre »</li>
+      <li>Un fil de discussion complet avec un confrère, qui contient toujours plus que ce que vous croyez</li>
+      <li>Une capture d'écran de votre logiciel de cabinet</li>
+    </ul>
+  </div>
+
+  <div class="banniere">
+    <p>Le brouillon est de l'outil. La signature est la vôtre. La responsabilité aussi.
+    <small>Le secret médical est protégé par l'article L.1110-4 du Code de la santé publique, et sa violation par l'article 226-13 du Code pénal. Aucun gain de temps ne s'inscrit en exception.</small></p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <h2>Questions fréquentes</h2>
+
+  <details>
+    <summary>Puis-je brancher un assistant sur ma boîte professionnelle ?</summary>
+    <p>Techniquement oui, et c'est même l'argument de vente principal. Mais un assistant connecté accède à l'ensemble des messages, y compris ceux qui contiennent des données de santé que vous ne lui auriez jamais soumises volontairement. Sur une boîte professionnelle de santé, la prudence commande de rédiger dans un outil séparé et de coller ensuite.</p>
+  </details>
+
+  <details>
+    <summary>Et si je supprime juste le nom du patient ?</summary>
+    <p>Insuffisant. Un âge précis, une date de consultation, une pathologie peu fréquente et une commune suffisent souvent à réidentifier une personne. La bonne pratique consiste à écrire « un patient de la soixantaine » et à réintroduire les éléments précis à la main, dans le canal sécurisé.</p>
+  </details>
+
+  <details>
+    <summary>Un mail ordinaire chiffré, cela suffit-il ?</summary>
+    <p>Le chiffrement du transport ne règle pas la question de l'identification des correspondants ni celle de l'hébergement. L'espace de confiance dédié existe précisément parce que ces trois exigences vont ensemble.</p>
+  </details>
+
+  <details>
+    <summary>Le patient peut-il m'écrire directement sur la messagerie sécurisée ?</summary>
+    <p>L'échange avec le patient passe par sa messagerie sécurisée, mais c'est le professionnel qui en prend l'initiative. Concrètement, c'est vous qui ouvrez le fil, le patient peut ensuite répondre.</p>
+  </details>
+
+  <details>
+    <summary>Combien de temps fait-on gagner, réellement ?</summary>
+    <p>Sur des messages répétitifs et administratifs, le gain est net et immédiat. Sur un courrier clinique, le gain de rédaction est en partie repris par le temps de relecture, qui n'est pas compressible. Le bénéfice tient alors moins au temps qu'à la régularité de la forme et à la baisse de la charge mentale.</p>
+  </details>
+
+  <details>
+    <summary>Dois-je signaler à mon correspondant que le message a été rédigé avec une IA ?</summary>
+    <p>Non, dès lors que vous en assumez intégralement le contenu : le message est le vôtre, comme une lettre tapée par un secrétariat reste la vôtre. Ce qui compte est que rien d'inexact ne parte sous votre signature.</p>
+  </details>
+</section>
+
+<!-- SOURCES -->
+<section id="sources">
+  <h2>Sources</h2>
+  <table class="tableau">
+    <thead><tr><th>Élément</th><th>Source</th></tr></thead>
+    <tbody>
+      <tr><td>Échange de données de santé : cadre juridique et responsabilité</td><td>Code de la santé publique, article L.1110-4</td></tr>
+      <tr><td>Hébergement des données de santé</td><td>Code de la santé publique, article L.1111-8</td></tr>
+      <tr><td>Violation du secret professionnel</td><td>Code pénal, article 226-13</td></tr>
+      <tr><td>Espace de confiance MSSanté, opérateurs référencés, boîtes nominatives et organisationnelles, annuaire santé</td><td>Agence du Numérique en Santé, doctrine du numérique en santé et référentiel opérateurs</td></tr>
+      <tr><td>Messagerie citoyenne de Mon espace santé, initiative de l'échange réservée au professionnel</td><td>Agence du Numérique en Santé</td></tr>
+      <tr><td>Non-utilisation des contenus pour l'entraînement et non-conservation des requêtes au delà de la session sur les offres professionnelles</td><td>Guide de confidentialité de l'IA générative dans la suite bureautique concernée, mise à jour janvier 2026</td></tr>
+      <tr><td>Absence de garantie contractuelle équivalente sur les comptes grand public gratuits</td><td>Conditions d'utilisation des offres grand public, 2026</td></tr>
+    </tbody>
+  </table>
+  <p class="chapeau">Les fonctions d'assistance intégrées aux messageries évoluent vite et diffèrent selon les offres. Vérifiez ce qui est actif sur votre compte plutôt que ce qui est annoncé sur une page produit.</p>
+</section>
+
+<footer>
+  <p><strong>L'IA Minute du Médecin</strong>, Dr Guillaume Zagury et Samuel De Queiroz, Éditions Medicilline.</p>
+  <p>Ressource compagnon de la double page consacrée aux courriers et aux messages. Cette page décrit des pratiques de rédaction, elle ne constitue pas un conseil juridique. En cas de doute sur un échange, votre conseil départemental de l'Ordre et votre délégué à la protection des données sont les bons interlocuteurs.</p>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var chips = document.querySelectorAll("nav button[data-cible]");
+  Array.prototype.forEach.call(chips, function(btn){
+    btn.addEventListener("click", function(){
+      var cible = document.getElementById(btn.getAttribute("data-cible"));
+      if(cible){ cible.scrollIntoView({ behavior:"smooth", block:"start" }); }
+    });
+  });
+
+  var onglets = document.querySelectorAll(".onglets button[data-panneau]");
+  Array.prototype.forEach.call(onglets, function(btn){
+    btn.addEventListener("click", function(){
+      Array.prototype.forEach.call(onglets, function(autre){
+        autre.setAttribute("aria-selected", autre === btn ? "true" : "false");
+        var p = document.getElementById(autre.getAttribute("data-panneau"));
+        if(p){ p.hidden = (autre !== btn); }
+      });
+    });
+  });
+
+  var controles = document.querySelectorAll("[data-controle]");
+  var barre = document.getElementById("jauge-barre");
+  var compteur = document.getElementById("jauge-compteur");
+  var total = controles.length;
+
+  function maj(){
+    var faits = 0;
+    Array.prototype.forEach.call(controles, function(c){
+      var box = c.querySelector("input[type=checkbox]");
+      if(box && box.checked){ faits++; c.classList.add("fait"); }
+      else { c.classList.remove("fait"); }
+    });
+    barre.style.width = (faits/total*100) + "%";
+    barre.style.background = (faits === total) ? "#27AE60" : "#DC322F";
+    compteur.textContent = faits + " / " + total;
+  }
+
+  Array.prototype.forEach.call(controles, function(c){
+    var box = c.querySelector("input[type=checkbox]");
+    if(box){ box.addEventListener("change", maj); }
+  });
+  maj();
+
+  var boutons = document.querySelectorAll(".copier");
+  Array.prototype.forEach.call(boutons, function(btn){
+    btn.addEventListener("click", function(){
+      var bloc = btn.closest(".bloc");
+      var pre = bloc ? bloc.querySelector("pre") : null;
+      if(!pre){ return; }
+      var texte = pre.textContent;
+      var fini = function(){
+        btn.textContent = "Copié";
+        btn.classList.add("ok");
+        setTimeout(function(){ btn.textContent = "Copier"; btn.classList.remove("ok"); }, 1800);
+      };
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(texte).then(fini, function(){ secours(texte, fini); });
+      } else { secours(texte, fini); }
+    });
+  });
+
+  function secours(texte, fini){
+    var zone = document.createElement("textarea");
+    zone.value = texte;
+    zone.setAttribute("readonly","");
+    zone.style.position = "absolute";
+    zone.style.left = "-9999px";
+    document.body.appendChild(zone);
+    zone.select();
+    try { document.execCommand("copy"); fini(); } catch(e){}
+    document.body.removeChild(zone);
+  }
+})();
+</script>
+</body>
+</html>

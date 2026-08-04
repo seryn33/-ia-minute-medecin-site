@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aide à la cotation · L'IA Minute du Médecin</title>
+<meta name="description" content="Ressource compagnon du livre L'IA Minute du Médecin : générateur de ligne de cotation à vérifier, les sept pièges de cotation, le prompt anti-invention et le protocole de vérification sur ameli.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Fira+Sans+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --rouge:#DC322F;--noir:#1A1A1A;--blanc:#FFFFFF;--jaune:#FFD700;
+  --bleu:#3498DB;--orange:#F39C12;--vert:#27AE60;--violet:#8E44AD;--teal:#1ABC9C;
+  --gris:#BDC3C7;--gris-clair:#F4F5F6;--gris-ligne:#E1E4E6;--gris-texte:#5A6268;
+}
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{margin:0;background:var(--blanc);color:var(--noir);font-family:"Fira Sans Condensed","Roboto Condensed",Arial,sans-serif;font-size:17px;line-height:1.5;}
+.page{max-width:720px;margin:0 auto;padding:0 18px 80px;}
+h1,h2,h3,h4{font-family:"Oswald","Arial Narrow",Arial,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.2px;}
+p{margin:0 0 14px;}
+
+header{padding:26px 0 8px;}
+.eyebrow{display:inline-block;font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:var(--blanc);background:var(--noir);padding:5px 11px;}
+h1{font-size:33px;line-height:1.06;margin:14px 0 0;}
+h1 mark{background:var(--jaune);color:var(--noir);padding:0 5px;}
+.sous-titre{font-family:"Fira Sans Condensed",Arial,sans-serif;font-style:italic;font-weight:600;color:var(--rouge);font-size:19px;margin:10px 0 0;text-transform:none;}
+.trait{height:4px;background:var(--rouge);margin:16px 0 22px;}
+.meta{font-size:14px;color:var(--gris-texte);margin:0 0 22px;}
+
+.flash{border:3px solid var(--rouge);border-radius:14px;padding:16px 18px;margin:0 0 26px;}
+.flash h2{font-size:19px;margin:0 0 10px;color:var(--rouge);}
+.flash ul{margin:0;padding-left:20px;}
+.flash li{margin-bottom:9px;}
+
+nav{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 34px;}
+nav button{font-family:"Oswald",Arial,sans-serif;font-weight:500;font-size:13px;letter-spacing:.6px;text-transform:uppercase;background:var(--gris-clair);color:var(--noir);border:2px solid var(--gris-ligne);border-radius:999px;padding:7px 13px;cursor:pointer;}
+nav button:hover{background:var(--noir);color:var(--blanc);border-color:var(--noir);}
+nav button:focus-visible{outline:3px solid var(--rouge);outline-offset:2px;}
+
+section{border-top:2px solid var(--gris-ligne);padding-top:26px;margin-top:34px;scroll-margin-top:14px;}
+section > h2{font-size:25px;margin:0 0 4px;line-height:1.1;}
+.chapeau{color:var(--gris-texte);font-size:16px;margin:0 0 20px;}
+h3{font-size:19px;margin:26px 0 8px;}
+
+/* OUTIL */
+.outil{border:3px solid var(--noir);border-radius:16px;padding:16px 18px;margin:0 0 18px;}
+.question{margin-bottom:16px;}
+.question h4{font-size:15px;margin:0 0 8px;}
+.choix{display:flex;flex-wrap:wrap;gap:8px;}
+.choix button{
+  font-family:"Fira Sans Condensed",Arial,sans-serif;font-size:15.5px;font-weight:600;
+  background:var(--blanc);color:var(--noir);border:2px solid var(--gris-ligne);
+  border-radius:10px;padding:8px 12px;cursor:pointer;
+}
+.choix button[aria-pressed="true"]{background:var(--noir);color:var(--blanc);border-color:var(--noir);}
+.choix button:focus-visible{outline:3px solid var(--rouge);outline-offset:2px;}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px;}
+.bouton-primaire{
+  font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:14px;letter-spacing:.8px;text-transform:uppercase;
+  background:var(--rouge);color:var(--blanc);border:none;border-radius:8px;padding:11px 18px;cursor:pointer;
+}
+.bouton-secondaire{
+  font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:14px;letter-spacing:.8px;text-transform:uppercase;
+  background:var(--blanc);color:var(--noir);border:2px solid var(--noir);border-radius:8px;padding:9px 16px;cursor:pointer;
+}
+#resultat{margin-top:18px;}
+.ligne{border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;margin-bottom:10px;}
+.ligne .code{font-family:"Oswald",Arial,sans-serif;font-size:19px;font-weight:700;}
+.ligne .valeur{font-family:"Oswald",Arial,sans-serif;font-size:19px;font-weight:700;color:var(--rouge);float:right;}
+.ligne .detail{font-size:15.5px;margin:6px 0 0;clear:both;}
+.ligne.alerte{border-color:var(--orange);background:#FFF8EC;}
+.ligne.total{border-color:var(--vert);background:#F3FBF6;}
+.avertissement{font-size:15px;background:var(--gris-clair);border-left:4px solid var(--rouge);padding:10px 12px;margin:14px 0 0;}
+
+.piege{display:flex;gap:14px;border:2px solid var(--gris-ligne);border-radius:14px;padding:14px;margin-bottom:12px;}
+.pastille{flex:0 0 40px;height:40px;border-radius:50%;color:var(--blanc);font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:18px;display:flex;align-items:center;justify-content:center;background:var(--rouge);}
+.piege h4{font-size:16px;margin:3px 0 6px;}
+.piege p{font-size:15.5px;margin:0 0 6px;}
+.piege p:last-child{margin-bottom:0;}
+.correctif{font-size:15px;background:#F3FBF6;border-left:4px solid var(--vert);padding:8px 10px;}
+.correctif b{font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:12.5px;letter-spacing:.6px;color:var(--vert);}
+
+.bloc{border:2px solid var(--gris-ligne);border-radius:14px;overflow:hidden;margin:0 0 16px;}
+.bloc-tete{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--gris-clair);padding:10px 12px;border-bottom:2px solid var(--gris-ligne);}
+.bloc-tete h4{margin:0;font-size:15px;}
+.copier{font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:12px;letter-spacing:.8px;text-transform:uppercase;background:var(--rouge);color:var(--blanc);border:none;border-radius:6px;padding:7px 12px;cursor:pointer;white-space:nowrap;}
+.copier.ok{background:var(--vert);}
+.copier:focus-visible{outline:3px solid var(--noir);outline-offset:2px;}
+pre{margin:0;padding:14px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px;line-height:1.5;white-space:pre-wrap;word-wrap:break-word;}
+.badge{display:inline-block;background:var(--gris);color:var(--noir);border-radius:5px;font-family:"Oswald",Arial,sans-serif;font-size:11.5px;letter-spacing:.7px;text-transform:uppercase;padding:3px 8px;margin:0 6px 6px 0;}
+
+.tableau{width:100%;border-collapse:collapse;font-size:15px;margin:0 0 18px;}
+.tableau th,.tableau td{border:1px solid var(--gris-ligne);padding:8px 10px;text-align:left;vertical-align:top;}
+.tableau th{background:var(--noir);color:var(--blanc);font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:13px;letter-spacing:.5px;}
+.tableau tr:nth-child(even) td{background:var(--gris-clair);}
+
+.banniere{background:var(--rouge);color:var(--blanc);border-radius:14px;padding:18px 20px;margin:26px 0;}
+.banniere p{margin:0;font-family:"Oswald",Arial,sans-serif;font-size:19px;line-height:1.25;text-transform:uppercase;}
+.banniere small{display:block;font-family:"Fira Sans Condensed",Arial,sans-serif;text-transform:none;font-size:15px;margin-top:8px;opacity:.95;}
+
+details{border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;margin-bottom:10px;}
+details[open]{border-color:var(--noir);}
+summary{cursor:pointer;font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:16px;text-transform:uppercase;letter-spacing:.3px;}
+summary::-webkit-details-marker{display:none;}
+summary::before{content:"+ ";color:var(--rouge);font-weight:700;}
+details[open] summary::before{content:"\2212 ";}
+details p{margin:10px 0 0;font-size:16px;}
+
+footer{border-top:4px solid var(--noir);margin-top:44px;padding-top:18px;font-size:14px;color:var(--gris-texte);}
+footer strong{color:var(--noir);}
+
+@media (max-width:520px){
+  body{font-size:16px;}h1{font-size:27px;}section > h2{font-size:21px;}
+  .tableau{font-size:14px;}pre{font-size:12.5px;}
+  .ligne .valeur{float:none;display:block;}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none !important;scroll-behavior:auto !important;}}
+</style>
+</head>
+<body>
+<div class="page">
+
+<header>
+  <span class="eyebrow">Ressource compagnon · L'IA Minute du Médecin</span>
+  <h1>Cotation : <mark>l'aide à la vérification</mark></h1>
+  <p class="sous-titre">Un générateur de ligne de cotation à contrôler, les sept pièges qui reviennent en contrôle, et le prompt qui empêche un assistant d'inventer un code.</p>
+  <div class="trait"></div>
+  <p class="meta">Montants vérifiés le 25 juillet 2026. Ils changent au moins une fois par an : la date ci-dessus fait partie de l'information.</p>
+</header>
+
+<div class="flash">
+  <h2>La règle qui commande tout le reste</h2>
+  <ul>
+    <li><strong>Un assistant conversationnel n'a pas la nomenclature à jour.</strong> Il a lu beaucoup de pages parlant de cotation, dont des pages périmées et des forums. Il produit donc des codes plausibles avec des montants d'il y a trois ans, et il le fait avec le même aplomb qu'une réponse juste. Le montant qu'il annonce n'est jamais la source.</li>
+    <li><strong>Ce à quoi il sert réellement :</strong> transformer votre acte en une liste structurée de lignes à vérifier, vous rappeler les majorations que vous oubliez, et signaler les cumuls à contrôler. Le gain est là, et il est réel. La valeur monétaire, elle, se lit sur la source officielle.</li>
+    <li><strong>Deux exemples récents, pour fixer les idées.</strong> L'électrocardiogramme est passé de 14,26 à <strong>14,77 euros</strong> au 1er janvier 2026. La téléconsultation du généraliste est restée à <strong>25 euros</strong> alors que la consultation au cabinet est passée à 30. Un assistant qui n'a pas ces deux informations vous fera perdre de l'argent dans un cas et facturer à tort dans l'autre.</li>
+  </ul>
+</div>
+
+<nav aria-label="Sommaire">
+  <button type="button" data-cible="outil">L'outil</button>
+  <button type="button" data-cible="pieges">Les 7 pièges</button>
+  <button type="button" data-cible="prompt">Le prompt</button>
+  <button type="button" data-cible="verifier">Vérifier en 3 clics</button>
+  <button type="button" data-cible="controle">En cas de contrôle</button>
+  <button type="button" data-cible="faq">Questions</button>
+  <button type="button" data-cible="sources">Sources</button>
+</nav>
+
+<!-- OUTIL -->
+<section id="outil">
+  <h2>Générateur de ligne de cotation</h2>
+  <p class="chapeau">Répondez aux six questions. L'outil propose une ligne de cotation et la liste des points à vérifier. Il ne facture rien et ne remplace pas la nomenclature.</p>
+
+  <div class="outil">
+    <div class="question" data-q="acte">
+      <h4>1. Quel type d'acte</h4>
+      <div class="choix">
+        <button type="button" data-v="cabinet">Consultation au cabinet</button>
+        <button type="button" data-v="domicile">Visite à domicile</button>
+        <button type="button" data-v="tele">Téléconsultation</button>
+      </div>
+    </div>
+
+    <div class="question" data-q="age">
+      <h4>2. Âge du patient</h4>
+      <div class="choix">
+        <button type="button" data-v="moins6">Moins de 6 ans</button>
+        <button type="button" data-v="adulte">6 à 79 ans</button>
+        <button type="button" data-v="plus80">80 ans et plus</button>
+      </div>
+    </div>
+
+    <div class="question" data-q="mt">
+      <h4>3. Êtes-vous le médecin traitant déclaré</h4>
+      <div class="choix">
+        <button type="button" data-v="oui">Oui</button>
+        <button type="button" data-v="non">Non</button>
+        <button type="button" data-v="adresse">Non, patient adressé</button>
+      </div>
+    </div>
+
+    <div class="question" data-q="horaire">
+      <h4>4. Quand</h4>
+      <div class="choix">
+        <button type="button" data-v="jour">Heures ouvrables</button>
+        <button type="button" data-v="samedi">Samedi après-midi</button>
+        <button type="button" data-v="dimanche">Dimanche ou férié</button>
+        <button type="button" data-v="nuit">Nuit</button>
+      </div>
+    </div>
+
+    <div class="question" data-q="contexte">
+      <h4>5. Contexte de la demande</h4>
+      <div class="choix">
+        <button type="button" data-v="programme">Rendez-vous programmé</button>
+        <button type="button" data-v="regule">Adressé par la régulation du 15</button>
+        <button type="button" data-v="specialiste">Rendez-vous urgent de spécialiste obtenu sous 48 h</button>
+      </div>
+    </div>
+
+    <div class="question" data-q="technique">
+      <h4>6. Acte technique réalisé pendant la consultation</h4>
+      <div class="choix">
+        <button type="button" data-v="aucun">Aucun</button>
+        <button type="button" data-v="ecg">Électrocardiogramme</button>
+        <button type="button" data-v="suture">Suture</button>
+        <button type="button" data-v="frottis">Frottis</button>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button type="button" class="bouton-primaire" id="btn-generer">Proposer la cotation</button>
+      <button type="button" class="bouton-secondaire" id="btn-reset">Effacer</button>
+    </div>
+
+    <div id="resultat" aria-live="polite"></div>
+  </div>
+</section>
+
+<!-- PIEGES -->
+<section id="pieges">
+  <h2>Les sept pièges qui reviennent</h2>
+  <p class="chapeau">Ce ne sont pas les codes rares qui posent problème, ce sont les gestes quotidiens mal cotés, répétés cent fois dans l'année.</p>
+
+  <div class="piege">
+    <div class="pastille">1</div>
+    <div>
+      <h4>Oublier la majoration de l'enfant</h4>
+      <p>La majoration pour la prise en charge des enfants s'applique jusqu'à la veille incluse du sixième anniversaire. Elle est due au médecin généraliste conventionné, et n'est pas réservée au médecin traitant.</p>
+      <p class="correctif"><b>Correctif</b> : programmez le rappel dans votre logiciel sur le critère d'âge, pas dans votre mémoire.</p>
+    </div>
+  </div>
+
+  <div class="piege">
+    <div class="pastille">2</div>
+    <div>
+      <h4>Ne pas facturer l'électrocardiogramme réalisé</h4>
+      <p>C'est l'un des rares actes techniques qui se cumule avec la consultation sans abattement. L'acte se porte sur une ligne distincte de la consultation, en code CCAM.</p>
+      <p class="correctif"><b>Correctif</b> : deux lignes, toujours. Une ligne NGAP pour la consultation, une ligne CCAM pour l'acte.</p>
+    </div>
+  </div>
+
+  <div class="piege">
+    <div class="pastille">3</div>
+    <div>
+      <h4>Confondre le tarif de la téléconsultation avec celui du cabinet</h4>
+      <p>La téléconsultation du généraliste n'a pas suivi la revalorisation de la consultation au cabinet. Les majorations qui restent applicables à distance ne sont pas non plus les mêmes qu'en présentiel.</p>
+      <p class="correctif"><b>Correctif</b> : un modèle de cotation distinct dans votre logiciel pour la téléconsultation, jamais une copie de celui du cabinet.</p>
+    </div>
+  </div>
+
+  <div class="piege">
+    <div class="pastille">4</div>
+    <div>
+      <h4>Se tromper de majoration d'urgence</h4>
+      <p>Il en existe plusieurs, qui ne se déclenchent pas dans les mêmes situations : la régulation par le centre 15, l'obtention d'un rendez-vous urgent de spécialiste, les horaires de permanence des soins, le samedi après-midi, le dimanche et la nuit. Elles ne se cumulent pas librement.</p>
+      <p class="correctif"><b>Correctif</b> : retenez le déclencheur, pas le code. Qui a orienté le patient, et à quelle heure. Le code se déduit ensuite.</p>
+    </div>
+  </div>
+
+  <div class="piege">
+    <div class="pastille">5</div>
+    <div>
+      <h4>Facturer un cumul interdit</h4>
+      <p>Certaines consultations forfaitaires excluent expressément les majorations habituelles. Les consultations obligatoires de l'enfant, par exemple, ne se cumulent pas avec la majoration enfant du généraliste.</p>
+      <p class="correctif"><b>Correctif</b> : pour toute consultation à tarif forfaitaire, vérifiez la clause d'exclusion avant d'ajouter quoi que ce soit.</p>
+    </div>
+  </div>
+
+  <div class="piege">
+    <div class="pastille">6</div>
+    <div>
+      <h4>Oublier le modificateur sur l'acte technique</h4>
+      <p>Sur un acte CCAM, le modificateur change le montant. Urgence, nuit, dimanche, âge : ce sont des lettres ajoutées au code, et leur oubli est une perte sèche, invisible sur la feuille de soins.</p>
+      <p class="correctif"><b>Correctif</b> : après avoir saisi un code CCAM, posez-vous une seule question, celle des circonstances.</p>
+    </div>
+  </div>
+
+  <div class="piege">
+    <div class="pastille">7</div>
+    <div>
+      <h4>Coter avec un montant mémorisé</h4>
+      <p>Les tarifs bougent au moins une fois par an, à la hausse comme à la baisse. Une partie des actes techniques a été revalorisée en janvier 2026, d'autres ont été abaissés. Un montant appris il y a deux ans est un montant faux.</p>
+      <p class="correctif"><b>Correctif</b> : les montants viennent du logiciel à jour ou de la source officielle. Jamais de la mémoire, jamais d'un assistant conversationnel.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROMPT -->
+<section id="prompt">
+  <h2>Le prompt qui empêche l'invention</h2>
+  <p class="chapeau">La formulation change tout. Demandez une cotation, vous obtiendrez des chiffres inventés. Demandez une liste de vérifications, vous obtiendrez un outil de travail.</p>
+
+  <div class="bloc">
+    <div class="bloc-tete"><h4>Analyse d'un acte, sans montant</h4><button type="button" class="copier">Copier</button></div>
+    <pre>Rôle : tu m'aides à préparer la vérification d'une cotation. Tu n'es pas une source de nomenclature.
+
+Acte réalisé : [décrire précisément : âge du patient, motif, actes réalisés, horaire, jour, lieu, statut médecin traitant, secteur conventionnel].
+
+Ce que je te demande :
+1. La liste des lignes de facturation à envisager, en distinguant les actes de la nomenclature générale et les actes techniques.
+2. Pour chaque ligne : le code, le libellé, et la condition qui la déclenche.
+3. Les majorations que j'ai des chances d'oublier dans cette situation.
+4. Les cumuls à vérifier, en indiquant lequel pourrait être interdit et pourquoi.
+5. La question précise que je dois aller vérifier sur la source officielle pour chaque ligne.
+
+Règles absolues :
+- Tu n'indiques AUCUN montant en euros. Pas d'estimation, pas d'ordre de grandeur, pas de fourchette.
+- Si tu n'es pas certain d'un code, tu écris "code à confirmer" plutôt que de proposer un code plausible.
+- Tu ne cites aucune date d'entrée en vigueur, sauf si je te l'ai fournie.
+- Tu termines par la liste de ce que tu n'as pas pu déterminer avec les éléments donnés.
+
+Aucune donnée identifiante ne figure dans ma description, et tu ne m'en demandes pas.</pre>
+  </div>
+
+  <div class="bloc">
+    <div class="bloc-tete"><h4>Construire votre mémo personnel, à valider ensuite</h4><button type="button" class="copier">Copier</button></div>
+    <pre>Aide-moi à construire le mémo de cotation de mon activité réelle.
+
+Voici mes dix situations les plus fréquentes : [lister en une ligne chacune].
+
+Pour chaque situation, produis un tableau à quatre colonnes :
+1. La situation, formulée comme je la reconnaîtrai en consultation.
+2. Les lignes de facturation à envisager, codes seuls.
+3. Le déclencheur de chaque majoration, en langage clair.
+4. Une colonne "Montant" laissée VIDE, que je remplirai moi-même depuis ma source officielle.
+
+Ajoute une colonne "Vérifié le" également vide.
+
+Ne remplis jamais la colonne Montant, même si je te le demande ensuite : c'est une règle de sécurité que je te donne volontairement.</pre>
+  </div>
+
+  <p><strong>Pourquoi la colonne montant reste vide :</strong> parce que c'est vous qui la remplirez, une fois, en ouvrant la source officielle, et que vous daterez ce remplissage. Un mémo daté et rempli à la main vaut mieux qu'un tableau complet dont personne ne sait d'où viennent les chiffres.</p>
+</section>
+
+<!-- VERIFIER -->
+<section id="verifier">
+  <h2>Vérifier en trois clics</h2>
+  <p class="chapeau">Le réflexe qui transforme une proposition en cotation défendable.</p>
+
+  <table class="tableau">
+    <thead><tr><th>Ce que vous cherchez</th><th>Où</th></tr></thead>
+    <tbody>
+      <tr><td>Le montant et les conditions d'un acte technique</td><td>Le moteur de recherche de la classification commune des actes médicaux, sur le site de l'Assurance Maladie destiné aux professionnels. Recherche par code, puis lecture des notes de facturation, qui contiennent les exclusions.</td></tr>
+      <tr><td>Une majoration de la nomenclature générale</td><td>Le texte de la nomenclature générale des actes professionnels, article par article. Les conditions y sont écrites en toutes lettres, y compris les cumuls interdits.</td></tr>
+      <tr><td>Un tarif de consultation à jour</td><td>La page tarifs de votre caisse, ou la plaquette de cotation de votre syndicat, qui a l'avantage d'être datée et lisible.</td></tr>
+      <tr><td>Une règle d'association entre deux actes</td><td>Les dispositions générales de la classification, chapitre des associations d'actes. C'est là que se règlent les questions de pourcentage.</td></tr>
+    </tbody>
+  </table>
+
+  <p><strong>Le geste à prendre :</strong> quand vous vérifiez un point, notez la date à côté dans votre mémo. Six mois plus tard, vous saurez si l'information mérite un nouveau contrôle. Sans date, un mémo devient un piège.</p>
+</section>
+
+<!-- CONTROLE -->
+<section id="controle">
+  <h2>Si un contrôle arrive</h2>
+  <p class="chapeau">Ce que l'on vous demandera n'est pas d'avoir eu raison, mais de pouvoir expliquer.</p>
+
+  <table class="tableau">
+    <thead><tr><th>Ce qui protège</th><th>Ce qui ne protège pas</th></tr></thead>
+    <tbody>
+      <tr><td>Un dossier qui justifie l'acte facturé : la trace de ce qui a été fait, à quelle heure, sur demande de qui</td><td>Un raisonnement de cotation, aussi cohérent soit-il, sans trace dans le dossier</td></tr>
+      <tr><td>Un mémo daté, aligné sur la source officielle</td><td>Une capture d'écran d'une conversation avec un assistant</td></tr>
+      <tr><td>La correction spontanée d'une erreur repérée, et la régularisation</td><td>La répétition d'une même erreur pendant deux ans</td></tr>
+      <tr><td>La cohérence entre votre pratique et votre facturation</td><td>L'argument selon lequel un outil l'avait proposé</td></tr>
+    </tbody>
+  </table>
+
+  <p>La responsabilité de la facturation appartient au médecin qui l'émet. Aucun outil, aucun logiciel, aucun assistant ne la transfère. C'est aussi pour cela que l'objectif de cette page n'est pas de coter à votre place, mais de vous faire poser les bonnes questions plus vite.</p>
+
+  <div class="banniere">
+    <p>L'assistant propose. Vous vérifiez. La caisse contrôle.
+    <small>Facturer un acte non réalisé ou une majoration non due expose à un indu, et le cas échéant à des suites disciplinaires ou pénales. La rapidité d'une aide à la cotation ne change rien à cette règle.</small></p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <h2>Questions fréquentes</h2>
+
+  <details>
+    <summary>Pourquoi ne pas simplement demander le montant à un assistant ?</summary>
+    <p>Parce qu'il répondra. Avec un chiffre juste dans la majorité des cas, et faux dans une minorité que rien ne signale. Sur une facturation répétée cent fois par an, cette minorité coûte cher, dans un sens comme dans l'autre.</p>
+  </details>
+
+  <details>
+    <summary>Un assistant connecté à internet ne règle-t-il pas le problème ?</summary>
+    <p>Il l'améliore et ne le supprime pas : il tombera aussi sur des pages de blog périmées, qui sont plus nombreuses et mieux référencées que les textes officiels. Demandez-lui alors la source de chaque montant, et vérifiez cette source, pas le montant.</p>
+  </details>
+
+  <details>
+    <summary>Puis-je décrire un vrai patient dans ma requête ?</summary>
+    <p>Décrivez la situation, jamais la personne. « Enfant de 4 ans, consultation de suivi avec vaccination » suffit à obtenir la bonne analyse. Un prénom, une date de naissance ou une commune n'apportent rien et vous font sortir du cadre.</p>
+  </details>
+
+  <details>
+    <summary>Combien de temps prend la construction d'un mémo personnel ?</summary>
+    <p>Une heure pour les dix situations qui représentent l'essentiel de votre activité, dont quarante minutes de vérification sur les sources. Ensuite, un contrôle une fois par an, en janvier, quand les nouveaux tarifs entrent en vigueur.</p>
+  </details>
+
+  <details>
+    <summary>Et si je découvre que je sous-cote depuis des années ?</summary>
+    <p>La correction vaut pour l'avenir. Pour le passé, les règles de rattrapage sont limitées dans le temps et méritent un avis, auprès de votre caisse ou de votre syndicat. Commencez par arrêter la perte, l'essentiel du gain est là.</p>
+  </details>
+
+  <details>
+    <summary>Cet outil remplace-t-il mon logiciel de facturation ?</summary>
+    <p>Non. Votre logiciel, mis à jour, reste la référence opérationnelle. Cette page sert à repérer ce que vous oubliez et à formuler la question à vérifier.</p>
+  </details>
+</section>
+
+<!-- SOURCES -->
+<section id="sources">
+  <h2>Sources</h2>
+  <table class="tableau">
+    <thead><tr><th>Élément</th><th>Source</th></tr></thead>
+    <tbody>
+      <tr><td>Consultation du médecin généraliste à 30 euros en métropole depuis le 22 décembre 2024</td><td>Convention médicale 2024-2029 et communication officielle</td></tr>
+      <tr><td>Majoration pour la prise en charge des enfants jusqu'à la veille incluse des six ans, par le médecin généraliste conventionné</td><td>Nomenclature générale des actes professionnels, article 14.7</td></tr>
+      <tr><td>Non-cumul des consultations obligatoires de l'enfant avec la majoration enfant du généraliste</td><td>Décision de l'Union nationale des caisses d'assurance maladie du 29 octobre 2024</td></tr>
+      <tr><td>Téléconsultation du généraliste maintenue à 25 euros, non revalorisée par la convention</td><td>Analyses de cotation professionnelles, 2026</td></tr>
+      <tr><td>Électrocardiographie sur au moins 12 dérivations portée à 14,77 euros au 1er janvier 2026</td><td>Analyse syndicale des décisions tarifaires du 1er janvier 2026</td></tr>
+      <tr><td>Cumul de l'électrocardiogramme avec la consultation sans abattement</td><td>Règles d'association de la classification commune des actes médicaux</td></tr>
+      <tr><td>Mesures tarifaires du 1er janvier 2026, revalorisations et baisses selon les actes</td><td>Décisions de l'Union nationale des caisses d'assurance maladie, 2025 et 2026</td></tr>
+    </tbody>
+  </table>
+  <p class="chapeau">Aucun montant de cette page ne fait foi. Les valeurs indiquées ont été relevées le 25 juillet 2026 et servent d'ordre de grandeur pour repérer une anomalie, pas de référence de facturation.</p>
+</section>
+
+<footer>
+  <p><strong>L'IA Minute du Médecin</strong>, Dr Guillaume Zagury et Samuel De Queiroz, Éditions Medicilline.</p>
+  <p>Ressource compagnon de la double page consacrée au codage des actes. Cet outil est une aide à la vérification. Il ne constitue ni un conseil de facturation, ni une source opposable, et n'engage ni les auteurs ni l'éditeur. La cotation relève de la responsabilité du médecin qui l'émet.</p>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* Navigation */
+  var chips = document.querySelectorAll("nav button[data-cible]");
+  Array.prototype.forEach.call(chips, function(btn){
+    btn.addEventListener("click", function(){
+      var cible = document.getElementById(btn.getAttribute("data-cible"));
+      if(cible){ cible.scrollIntoView({ behavior:"smooth", block:"start" }); }
+    });
+  });
+
+  /* Choix de l'outil */
+  var reponses = {};
+  var groupes = document.querySelectorAll(".question[data-q]");
+  Array.prototype.forEach.call(groupes, function(groupe){
+    var cle = groupe.getAttribute("data-q");
+    var boutons = groupe.querySelectorAll(".choix button");
+    Array.prototype.forEach.call(boutons, function(b){
+      b.setAttribute("aria-pressed", "false");
+      b.addEventListener("click", function(){
+        Array.prototype.forEach.call(boutons, function(autre){
+          autre.setAttribute("aria-pressed", autre === b ? "true" : "false");
+        });
+        reponses[cle] = b.getAttribute("data-v");
+      });
+    });
+  });
+
+  var zone = document.getElementById("resultat");
+
+  function ligne(code, valeur, detail, classe){
+    return '<div class="ligne ' + (classe || '') + '">' +
+           '<span class="valeur">' + valeur + '</span>' +
+           '<span class="code">' + code + '</span>' +
+           '<p class="detail">' + detail + '</p></div>';
+  }
+
+  document.getElementById("btn-generer").addEventListener("click", function(){
+    var manque = [];
+    ["acte","age","mt","horaire","contexte","technique"].forEach(function(k){
+      if(!reponses[k]){ manque.push(k); }
+    });
+    if(manque.length){
+      zone.innerHTML = '<div class="ligne alerte"><span class="code">Réponses incomplètes</span>' +
+        '<p class="detail">Répondez aux six questions pour obtenir une proposition.</p></div>';
+      return;
+    }
+
+    var html = "";
+    var notes = [];
+
+    /* Ligne principale */
+    if(reponses.acte === "cabinet"){
+      html += ligne("G", "30,00 €", "Consultation au cabinet du médecin généraliste, métropole. Tarif relevé en juillet 2026, à confirmer dans votre logiciel.");
+    } else if(reponses.acte === "domicile"){
+      html += ligne("VG", "à vérifier", "Visite au domicile du patient. Le déplacement se facture en sus selon les règles applicables. Vérifiez l'indemnité de déplacement correspondant à votre situation.");
+      notes.push("La justification médicale du déplacement doit figurer au dossier.");
+    } else {
+      html += ligne("TCG", "25,00 €", "Téléconsultation du médecin généraliste. Attention : ce tarif n'a pas suivi la revalorisation de la consultation au cabinet.");
+      notes.push("Les majorations applicables en téléconsultation ne sont pas les mêmes qu'en présentiel. Vérifiez avant d'en ajouter une.");
+    }
+
+    /* Age */
+    if(reponses.age === "moins6"){
+      html += ligne("MEG", "5,00 €", "Majoration pour la prise en charge de l'enfant jusqu'à la veille incluse de son sixième anniversaire, par le médecin généraliste conventionné. Non réservée au médecin traitant.");
+      notes.push("Si la consultation est une consultation obligatoire de l'enfant à tarif forfaitaire, cette majoration n'est pas cumulable. Vérifiez la nature exacte de la consultation.");
+    }
+    if(reponses.age === "plus80"){
+      html += ligne("Consultation longue", "à vérifier", "Une consultation longue du médecin traitant existe pour les patients de plus de 80 ans depuis le 1er janvier 2026, sous conditions de contenu et de fréquence.", "alerte");
+      notes.push("Vérifiez les conditions de la consultation longue avant de l'utiliser : elle n'est pas facturable à chaque consultation.");
+    }
+
+    /* Parcours */
+    if(reponses.mt === "adresse"){
+      notes.push("Patient adressé : renseignez le parcours de soins et le nom du correspondant. Une majoration de coordination peut s'appliquer selon votre situation, à vérifier.");
+    }
+    if(reponses.mt === "non"){
+      notes.push("Vous n'êtes pas le médecin traitant : certaines majorations sont réservées au médecin traitant, notamment celles liées à la régulation et à l'obtention d'un rendez-vous urgent.");
+    }
+
+    /* Horaire */
+    if(reponses.horaire === "samedi" || reponses.horaire === "dimanche" || reponses.horaire === "nuit"){
+      html += ligne("Majoration horaire", "à vérifier", "Samedi après-midi, dimanche, jour férié et nuit ouvrent droit à des majorations distinctes, dont les conditions dépendent de la régulation et des horaires de permanence des soins.", "alerte");
+      notes.push("Ces majorations ne se cumulent pas librement entre elles. Vérifiez laquelle s'applique dans votre situation exacte, plutôt que d'en ajouter plusieurs.");
+    }
+
+    /* Contexte */
+    if(reponses.contexte === "regule"){
+      if(reponses.mt === "oui"){
+        html += ligne("Majoration de régulation", "15,00 €", "Patient adressé par la régulation du centre 15 au médecin traitant. Vérifiez le code exact applicable à votre situation et la trace de la régulation dans le dossier.");
+      } else {
+        html += ligne("Majoration de régulation", "à vérifier", "Une majoration existe pour les patients adressés par la régulation. Son bénéfice dépend de votre statut vis-à-vis du patient.", "alerte");
+      }
+      notes.push("Conservez au dossier la trace de l'appel de la régulation : c'est ce qui justifie la majoration en cas de contrôle.");
+    }
+    if(reponses.contexte === "specialiste"){
+      html += ligne("Majoration rendez-vous urgent", "5,00 €", "Obtention d'un rendez-vous urgent de spécialiste sous 48 heures, réservée au médecin traitant. Notez au dossier le spécialiste, la date et l'heure du rendez-vous obtenu.");
+    }
+
+    /* Technique */
+    if(reponses.technique === "ecg"){
+      html += ligne("DEQP003", "14,77 €", "Électrocardiographie sur au moins 12 dérivations, sur une ligne distincte de la consultation. Se cumule avec la consultation sans abattement. Montant porté à 14,77 euros au 1er janvier 2026.");
+      notes.push("L'interprétation doit être tracée dans le dossier, le tracé conservé.");
+    }
+    if(reponses.technique === "suture"){
+      html += ligne("Code de suture", "à vérifier", "Le code dépend de la localisation, de la longueur et de la profondeur de la plaie. Un modificateur d'urgence peut s'appliquer si l'acte est non programmé.", "alerte");
+      notes.push("Vérifiez le libellé exact avant de choisir le code : la longueur et la profondeur changent le code et le montant.");
+    }
+    if(reponses.technique === "frottis"){
+      html += ligne("Frottis", "à vérifier", "Le frottis fait partie des actes techniques cumulables avec la consultation. Vérifiez le code et le montant en vigueur.");
+    }
+
+    /* Total et avertissement */
+    html += '<div class="ligne total"><span class="code">À faire maintenant</span>' +
+            '<p class="detail">Recopiez ces lignes dans votre logiciel, puis vérifiez chaque montant et chaque condition sur votre source officielle avant de valider la feuille de soins.</p></div>';
+
+    if(notes.length){
+      html += '<div class="ligne alerte"><span class="code">Points à contrôler</span><p class="detail">' +
+              notes.map(function(n){ return "&bull; " + n; }).join("<br>") + '</p></div>';
+    }
+
+    html += '<div class="avertissement"><strong>Rappel :</strong> cette proposition est une aide à la vérification. ' +
+            'Les montants affichés ont été relevés le 25 juillet 2026 et peuvent avoir changé depuis. ' +
+            'Aucune ligne ne doit être facturée sans contrôle sur la nomenclature en vigueur.</div>';
+
+    zone.innerHTML = html;
+    zone.scrollIntoView({ behavior:"smooth", block:"nearest" });
+  });
+
+  document.getElementById("btn-reset").addEventListener("click", function(){
+    reponses = {};
+    Array.prototype.forEach.call(document.querySelectorAll(".choix button"), function(b){
+      b.setAttribute("aria-pressed", "false");
+    });
+    zone.innerHTML = "";
+  });
+
+  /* Boutons copier */
+  var boutons = document.querySelectorAll(".copier");
+  Array.prototype.forEach.call(boutons, function(btn){
+    btn.addEventListener("click", function(){
+      var bloc = btn.closest(".bloc");
+      var pre = bloc ? bloc.querySelector("pre") : null;
+      if(!pre){ return; }
+      var texte = pre.textContent;
+      var fini = function(){
+        btn.textContent = "Copié";
+        btn.classList.add("ok");
+        setTimeout(function(){ btn.textContent = "Copier"; btn.classList.remove("ok"); }, 1800);
+      };
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(texte).then(fini, function(){ secours(texte, fini); });
+      } else { secours(texte, fini); }
+    });
+  });
+
+  function secours(texte, fini){
+    var z = document.createElement("textarea");
+    z.value = texte;
+    z.setAttribute("readonly","");
+    z.style.position = "absolute";
+    z.style.left = "-9999px";
+    document.body.appendChild(z);
+    z.select();
+    try { document.execCommand("copy"); fini(); } catch(e){}
+    document.body.removeChild(z);
+  }
+})();
+</script>
+</body>
+</html>
