@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ce que dit le droit français · L'IA Minute du Médecin</title>
+<meta name="description" content="Ressource compagnon du livre L'IA Minute du Médecin : les cinq textes qui encadrent l'IA au cabinet, commentés, qui répond de quoi, et quatre situations concrètes analysées.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Fira+Sans+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --rouge:#DC322F;--noir:#1A1A1A;--blanc:#FFFFFF;--jaune:#FFD700;
+  --bleu:#3498DB;--orange:#F39C12;--vert:#27AE60;--violet:#8E44AD;--teal:#1ABC9C;
+  --gris:#BDC3C7;--gris-clair:#F4F5F6;--gris-ligne:#E1E4E6;--gris-texte:#5A6268;
+}
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{margin:0;background:var(--blanc);color:var(--noir);font-family:"Fira Sans Condensed","Roboto Condensed",Arial,sans-serif;font-size:17px;line-height:1.5;}
+.page{max-width:720px;margin:0 auto;padding:0 18px 80px;}
+h1,h2,h3,h4{font-family:"Oswald","Arial Narrow",Arial,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.2px;}
+p{margin:0 0 14px;}
+
+header{padding:26px 0 8px;}
+.eyebrow{display:inline-block;font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:var(--blanc);background:var(--noir);padding:5px 11px;}
+h1{font-size:33px;line-height:1.06;margin:14px 0 0;}
+h1 mark{background:var(--jaune);color:var(--noir);padding:0 5px;}
+.sous-titre{font-family:"Fira Sans Condensed",Arial,sans-serif;font-style:italic;font-weight:600;color:var(--rouge);font-size:19px;margin:10px 0 0;text-transform:none;}
+.trait{height:4px;background:var(--rouge);margin:16px 0 22px;}
+.meta{font-size:14px;color:var(--gris-texte);margin:0 0 22px;}
+
+.flash{border:3px solid var(--rouge);border-radius:14px;padding:16px 18px;margin:0 0 26px;}
+.flash h2{font-size:19px;margin:0 0 10px;color:var(--rouge);}
+.flash ul{margin:0;padding-left:20px;}
+.flash li{margin-bottom:9px;}
+
+nav{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 34px;}
+nav button{font-family:"Oswald",Arial,sans-serif;font-weight:500;font-size:13px;letter-spacing:.6px;text-transform:uppercase;background:var(--gris-clair);color:var(--noir);border:2px solid var(--gris-ligne);border-radius:999px;padding:7px 13px;cursor:pointer;}
+nav button:hover{background:var(--noir);color:var(--blanc);border-color:var(--noir);}
+nav button:focus-visible{outline:3px solid var(--rouge);outline-offset:2px;}
+
+section{border-top:2px solid var(--gris-ligne);padding-top:26px;margin-top:34px;scroll-margin-top:14px;}
+section > h2{font-size:25px;margin:0 0 4px;line-height:1.1;}
+.chapeau{color:var(--gris-texte);font-size:16px;margin:0 0 20px;}
+h3{font-size:19px;margin:26px 0 8px;}
+
+.regle{display:flex;gap:14px;border:2px solid var(--gris-ligne);border-radius:14px;padding:14px;margin-bottom:12px;}
+.pastille{flex:0 0 42px;height:42px;border-radius:50%;color:var(--blanc);font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:19px;display:flex;align-items:center;justify-content:center;}
+.p-bleu{background:var(--bleu);}.p-orange{background:var(--orange);}.p-vert{background:var(--vert);}.p-violet{background:var(--violet);}.p-teal{background:var(--teal);}
+.regle-corps{flex:1;min-width:0;}
+.regle h4{font-size:17px;margin:4px 0 6px;}
+.regle p{font-size:16px;margin:0 0 8px;}
+.regle p:last-child{margin-bottom:0;}
+.piege{font-size:15px;background:var(--gris-clair);border-left:4px solid var(--orange);padding:8px 10px;margin:0;}
+.piege b{font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:13px;letter-spacing:.6px;color:var(--orange);}
+
+.onglets{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px;}
+.onglets button{font-family:"Oswald",Arial,sans-serif;font-weight:500;font-size:13px;letter-spacing:.6px;text-transform:uppercase;background:var(--blanc);color:var(--noir);border:2px solid var(--noir);border-radius:8px;padding:7px 12px;cursor:pointer;}
+.onglets button[aria-selected="true"]{background:var(--noir);color:var(--blanc);}
+.onglets button:focus-visible{outline:3px solid var(--rouge);outline-offset:2px;}
+.panneau[hidden]{display:none;}
+
+.bloc{border:2px solid var(--gris-ligne);border-radius:14px;overflow:hidden;margin:0 0 16px;}
+.bloc-tete{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--gris-clair);padding:10px 12px;border-bottom:2px solid var(--gris-ligne);}
+.bloc-tete h4{margin:0;font-size:15px;}
+.copier{font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:12px;letter-spacing:.8px;text-transform:uppercase;background:var(--rouge);color:var(--blanc);border:none;border-radius:6px;padding:7px 12px;cursor:pointer;white-space:nowrap;}
+.copier.ok{background:var(--vert);}
+.copier:focus-visible{outline:3px solid var(--noir);outline-offset:2px;}
+pre{margin:0;padding:14px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px;line-height:1.5;white-space:pre-wrap;word-wrap:break-word;}
+.badge{display:inline-block;background:var(--gris);color:var(--noir);border-radius:5px;font-family:"Oswald",Arial,sans-serif;font-size:11.5px;letter-spacing:.7px;text-transform:uppercase;padding:3px 8px;margin:0 6px 6px 0;}
+
+.tableau{width:100%;border-collapse:collapse;font-size:15px;margin:0 0 18px;}
+.tableau th,.tableau td{border:1px solid var(--gris-ligne);padding:8px 10px;text-align:left;vertical-align:top;}
+.tableau th{background:var(--noir);color:var(--blanc);font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:13px;letter-spacing:.5px;}
+.tableau tr:nth-child(even) td{background:var(--gris-clair);}
+
+.controle{display:flex;gap:12px;border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;margin-bottom:10px;}
+.controle.fait{border-color:var(--vert);background:#F3FBF6;}
+.controle input{width:22px;height:22px;accent-color:var(--vert);cursor:pointer;flex:0 0 22px;margin-top:2px;}
+.controle h4{margin:0 0 4px;font-size:16px;}
+.controle p{margin:0;font-size:15.5px;}
+.progression{display:flex;align-items:center;gap:12px;margin:0 0 18px;border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;}
+.jauge{flex:1;height:12px;background:var(--gris-ligne);border-radius:999px;overflow:hidden;}
+.jauge span{display:block;height:100%;width:0;background:var(--rouge);transition:width .25s ease;}
+.compteur{font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:16px;white-space:nowrap;}
+
+.zone-rouge{border:3px solid var(--rouge);border-radius:14px;padding:16px 18px;margin:18px 0;}
+.zone-rouge h3{margin-top:0;color:var(--rouge);}
+.interdit{list-style:none;padding:0;margin:0;}
+.interdit li{padding-left:26px;position:relative;margin-bottom:8px;}
+.interdit li::before{content:"\00d7";position:absolute;left:0;top:-2px;color:var(--rouge);font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:22px;line-height:1;}
+
+.banniere{background:var(--rouge);color:var(--blanc);border-radius:14px;padding:18px 20px;margin:26px 0;}
+.banniere p{margin:0;font-family:"Oswald",Arial,sans-serif;font-size:19px;line-height:1.25;text-transform:uppercase;}
+.banniere small{display:block;font-family:"Fira Sans Condensed",Arial,sans-serif;text-transform:none;font-size:15px;margin-top:8px;opacity:.95;}
+
+details{border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;margin-bottom:10px;}
+details[open]{border-color:var(--noir);}
+summary{cursor:pointer;font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:16px;text-transform:uppercase;letter-spacing:.3px;}
+summary::-webkit-details-marker{display:none;}
+summary::before{content:"+ ";color:var(--rouge);font-weight:700;}
+details[open] summary::before{content:"\2212 ";}
+details p{margin:10px 0 0;font-size:16px;}
+
+footer{border-top:4px solid var(--noir);margin-top:44px;padding-top:18px;font-size:14px;color:var(--gris-texte);}
+footer strong{color:var(--noir);}
+
+@media (max-width:520px){
+  body{font-size:16px;}h1{font-size:27px;}section > h2{font-size:21px;}
+  .tableau{font-size:14px;}pre{font-size:12.5px;}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none !important;scroll-behavior:auto !important;}}
+</style>
+</head>
+<body>
+<div class="page">
+
+<header>
+  <span class="eyebrow">Ressource compagnon · L'IA Minute du Médecin</span>
+  <h1>Ce que dit <mark>le droit français</mark></h1>
+  <p class="sous-titre">Cinq textes, un principe : derrière chaque décision médicale, il reste un médecin. Chaque texte commenté, qui répond de quoi, et quatre situations passées au crible.</p>
+  <div class="trait"></div>
+  <p class="meta">Mise à jour : 5 août 2026. Cette page éclaire le droit applicable, elle ne remplace pas un conseil juridique.</p>
+</header>
+
+<div class="flash">
+  <h2>Trois choses à retenir avant les articles de loi</h2>
+  <ul>
+    <li><strong>Il n'y a pas de vide juridique.</strong> Déontologie de 1995, secret médical, RGPD, loi de bioéthique de 2021, règlement européen sur l'IA de 2024 : le cadre existe, il est même dense. Aucun de ces textes n'interdit l'IA au cabinet : tous organisent la même exigence.</li>
+    <li><strong>Cette exigence a un nom : la garantie humaine.</strong> La France l'a inscrite dans la loi avant l'Europe. L'algorithme éclaire, le médecin décide, le patient est informé.</li>
+    <li><strong>La responsabilité ne se délègue pas, elle se documente.</strong> Ce que vous signez reste à vous, outil ou pas. Votre meilleure protection n'est pas d'éviter l'IA : c'est de tracer ce que vous en faites. La page Responsabilité du livre en fait un protocole.</li>
+  </ul>
+</div>
+
+<nav aria-label="Sommaire">
+  <button type="button" data-cible="textes">Les 5 textes</button>
+  <button type="button" data-cible="repond">Qui répond de quoi</button>
+  <button type="button" data-cible="situations">4 situations</button>
+  <button type="button" data-cible="faq">Questions</button>
+  <button type="button" data-cible="sources">Sources</button>
+</nav>
+
+<section id="textes">
+  <h2>Les cinq textes, commentés</h2>
+  <p class="chapeau">Du plus ancien au plus récent : chacun ajoute une pièce, aucun ne contredit les autres.</p>
+
+  <div class="regle">
+    <div class="pastille p-bleu">1</div>
+    <div class="regle-corps">
+      <h4>Le code de déontologie : l'exercice reste personnel</h4>
+      <p>Article R.4127-69 du Code de la santé publique, inchangé depuis 1995 : « L'exercice de la médecine est personnel ; chaque médecin est responsable de ses décisions et de ses actes. » Douze mots qui règlent 90 % des débats : pas de délégation de la décision à un algorithme, fût-il certifié, brillant ou recommandé par votre éditeur de logiciel.</p>
+      <p class="piege"><b>En pratique</b> : l'IA peut préparer, suggérer, rédiger. La validation est un acte médical, et cet acte est le vôtre.</p>
+    </div>
+  </div>
+
+  <div class="regle">
+    <div class="pastille p-orange">2</div>
+    <div class="regle-corps">
+      <h4>Le secret médical : la ligne pénale</h4>
+      <p>Article L.1110-4 du Code de la santé publique : tout ce qui est venu à votre connaissance dans l'exercice est couvert. Et l'article 226-13 du code pénal donne le tarif de la violation : un an d'emprisonnement, 15 000 € d'amende. C'est le texte que l'on enfreint le plus facilement à l'ère de l'IA : en trente secondes, en collant un courrier dans un outil grand public.</p>
+      <p class="piege"><b>En pratique</b> : décrivez la situation, jamais la personne. Trois détails croisés suffisent à identifier un patient de votre file active.</p>
+    </div>
+  </div>
+
+  <div class="regle">
+    <div class="pastille p-vert">3</div>
+    <div class="regle-corps">
+      <h4>Le RGPD : la donnée de santé est une donnée sensible</h4>
+      <p>Règlement (UE) 2016/679 : la donnée de santé bénéficie du régime le plus protecteur (art. 9) : minimisation, information, sécurité, et sous-traitants encadrés (art. 28). S'y ajoute l'hébergement certifié des données de santé (art. L.1111-8, certification HDS). Le gendarme est la CNIL, et sa sanction est administrative : elle peut être lourde, et publique.</p>
+      <p class="piege"><b>En pratique</b> : exigez la certification HDS de tout outil qui traite des données de santé, et gardez sous la main le protocole 72 heures de la page RGPD &amp; HDS.</p>
+    </div>
+  </div>
+
+  <div class="regle">
+    <div class="pastille p-violet">4</div>
+    <div class="regle-corps">
+      <h4>La loi de bioéthique de 2021 : la garantie humaine</h4>
+      <p>Loi du 2 août 2021, article L.4001-3 du Code de la santé publique. Quand un professionnel utilise, pour un acte de prévention, de diagnostic ou de soin, un dispositif médical embarquant un traitement algorithmique appris sur des données massives : le patient doit en être informé, le professionnel doit pouvoir accéder aux données utilisées et aux résultats, et le concepteur doit assurer l'explicabilité du fonctionnement. Trois obligations, trois acteurs, une philosophie.</p>
+      <p class="piege"><b>En pratique</b> : un outil d'aide à la décision qui ne sait pas expliquer d'où sort sa suggestion n'est pas conforme à l'esprit du texte. Exigez l'explication : c'est votre droit, littéralement.</p>
+    </div>
+  </div>
+
+  <div class="regle">
+    <div class="pastille p-teal">5</div>
+    <div class="regle-corps">
+      <h4>L'AI Act européen : le calendrier qui s'applique en ce moment</h4>
+      <p>Règlement (UE) 2024/1689, application par étages. Depuis le <b>2 février 2025</b> : pratiques interdites et obligation de maîtrise des outils pour ceux qui les déploient, cabinet compris. Depuis le <b>2 août 2025</b> : obligations des fournisseurs de modèles à usage général. Depuis le <b>2 août 2026</b> : application générale, dont les règles des systèmes à haut risque. Au <b>2 août 2027</b> : échéance des systèmes à haut risque intégrés à des produits déjà réglementés, dispositifs médicaux en tête.</p>
+      <p class="piege"><b>En pratique</b> : vous êtes un « déployeur » au sens du règlement. Former son équipe à l'usage correct des outils n'est plus un conseil, c'est une obligation. Le détail du calendrier est sur la page Horizon 2030.</p>
+    </div>
+  </div>
+</section>
+
+<section id="repond">
+  <h2>Qui répond de quoi</h2>
+  <p class="chapeau">La responsabilité ne disparaît pas avec l'IA, elle se répartit. Quatre acteurs, quatre terrains.</p>
+  <table class="tableau">
+    <thead><tr><th>Acteur</th><th>Répond de</th><th>Sur quel fondement</th></tr></thead>
+    <tbody>
+      <tr><td><b>Vous</b></td><td>La décision médicale, la prescription, le document signé, même préparés par l'IA</td><td>R.4127-69 (exercice personnel) ; L.1142-1 (faute)</td></tr>
+      <tr><td><b>Le fabricant</b></td><td>Le défaut de son produit : résultat erroné imputable à la conception, information insuffisante</td><td>Responsabilité du fait des produits défectueux (C. civ., art. 1245 et s.) ; la directive (UE) 2024/2853 l'étend explicitement aux logiciels et à l'IA (transposition attendue fin 2026)</td></tr>
+      <tr><td><b>L'employeur ou la structure</b></td><td>L'organisation : choix des outils, formation des équipes, règles d'usage écrites</td><td>AI Act, art. 4 (maîtrise) ; droit commun de la responsabilité d'organisation</td></tr>
+      <tr><td><b>L'hébergeur / l'éditeur</b></td><td>La sécurité et la localisation des données de santé qu'il traite</td><td>L.1111-8 (certification HDS) ; RGPD (sous-traitant, art. 28)</td></tr>
+    </tbody>
+  </table>
+  <p>La nuance qui compte : si l'outil est défectueux, son fabricant peut être recherché, et c'est de plus en plus facile. Mais cela ne vous exonère pas d'avoir vérifié. Les deux responsabilités s'additionnent, elles ne se remplacent pas.</p>
+</section>
+
+<section id="situations">
+  <h2>Quatre situations concrètes, analysées</h2>
+  <p class="chapeau">Les quatre cas qui reviennent le plus souvent en formation. Chacun renvoie à la page du livre qui le traite en profondeur.</p>
+
+  <div class="regle">
+    <div class="pastille p-bleu">1</div>
+    <div class="regle-corps">
+      <h4>« J'utilise un scribe IA pendant mes consultations »</h4>
+      <p>Trois textes s'appliquent : information du patient avant l'enregistrement (loyauté, L.1111-2, et RGPD), hébergement conforme des données captées (L.1111-8), et relecture-signature du compte rendu, qui redevient votre acte personnel (R.4127-69). Le scribe écrit, vous signez : juridiquement, c'est vous qui avez écrit.</p>
+      <p class="piege"><b>Le geste qui protège</b> : une information orale systématique, une mention dans le dossier, une relecture réelle. Détail sur la page Le scribe IA.</p>
+    </div>
+  </div>
+
+  <div class="regle">
+    <div class="pastille p-orange">2</div>
+    <div class="regle-corps">
+      <h4>« Un outil d'aide au diagnostic marqué CE m'a suggéré une piste, je l'ai suivie, elle était fausse »</h4>
+      <p>Votre décision reste la vôtre : suivre une suggestion est un choix médical, qui s'apprécie selon les règles de l'art (L.1142-1). Mais si l'erreur vient d'un défaut démontrable du dispositif, la responsabilité du fabricant peut être engagée en parallèle. La garantie humaine (L.4001-3) joue pour vous : vous étiez en droit d'accéder aux données et à l'explication.</p>
+      <p class="piege"><b>Le geste qui protège</b> : noter au dossier la suggestion, votre analyse et votre conclusion, divergente ou non. C'est le dossier de preuve de la page Responsabilité.</p>
+    </div>
+  </div>
+
+  <div class="regle">
+    <div class="pastille p-vert">3</div>
+    <div class="regle-corps">
+      <h4>« J'ai recopié dans un courrier une référence que l'IA avait inventée »</h4>
+      <p>Faute de vérification, entièrement à votre charge. L'éditeur d'un outil grand public n'assume aucune responsabilité pour un usage médical : ses conditions d'utilisation l'excluent expressément. Le taux de références bibliographiques erronées ou inventées peut atteindre des sommets selon les outils : c'est LE terrain où la confiance ne se donne jamais.</p>
+      <p class="piege"><b>Le geste qui protège</b> : toute référence citée est ouverte et lue avant d'être recopiée. Les chiffres et les parades sont sur la page Hallucinations.</p>
+    </div>
+  </div>
+
+  <div class="regle">
+    <div class="pastille p-violet">4</div>
+    <div class="regle-corps">
+      <h4>« Ma secrétaire a collé un dossier complet dans un chatbot gratuit »</h4>
+      <p>Violation potentielle du secret (L.1110-4) et du RGPD, imputable à l'organisation du cabinet, donc à vous, employeur. Depuis février 2025, l'AI Act ajoute l'obligation de former à l'usage correct des outils toute personne qui les manipule pour votre compte. Une page de règles écrites et une heure de formation ne sont plus du zèle : c'est le minimum attendu.</p>
+      <p class="piege"><b>Le geste qui protège</b> : règles d'usage affichées, formation datée et signée, et le protocole 72 heures de la page RGPD &amp; HDS en cas d'incident.</p>
+    </div>
+  </div>
+
+  <div class="banniere">
+    <p>Aucun texte n'interdit l'IA au cabinet. Tous exigent la même chose : que le médecin reste aux commandes, et puisse le prouver.
+    <small>Garantie humaine, art. L.4001-3 du Code de la santé publique. France, 2 août 2021, trois ans avant le règlement européen.</small></p>
+  </div>
+</section>
+
+<section id="faq">
+  <h2>Questions fréquentes</h2>
+  <details>
+    <summary>Dois-je informer chaque patient que j'utilise l'IA ?</summary>
+    <p>Pour un dispositif médical algorithmique utilisé dans sa prise en charge, oui : c'est la lettre de L.4001-3. Pour un scribe qui enregistre la consultation, oui également, avant l'enregistrement. Pour un usage qui ne traite aucune donnée du patient (rédiger un modèle de courrier, préparer un cours), aucune obligation. Entre les deux, la loyauté de l'information (L.1111-2) reste la boussole : dans le doute, dites-le simplement.</p>
+  </details>
+  <details>
+    <summary>ChatGPT n'est pas un dispositif médical : suis-je hors cadre en l'utilisant ?</summary>
+    <p>Non, vous changez simplement de cadre. La garantie humaine de L.4001-3 vise les dispositifs médicaux, mais votre déontologie, le secret, le RGPD et l'AI Act s'appliquent à tout outil, y compris grand public. Et un outil non certifié utilisé pour une tâche clinique vous expose davantage, pas moins : vous ne pourrez invoquer ni son marquage CE, ni son fabricant.</p>
+  </details>
+  <details>
+    <summary>Dois-je prévenir mon assureur en responsabilité civile professionnelle ?</summary>
+    <p>Aucun texte ne l'impose à ce jour, mais les contrats évoluent : certains assureurs commencent à poser la question des outils numériques utilisés. Relisez votre contrat, et en cas d'usage structurant (scribe systématique, aide à la décision), une déclaration écrite lève toute ambiguïté le jour où vous en aurez besoin.</p>
+  </details>
+  <details>
+    <summary>Que risque concrètement un médecin aujourd'hui ?</summary>
+    <p>Les terrains classiques : disciplinaire (chambre ordinale, sur la déontologie), civil (indemnisation, sur la faute), administratif (CNIL, sur les données, jusqu'à sanctions financières), pénal dans les cas extrêmes (violation du secret). Aucune jurisprudence française ne condamne à ce jour un médecin « pour avoir utilisé l'IA » : les condamnations passent par les fautes ordinaires : défaut de vérification, d'information, de protection des données.</p>
+  </details>
+</section>
+
+<section id="sources">
+  <h2>Sources</h2>
+  <table class="tableau">
+    <thead><tr><th>Élément</th><th>Source</th></tr></thead>
+    <tbody>
+      <tr><td>« L'exercice de la médecine est personnel… »</td><td>Code de la santé publique, art. R.4127-69 (code de déontologie médicale, décret du 6 septembre 1995) ; commentaires du CNOM</td></tr>
+      <tr><td>Secret médical et sanction pénale de sa violation (un an, 15 000 €)</td><td>CSP art. L.1110-4 ; code pénal, art. 226-13</td></tr>
+      <tr><td>Données de santé, sous-traitants, hébergement certifié</td><td>Règlement (UE) 2016/679, art. 9 et 28 ; CSP art. L.1111-8</td></tr>
+      <tr><td>Information du patient, consentement, responsabilité pour faute (cités dans les situations)</td><td>Loi n° 2002-303 du 4 mars 2002 ; CSP art. L.1111-2, L.1111-4, L.1142-1</td></tr>
+      <tr><td>Garantie humaine : information du patient, accès aux données, explicabilité</td><td>Loi n° 2021-1017 du 2 août 2021 ; CSP art. L.4001-3</td></tr>
+      <tr><td>Calendrier IA : 2 février 2025, 2 août 2025, 2 août 2026, 2 août 2027</td><td>Règlement (UE) 2024/1689 (« AI Act »), art. 4 et 113</td></tr>
+      <tr><td>Responsabilité du fait des produits défectueux étendue aux logiciels et à l'IA</td><td>Code civil, art. 1245 et s. ; directive (UE) 2024/2853 du 23 octobre 2024, à transposer avant le 9 décembre 2026</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<footer>
+  <p><strong>L'IA Minute du Médecin</strong>, Dr Guillaume Zagury et Samuel De Queiroz, Éditions Medicilline.</p>
+  <p>Ressource compagnon de la double page « Ce que dit le droit français ». Information juridique générale : pour une situation personnelle, consultez votre conseil ou votre assureur RCP.</p>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var chips = document.querySelectorAll("nav button[data-cible]");
+  Array.prototype.forEach.call(chips, function(btn){
+    btn.addEventListener("click", function(){
+      var cible = document.getElementById(btn.getAttribute("data-cible"));
+      if(cible){ cible.scrollIntoView({ behavior:"smooth", block:"start" }); }
+    });
+  });
+
+  var onglets = document.querySelectorAll(".onglets button[data-panneau]");
+  Array.prototype.forEach.call(onglets, function(btn){
+    btn.addEventListener("click", function(){
+      Array.prototype.forEach.call(onglets, function(autre){
+        autre.setAttribute("aria-selected", autre === btn ? "true" : "false");
+        var p = document.getElementById(autre.getAttribute("data-panneau"));
+        if(p){ p.hidden = (autre !== btn); }
+      });
+    });
+  });
+
+  var controles = document.querySelectorAll("[data-controle]");
+  var barre = document.getElementById("jauge-barre");
+  var compteur = document.getElementById("jauge-compteur");
+  var total = controles.length;
+
+  function maj(){
+    if(!barre || !compteur || !total){ return; }
+    var faits = 0;
+    Array.prototype.forEach.call(controles, function(c){
+      var box = c.querySelector("input[type=checkbox]");
+      if(box && box.checked){ faits++; c.classList.add("fait"); }
+      else { c.classList.remove("fait"); }
+    });
+    barre.style.width = (faits/total*100) + "%";
+    barre.style.background = (faits === total) ? "#27AE60" : "#DC322F";
+    compteur.textContent = faits + " / " + total;
+  }
+
+  Array.prototype.forEach.call(controles, function(c){
+    var box = c.querySelector("input[type=checkbox]");
+    if(box){ box.addEventListener("change", maj); }
+  });
+  maj();
+
+  var boutons = document.querySelectorAll(".copier");
+  Array.prototype.forEach.call(boutons, function(btn){
+    btn.addEventListener("click", function(){
+      var bloc = btn.closest(".bloc");
+      var pre = bloc ? bloc.querySelector("pre") : null;
+      if(!pre){ return; }
+      var texte = pre.textContent;
+      var fini = function(){
+        btn.textContent = "Copié";
+        btn.classList.add("ok");
+        setTimeout(function(){ btn.textContent = "Copier"; btn.classList.remove("ok"); }, 1800);
+      };
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(texte).then(fini, function(){ secours(texte, fini); });
+      } else { secours(texte, fini); }
+    });
+  });
+
+  function secours(texte, fini){
+    var zone = document.createElement("textarea");
+    zone.value = texte;
+    zone.setAttribute("readonly","");
+    zone.style.position = "absolute";
+    zone.style.left = "-9999px";
+    document.body.appendChild(zone);
+    zone.select();
+    try { document.execCommand("copy"); fini(); } catch(e){}
+    document.body.removeChild(zone);
+  }
+})();
+</script>
+</body>
+</html>

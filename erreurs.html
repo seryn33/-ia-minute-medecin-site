@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Les 6 erreurs du débutant, et comment les éviter · L'IA Minute du Médecin</title>
+<meta name="description" content="Ressource compagnon du livre L'IA Minute du Médecin : les six erreurs détaillées avec leurs correctifs, le kit anti-erreurs à copier, et le contrôle en six points.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Fira+Sans+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --rouge:#DC322F;--noir:#1A1A1A;--blanc:#FFFFFF;--jaune:#FFD700;
+  --bleu:#3498DB;--orange:#F39C12;--vert:#27AE60;--violet:#8E44AD;--teal:#1ABC9C;
+  --gris:#BDC3C7;--gris-clair:#F4F5F6;--gris-ligne:#E1E4E6;--gris-texte:#5A6268;
+}
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{margin:0;background:var(--blanc);color:var(--noir);font-family:"Fira Sans Condensed","Roboto Condensed",Arial,sans-serif;font-size:17px;line-height:1.5;}
+.page{max-width:720px;margin:0 auto;padding:0 18px 80px;}
+h1,h2,h3,h4{font-family:"Oswald","Arial Narrow",Arial,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.2px;}
+p{margin:0 0 14px;}
+
+header{padding:26px 0 8px;}
+.eyebrow{display:inline-block;font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:var(--blanc);background:var(--noir);padding:5px 11px;}
+h1{font-size:33px;line-height:1.06;margin:14px 0 0;}
+h1 mark{background:var(--jaune);color:var(--noir);padding:0 5px;}
+.sous-titre{font-family:"Fira Sans Condensed",Arial,sans-serif;font-style:italic;font-weight:600;color:var(--rouge);font-size:19px;margin:10px 0 0;text-transform:none;}
+.trait{height:4px;background:var(--rouge);margin:16px 0 22px;}
+.meta{font-size:14px;color:var(--gris-texte);margin:0 0 22px;}
+
+.flash{border:3px solid var(--rouge);border-radius:14px;padding:16px 18px;margin:0 0 26px;}
+.flash h2{font-size:19px;margin:0 0 10px;color:var(--rouge);}
+.flash ul{margin:0;padding-left:20px;}
+.flash li{margin-bottom:9px;}
+
+nav{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 34px;}
+nav button{font-family:"Oswald",Arial,sans-serif;font-weight:500;font-size:13px;letter-spacing:.6px;text-transform:uppercase;background:var(--gris-clair);color:var(--noir);border:2px solid var(--gris-ligne);border-radius:999px;padding:7px 13px;cursor:pointer;}
+nav button:hover{background:var(--noir);color:var(--blanc);border-color:var(--noir);}
+nav button:focus-visible{outline:3px solid var(--rouge);outline-offset:2px;}
+
+section{border-top:2px solid var(--gris-ligne);padding-top:26px;margin-top:34px;scroll-margin-top:14px;}
+section > h2{font-size:25px;margin:0 0 4px;line-height:1.1;}
+.chapeau{color:var(--gris-texte);font-size:16px;margin:0 0 20px;}
+h3{font-size:19px;margin:26px 0 8px;}
+
+.regle{display:flex;gap:14px;border:2px solid var(--gris-ligne);border-radius:14px;padding:14px;margin-bottom:12px;}
+.pastille{flex:0 0 42px;height:42px;border-radius:50%;color:var(--blanc);font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:19px;display:flex;align-items:center;justify-content:center;}
+.p-bleu{background:var(--bleu);}.p-orange{background:var(--orange);}.p-vert{background:var(--vert);}.p-violet{background:var(--violet);}.p-teal{background:var(--teal);}
+.regle-corps{flex:1;min-width:0;}
+.regle h4{font-size:17px;margin:4px 0 6px;}
+.regle p{font-size:16px;margin:0 0 8px;}
+.regle p:last-child{margin-bottom:0;}
+.piege{font-size:15px;background:var(--gris-clair);border-left:4px solid var(--orange);padding:8px 10px;margin:0;}
+.piege b{font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:13px;letter-spacing:.6px;color:var(--orange);}
+
+.onglets{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px;}
+.onglets button{font-family:"Oswald",Arial,sans-serif;font-weight:500;font-size:13px;letter-spacing:.6px;text-transform:uppercase;background:var(--blanc);color:var(--noir);border:2px solid var(--noir);border-radius:8px;padding:7px 12px;cursor:pointer;}
+.onglets button[aria-selected="true"]{background:var(--noir);color:var(--blanc);}
+.onglets button:focus-visible{outline:3px solid var(--rouge);outline-offset:2px;}
+.panneau[hidden]{display:none;}
+
+.bloc{border:2px solid var(--gris-ligne);border-radius:14px;overflow:hidden;margin:0 0 16px;}
+.bloc-tete{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--gris-clair);padding:10px 12px;border-bottom:2px solid var(--gris-ligne);}
+.bloc-tete h4{margin:0;font-size:15px;}
+.copier{font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:12px;letter-spacing:.8px;text-transform:uppercase;background:var(--rouge);color:var(--blanc);border:none;border-radius:6px;padding:7px 12px;cursor:pointer;white-space:nowrap;}
+.copier.ok{background:var(--vert);}
+.copier:focus-visible{outline:3px solid var(--noir);outline-offset:2px;}
+pre{margin:0;padding:14px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px;line-height:1.5;white-space:pre-wrap;word-wrap:break-word;}
+.badge{display:inline-block;background:var(--gris);color:var(--noir);border-radius:5px;font-family:"Oswald",Arial,sans-serif;font-size:11.5px;letter-spacing:.7px;text-transform:uppercase;padding:3px 8px;margin:0 6px 6px 0;}
+
+.tableau{width:100%;border-collapse:collapse;font-size:15px;margin:0 0 18px;}
+.tableau th,.tableau td{border:1px solid var(--gris-ligne);padding:8px 10px;text-align:left;vertical-align:top;}
+.tableau th{background:var(--noir);color:var(--blanc);font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:13px;letter-spacing:.5px;}
+.tableau tr:nth-child(even) td{background:var(--gris-clair);}
+
+.controle{display:flex;gap:12px;border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;margin-bottom:10px;}
+.controle.fait{border-color:var(--vert);background:#F3FBF6;}
+.controle input{width:22px;height:22px;accent-color:var(--vert);cursor:pointer;flex:0 0 22px;margin-top:2px;}
+.controle h4{margin:0 0 4px;font-size:16px;}
+.controle p{margin:0;font-size:15.5px;}
+.progression{display:flex;align-items:center;gap:12px;margin:0 0 18px;border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;}
+.jauge{flex:1;height:12px;background:var(--gris-ligne);border-radius:999px;overflow:hidden;}
+.jauge span{display:block;height:100%;width:0;background:var(--rouge);transition:width .25s ease;}
+.compteur{font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:16px;white-space:nowrap;}
+
+.zone-rouge{border:3px solid var(--rouge);border-radius:14px;padding:16px 18px;margin:18px 0;}
+.zone-rouge h3{margin-top:0;color:var(--rouge);}
+.interdit{list-style:none;padding:0;margin:0;}
+.interdit li{padding-left:26px;position:relative;margin-bottom:8px;}
+.interdit li::before{content:"\00d7";position:absolute;left:0;top:-2px;color:var(--rouge);font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:22px;line-height:1;}
+
+.banniere{background:var(--rouge);color:var(--blanc);border-radius:14px;padding:18px 20px;margin:26px 0;}
+.banniere p{margin:0;font-family:"Oswald",Arial,sans-serif;font-size:19px;line-height:1.25;text-transform:uppercase;}
+.banniere small{display:block;font-family:"Fira Sans Condensed",Arial,sans-serif;text-transform:none;font-size:15px;margin-top:8px;opacity:.95;}
+
+details{border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;margin-bottom:10px;}
+details[open]{border-color:var(--noir);}
+summary{cursor:pointer;font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:16px;text-transform:uppercase;letter-spacing:.3px;}
+summary::-webkit-details-marker{display:none;}
+summary::before{content:"+ ";color:var(--rouge);font-weight:700;}
+details[open] summary::before{content:"\2212 ";}
+details p{margin:10px 0 0;font-size:16px;}
+
+footer{border-top:4px solid var(--noir);margin-top:44px;padding-top:18px;font-size:14px;color:var(--gris-texte);}
+footer strong{color:var(--noir);}
+
+@media (max-width:520px){
+  body{font-size:16px;}h1{font-size:27px;}section > h2{font-size:21px;}
+  .tableau{font-size:14px;}pre{font-size:12.5px;}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none !important;scroll-behavior:auto !important;}}
+</style>
+</head>
+<body>
+<div class="page">
+
+<header>
+  <span class="eyebrow">Ressource compagnon · L'IA Minute du Médecin</span>
+  <h1>Les 6 erreurs du débutant, <mark>et comment les éviter</mark></h1>
+  <p class="sous-titre">Chaque erreur détaillée avec ce qu'elle coûte vraiment, le correctif en un geste, et le kit à copier pour ne plus jamais les commettre.</p>
+  <div class="trait"></div>
+  <p class="meta">Mise à jour : 5 août 2026.</p>
+</header>
+
+<div class="flash">
+  <h2>Trois choses à savoir avant de lire la liste</h2>
+  <ul>
+    <li><strong>Ces erreurs ne sont pas des maladresses, ce sont des pièges de conception.</strong> Une IA répond toujours, même quand elle devrait se taire ; elle est convaincante, même quand elle se trompe ; et elle ne vous préviendra jamais que votre question contenait une donnée de patient. Les six réflexes ci-dessous compensent exactement ces trois traits.</li>
+    <li><strong>L'ordre n'est pas décoratif.</strong> L'erreur n°1 engage le secret médical, les erreurs 2 et 3 la qualité de vos décisions, les trois dernières votre temps. Si vous ne deviez en retenir qu'une, c'est la première.</li>
+    <li><strong>Chaque correctif tient en un geste.</strong> Pas de théorie : une habitude de dix secondes par erreur, à installer dès la première semaine. C'est la période où tout se joue, dans un sens comme dans l'autre.</li>
+  </ul>
+</div>
+
+<nav aria-label="Sommaire">
+  <button type="button" data-cible="liste">Les 6 erreurs</button>
+  <button type="button" data-cible="kit">Le kit anti-erreurs</button>
+  <button type="button" data-cible="controles">Le contrôle</button>
+  <button type="button" data-cible="faq">Questions</button>
+  <button type="button" data-cible="sources">Sources</button>
+</nav>
+
+<section id="liste">
+  <h2>Les six erreurs, en détail</h2>
+  <p class="chapeau">Observées en formation auprès de médecins débutants, dans cet ordre de gravité.</p>
+
+  <div class="regle">
+    <div class="pastille p-bleu">1</div>
+    <div class="regle-corps">
+      <h4>Coller une donnée de patient dans un outil grand public</h4>
+      <p>Le réflexe de précision joue contre vous : on colle le courrier reçu, on donne l'âge exact, la date, la commune. Or retirer le nom ne suffit pas : trois éléments croisés désignent souvent une seule personne de votre patientèle. Et une donnée partie ne revient jamais.</p>
+      <p class="piege"><b>Le correctif</b> : décrivez la situation, jamais la personne. Tranche d'âge, délais relatifs, aucun lieu. Le détail complet est sur la page RGPD et l'arbre de décision du livre.</p>
+    </div>
+  </div>
+
+  <div class="regle">
+    <div class="pastille p-orange">2</div>
+    <div class="regle-corps">
+      <h4>Croire une réponse parce qu'elle est bien écrite</h4>
+      <p>Une IA ne « sait » rien : elle prédit la suite la plus plausible, avec le même aplomb quand elle invente. Sur des questions ouvertes sans source, les taux d'erreur mesurés vont de 15 à 35 %, et jusqu'à 95 % sur les références bibliographiques selon les outils.</p>
+      <p class="piege"><b>Le correctif</b> : fournissez le document et exigez la citation. Une synthèse ancrée sur une source que vous donnez tombe autour de 1,5 % d'erreurs. Le chiffre qui change une décision se vérifie toujours à la source.</p>
+    </div>
+  </div>
+
+  <div class="regle">
+    <div class="pastille p-vert">3</div>
+    <div class="regle-corps">
+      <h4>Poser une question sans contexte ni format</h4>
+      <p>« Parle-moi de l'HTA » produit la réponse moyenne à la question moyenne : un article d'encyclopédie dont vous ne ferez rien. Le modèle ne connaît ni votre spécialité, ni votre patientèle, ni l'usage que vous ferez de sa réponse.</p>
+      <p class="piege"><b>Le correctif</b> : la méthode ORCF du livre. Objectif, Rôle, Contexte, Format : quatre lignes, trente secondes, et la réponse devient utilisable. Un prompt, c'est une consultation.</p>
+    </div>
+  </div>
+
+  <div class="regle">
+    <div class="pastille p-violet">4</div>
+    <div class="regle-corps">
+      <h4>S'acharner sur une conversation mal partie</h4>
+      <p>Après trois corrections successives, le contexte est encombré de vos allers-retours et la qualité plafonne. On persiste parce qu'on a déjà investi du temps, et c'est précisément le mauvais réflexe.</p>
+      <p class="piege"><b>Le correctif</b> : la règle des deux relances. Si deux corrections n'ont pas redressé la trajectoire, ouvrez une conversation neuve avec un prompt corrigé. Deux minutes perdues valent mieux que vingt.</p>
+    </div>
+  </div>
+
+  <div class="regle">
+    <div class="pastille p-teal">5</div>
+    <div class="regle-corps">
+      <h4>Glisser sa propre erreur dans la question</h4>
+      <p>« Depuis que le seuil est passé à X… » alors qu'il n'a pas bougé : le modèle construira une réponse cohérente autour de votre prémisse fausse. Dans une étude sur 300 cas cliniques contenant un détail fabriqué, les modèles l'ont repris ou développé dans jusqu'à 83 % des cas.</p>
+      <p class="piege"><b>Le correctif</b> : question ouverte avant question fermée, et ne citez jamais le chiffre que vous voulez faire vérifier. Demandez-le, et comparez.</p>
+    </div>
+  </div>
+
+  <div class="regle">
+    <div class="pastille p-bleu">6</div>
+    <div class="regle-corps">
+      <h4>Ne rien capitaliser</h4>
+      <p>Le bon prompt trouvé un mardi soir est perdu le jeudi matin, et vous le réécrivez, cinquante fois dans l'année. C'est l'erreur la moins grave et la plus coûteuse en temps cumulé.</p>
+      <p class="piege"><b>Le correctif</b> : une bibliothèque de dix prompts, un par situation récurrente, stockée là où vous la rouvrez en trois secondes. Une soirée pour la constituer, des heures gagnées chaque mois.</p>
+    </div>
+  </div>
+</section>
+
+<section id="kit">
+  <h2>Le kit anti-erreurs, à copier une fois</h2>
+  <p class="chapeau">Deux blocs qui neutralisent quatre des six erreurs d'un coup. Collez-les en tête de vos prompts importants.</p>
+
+  <div class="bloc">
+    <div class="bloc-tete"><h4>Le garde-fou universel</h4><button type="button" class="copier">Copier</button></div>
+    <pre>Règles pour cette réponse :
+1. Si tu n'as pas l'information, écris "je n'ai pas cette information". Aucune estimation, aucune fourchette.
+2. Distingue ce qui vient des documents fournis, de tes connaissances générales, et de tes déductions.
+3. Si ma question contient une affirmation que tu ne peux pas vérifier, signale-le avant de répondre.
+4. Termine par "Ce dont je ne suis pas sûr", avec au moins un élément.</pre>
+  </div>
+
+  <div class="bloc">
+    <div class="bloc-tete"><h4>Le test des trois questions, pour calibrer un nouvel outil</h4><button type="button" class="copier">Copier</button></div>
+    <pre>1. Une question dont je connais parfaitement la réponse (je juge l'exactitude et la nuance).
+2. Une question dont la réponse n'existe pas dans la littérature (je juge sa capacité à dire "je ne sais pas").
+3. Une question contenant une fausse prémisse volontaire (je juge s'il la conteste ou s'il brode dessus).
+
+Un outil qui échoue au test 3 ne mérite pas ma confiance sur une décision.</pre>
+  </div>
+
+  <p class="chapeau">Ces deux blocs viennent des pages Hallucinations et ORCF du livre, où chaque mécanisme est détaillé et sourcé.</p>
+</section>
+
+<section id="controles">
+  <h2>Le contrôle en six points</h2>
+  <p class="chapeau">À vous auto-administrer après vos deux premières semaines d'usage.</p>
+
+  <div class="progression">
+    <div class="jauge"><span id="jauge-barre"></span></div>
+    <div class="compteur" id="jauge-compteur">0 / 6</div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Aucune donnée identifiante n'entre dans mes prompts</h4>
+    <p>Relecture systématique des chiffres et noms propres avant d'envoyer. Deux secondes.</p></div>
+  </div>
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Tout chiffre décisionnel est vérifié à la source</h4>
+    <p>Posologie dans la base du médicament, seuil dans la recommandation, tarif sur le site officiel.</p></div>
+  </div>
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Mes prompts importants suivent ORCF</h4>
+    <p>Objectif, rôle, contexte, format, et l'autorisation de ne pas savoir en dernière ligne.</p></div>
+  </div>
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>J'applique la règle des deux relances</h4>
+    <p>Au-delà, conversation neuve avec un prompt corrigé.</p></div>
+  </div>
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Je ne souffle jamais la réponse dans ma question</h4>
+    <p>Question ouverte d'abord, chiffre jamais cité quand je veux le faire vérifier.</p></div>
+  </div>
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Ma bibliothèque de prompts existe et vit</h4>
+    <p>Au moins cinq situations couvertes, corrigées au fil de l'eau.</p></div>
+  </div>
+
+  <div class="banniere">
+    <p>Six réflexes installés tôt valent mieux que six leçons apprises tard.
+    <small>La méthode A.V.E.C. de la Haute Autorité de santé résume l'état d'esprit : apprendre, vérifier, estimer, communiquer.</small></p>
+  </div>
+</section>
+
+<section id="faq">
+  <h2>Questions fréquentes</h2>
+  <details>
+    <summary>Par laquelle commencer ?</summary>
+    <p>La première : aucune donnée de patient dans un outil non prévu pour. C'est la seule des six qui engage autre chose que votre temps ou la qualité d'une réponse, et son correctif est immédiat.</p>
+  </details>
+  <details>
+    <summary>Ces erreurs disparaissent-elles avec l'expérience ?</summary>
+    <p>Les trois premières, oui, en quelques semaines de pratique consciente. Les trois dernières reviennent par relâchement, même chez les utilisateurs aguerris, d'où l'intérêt du contrôle périodique ci-dessus.</p>
+  </details>
+  <details>
+    <summary>Mon secrétariat commet-il les mêmes ?</summary>
+    <p>Les mêmes, plus une : utiliser un compte personnel pour des tâches du cabinet. Une page de règles écrites et une heure de formation règlent l'essentiel. C'est d'ailleurs une obligation depuis février 2025 pour les organisations qui déploient ces outils.</p>
+  </details>
+  <details>
+    <summary>Un outil « médical » me dispense-t-il de ces réflexes ?</summary>
+    <p>Non. Un outil conforme règle la question de l'hébergement des données, pas celle de la qualité des réponses ni de vos prémisses fausses. Les réflexes 2 à 6 s'appliquent partout.</p>
+  </details>
+</section>
+
+<section id="sources">
+  <h2>Sources</h2>
+  <table class="tableau">
+    <thead><tr><th>Élément</th><th>Source</th></tr></thead>
+    <tbody>
+      <tr><td>Taux d'erreur de 15 à 35 % sur tâches cliniques sans ancrage, 14 à 95 % sur les références bibliographiques selon les outils, environ 1,5 % en synthèse ancrée sur source fournie</td><td>Asgari E. et coll., npj Digital Medicine, 2025, et bancs d'essai 2026 ; détail sur la page Hallucinations du livre</td></tr>
+      <tr><td>Reprise d'un détail médical fabriqué dans jusqu'à 83 % des cas sur 300 cas cliniques</td><td>Icahn School of Medicine at Mount Sinai, 2025</td></tr>
+      <tr><td>Secret médical et hébergement des données de santé</td><td>Code de la santé publique, articles L.1110-4 et L.1111-8</td></tr>
+      <tr><td>Obligation de maîtrise des outils d'IA pour les utilisateurs, en vigueur depuis février 2025</td><td>Règlement (UE) 2024/1689</td></tr>
+      <tr><td>Méthode A.V.E.C.</td><td>Haute Autorité de santé, recommandations sur l'IA générative en santé, 30 octobre 2025</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<footer>
+  <p><strong>L'IA Minute du Médecin</strong>, Dr Guillaume Zagury et Samuel De Queiroz, Éditions Medicilline.</p>
+  <p>Ressource compagnon de la double page consacrée aux erreurs du débutant. Les mécanismes et chiffres cités renvoient aux pages spécialisées du livre, où figurent les sources détaillées.</p>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var chips = document.querySelectorAll("nav button[data-cible]");
+  Array.prototype.forEach.call(chips, function(btn){
+    btn.addEventListener("click", function(){
+      var cible = document.getElementById(btn.getAttribute("data-cible"));
+      if(cible){ cible.scrollIntoView({ behavior:"smooth", block:"start" }); }
+    });
+  });
+
+  var onglets = document.querySelectorAll(".onglets button[data-panneau]");
+  Array.prototype.forEach.call(onglets, function(btn){
+    btn.addEventListener("click", function(){
+      Array.prototype.forEach.call(onglets, function(autre){
+        autre.setAttribute("aria-selected", autre === btn ? "true" : "false");
+        var p = document.getElementById(autre.getAttribute("data-panneau"));
+        if(p){ p.hidden = (autre !== btn); }
+      });
+    });
+  });
+
+  var controles = document.querySelectorAll("[data-controle]");
+  var barre = document.getElementById("jauge-barre");
+  var compteur = document.getElementById("jauge-compteur");
+  var total = controles.length;
+
+  function maj(){
+    if(!barre || !compteur || !total){ return; }
+    var faits = 0;
+    Array.prototype.forEach.call(controles, function(c){
+      var box = c.querySelector("input[type=checkbox]");
+      if(box && box.checked){ faits++; c.classList.add("fait"); }
+      else { c.classList.remove("fait"); }
+    });
+    barre.style.width = (faits/total*100) + "%";
+    barre.style.background = (faits === total) ? "#27AE60" : "#DC322F";
+    compteur.textContent = faits + " / " + total;
+  }
+
+  Array.prototype.forEach.call(controles, function(c){
+    var box = c.querySelector("input[type=checkbox]");
+    if(box){ box.addEventListener("change", maj); }
+  });
+  maj();
+
+  var boutons = document.querySelectorAll(".copier");
+  Array.prototype.forEach.call(boutons, function(btn){
+    btn.addEventListener("click", function(){
+      var bloc = btn.closest(".bloc");
+      var pre = bloc ? bloc.querySelector("pre") : null;
+      if(!pre){ return; }
+      var texte = pre.textContent;
+      var fini = function(){
+        btn.textContent = "Copié";
+        btn.classList.add("ok");
+        setTimeout(function(){ btn.textContent = "Copier"; btn.classList.remove("ok"); }, 1800);
+      };
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(texte).then(fini, function(){ secours(texte, fini); });
+      } else { secours(texte, fini); }
+    });
+  });
+
+  function secours(texte, fini){
+    var zone = document.createElement("textarea");
+    zone.value = texte;
+    zone.setAttribute("readonly","");
+    zone.style.position = "absolute";
+    zone.style.left = "-9999px";
+    document.body.appendChild(zone);
+    zone.select();
+    try { document.execCommand("copy"); fini(); } catch(e){}
+    document.body.removeChild(zone);
+  }
+})();
+</script>
+</body>
+</html>

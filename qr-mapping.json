@@ -1,0 +1,167 @@
+[
+ {
+  "slug": "agents-autonomes",
+  "titre": "Agents autonomes 2026 : le hors-piste",
+  "url": "https://medecin.prompt-id.com/agents-autonomes"
+ },
+ {
+  "slug": "agi",
+  "titre": "AGI : qui dit quoi, et que surveiller",
+  "url": "https://medecin.prompt-id.com/agi"
+ },
+ {
+  "slug": "arbre-decision",
+  "titre": "Puis-je utiliser l'IA ?",
+  "url": "https://medecin.prompt-id.com/arbre-decision"
+ },
+ {
+  "slug": "audio-cabinet",
+  "titre": "Votre identité sonore",
+  "url": "https://medecin.prompt-id.com/audio-cabinet"
+ },
+ {
+  "slug": "bd-patient",
+  "titre": "La BD patient, case par case",
+  "url": "https://medecin.prompt-id.com/bd-patient"
+ },
+ {
+  "slug": "comptabilite",
+  "titre": "Le tableau de bord du cabinet",
+  "url": "https://medecin.prompt-id.com/comptabilite"
+ },
+ {
+  "slug": "cotation",
+  "titre": "Aide à la cotation",
+  "url": "https://medecin.prompt-id.com/cotation"
+ },
+ {
+  "slug": "courriers",
+  "titre": "Courriers et mails : les modèles et le bon canal",
+  "url": "https://medecin.prompt-id.com/courriers"
+ },
+ {
+  "slug": "cowork",
+  "titre": "Workspace & Cowork : l'IA au travail",
+  "url": "https://medecin.prompt-id.com/cowork"
+ },
+ {
+  "slug": "custom-gpt",
+  "titre": "Custom GPT pas à pas",
+  "url": "https://medecin.prompt-id.com/custom-gpt"
+ },
+ {
+  "slug": "diaporama",
+  "titre": "Le diaporama médical",
+  "url": "https://medecin.prompt-id.com/diaporama"
+ },
+ {
+  "slug": "droit",
+  "titre": "Ce que dit le droit français",
+  "url": "https://medecin.prompt-id.com/droit"
+ },
+ {
+  "slug": "erreurs",
+  "titre": "Les 6 erreurs du débutant",
+  "url": "https://medecin.prompt-id.com/erreurs"
+ },
+ {
+  "slug": "formation",
+  "titre": "Veille et formation augmentées",
+  "url": "https://medecin.prompt-id.com/formation"
+ },
+ {
+  "slug": "gems",
+  "titre": "Les Gems de Gemini",
+  "url": "https://medecin.prompt-id.com/gems"
+ },
+ {
+  "slug": "grille",
+  "titre": "Grille d'évaluation d'un outil IA",
+  "url": "https://medecin.prompt-id.com/grille"
+ },
+ {
+  "slug": "hallucinations",
+  "titre": "Hallucinations : les taux, les tests, les parades",
+  "url": "https://medecin.prompt-id.com/hallucinations"
+ },
+ {
+  "slug": "horizon-2030",
+  "titre": "Le calendrier 2026-2030",
+  "url": "https://medecin.prompt-id.com/horizon-2030"
+ },
+ {
+  "slug": "ia-agentique",
+  "titre": "IA agentique : ce qui change vraiment",
+  "url": "https://medecin.prompt-id.com/ia-agentique"
+ },
+ {
+  "slug": "ia-open-source",
+  "titre": "L'IA open source au cabinet",
+  "url": "https://medecin.prompt-id.com/ia-open-source"
+ },
+ {
+  "slug": "notebooklm",
+  "titre": "Interroger un corpus, sans perdre la nuance",
+  "url": "https://medecin.prompt-id.com/notebooklm"
+ },
+ {
+  "slug": "orcf",
+  "titre": "La bibliothèque ORCF",
+  "url": "https://medecin.prompt-id.com/orcf"
+ },
+ {
+  "slug": "profession",
+  "titre": "Ce que dit la profession (livre blanc CNOM)",
+  "url": "https://medecin.prompt-id.com/profession"
+ },
+ {
+  "slug": "responsabilite",
+  "titre": "Responsabilité et IA : le dossier de preuve",
+  "url": "https://medecin.prompt-id.com/responsabilite"
+ },
+ {
+  "slug": "rgpd-hds",
+  "titre": "RGPD et HDS : la check-list du cabinet",
+  "url": "https://medecin.prompt-id.com/rgpd-hds"
+ },
+ {
+  "slug": "scribe",
+  "titre": "Le scribe IA en consultation",
+  "url": "https://medecin.prompt-id.com/scribe"
+ },
+ {
+  "slug": "site-cabinet",
+  "titre": "Le site du cabinet, guide complet",
+  "url": "https://medecin.prompt-id.com/site-cabinet"
+ },
+ {
+  "slug": "skills-claude",
+  "titre": "Projets et Skills de Claude",
+  "url": "https://medecin.prompt-id.com/skills-claude"
+ },
+ {
+  "slug": "staff-rcp",
+  "titre": "Préparer un staff sans dossier patient",
+  "url": "https://medecin.prompt-id.com/staff-rcp"
+ },
+ {
+  "slug": "traduction",
+  "titre": "Traduction en consultation",
+  "url": "https://medecin.prompt-id.com/traduction"
+ },
+ {
+  "slug": "veille",
+  "titre": "Bibliothèque de prompts de veille",
+  "url": "https://medecin.prompt-id.com/veille"
+ },
+ {
+  "slug": "video",
+  "titre": "Du visuel au mini-cours filmé",
+  "url": "https://medecin.prompt-id.com/video"
+ },
+ {
+  "slug": "visuels",
+  "titre": "Bibliothèque de prompts visuels médicaux",
+  "url": "https://medecin.prompt-id.com/visuels"
+ }
+]

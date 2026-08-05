@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Traduction en consultation · L'IA Minute du Médecin</title>
+<meta name="description" content="Ressource compagnon du livre L'IA Minute du Médecin : le mode d'emploi de la traduction vocale en temps réel, les prompts d'interprète à copier, et la ligne rouge de l'interprétariat professionnel.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Fira+Sans+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --rouge:#DC322F;--noir:#1A1A1A;--blanc:#FFFFFF;--jaune:#FFD700;
+  --bleu:#3498DB;--orange:#F39C12;--vert:#27AE60;--violet:#8E44AD;--teal:#1ABC9C;
+  --gris:#BDC3C7;--gris-clair:#F4F5F6;--gris-ligne:#E1E4E6;--gris-texte:#5A6268;
+}
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{margin:0;background:var(--blanc);color:var(--noir);font-family:"Fira Sans Condensed","Roboto Condensed",Arial,sans-serif;font-size:17px;line-height:1.5;}
+.page{max-width:720px;margin:0 auto;padding:0 18px 80px;}
+h1,h2,h3,h4{font-family:"Oswald","Arial Narrow",Arial,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.2px;}
+p{margin:0 0 14px;}
+
+header{padding:26px 0 8px;}
+.eyebrow{display:inline-block;font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:var(--blanc);background:var(--noir);padding:5px 11px;}
+h1{font-size:33px;line-height:1.06;margin:14px 0 0;}
+h1 mark{background:var(--jaune);color:var(--noir);padding:0 5px;}
+.sous-titre{font-family:"Fira Sans Condensed",Arial,sans-serif;font-style:italic;font-weight:600;color:var(--rouge);font-size:19px;margin:10px 0 0;text-transform:none;}
+.trait{height:4px;background:var(--rouge);margin:16px 0 22px;}
+.meta{font-size:14px;color:var(--gris-texte);margin:0 0 22px;}
+
+.flash{border:3px solid var(--rouge);border-radius:14px;padding:16px 18px;margin:0 0 26px;}
+.flash h2{font-size:19px;margin:0 0 10px;color:var(--rouge);}
+.flash ul{margin:0;padding-left:20px;}
+.flash li{margin-bottom:9px;}
+
+nav{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 34px;}
+nav button{font-family:"Oswald",Arial,sans-serif;font-weight:500;font-size:13px;letter-spacing:.6px;text-transform:uppercase;background:var(--gris-clair);color:var(--noir);border:2px solid var(--gris-ligne);border-radius:999px;padding:7px 13px;cursor:pointer;}
+nav button:hover{background:var(--noir);color:var(--blanc);border-color:var(--noir);}
+nav button:focus-visible{outline:3px solid var(--rouge);outline-offset:2px;}
+
+section{border-top:2px solid var(--gris-ligne);padding-top:26px;margin-top:34px;scroll-margin-top:14px;}
+section > h2{font-size:25px;margin:0 0 4px;line-height:1.1;}
+.chapeau{color:var(--gris-texte);font-size:16px;margin:0 0 20px;}
+h3{font-size:19px;margin:26px 0 8px;}
+
+.regle{display:flex;gap:14px;border:2px solid var(--gris-ligne);border-radius:14px;padding:14px;margin-bottom:12px;}
+.pastille{flex:0 0 42px;height:42px;border-radius:50%;color:var(--blanc);font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:19px;display:flex;align-items:center;justify-content:center;}
+.p-bleu{background:var(--bleu);}.p-orange{background:var(--orange);}.p-vert{background:var(--vert);}.p-violet{background:var(--violet);}.p-teal{background:var(--teal);}
+.regle-corps{flex:1;min-width:0;}
+.regle h4{font-size:17px;margin:4px 0 6px;}
+.regle p{font-size:16px;margin:0 0 8px;}
+.regle p:last-child{margin-bottom:0;}
+.piege{font-size:15px;background:var(--gris-clair);border-left:4px solid var(--orange);padding:8px 10px;margin:0;}
+.piege b{font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:13px;letter-spacing:.6px;color:var(--orange);}
+
+.onglets{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px;}
+.onglets button{font-family:"Oswald",Arial,sans-serif;font-weight:500;font-size:13px;letter-spacing:.6px;text-transform:uppercase;background:var(--blanc);color:var(--noir);border:2px solid var(--noir);border-radius:8px;padding:7px 12px;cursor:pointer;}
+.onglets button[aria-selected="true"]{background:var(--noir);color:var(--blanc);}
+.onglets button:focus-visible{outline:3px solid var(--rouge);outline-offset:2px;}
+.panneau[hidden]{display:none;}
+
+.bloc{border:2px solid var(--gris-ligne);border-radius:14px;overflow:hidden;margin:0 0 16px;}
+.bloc-tete{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--gris-clair);padding:10px 12px;border-bottom:2px solid var(--gris-ligne);}
+.bloc-tete h4{margin:0;font-size:15px;}
+.copier{font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:12px;letter-spacing:.8px;text-transform:uppercase;background:var(--rouge);color:var(--blanc);border:none;border-radius:6px;padding:7px 12px;cursor:pointer;white-space:nowrap;}
+.copier.ok{background:var(--vert);}
+.copier:focus-visible{outline:3px solid var(--noir);outline-offset:2px;}
+pre{margin:0;padding:14px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px;line-height:1.5;white-space:pre-wrap;word-wrap:break-word;}
+.badge{display:inline-block;background:var(--gris);color:var(--noir);border-radius:5px;font-family:"Oswald",Arial,sans-serif;font-size:11.5px;letter-spacing:.7px;text-transform:uppercase;padding:3px 8px;margin:0 6px 6px 0;}
+
+.tableau{width:100%;border-collapse:collapse;font-size:15px;margin:0 0 18px;}
+.tableau th,.tableau td{border:1px solid var(--gris-ligne);padding:8px 10px;text-align:left;vertical-align:top;}
+.tableau th{background:var(--noir);color:var(--blanc);font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:13px;letter-spacing:.5px;}
+.tableau tr:nth-child(even) td{background:var(--gris-clair);}
+
+.controle{display:flex;gap:12px;border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;margin-bottom:10px;}
+.controle.fait{border-color:var(--vert);background:#F3FBF6;}
+.controle input{width:22px;height:22px;accent-color:var(--vert);cursor:pointer;flex:0 0 22px;margin-top:2px;}
+.controle h4{margin:0 0 4px;font-size:16px;}
+.controle p{margin:0;font-size:15.5px;}
+.progression{display:flex;align-items:center;gap:12px;margin:0 0 18px;border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;}
+.jauge{flex:1;height:12px;background:var(--gris-ligne);border-radius:999px;overflow:hidden;}
+.jauge span{display:block;height:100%;width:0;background:var(--rouge);transition:width .25s ease;}
+.compteur{font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:16px;white-space:nowrap;}
+
+.zone-rouge{border:3px solid var(--rouge);border-radius:14px;padding:16px 18px;margin:18px 0;}
+.zone-rouge h3{margin-top:0;color:var(--rouge);}
+.interdit{list-style:none;padding:0;margin:0;}
+.interdit li{padding-left:26px;position:relative;margin-bottom:8px;}
+.interdit li::before{content:"\00d7";position:absolute;left:0;top:-2px;color:var(--rouge);font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:22px;line-height:1;}
+
+.banniere{background:var(--rouge);color:var(--blanc);border-radius:14px;padding:18px 20px;margin:26px 0;}
+.banniere p{margin:0;font-family:"Oswald",Arial,sans-serif;font-size:19px;line-height:1.25;text-transform:uppercase;}
+.banniere small{display:block;font-family:"Fira Sans Condensed",Arial,sans-serif;text-transform:none;font-size:15px;margin-top:8px;opacity:.95;}
+
+details{border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;margin-bottom:10px;}
+details[open]{border-color:var(--noir);}
+summary{cursor:pointer;font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:16px;text-transform:uppercase;letter-spacing:.3px;}
+summary::-webkit-details-marker{display:none;}
+summary::before{content:"+ ";color:var(--rouge);font-weight:700;}
+details[open] summary::before{content:"\2212 ";}
+details p{margin:10px 0 0;font-size:16px;}
+
+footer{border-top:4px solid var(--noir);margin-top:44px;padding-top:18px;font-size:14px;color:var(--gris-texte);}
+footer strong{color:var(--noir);}
+
+@media (max-width:520px){
+  body{font-size:16px;}h1{font-size:27px;}section > h2{font-size:21px;}
+  .tableau{font-size:14px;}pre{font-size:12.5px;}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none !important;scroll-behavior:auto !important;}}
+</style>
+</head>
+<body>
+<div class="page">
+
+<header>
+  <span class="eyebrow">Ressource compagnon · L'IA Minute du Médecin</span>
+  <h1>Parlez à votre patient <mark>dans sa langue</mark></h1>
+  <p class="sous-titre">Le mode vocal transforme votre téléphone en interprète de consultation. Le pas-à-pas, les prompts à copier, et la ligne rouge à ne jamais franchir.</p>
+  <div class="trait"></div>
+  <p class="meta">Mise à jour : 5 août 2026.</p>
+</header>
+
+<div class="flash">
+  <h2>Trois choses à savoir avant la première fois</h2>
+  <ul>
+    <li><strong>Ça marche, et c'est déjà utilisable un lundi matin.</strong> Mode vocal activé, une consigne d'une phrase, et l'échange s'installe : le patient parle dans sa langue, vous entendez du français, et inversement. Plus de cinquante langues sont couvertes à l'oral, davantage encore à l'écrit.</li>
+    <li><strong>La ligne rouge est simple : comprendre, oui ; consentir, non.</strong> Anamnèse, localisation d'une douleur, explication d'un traitement : l'IA excelle. Consentement éclairé, annonce grave, situation médico-légale : interprète professionnel, un droit inscrit dans la loi depuis 2016.</li>
+    <li><strong>La voix part sur des serveurs.</strong> Aucun nom, aucune date de naissance, aucune adresse dictée. On traduit des symptômes et des consignes, jamais une identité.</li>
+  </ul>
+</div>
+
+<nav aria-label="Sommaire">
+  <button type="button" data-cible="pasapas">Le pas-à-pas</button>
+  <button type="button" data-cible="prompts">Les prompts</button>
+  <button type="button" data-cible="lignerouge">La ligne rouge</button>
+  <button type="button" data-cible="controles">Le contrôle</button>
+  <button type="button" data-cible="faq">Questions</button>
+  <button type="button" data-cible="sources">Sources</button>
+</nav>
+
+<section id="pasapas">
+  <h2>Le pas-à-pas, en quatre gestes</h2>
+  <p class="chapeau">Avec ChatGPT en mode vocal ; la même logique vaut pour Gemini Live ou tout assistant vocal récent.</p>
+
+  <div class="regle">
+    <div class="pastille p-bleu">1</div>
+    <div class="regle-corps">
+      <h4>Ouvrez le mode vocal</h4>
+      <p>Application sur votre téléphone, icône du mode vocal à droite de la zone de saisie. Testez-le une fois à vide, avant le jour où vous en aurez besoin en situation : trente secondes qui changent tout au moment venu.</p>
+    </div>
+  </div>
+
+  <div class="regle">
+    <div class="pastille p-orange">2</div>
+    <div class="regle-corps">
+      <h4>Donnez la consigne d'interprète</h4>
+      <p>À l'oral : « Traduis en temps réel entre le français et l'arabe, sans rien ajouter ni retirer. » Pour un cadrage plus strict, le prompt complet ci-dessous se colle en une fois dans la conversation avant de passer en vocal.</p>
+    </div>
+  </div>
+
+  <div class="regle">
+    <div class="pastille p-vert">3</div>
+    <div class="regle-corps">
+      <h4>Posez le téléphone entre vous</h4>
+      <p>Haut-parleur activé, téléphone à mi-distance. Phrases courtes, une idée par phrase, pauses franches : la qualité de la traduction dépend d'abord de la clarté de ce que vous dites. Regardez le patient, pas l'écran.</p>
+    </div>
+  </div>
+
+  <div class="regle">
+    <div class="pastille p-violet">4</div>
+    <div class="regle-corps">
+      <h4>Verrouillez ce qui compte</h4>
+      <p>Pour toute consigne de traitement, faites reformuler : demandez au patient de redire ce qu'il a compris, et écoutez la traduction retour. Une consigne importante mérite en plus son double écrit bilingue : le prompt est plus bas.</p>
+    </div>
+  </div>
+</section>
+
+<section id="prompts">
+  <h2>Les trois prompts à copier</h2>
+  <p class="chapeau">À enregistrer dans votre bibliothèque de prompts. Remplacez [langue] et testez une fois au calme.</p>
+
+  <div class="bloc">
+    <div class="bloc-tete"><h4>L'interprète de consultation</h4><button type="button" class="copier">Copier</button></div>
+    <pre>Tu es interprète médical entre un médecin francophone et un patient qui parle [langue].
+Règles strictes :
+1. Traduis fidèlement, sans rien ajouter, retirer ni adoucir. Aucun avis médical.
+2. Registre simple, phrases courtes, vocabulaire du quotidien.
+3. Si un mot est ambigu ou dialectal, demande une clarification au lieu de deviner.
+4. Ne mentionne jamais de nom : dis « le médecin » et « le patient ».
+Quand tu es prêt, dis « prêt » en français et dans la langue du patient.</pre>
+  </div>
+
+  <div class="bloc">
+    <div class="bloc-tete"><h4>La vérification retour, pour les consignes qui comptent</h4><button type="button" class="copier">Copier</button></div>
+    <pre>Traduis cette consigne en [langue], puis retraduis ta propre traduction en français, littéralement, pour que je vérifie que le sens n'a pas bougé. Signale tout terme qui n'a pas d'équivalent exact.
+
+Consigne : [votre consigne de traitement ou de surveillance]</pre>
+  </div>
+
+  <div class="bloc">
+    <div class="bloc-tete"><h4>La fiche de sortie bilingue</h4><button type="button" class="copier">Copier</button></div>
+    <pre>Rédige une fiche patient en deux colonnes : français à gauche, [langue] à droite, ligne par ligne.
+Contenu : [motif générique], le traitement ([DCI, dose, durée]), les signes qui doivent faire reconsulter, le numéro à appeler en urgence (15).
+Niveau de lecture : 12 ans. Phrases courtes. Aucune donnée personnelle.</pre>
+  </div>
+</section>
+
+<section id="lignerouge">
+  <h2>La ligne rouge : quand l'IA ne suffit pas</h2>
+  <p class="chapeau">Un chiffre pour calibrer la confiance, puis les situations où la loi et le bon sens exigent un humain.</p>
+  <p>L'étude de référence a testé la traduction automatique sur des consignes de sortie d'urgences : <b>92 %</b> de phrases correctes en espagnol, <b>81 %</b> en chinois. Et parmi les erreurs, respectivement <b>2 %</b> et <b>8 %</b> pouvaient entraîner un préjudice clinique significatif (Khoong et coll., JAMA Internal Medicine, 2019). Les modèles vocaux actuels font mieux, mais la leçon tient : excellent pour l'échange courant, jamais aveuglément pour une consigne critique, d'où la vérification retour.</p>
+
+  <div class="zone-rouge">
+    <h3>Interprète professionnel obligatoire ou fortement recommandé</h3>
+    <ul class="interdit">
+      <li><b>Consentement éclairé</b> avant un acte, une chirurgie, une inclusion dans une recherche : le patient a droit à un interprétariat professionnel (art. L.1110-13 du CSP, loi du 26 janvier 2016).</li>
+      <li><b>Annonce d'un diagnostic grave</b> ou d'un pronostic engagé : la nuance et l'accompagnement ne se sous-traitent pas à une machine.</li>
+      <li><b>Situations médico-légales</b> : certificats, signalements, expertises, soins sans consentement.</li>
+      <li><b>Santé mentale</b> : l'évaluation psychiatrique repose sur la langue fine : idiomes, affects, sous-entendus.</li>
+      <li><b>Jamais l'enfant du patient comme interprète</b>, ni un proche pour les sujets sensibles : c'est l'une des bonnes pratiques du référentiel HAS (octobre 2017). L'IA, paradoxalement, protège mieux l'intimité qu'un cousin dans la pièce.</li>
+    </ul>
+  </div>
+  <p>Le référentiel HAS rappelle que recourir à un interprète professionnel garantit fidélité, confidentialité et neutralité. En pratique de ville, les associations d'interprétariat en santé interviennent aussi par téléphone, souvent en quelques minutes : identifiez le circuit de votre territoire avant d'en avoir besoin.</p>
+</section>
+
+<section id="controles">
+  <h2>Le contrôle en cinq points</h2>
+  <p class="chapeau">À valider une fois pour être prêt le jour J.</p>
+
+  <div class="progression">
+    <div class="jauge"><span id="jauge-barre"></span></div>
+    <div class="compteur" id="jauge-compteur">0 / 5</div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Le mode vocal est testé sur mon téléphone</h4>
+    <p>Application installée, micro autorisé, essai fait à vide avec une langue que je peux vérifier.</p></div>
+  </div>
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Le prompt d'interprète est dans ma bibliothèque</h4>
+    <p>Accessible en trois secondes, avec la vérification retour et la fiche bilingue.</p></div>
+  </div>
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Aucune identité ne passe par la voix</h4>
+    <p>Ni nom, ni date de naissance, ni adresse : des symptômes et des consignes, rien d'autre.</p></div>
+  </div>
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Toute consigne de traitement est verrouillée</h4>
+    <p>Reformulation par le patient, et double écrit bilingue si l'enjeu le justifie.</p></div>
+  </div>
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>Le circuit interprète professionnel est identifié</h4>
+    <p>Association ou plateforme téléphonique de mon territoire, numéro noté, pour le jour où la ligne rouge s'applique.</p></div>
+  </div>
+
+  <div class="banniere">
+    <p>L'IA pour se comprendre, l'interprète pour consentir.
+    <small>Art. L.1110-13 du Code de la santé publique · référentiel HAS d'interprétariat linguistique en santé, octobre 2017.</small></p>
+  </div>
+</section>
+
+<section id="faq">
+  <h2>Questions fréquentes</h2>
+  <details>
+    <summary>Quelles langues, et avec quelle fiabilité ?</summary>
+    <p>Plus de cinquante langues à l'oral pour les principaux assistants, bien davantage à l'écrit. La fiabilité est excellente sur les grandes langues (arabe, anglais, espagnol, portugais, mandarin, russe, turc…), plus inégale sur les dialectes et les langues rares : testez la paire de langues avec un locuteur de confiance avant de vous y fier, et privilégiez l'arabe standard, par exemple, plutôt qu'un dialecte régional.</p>
+  </details>
+  <details>
+    <summary>Et sans réseau, en visite ou en zone blanche ?</summary>
+    <p>Le mode vocal IA a besoin d'une connexion. En secours : une application de traduction classique en mode hors ligne, dictionnaires téléchargés à l'avance : moins fluide, moins fiable, mais suffisant pour dépanner. Vérifiez le téléchargement des langues avant la tournée, pas pendant.</p>
+  </details>
+  <details>
+    <summary>Que dire au patient, et qu'écrire au dossier ?</summary>
+    <p>Une phrase suffit, gestes à l'appui : « Le téléphone va traduire entre nous, d'accord ? » Le sourire du patient qui entend enfin sa langue règle généralement la question. Au dossier, notez le recours à la traduction automatique et, pour toute décision importante, la reformulation obtenue : c'est votre trace d'information loyale.</p>
+  </details>
+  <details>
+    <summary>Et pour un patient sourd ?</summary>
+    <p>La langue des signes n'est pas couverte par la traduction vocale. Passez par un interprète en LSF, en présence ou en visio ; l'écrit simple (niveau de lecture 12 ans, phrases courtes) reste un complément utile, pas un substitut : le français écrit n'est pas la langue première de nombreux sourds signants.</p>
+  </details>
+</section>
+
+<section id="sources">
+  <h2>Sources</h2>
+  <table class="tableau">
+    <thead><tr><th>Élément</th><th>Source</th></tr></thead>
+    <tbody>
+      <tr><td>Droit à l'interprétariat linguistique en santé</td><td>Code de la santé publique, art. L.1110-13 (loi n° 2016-41 du 26 janvier 2016) ; décret n° 2017-816 du 5 mai 2017</td></tr>
+      <tr><td>Bonnes pratiques : fidélité, confidentialité, neutralité ; ne pas recourir aux proches et aux mineurs</td><td>HAS, « Interprétariat linguistique dans le domaine de la santé », référentiel, octobre 2017</td></tr>
+      <tr><td>Traduction automatique de consignes de sortie : 92 % (espagnol) et 81 % (chinois) de phrases exactes ; 2 % et 8 % des erreurs à risque clinique significatif</td><td>Khoong E.C. et coll., JAMA Internal Medicine, 2019</td></tr>
+      <tr><td>Mode vocal : plus de cinquante langues, traduction en temps réel</td><td>Documentation des éditeurs (OpenAI, Google), 2025-2026 ; chiffre arrondi prudemment</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<footer>
+  <p><strong>L'IA Minute du Médecin</strong>, Dr Guillaume Zagury et Samuel De Queiroz, Éditions Medicilline.</p>
+  <p>Ressource compagnon de la double page « Traduction en consultation ». L'interprétariat professionnel reste le standard pour le consentement et les annonces : cette page organise la complémentarité, pas le remplacement.</p>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var chips = document.querySelectorAll("nav button[data-cible]");
+  Array.prototype.forEach.call(chips, function(btn){
+    btn.addEventListener("click", function(){
+      var cible = document.getElementById(btn.getAttribute("data-cible"));
+      if(cible){ cible.scrollIntoView({ behavior:"smooth", block:"start" }); }
+    });
+  });
+
+  var onglets = document.querySelectorAll(".onglets button[data-panneau]");
+  Array.prototype.forEach.call(onglets, function(btn){
+    btn.addEventListener("click", function(){
+      Array.prototype.forEach.call(onglets, function(autre){
+        autre.setAttribute("aria-selected", autre === btn ? "true" : "false");
+        var p = document.getElementById(autre.getAttribute("data-panneau"));
+        if(p){ p.hidden = (autre !== btn); }
+      });
+    });
+  });
+
+  var controles = document.querySelectorAll("[data-controle]");
+  var barre = document.getElementById("jauge-barre");
+  var compteur = document.getElementById("jauge-compteur");
+  var total = controles.length;
+
+  function maj(){
+    if(!barre || !compteur || !total){ return; }
+    var faits = 0;
+    Array.prototype.forEach.call(controles, function(c){
+      var box = c.querySelector("input[type=checkbox]");
+      if(box && box.checked){ faits++; c.classList.add("fait"); }
+      else { c.classList.remove("fait"); }
+    });
+    barre.style.width = (faits/total*100) + "%";
+    barre.style.background = (faits === total) ? "#27AE60" : "#DC322F";
+    compteur.textContent = faits + " / " + total;
+  }
+
+  Array.prototype.forEach.call(controles, function(c){
+    var box = c.querySelector("input[type=checkbox]");
+    if(box){ box.addEventListener("change", maj); }
+  });
+  maj();
+
+  var boutons = document.querySelectorAll(".copier");
+  Array.prototype.forEach.call(boutons, function(btn){
+    btn.addEventListener("click", function(){
+      var bloc = btn.closest(".bloc");
+      var pre = bloc ? bloc.querySelector("pre") : null;
+      if(!pre){ return; }
+      var texte = pre.textContent;
+      var fini = function(){
+        btn.textContent = "Copié";
+        btn.classList.add("ok");
+        setTimeout(function(){ btn.textContent = "Copier"; btn.classList.remove("ok"); }, 1800);
+      };
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(texte).then(fini, function(){ secours(texte, fini); });
+      } else { secours(texte, fini); }
+    });
+  });
+
+  function secours(texte, fini){
+    var zone = document.createElement("textarea");
+    zone.value = texte;
+    zone.setAttribute("readonly","");
+    zone.style.position = "absolute";
+    zone.style.left = "-9999px";
+    document.body.appendChild(zone);
+    zone.select();
+    try { document.execCommand("copy"); fini(); } catch(e){}
+    document.body.removeChild(zone);
+  }
+})();
+</script>
+</body>
+</html>

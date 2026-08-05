@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ce que dit la profession · L'IA Minute du Médecin</title>
+<meta name="description" content="Ressource compagnon du livre L'IA Minute du Médecin : le livre blanc du CNOM de 2018 décrypté, les recommandations qui ont le mieux vieilli, ce qu'il n'avait pas vu venir, et la boussole en sept questions.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Fira+Sans+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --rouge:#DC322F;--noir:#1A1A1A;--blanc:#FFFFFF;--jaune:#FFD700;
+  --bleu:#3498DB;--orange:#F39C12;--vert:#27AE60;--violet:#8E44AD;--teal:#1ABC9C;
+  --gris:#BDC3C7;--gris-clair:#F4F5F6;--gris-ligne:#E1E4E6;--gris-texte:#5A6268;
+}
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{margin:0;background:var(--blanc);color:var(--noir);font-family:"Fira Sans Condensed","Roboto Condensed",Arial,sans-serif;font-size:17px;line-height:1.5;}
+.page{max-width:720px;margin:0 auto;padding:0 18px 80px;}
+h1,h2,h3,h4{font-family:"Oswald","Arial Narrow",Arial,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.2px;}
+p{margin:0 0 14px;}
+
+header{padding:26px 0 8px;}
+.eyebrow{display:inline-block;font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:var(--blanc);background:var(--noir);padding:5px 11px;}
+h1{font-size:33px;line-height:1.06;margin:14px 0 0;}
+h1 mark{background:var(--jaune);color:var(--noir);padding:0 5px;}
+.sous-titre{font-family:"Fira Sans Condensed",Arial,sans-serif;font-style:italic;font-weight:600;color:var(--rouge);font-size:19px;margin:10px 0 0;text-transform:none;}
+.trait{height:4px;background:var(--rouge);margin:16px 0 22px;}
+.meta{font-size:14px;color:var(--gris-texte);margin:0 0 22px;}
+
+.flash{border:3px solid var(--rouge);border-radius:14px;padding:16px 18px;margin:0 0 26px;}
+.flash h2{font-size:19px;margin:0 0 10px;color:var(--rouge);}
+.flash ul{margin:0;padding-left:20px;}
+.flash li{margin-bottom:9px;}
+
+nav{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 34px;}
+nav button{font-family:"Oswald",Arial,sans-serif;font-weight:500;font-size:13px;letter-spacing:.6px;text-transform:uppercase;background:var(--gris-clair);color:var(--noir);border:2px solid var(--gris-ligne);border-radius:999px;padding:7px 13px;cursor:pointer;}
+nav button:hover{background:var(--noir);color:var(--blanc);border-color:var(--noir);}
+nav button:focus-visible{outline:3px solid var(--rouge);outline-offset:2px;}
+
+section{border-top:2px solid var(--gris-ligne);padding-top:26px;margin-top:34px;scroll-margin-top:14px;}
+section > h2{font-size:25px;margin:0 0 4px;line-height:1.1;}
+.chapeau{color:var(--gris-texte);font-size:16px;margin:0 0 20px;}
+h3{font-size:19px;margin:26px 0 8px;}
+
+.regle{display:flex;gap:14px;border:2px solid var(--gris-ligne);border-radius:14px;padding:14px;margin-bottom:12px;}
+.pastille{flex:0 0 42px;height:42px;border-radius:50%;color:var(--blanc);font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:19px;display:flex;align-items:center;justify-content:center;}
+.p-bleu{background:var(--bleu);}.p-orange{background:var(--orange);}.p-vert{background:var(--vert);}.p-violet{background:var(--violet);}.p-teal{background:var(--teal);}
+.regle-corps{flex:1;min-width:0;}
+.regle h4{font-size:17px;margin:4px 0 6px;}
+.regle p{font-size:16px;margin:0 0 8px;}
+.regle p:last-child{margin-bottom:0;}
+.piege{font-size:15px;background:var(--gris-clair);border-left:4px solid var(--orange);padding:8px 10px;margin:0;}
+.piege b{font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:13px;letter-spacing:.6px;color:var(--orange);}
+
+.onglets{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px;}
+.onglets button{font-family:"Oswald",Arial,sans-serif;font-weight:500;font-size:13px;letter-spacing:.6px;text-transform:uppercase;background:var(--blanc);color:var(--noir);border:2px solid var(--noir);border-radius:8px;padding:7px 12px;cursor:pointer;}
+.onglets button[aria-selected="true"]{background:var(--noir);color:var(--blanc);}
+.onglets button:focus-visible{outline:3px solid var(--rouge);outline-offset:2px;}
+.panneau[hidden]{display:none;}
+
+.bloc{border:2px solid var(--gris-ligne);border-radius:14px;overflow:hidden;margin:0 0 16px;}
+.bloc-tete{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--gris-clair);padding:10px 12px;border-bottom:2px solid var(--gris-ligne);}
+.bloc-tete h4{margin:0;font-size:15px;}
+.copier{font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:12px;letter-spacing:.8px;text-transform:uppercase;background:var(--rouge);color:var(--blanc);border:none;border-radius:6px;padding:7px 12px;cursor:pointer;white-space:nowrap;}
+.copier.ok{background:var(--vert);}
+.copier:focus-visible{outline:3px solid var(--noir);outline-offset:2px;}
+pre{margin:0;padding:14px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px;line-height:1.5;white-space:pre-wrap;word-wrap:break-word;}
+.badge{display:inline-block;background:var(--gris);color:var(--noir);border-radius:5px;font-family:"Oswald",Arial,sans-serif;font-size:11.5px;letter-spacing:.7px;text-transform:uppercase;padding:3px 8px;margin:0 6px 6px 0;}
+
+.tableau{width:100%;border-collapse:collapse;font-size:15px;margin:0 0 18px;}
+.tableau th,.tableau td{border:1px solid var(--gris-ligne);padding:8px 10px;text-align:left;vertical-align:top;}
+.tableau th{background:var(--noir);color:var(--blanc);font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:13px;letter-spacing:.5px;}
+.tableau tr:nth-child(even) td{background:var(--gris-clair);}
+
+.controle{display:flex;gap:12px;border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;margin-bottom:10px;}
+.controle.fait{border-color:var(--vert);background:#F3FBF6;}
+.controle input{width:22px;height:22px;accent-color:var(--vert);cursor:pointer;flex:0 0 22px;margin-top:2px;}
+.controle h4{margin:0 0 4px;font-size:16px;}
+.controle p{margin:0;font-size:15.5px;}
+.progression{display:flex;align-items:center;gap:12px;margin:0 0 18px;border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;}
+.jauge{flex:1;height:12px;background:var(--gris-ligne);border-radius:999px;overflow:hidden;}
+.jauge span{display:block;height:100%;width:0;background:var(--rouge);transition:width .25s ease;}
+.compteur{font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:16px;white-space:nowrap;}
+
+.zone-rouge{border:3px solid var(--rouge);border-radius:14px;padding:16px 18px;margin:18px 0;}
+.zone-rouge h3{margin-top:0;color:var(--rouge);}
+.interdit{list-style:none;padding:0;margin:0;}
+.interdit li{padding-left:26px;position:relative;margin-bottom:8px;}
+.interdit li::before{content:"\00d7";position:absolute;left:0;top:-2px;color:var(--rouge);font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:22px;line-height:1;}
+
+.banniere{background:var(--rouge);color:var(--blanc);border-radius:14px;padding:18px 20px;margin:26px 0;}
+.banniere p{margin:0;font-family:"Oswald",Arial,sans-serif;font-size:19px;line-height:1.25;text-transform:uppercase;}
+.banniere small{display:block;font-family:"Fira Sans Condensed",Arial,sans-serif;text-transform:none;font-size:15px;margin-top:8px;opacity:.95;}
+
+details{border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;margin-bottom:10px;}
+details[open]{border-color:var(--noir);}
+summary{cursor:pointer;font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:16px;text-transform:uppercase;letter-spacing:.3px;}
+summary::-webkit-details-marker{display:none;}
+summary::before{content:"+ ";color:var(--rouge);font-weight:700;}
+details[open] summary::before{content:"\2212 ";}
+details p{margin:10px 0 0;font-size:16px;}
+
+footer{border-top:4px solid var(--noir);margin-top:44px;padding-top:18px;font-size:14px;color:var(--gris-texte);}
+footer strong{color:var(--noir);}
+
+@media (max-width:520px){
+  body{font-size:16px;}h1{font-size:27px;}section > h2{font-size:21px;}
+  .tableau{font-size:14px;}pre{font-size:12.5px;}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none !important;scroll-behavior:auto !important;}}
+</style>
+</head>
+<body>
+<div class="page">
+
+<header>
+  <span class="eyebrow">Ressource compagnon · L'IA Minute du Médecin</span>
+  <h1>Ce que dit la profession : <mark>la boussole de l'Ordre</mark></h1>
+  <p class="sous-titre">Le livre blanc de 2018 décrypté, les recommandations qui ont le mieux vieilli, ce qu'il n'avait pas vu venir, et la boussole en sept questions à vous poser avant chaque nouvel usage.</p>
+  <div class="trait"></div>
+  <p class="meta">Mise à jour : 5 août 2026.</p>
+</header>
+
+<div class="flash">
+  <h2>Le document, en trois repères exacts</h2>
+  <ul>
+    <li><strong>Janvier 2018 : « Médecins et patients dans le monde des data, des algorithmes et de l'intelligence artificielle ».</strong> Le Conseil national de l'Ordre des médecins publie son livre blanc et ses 33 recommandations, coordonné par le Dr Jacques Lucas, alors délégué général au numérique, et le Pr Serge Uzan. ChatGPT n'existe pas, le règlement européen non plus : le texte précède de quatre ans l'IA générative grand public.</li>
+    <li><strong>Ce n'est ni une norme ni une obligation.</strong> C'est une prise de position déontologique : une boussole, pas un code. Elle n'a été ni abrogée ni remplacée : la HAS (méthode A.V.E.C., octobre 2025) et l'Académie nationale de médecine (rapport sur la responsabilité, octobre 2025) ont pris le relais sur les volets pratiques et juridiques.</li>
+    <li><strong>Son fil rouge n'a pas bougé :</strong> l'IA au service de la relation de soin, jamais l'inverse. La recommandation première parle d'« une personne et une société libres et non asservies par les géants technologiques ». Pas de performance, pas de conformité : la liberté du patient et du médecin comme socle.</li>
+  </ul>
+</div>
+
+<nav aria-label="Sommaire">
+  <button type="button" data-cible="vieilli">Ce qui a le mieux vieilli</button>
+  <button type="button" data-cible="pasvu">Ce qu'il n'avait pas vu</button>
+  <button type="button" data-cible="apres">Qui a pris le relais</button>
+  <button type="button" data-cible="boussole">La boussole en 7 questions</button>
+  <button type="button" data-cible="faq">Questions</button>
+  <button type="button" data-cible="sources">Sources</button>
+</nav>
+
+<section id="vieilli">
+  <h2>Les recommandations qui ont le mieux vieilli</h2>
+  <p class="chapeau">Relire un texte de 2018 en 2026 est un exercice cruel pour la plupart des publications techniques. Celui-ci s'en sort remarquablement, parce qu'il parle de principes, pas d'outils.</p>
+
+  <div class="regle">
+    <div class="pastille p-bleu">1</div>
+    <div class="regle-corps">
+      <h4>Le refus de la décision aveugle</h4>
+      <p>Le texte écarte d'emblée une illusion : la médecine « ne pourra jamais s'en remettre aveuglément à des décisions prises par des algorithmes dénués de nuances, de compassion et d'empathie ». Huit ans plus tard, c'est devenu le droit positif : la garantie humaine de l'article L.4001-3 et la supervision exigée par le règlement européen disent la même chose en langage juridique.</p>
+    </div>
+  </div>
+
+  <div class="regle">
+    <div class="pastille p-orange">2</div>
+    <div class="regle-corps">
+      <h4>L'information du patient</h4>
+      <p>Le livre blanc plaidait déjà pour que le patient sache quand un traitement algorithmique intervient dans sa prise en charge. L'Académie nationale de médecine en a fait en 2025 une obligation qualifiée d'absolue, avec traçabilité. Le principe de 2018 est devenu la règle de 2025.</p>
+    </div>
+  </div>
+
+  <div class="regle">
+    <div class="pastille p-vert">3</div>
+    <div class="regle-corps">
+      <h4>La formation des médecins au numérique</h4>
+      <p>Le texte réclamait l'entrée du numérique et de l'IA dans la formation initiale et continue. C'est aujourd'hui une exigence réglementaire : depuis février 2025, les organisations qui déploient des outils d'IA doivent s'assurer que leurs utilisateurs en maîtrisent le fonctionnement et les limites.</p>
+    </div>
+  </div>
+
+  <div class="regle">
+    <div class="pastille p-violet">4</div>
+    <div class="regle-corps">
+      <h4>La souveraineté sur les données de santé</h4>
+      <p>La méfiance de 2018 envers la captation des données par les grandes plateformes annonçait les exigences actuelles : certification pour l'hébergement des données de santé, localisation européenne, et depuis 2026 un renforcement des obligations de souveraineté et de transparence contractuelle.</p>
+    </div>
+  </div>
+</section>
+
+<section id="pasvu">
+  <h2>Ce que le livre blanc n'avait pas vu venir</h2>
+  <p class="chapeau">Le relever n'est pas lui faire injure : personne ne l'avait vu. C'est un rappel utile sur la valeur des prédictions dans ce domaine.</p>
+
+  <table class="tableau">
+    <thead><tr><th>L'angle mort de 2018</th><th>Ce qui s'est réellement passé</th></tr></thead>
+    <tbody>
+      <tr><td>Le texte raisonne sur des algorithmes spécialisés (aide au diagnostic, imagerie, données massives)</td><td>La rupture est venue d'ailleurs : des modèles généralistes de langage, utilisables par n'importe qui pour n'importe quelle tâche, à partir de fin 2022</td></tr>
+      <tr><td>L'usage envisagé passe par des dispositifs institutionnels, validés, intégrés aux systèmes de santé</td><td>L'adoption réelle a été individuelle et silencieuse : des médecins ouvrant un assistant grand public entre deux consultations, sans cadre ni formation</td></tr>
+      <tr><td>Le risque central identifié : la captation des données par les plateformes</td><td>Il demeure, mais s'y est ajouté un risque que personne n'anticipait : l'hallucination, une machine qui invente avec assurance</td></tr>
+      <tr><td>L'horizon implicite : une évolution graduelle, pilotée par les institutions</td><td>Quatre ans de statu quo, puis une accélération brutale que ni les facultés ni les autorités n'ont précédée</td></tr>
+    </tbody>
+  </table>
+
+  <p><strong>La leçon à en tirer :</strong> les principes vieillissent bien, les prédictions techniques mal. C'est exactement pourquoi ce livre s'appuie sur des méthodes transposables plutôt que sur des outils datés.</p>
+</section>
+
+<section id="apres">
+  <h2>Qui a pris le relais depuis</h2>
+  <p class="chapeau">Trois textes de référence complètent aujourd'hui la boussole de 2018. Les trois sont détaillés ailleurs dans le livre.</p>
+
+  <table class="tableau">
+    <thead><tr><th>Texte</th><th>Ce qu'il apporte</th></tr></thead>
+    <tbody>
+      <tr><td><strong>HAS, méthode A.V.E.C.</strong> (30 octobre 2025)</td><td>Le mode d'emploi pratique de l'IA générative pour les professionnels : apprendre, vérifier, estimer, communiquer. Le pendant opérationnel des principes de l'Ordre.</td></tr>
+      <tr><td><strong>Académie nationale de médecine</strong>, rapport 25-12 (7 octobre 2025)</td><td>Le volet responsabilité : les règles ne changent pas, la preuve se déplace, l'information du patient devient une obligation absolue et tracée.</td></tr>
+      <tr><td><strong>Règlement (UE) 2024/1689</strong></td><td>Le cadre juridique contraignant, par échéances de 2025 à 2027 : transparence, supervision humaine, maîtrise des outils par leurs utilisateurs.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="boussole">
+  <h2>La boussole en sept questions</h2>
+  <p class="chapeau">La synthèse actionnable de l'esprit du livre blanc, réécrite pour l'ère générative. À vous poser avant chaque nouvel usage : sept oui valent un feu vert déontologique.</p>
+
+  <div class="progression">
+    <div class="jauge"><span id="jauge-barre"></span></div>
+    <div class="compteur" id="jauge-compteur">0 / 7</div>
+  </div>
+
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>1. Cet usage sert-il la relation de soin ?</h4>
+    <p>Du temps rendu au patient, une explication plus claire, un accès plus simple, et non un écran de plus entre vous et lui.</p></div>
+  </div>
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>2. Le patient peut-il le savoir ?</h4>
+    <p>Si vous seriez gêné de dire que l'IA est intervenue, la question est déjà tranchée.</p></div>
+  </div>
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>3. Est-ce que je reste le décideur ?</h4>
+    <p>La sortie est une proposition que vous évaluez, jamais une décision que vous enregistrez.</p></div>
+  </div>
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>4. Le secret est-il intact ?</h4>
+    <p>Aucune donnée permettant de reconnaître une personne ne transite par un outil non prévu pour.</p></div>
+  </div>
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>5. Suis-je capable d'expliquer ce que fait l'outil ?</h4>
+    <p>Pas son architecture : son rôle, ses limites, ses erreurs typiques. C'est la maîtrise exigée depuis 2025.</p></div>
+  </div>
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>6. Ma liberté professionnelle est-elle préservée ?</h4>
+    <p>Pas de dépendance à un outil unique, réversibilité des données, capacité d'en changer.</p></div>
+  </div>
+  <div class="controle" data-controle>
+    <input type="checkbox">
+    <div><h4>7. Est-ce que je saurais l'assumer devant un confrère ?</h4>
+    <p>Le test déontologique le plus ancien et le plus fiable, et il fonctionne aussi pour l'IA.</p></div>
+  </div>
+
+  <div class="banniere">
+    <p>La technologie au service de la relation de soin. Jamais l'inverse.
+    <small>C'est la phrase de 2018 qui n'a pas pris une ride, et celle qui départage encore aujourd'hui les bons usages des mauvais.</small></p>
+  </div>
+</section>
+
+<section id="faq">
+  <h2>Questions fréquentes</h2>
+  <details>
+    <summary>Le livre blanc m'oblige-t-il à quelque chose ?</summary>
+    <p>Non. C'est une prise de position de l'institution ordinale, pas une norme opposable. Mais ses principes ont largement infusé dans les textes qui, eux, obligent : garantie humaine, information du patient, maîtrise des outils. Le lire, c'est comprendre d'où viennent vos obligations actuelles.</p>
+  </details>
+  <details>
+    <summary>Où le trouver ?</summary>
+    <p>En libre accès sur le site du Conseil national de l'Ordre des médecins, rubrique publications. La lecture des 33 recommandations prend une demi-heure et vaut la plupart des conférences sur le sujet.</p>
+  </details>
+  <details>
+    <summary>L'Ordre a-t-il publié une mise à jour depuis l'IA générative ?</summary>
+    <p>L'institution s'exprime régulièrement (communiqués, auditions, contributions), sans avoir republié de livre blanc d'ampleur équivalente à ce jour. Les repères pratiques récents viennent de la HAS et de l'Académie. Vérifiez le site de l'Ordre au moment où vous lisez : cette page est révisée, pas quotidiennement.</p>
+  </details>
+  <details>
+    <summary>Que faire si mon conseil départemental me questionne sur mon usage de l'IA ?</summary>
+    <p>Répondez avec vos traces : information des patients, registre de vos outils, règles internes écrites. C'est exactement ce que les pages RGPD et Responsabilité du livre vous font constituer, et un usage documenté se défend toujours mieux qu'une conviction.</p>
+  </details>
+</section>
+
+<section id="sources">
+  <h2>Sources</h2>
+  <table class="tableau">
+    <thead><tr><th>Élément</th><th>Source</th></tr></thead>
+    <tbody>
+      <tr><td>Livre blanc « Médecins et patients dans le monde des data, des algorithmes et de l'intelligence artificielle », 33 recommandations, janvier 2018, coordination Dr Jacques Lucas et Pr Serge Uzan</td><td>Conseil national de l'Ordre des médecins, publication officielle</td></tr>
+      <tr><td>Citations : « une personne et une société libres… » et refus des décisions algorithmiques « dénuées de nuances, de compassion et d'empathie »</td><td>Livre blanc CNOM 2018 ; à vérifier dans le texte intégral avant toute citation publique</td></tr>
+      <tr><td>Garantie humaine, information du patient, explicabilité</td><td>Code de la santé publique, article L.4001-3 (loi de bioéthique du 2 août 2021)</td></tr>
+      <tr><td>Obligation absolue d'informer le patient, avec traçabilité</td><td>Académie nationale de médecine, rapport 25-12, adopté le 7 octobre 2025</td></tr>
+      <tr><td>Méthode A.V.E.C.</td><td>Haute Autorité de santé, 30 octobre 2025</td></tr>
+      <tr><td>Maîtrise des outils par les utilisateurs (février 2025) et calendrier d'application</td><td>Règlement (UE) 2024/1689</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<footer>
+  <p><strong>L'IA Minute du Médecin</strong>, Dr Guillaume Zagury et Samuel De Queiroz, Éditions Medicilline.</p>
+  <p>Ressource compagnon de la double page consacrée à la position de la profession. Cette page propose une lecture pédagogique du livre blanc ; le texte intégral publié par l'Ordre reste la seule référence citée en contexte officiel.</p>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var chips = document.querySelectorAll("nav button[data-cible]");
+  Array.prototype.forEach.call(chips, function(btn){
+    btn.addEventListener("click", function(){
+      var cible = document.getElementById(btn.getAttribute("data-cible"));
+      if(cible){ cible.scrollIntoView({ behavior:"smooth", block:"start" }); }
+    });
+  });
+
+  var onglets = document.querySelectorAll(".onglets button[data-panneau]");
+  Array.prototype.forEach.call(onglets, function(btn){
+    btn.addEventListener("click", function(){
+      Array.prototype.forEach.call(onglets, function(autre){
+        autre.setAttribute("aria-selected", autre === btn ? "true" : "false");
+        var p = document.getElementById(autre.getAttribute("data-panneau"));
+        if(p){ p.hidden = (autre !== btn); }
+      });
+    });
+  });
+
+  var controles = document.querySelectorAll("[data-controle]");
+  var barre = document.getElementById("jauge-barre");
+  var compteur = document.getElementById("jauge-compteur");
+  var total = controles.length;
+
+  function maj(){
+    if(!barre || !compteur || !total){ return; }
+    var faits = 0;
+    Array.prototype.forEach.call(controles, function(c){
+      var box = c.querySelector("input[type=checkbox]");
+      if(box && box.checked){ faits++; c.classList.add("fait"); }
+      else { c.classList.remove("fait"); }
+    });
+    barre.style.width = (faits/total*100) + "%";
+    barre.style.background = (faits === total) ? "#27AE60" : "#DC322F";
+    compteur.textContent = faits + " / " + total;
+  }
+
+  Array.prototype.forEach.call(controles, function(c){
+    var box = c.querySelector("input[type=checkbox]");
+    if(box){ box.addEventListener("change", maj); }
+  });
+  maj();
+
+  var boutons = document.querySelectorAll(".copier");
+  Array.prototype.forEach.call(boutons, function(btn){
+    btn.addEventListener("click", function(){
+      var bloc = btn.closest(".bloc");
+      var pre = bloc ? bloc.querySelector("pre") : null;
+      if(!pre){ return; }
+      var texte = pre.textContent;
+      var fini = function(){
+        btn.textContent = "Copié";
+        btn.classList.add("ok");
+        setTimeout(function(){ btn.textContent = "Copier"; btn.classList.remove("ok"); }, 1800);
+      };
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(texte).then(fini, function(){ secours(texte, fini); });
+      } else { secours(texte, fini); }
+    });
+  });
+
+  function secours(texte, fini){
+    var zone = document.createElement("textarea");
+    zone.value = texte;
+    zone.setAttribute("readonly","");
+    zone.style.position = "absolute";
+    zone.style.left = "-9999px";
+    document.body.appendChild(zone);
+    zone.select();
+    try { document.execCommand("copy"); fini(); } catch(e){}
+    document.body.removeChild(zone);
+  }
+})();
+</script>
+</body>
+</html>

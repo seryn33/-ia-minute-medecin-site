@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projets et Skills de Claude · L'IA Minute du Médecin</title>
+<meta name="description" content="Ressource compagnon du livre L'IA Minute du Médecin : le classeur et le savoir-faire : monter un Projet en dix minutes, créer sa première Skill, et les instructions à copier pour le cabinet.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Fira+Sans+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --rouge:#DC322F;--noir:#1A1A1A;--blanc:#FFFFFF;--jaune:#FFD700;
+  --bleu:#3498DB;--orange:#F39C12;--vert:#27AE60;--violet:#8E44AD;--teal:#1ABC9C;
+  --gris:#BDC3C7;--gris-clair:#F4F5F6;--gris-ligne:#E1E4E6;--gris-texte:#5A6268;
+}
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{margin:0;background:var(--blanc);color:var(--noir);font-family:"Fira Sans Condensed","Roboto Condensed",Arial,sans-serif;font-size:17px;line-height:1.5;}
+.page{max-width:720px;margin:0 auto;padding:0 18px 80px;}
+h1,h2,h3,h4{font-family:"Oswald","Arial Narrow",Arial,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.2px;}
+p{margin:0 0 14px;}
+
+header{padding:26px 0 8px;}
+.eyebrow{display:inline-block;font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:var(--blanc);background:var(--noir);padding:5px 11px;}
+h1{font-size:33px;line-height:1.06;margin:14px 0 0;}
+h1 mark{background:var(--jaune);color:var(--noir);padding:0 5px;}
+.sous-titre{font-family:"Fira Sans Condensed",Arial,sans-serif;font-style:italic;font-weight:600;color:var(--rouge);font-size:19px;margin:10px 0 0;text-transform:none;}
+.trait{height:4px;background:var(--rouge);margin:16px 0 22px;}
+.meta{font-size:14px;color:var(--gris-texte);margin:0 0 22px;}
+
+.flash{border:3px solid var(--rouge);border-radius:14px;padding:16px 18px;margin:0 0 26px;}
+.flash h2{font-size:19px;margin:0 0 10px;color:var(--rouge);}
+.flash ul{margin:0;padding-left:20px;}
+.flash li{margin-bottom:9px;}
+
+nav{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 34px;}
+nav button{font-family:"Oswald",Arial,sans-serif;font-weight:500;font-size:13px;letter-spacing:.6px;text-transform:uppercase;background:var(--gris-clair);color:var(--noir);border:2px solid var(--gris-ligne);border-radius:999px;padding:7px 13px;cursor:pointer;}
+nav button:hover{background:var(--noir);color:var(--blanc);border-color:var(--noir);}
+nav button:focus-visible{outline:3px solid var(--rouge);outline-offset:2px;}
+
+section{border-top:2px solid var(--gris-ligne);padding-top:26px;margin-top:34px;scroll-margin-top:14px;}
+section > h2{font-size:25px;margin:0 0 4px;line-height:1.1;}
+.chapeau{color:var(--gris-texte);font-size:16px;margin:0 0 20px;}
+h3{font-size:19px;margin:26px 0 8px;}
+
+.regle{display:flex;gap:14px;border:2px solid var(--gris-ligne);border-radius:14px;padding:14px;margin-bottom:12px;}
+.pastille{flex:0 0 42px;height:42px;border-radius:50%;color:var(--blanc);font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:19px;display:flex;align-items:center;justify-content:center;}
+.p-bleu{background:var(--bleu);}.p-orange{background:var(--orange);}.p-vert{background:var(--vert);}.p-violet{background:var(--violet);}.p-teal{background:var(--teal);}
+.regle-corps{flex:1;min-width:0;}
+.regle h4{font-size:17px;margin:4px 0 6px;}
+.regle p{font-size:16px;margin:0 0 8px;}
+.regle p:last-child{margin-bottom:0;}
+.piege{font-size:15px;background:var(--gris-clair);border-left:4px solid var(--orange);padding:8px 10px;margin:0;}
+.piege b{font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:13px;letter-spacing:.6px;color:var(--orange);}
+
+.onglets{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px;}
+.onglets button{font-family:"Oswald",Arial,sans-serif;font-weight:500;font-size:13px;letter-spacing:.6px;text-transform:uppercase;background:var(--blanc);color:var(--noir);border:2px solid var(--noir);border-radius:8px;padding:7px 12px;cursor:pointer;}
+.onglets button[aria-selected="true"]{background:var(--noir);color:var(--blanc);}
+.onglets button:focus-visible{outline:3px solid var(--rouge);outline-offset:2px;}
+.panneau[hidden]{display:none;}
+
+.bloc{border:2px solid var(--gris-ligne);border-radius:14px;overflow:hidden;margin:0 0 16px;}
+.bloc-tete{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--gris-clair);padding:10px 12px;border-bottom:2px solid var(--gris-ligne);}
+.bloc-tete h4{margin:0;font-size:15px;}
+.copier{font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:12px;letter-spacing:.8px;text-transform:uppercase;background:var(--rouge);color:var(--blanc);border:none;border-radius:6px;padding:7px 12px;cursor:pointer;white-space:nowrap;}
+.copier.ok{background:var(--vert);}
+.copier:focus-visible{outline:3px solid var(--noir);outline-offset:2px;}
+pre{margin:0;padding:14px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px;line-height:1.5;white-space:pre-wrap;word-wrap:break-word;}
+.badge{display:inline-block;background:var(--gris);color:var(--noir);border-radius:5px;font-family:"Oswald",Arial,sans-serif;font-size:11.5px;letter-spacing:.7px;text-transform:uppercase;padding:3px 8px;margin:0 6px 6px 0;}
+
+.tableau{width:100%;border-collapse:collapse;font-size:15px;margin:0 0 18px;}
+.tableau th,.tableau td{border:1px solid var(--gris-ligne);padding:8px 10px;text-align:left;vertical-align:top;}
+.tableau th{background:var(--noir);color:var(--blanc);font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:13px;letter-spacing:.5px;}
+.tableau tr:nth-child(even) td{background:var(--gris-clair);}
+
+.controle{display:flex;gap:12px;border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;margin-bottom:10px;}
+.controle.fait{border-color:var(--vert);background:#F3FBF6;}
+.controle input{width:22px;height:22px;accent-color:var(--vert);cursor:pointer;flex:0 0 22px;margin-top:2px;}
+.controle h4{margin:0 0 4px;font-size:16px;}
+.controle p{margin:0;font-size:15.5px;}
+.progression{display:flex;align-items:center;gap:12px;margin:0 0 18px;border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;}
+.jauge{flex:1;height:12px;background:var(--gris-ligne);border-radius:999px;overflow:hidden;}
+.jauge span{display:block;height:100%;width:0;background:var(--rouge);transition:width .25s ease;}
+.compteur{font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:16px;white-space:nowrap;}
+
+.zone-rouge{border:3px solid var(--rouge);border-radius:14px;padding:16px 18px;margin:18px 0;}
+.zone-rouge h3{margin-top:0;color:var(--rouge);}
+.interdit{list-style:none;padding:0;margin:0;}
+.interdit li{padding-left:26px;position:relative;margin-bottom:8px;}
+.interdit li::before{content:"\00d7";position:absolute;left:0;top:-2px;color:var(--rouge);font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:22px;line-height:1;}
+
+.banniere{background:var(--rouge);color:var(--blanc);border-radius:14px;padding:18px 20px;margin:26px 0;}
+.banniere p{margin:0;font-family:"Oswald",Arial,sans-serif;font-size:19px;line-height:1.25;text-transform:uppercase;}
+.banniere small{display:block;font-family:"Fira Sans Condensed",Arial,sans-serif;text-transform:none;font-size:15px;margin-top:8px;opacity:.95;}
+
+details{border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;margin-bottom:10px;}
+details[open]{border-color:var(--noir);}
+summary{cursor:pointer;font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:16px;text-transform:uppercase;letter-spacing:.3px;}
+summary::-webkit-details-marker{display:none;}
+summary::before{content:"+ ";color:var(--rouge);font-weight:700;}
+details[open] summary::before{content:"\2212 ";}
+details p{margin:10px 0 0;font-size:16px;}
+
+footer{border-top:4px solid var(--noir);margin-top:44px;padding-top:18px;font-size:14px;color:var(--gris-texte);}
+footer strong{color:var(--noir);}
+
+@media (max-width:520px){
+  body{font-size:16px;}h1{font-size:27px;}section > h2{font-size:21px;}
+  .tableau{font-size:14px;}pre{font-size:12.5px;}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none !important;scroll-behavior:auto !important;}}
+</style>
+</head>
+<body>
+<div class="page">
+
+<header>
+  <span class="eyebrow">Ressource compagnon · L'IA Minute du Médecin</span>
+  <h1>Projets et Skills : <mark>Claude à votre main</mark></h1>
+  <p class="sous-titre">Le Projet retient votre contexte, la Skill retient votre geste. Dix minutes de réglage, et vous ne réexpliquez plus jamais deux fois la même chose.</p>
+  <div class="trait"></div>
+  <p class="meta">Mise à jour : 5 août 2026. Les interfaces évoluent vite : les chemins d'écran peuvent bouger, les principes restent.</p>
+</header>
+
+<div class="flash">
+  <h2>Trois choses à comprendre avant de cliquer</h2>
+  <ul>
+    <li><strong>Un Projet, c'est un classeur.</strong> Des instructions permanentes, des documents de référence, et toutes les conversations d'un même thème au même endroit. Ce que vous y déposez une fois (votre spécialité, vos gabarits, vos règles) vaut pour toutes les conversations du classeur. Disponible sur toutes les offres, y compris gratuite.</li>
+    <li><strong>Une Skill, c'est un savoir-faire.</strong> Une procédure que Claude charge de lui-même quand la tâche s'y prête : « comment je rédige un courrier de spécialiste », « comment je structure un compte rendu ». Lancées fin 2025, elles sont réservées aux offres payantes.</li>
+    <li><strong>L'ordre d'installation compte.</strong> Un Projet d'abord : dix minutes, gain immédiat. Des Skills ensuite, quand un geste devient répétitif. Et la même règle que partout dans ce livre : aucune donnée de patient, ni dans les instructions, ni dans les documents.</li>
+  </ul>
+</div>
+
+<nav aria-label="Sommaire">
+  <button type="button" data-cible="comprendre">Comprendre</button>
+  <button type="button" data-cible="projet">Créer un Projet</button>
+  <button type="button" data-cible="skill">Créer une Skill</button>
+  <button type="button" data-cible="idees">Idées cabinet</button>
+  <button type="button" data-cible="faq">Questions</button>
+  <button type="button" data-cible="sources">Sources</button>
+</nav>
+
+<section id="comprendre">
+  <h2>Conversation, Projet, Skill : qui fait quoi</h2>
+  <table class="tableau">
+    <thead><tr><th></th><th>Ce que c'est</th><th>Exemple au cabinet</th></tr></thead>
+    <tbody>
+      <tr><td><b>Conversation simple</b></td><td>Un échange qui repart de zéro à chaque fois : tout le contexte tient dans votre prompt</td><td>Une question ponctuelle, un texte à reformuler</td></tr>
+      <tr><td><b>Projet</b></td><td>Un espace permanent : instructions + documents + historique des conversations du thème</td><td>« Courriers du cabinet » : votre style, vos gabarits, vos correspondants habituels</td></tr>
+      <tr><td><b>Skill</b></td><td>Une procédure réutilisable que Claude active quand la tâche correspond, dans n'importe quelle conversation</td><td>« Compte rendu structuré » : votre plan type, vos rubriques, vos tournures</td></tr>
+    </tbody>
+  </table>
+  <p>La parenté avec les <b>Custom GPT</b> (page dédiée du livre) et les <b>Gems</b> de Gemini est directe : même idée (capitaliser vos consignes) avec une différence d'architecture. Le Projet garde en plus vos documents et vos conversations ensemble ; la Skill, elle, voyage : une fois créée, elle s'applique partout où la tâche la réclame.</p>
+</section>
+
+<section id="projet">
+  <h2>Votre premier Projet, en trois temps</h2>
+  <p class="chapeau">Sur claude.ai, connecté à votre compte. Comptez dix minutes, une fois pour toutes.</p>
+
+  <div class="regle">
+    <div class="pastille p-bleu">1</div>
+    <div class="regle-corps">
+      <h4>Créez et nommez par usage</h4>
+      <p>Menu « Projets », puis « Nouveau projet ». Un nom d'usage, pas de poésie : « Courriers du cabinet », « Protocoles », « Préparation DPC ». Un projet = un thème ; trois projets bien découpés valent mieux qu'un fourre-tout.</p>
+    </div>
+  </div>
+
+  <div class="regle">
+    <div class="pastille p-orange">2</div>
+    <div class="regle-corps">
+      <h4>Écrivez les instructions permanentes</h4>
+      <p>C'est le cœur du réglage : qui vous êtes, pour qui vous écrivez, vos règles non négociables. Le bloc ci-dessous est un point de départ éprouvé : adaptez la spécialité et le style, puis collez-le dans le champ « Instructions » du projet.</p>
+    </div>
+  </div>
+
+  <div class="regle">
+    <div class="pastille p-vert">3</div>
+    <div class="regle-corps">
+      <h4>Déposez les documents de référence</h4>
+      <p>Deux ou trois gabarits de courriers <b>anonymisés</b>, vos protocoles maison, les recommandations que vous citez sans cesse. Chaque conversation du projet s'appuiera dessus sans que vous les re-téléversiez. Relisez chaque document avant dépôt : ce qui entre dans le classeur y reste.</p>
+    </div>
+  </div>
+
+  <div class="bloc">
+    <div class="bloc-tete"><h4>Instructions permanentes type : projet « Courriers du cabinet »</h4><button type="button" class="copier">Copier</button></div>
+    <pre>Tu assistes un médecin [spécialité] exerçant en France, pour la rédaction de ses courriers professionnels.
+
+Règles permanentes :
+1. Vouvoiement, ton confraternel sobre, sans emphase.
+2. Médicaments en DCI. Aucune abréviation non standard.
+3. Structure par défaut : motif d'adressage, éléments cliniques, question posée, formule de courtoisie courte.
+4. Longueur : une page maximum, phrases courtes.
+5. Je te donne toujours des situations anonymisées ; si un élément ressemble à une donnée identifiante, signale-le avant de rédiger.
+6. Si une information clinique te manque pour conclure, pose la question au lieu d'inventer.
+7. Appuie-toi sur les gabarits fournis dans ce projet : même plan, mêmes tournures.</pre>
+  </div>
+</section>
+
+<section id="skill">
+  <h2>Votre première Skill, en trois temps</h2>
+  <p class="chapeau">Offres payantes. Une Skill se rédige comme une procédure qualité : quand l'utiliser, comment faire, à quoi ressemble le résultat.</p>
+
+  <div class="regle">
+    <div class="pastille p-violet">1</div>
+    <div class="regle-corps">
+      <h4>Activez les Skills dans les réglages</h4>
+      <p>Paramètres du compte, rubrique fonctionnalités : activez les Skills, puis « Créer une skill ». Claude propose de vous accompagner dans la rédaction : acceptez, c'est le plus court chemin.</p>
+    </div>
+  </div>
+
+  <div class="regle">
+    <div class="pastille p-teal">2</div>
+    <div class="regle-corps">
+      <h4>Décrivez le savoir-faire, pas le souhait</h4>
+      <p>Trois ingrédients : le déclencheur (« quand on me demande un compte rendu de consultation »), la procédure pas à pas, le gabarit du résultat. Le bloc ci-dessous montre la structure : c'est votre façon de faire, mise en fiche une fois pour toutes.</p>
+    </div>
+  </div>
+
+  <div class="regle">
+    <div class="pastille p-bleu">3</div>
+    <div class="regle-corps">
+      <h4>Testez sur trois cas réels, puis corrigez</h4>
+      <p>Trois situations anonymisées de votre semaine passée. Comparez au résultat que vous auriez produit ; corrigez la Skill, pas le résultat. Deux itérations suffisent en général pour que le geste soit fidèle.</p>
+    </div>
+  </div>
+
+  <div class="bloc">
+    <div class="bloc-tete"><h4>Trame d'une Skill « Compte rendu structuré »</h4><button type="button" class="copier">Copier</button></div>
+    <pre>QUAND L'UTILISER
+Quand on me demande de transformer des notes de consultation en compte rendu.
+
+PROCÉDURE
+1. Classer les éléments fournis : motif, antécédents pertinents, examen, synthèse, conduite à tenir.
+2. Ne rien inventer : un élément absent des notes reste absent du compte rendu.
+3. Rédiger au style télégraphique médical, DCI uniquement.
+4. Terminer par la liste « À vérifier par le médecin » : tout élément incertain ou manquant.
+
+FORMAT DU RÉSULTAT
+[Motif] / [Antécédents pertinents] / [Examen] / [Synthèse] / [Conduite à tenir] / [À vérifier]</pre>
+  </div>
+</section>
+
+<section id="idees">
+  <h2>Six installations qui rapportent, côté cabinet</h2>
+  <p class="chapeau">Par ordre de retour sur investissement constaté en formation.</p>
+  <table class="tableau">
+    <thead><tr><th>Installation</th><th>Ce qu'elle règle</th></tr></thead>
+    <tbody>
+      <tr><td><b>Projet « Courriers du cabinet »</b></td><td>Le style réexpliqué à chaque courrier : adressages, réponses, certificats de complaisance refusés avec tact</td></tr>
+      <tr><td><b>Projet « Protocoles maison »</b></td><td>Vos conduites à tenir internes, interrogeables : « que dit notre protocole plaies ? »</td></tr>
+      <tr><td><b>Projet « Éducation patient »</b></td><td>Fiches et remis à votre goût : niveau de lecture, langues, mise en page, cohérents d'une fois sur l'autre</td></tr>
+      <tr><td><b>Skill « Compte rendu structuré »</b></td><td>Le plan type appliqué à toutes vos notes, avec la liste « à vérifier » systématique</td></tr>
+      <tr><td><b>Skill « Fiche patient niveau 12 ans »</b></td><td>La vulgarisation calibrée une fois : lisibilité, phrases courtes, zéro jargon</td></tr>
+      <tr><td><b>Projet « DPC et staff »</b></td><td>Vos supports de formation et bibliographies, réutilisés de session en session</td></tr>
+    </tbody>
+  </table>
+
+  <div class="zone-rouge">
+    <h3>Le cadre, en trois lignes</h3>
+    <ul class="interdit">
+      <li><b>Aucune donnée de patient</b> dans les instructions, les documents ou les conversations d'un projet : un classeur, ça se garde, raison de plus pour n'y ranger que de l'anonyme.</li>
+      <li><b>Vérifiez le réglage de confidentialité</b> : depuis fin septembre 2025, vous choisissez explicitement si vos conversations peuvent servir à améliorer les modèles. Paramètres, rubrique confidentialité : cochez en conscience.</li>
+      <li><b>Une Skill ne dispense de rien</b> : relecture et signature restent des actes médicaux. La Skill industrialise le brouillon, jamais la validation.</li>
+    </ul>
+  </div>
+
+  <div class="banniere">
+    <p>Le Projet retient le contexte, la Skill retient le geste. Vous, vous gardez la décision.
+    <small>Dix minutes de réglage pour des mois de prompts raccourcis : le meilleur rendement du livre.</small></p>
+  </div>
+</section>
+
+<section id="faq">
+  <h2>Questions fréquentes</h2>
+  <details>
+    <summary>Projet Claude, Custom GPT, Gem : lequel choisir ?</summary>
+    <p>Celui de l'écosystème où vous êtes déjà. Les trois capitalisent vos consignes ; les Projets y ajoutent le classement des conversations, les Custom GPT le partage public le plus rodé, les Gems l'intégration Google Workspace. Le livre consacre une page à chacun ; la méthode ORCF, elle, est portable partout.</p>
+  </details>
+  <details>
+    <summary>Mes documents servent-ils à entraîner les modèles ?</summary>
+    <p>C'est votre réglage qui décide : l'éditeur demande depuis septembre 2025 un choix explicite, modifiable dans les paramètres de confidentialité. Sur les offres professionnelles (Team, Enterprise), les données ne servent pas à l'entraînement par défaut. Dans tous les cas, la règle du livre prime : rien d'identifiant n'entre, donc rien d'identifiant ne peut fuir.</p>
+  </details>
+  <details>
+    <summary>Puis-je partager un Projet avec mon associé ou ma secrétaire ?</summary>
+    <p>Le partage de projets existe sur les offres d'équipe (Team et Enterprise) : mêmes instructions, mêmes documents, chacun ses conversations. Pour un cabinet de groupe, c'est le moyen d'harmoniser courriers et protocoles en une seule installation. Sur les offres individuelles, chacun reconstruit son projet : dix minutes, en copiant les mêmes instructions.</p>
+  </details>
+  <details>
+    <summary>Par où commencer si je n'ai que quinze minutes ?</summary>
+    <p>Créez le projet « Courriers du cabinet », collez les instructions type ci-dessus, déposez deux courriers anonymisés dont vous êtes satisfait, et demandez votre premier adressage. Le gain est perceptible à la première utilisation ; les Skills attendront le mois prochain.</p>
+  </details>
+</section>
+
+<section id="sources">
+  <h2>Sources</h2>
+  <table class="tableau">
+    <thead><tr><th>Élément</th><th>Source</th></tr></thead>
+    <tbody>
+      <tr><td>Projets : instructions + connaissances + conversations ; disponibles sur toutes les offres, y compris gratuite</td><td>Anthropic, documentation et grille des offres claude.com, consultées en août 2026</td></tr>
+      <tr><td>Skills (« Agent Skills ») : lancement en octobre 2025, offres payantes</td><td>Anthropic, annonce du 16 octobre 2025 ; grille des offres, août 2026</td></tr>
+      <tr><td>Choix explicite d'utilisation des conversations pour l'amélioration des modèles</td><td>Anthropic, mise à jour des conditions consommateurs, septembre 2025</td></tr>
+      <tr><td>Projets partagés sur les offres d'équipe</td><td>Anthropic, documentation Team / Enterprise</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<footer>
+  <p><strong>L'IA Minute du Médecin</strong>, Dr Guillaume Zagury et Samuel De Queiroz, Éditions Medicilline.</p>
+  <p>Ressource compagnon de la double page « Projets et Skills de Claude ». Interfaces et offres évoluent : cette page est révisée à chaque réédition, les principes de fond ne bougent pas.</p>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var chips = document.querySelectorAll("nav button[data-cible]");
+  Array.prototype.forEach.call(chips, function(btn){
+    btn.addEventListener("click", function(){
+      var cible = document.getElementById(btn.getAttribute("data-cible"));
+      if(cible){ cible.scrollIntoView({ behavior:"smooth", block:"start" }); }
+    });
+  });
+
+  var onglets = document.querySelectorAll(".onglets button[data-panneau]");
+  Array.prototype.forEach.call(onglets, function(btn){
+    btn.addEventListener("click", function(){
+      Array.prototype.forEach.call(onglets, function(autre){
+        autre.setAttribute("aria-selected", autre === btn ? "true" : "false");
+        var p = document.getElementById(autre.getAttribute("data-panneau"));
+        if(p){ p.hidden = (autre !== btn); }
+      });
+    });
+  });
+
+  var controles = document.querySelectorAll("[data-controle]");
+  var barre = document.getElementById("jauge-barre");
+  var compteur = document.getElementById("jauge-compteur");
+  var total = controles.length;
+
+  function maj(){
+    if(!barre || !compteur || !total){ return; }
+    var faits = 0;
+    Array.prototype.forEach.call(controles, function(c){
+      var box = c.querySelector("input[type=checkbox]");
+      if(box && box.checked){ faits++; c.classList.add("fait"); }
+      else { c.classList.remove("fait"); }
+    });
+    barre.style.width = (faits/total*100) + "%";
+    barre.style.background = (faits === total) ? "#27AE60" : "#DC322F";
+    compteur.textContent = faits + " / " + total;
+  }
+
+  Array.prototype.forEach.call(controles, function(c){
+    var box = c.querySelector("input[type=checkbox]");
+    if(box){ box.addEventListener("change", maj); }
+  });
+  maj();
+
+  var boutons = document.querySelectorAll(".copier");
+  Array.prototype.forEach.call(boutons, function(btn){
+    btn.addEventListener("click", function(){
+      var bloc = btn.closest(".bloc");
+      var pre = bloc ? bloc.querySelector("pre") : null;
+      if(!pre){ return; }
+      var texte = pre.textContent;
+      var fini = function(){
+        btn.textContent = "Copié";
+        btn.classList.add("ok");
+        setTimeout(function(){ btn.textContent = "Copier"; btn.classList.remove("ok"); }, 1800);
+      };
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(texte).then(fini, function(){ secours(texte, fini); });
+      } else { secours(texte, fini); }
+    });
+  });
+
+  function secours(texte, fini){
+    var zone = document.createElement("textarea");
+    zone.value = texte;
+    zone.setAttribute("readonly","");
+    zone.style.position = "absolute";
+    zone.style.left = "-9999px";
+    document.body.appendChild(zone);
+    zone.select();
+    try { document.execCommand("copy"); fini(); } catch(e){}
+    document.body.removeChild(zone);
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Workspace & Cowork : l'IA au travail · L'IA Minute du Médecin</title>
+<meta name="description" content="Ressource compagnon du livre L'IA Minute du Médecin : les agents de bureau comparés (ChatGPT / Claude), trois missions types à confier, et les garde-fous données patients.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Fira+Sans+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --rouge:#DC322F;--noir:#1A1A1A;--blanc:#FFFFFF;--jaune:#FFD700;
+  --bleu:#3498DB;--orange:#F39C12;--vert:#27AE60;--violet:#8E44AD;--teal:#1ABC9C;
+  --gris:#BDC3C7;--gris-clair:#F4F5F6;--gris-ligne:#E1E4E6;--gris-texte:#5A6268;
+}
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{margin:0;background:var(--blanc);color:var(--noir);font-family:"Fira Sans Condensed","Roboto Condensed",Arial,sans-serif;font-size:17px;line-height:1.5;}
+.page{max-width:720px;margin:0 auto;padding:0 18px 80px;}
+h1,h2,h3,h4{font-family:"Oswald","Arial Narrow",Arial,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.2px;}
+p{margin:0 0 14px;}
+
+header{padding:26px 0 8px;}
+.eyebrow{display:inline-block;font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:var(--blanc);background:var(--noir);padding:5px 11px;}
+h1{font-size:33px;line-height:1.06;margin:14px 0 0;}
+h1 mark{background:var(--jaune);color:var(--noir);padding:0 5px;}
+.sous-titre{font-family:"Fira Sans Condensed",Arial,sans-serif;font-style:italic;font-weight:600;color:var(--rouge);font-size:19px;margin:10px 0 0;text-transform:none;}
+.trait{height:4px;background:var(--rouge);margin:16px 0 22px;}
+.meta{font-size:14px;color:var(--gris-texte);margin:0 0 22px;}
+
+.flash{border:3px solid var(--rouge);border-radius:14px;padding:16px 18px;margin:0 0 26px;}
+.flash h2{font-size:19px;margin:0 0 10px;color:var(--rouge);}
+.flash ul{margin:0;padding-left:20px;}
+.flash li{margin-bottom:9px;}
+
+nav{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 34px;}
+nav button{font-family:"Oswald",Arial,sans-serif;font-weight:500;font-size:13px;letter-spacing:.6px;text-transform:uppercase;background:var(--gris-clair);color:var(--noir);border:2px solid var(--gris-ligne);border-radius:999px;padding:7px 13px;cursor:pointer;}
+nav button:hover{background:var(--noir);color:var(--blanc);border-color:var(--noir);}
+nav button:focus-visible{outline:3px solid var(--rouge);outline-offset:2px;}
+
+section{border-top:2px solid var(--gris-ligne);padding-top:26px;margin-top:34px;scroll-margin-top:14px;}
+section > h2{font-size:25px;margin:0 0 4px;line-height:1.1;}
+.chapeau{color:var(--gris-texte);font-size:16px;margin:0 0 20px;}
+h3{font-size:19px;margin:26px 0 8px;}
+
+.regle{display:flex;gap:14px;border:2px solid var(--gris-ligne);border-radius:14px;padding:14px;margin-bottom:12px;}
+.pastille{flex:0 0 42px;height:42px;border-radius:50%;color:var(--blanc);font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:19px;display:flex;align-items:center;justify-content:center;}
+.p-bleu{background:var(--bleu);}.p-orange{background:var(--orange);}.p-vert{background:var(--vert);}.p-violet{background:var(--violet);}.p-teal{background:var(--teal);}
+.regle-corps{flex:1;min-width:0;}
+.regle h4{font-size:17px;margin:4px 0 6px;}
+.regle p{font-size:16px;margin:0 0 8px;}
+.regle p:last-child{margin-bottom:0;}
+.piege{font-size:15px;background:var(--gris-clair);border-left:4px solid var(--orange);padding:8px 10px;margin:0;}
+.piege b{font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:13px;letter-spacing:.6px;color:var(--orange);}
+
+.onglets{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px;}
+.onglets button{font-family:"Oswald",Arial,sans-serif;font-weight:500;font-size:13px;letter-spacing:.6px;text-transform:uppercase;background:var(--blanc);color:var(--noir);border:2px solid var(--noir);border-radius:8px;padding:7px 12px;cursor:pointer;}
+.onglets button[aria-selected="true"]{background:var(--noir);color:var(--blanc);}
+.onglets button:focus-visible{outline:3px solid var(--rouge);outline-offset:2px;}
+.panneau[hidden]{display:none;}
+
+.bloc{border:2px solid var(--gris-ligne);border-radius:14px;overflow:hidden;margin:0 0 16px;}
+.bloc-tete{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--gris-clair);padding:10px 12px;border-bottom:2px solid var(--gris-ligne);}
+.bloc-tete h4{margin:0;font-size:15px;}
+.copier{font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:12px;letter-spacing:.8px;text-transform:uppercase;background:var(--rouge);color:var(--blanc);border:none;border-radius:6px;padding:7px 12px;cursor:pointer;white-space:nowrap;}
+.copier.ok{background:var(--vert);}
+.copier:focus-visible{outline:3px solid var(--noir);outline-offset:2px;}
+pre{margin:0;padding:14px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px;line-height:1.5;white-space:pre-wrap;word-wrap:break-word;}
+.badge{display:inline-block;background:var(--gris);color:var(--noir);border-radius:5px;font-family:"Oswald",Arial,sans-serif;font-size:11.5px;letter-spacing:.7px;text-transform:uppercase;padding:3px 8px;margin:0 6px 6px 0;}
+
+.tableau{width:100%;border-collapse:collapse;font-size:15px;margin:0 0 18px;}
+.tableau th,.tableau td{border:1px solid var(--gris-ligne);padding:8px 10px;text-align:left;vertical-align:top;}
+.tableau th{background:var(--noir);color:var(--blanc);font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:13px;letter-spacing:.5px;}
+.tableau tr:nth-child(even) td{background:var(--gris-clair);}
+
+.controle{display:flex;gap:12px;border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;margin-bottom:10px;}
+.controle.fait{border-color:var(--vert);background:#F3FBF6;}
+.controle input{width:22px;height:22px;accent-color:var(--vert);cursor:pointer;flex:0 0 22px;margin-top:2px;}
+.controle h4{margin:0 0 4px;font-size:16px;}
+.controle p{margin:0;font-size:15.5px;}
+.progression{display:flex;align-items:center;gap:12px;margin:0 0 18px;border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;}
+.jauge{flex:1;height:12px;background:var(--gris-ligne);border-radius:999px;overflow:hidden;}
+.jauge span{display:block;height:100%;width:0;background:var(--rouge);transition:width .25s ease;}
+.compteur{font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:16px;white-space:nowrap;}
+
+.zone-rouge{border:3px solid var(--rouge);border-radius:14px;padding:16px 18px;margin:18px 0;}
+.zone-rouge h3{margin-top:0;color:var(--rouge);}
+.interdit{list-style:none;padding:0;margin:0;}
+.interdit li{padding-left:26px;position:relative;margin-bottom:8px;}
+.interdit li::before{content:"\00d7";position:absolute;left:0;top:-2px;color:var(--rouge);font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:22px;line-height:1;}
+
+.banniere{background:var(--rouge);color:var(--blanc);border-radius:14px;padding:18px 20px;margin:26px 0;}
+.banniere p{margin:0;font-family:"Oswald",Arial,sans-serif;font-size:19px;line-height:1.25;text-transform:uppercase;}
+.banniere small{display:block;font-family:"Fira Sans Condensed",Arial,sans-serif;text-transform:none;font-size:15px;margin-top:8px;opacity:.95;}
+
+details{border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;margin-bottom:10px;}
+details[open]{border-color:var(--noir);}
+summary{cursor:pointer;font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:16px;text-transform:uppercase;letter-spacing:.3px;}
+summary::-webkit-details-marker{display:none;}
+summary::before{content:"+ ";color:var(--rouge);font-weight:700;}
+details[open] summary::before{content:"\2212 ";}
+details p{margin:10px 0 0;font-size:16px;}
+
+footer{border-top:4px solid var(--noir);margin-top:44px;padding-top:18px;font-size:14px;color:var(--gris-texte);}
+footer strong{color:var(--noir);}
+
+@media (max-width:520px){
+  body{font-size:16px;}h1{font-size:27px;}section > h2{font-size:21px;}
+  .tableau{font-size:14px;}pre{font-size:12.5px;}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none !important;scroll-behavior:auto !important;}}
+</style>
+</head>
+<body>
+<div class="page">
+
+<header>
+  <span class="eyebrow">Ressource compagnon · L'IA Minute du Médecin</span>
+  <h1>Workspace &amp; Cowork : <mark>l'IA au travail</mark></h1>
+  <p class="sous-titre">L'IA conversationnelle répondait ; l'IA de travail agit dans vos dossiers. Le comparatif des deux offres, les missions à confier, et les garde-fous.</p>
+  <div class="trait"></div>
+  <p class="meta">Mise à jour : 5 août 2026. Produits jeunes : les interfaces et les offres bougent vite, les principes de prudence restent.</p>
+</header>
+
+<div class="flash">
+  <h2>Trois choses à comprendre avant d'ouvrir vos dossiers</h2>
+  <ul>
+    <li><strong>L'IA sort du chat.</strong> Un agent de bureau ouvre vos dossiers, lit vos fichiers, en produit de nouveaux, enchaîne les actions. Deux offres dominent en 2026 : <b>Cowork</b> (Claude, Anthropic), lancé en préversion en janvier 2026 dans l'application de bureau, et les <b>Workspace Agents</b> de ChatGPT (OpenAI), annoncés le 22 avril 2026 pour les offres professionnelles.</li>
+    <li><strong>Le vrai sujet au cabinet, c'est l'accès.</strong> Un agent lit tout le dossier que vous lui autorisez. La parade tient en une règle : un dossier de travail dédié, sans aucune donnée de patient, et une validation avant tout envoi ou suppression.</li>
+    <li><strong>La méthode du livre s'applique telle quelle.</strong> Une mission d'agent, c'est un ORCF étendu : objectif précis, périmètre exact, format du livrable, et ce qui est interdit. Plus la mission est floue, plus le résultat l'est.</li>
+  </ul>
+</div>
+
+<nav aria-label="Sommaire">
+  <button type="button" data-cible="comprendre">Comparatif</button>
+  <button type="button" data-cible="cowork">Cowork</button>
+  <button type="button" data-cible="workspace">Workspace Agents</button>
+  <button type="button" data-cible="missions">Missions types</button>
+  <button type="button" data-cible="cadre">Le cadre</button>
+  <button type="button" data-cible="faq">Questions</button>
+  <button type="button" data-cible="sources">Sources</button>
+</nav>
+
+<section id="comprendre">
+  <h2>Les deux offres, côte à côte</h2>
+  <table class="tableau">
+    <thead><tr><th></th><th>Cowork (Claude)</th><th>Workspace Agents (ChatGPT)</th></tr></thead>
+    <tbody>
+      <tr><td><b>Où ça travaille</b></td><td>Sur votre ordinateur, dans les dossiers que vous autorisez (application de bureau Mac et Windows)</td><td>Dans le cloud, relié à vos outils : messagerie, agenda, tableurs, Slack</td></tr>
+      <tr><td><b>Ce que ça fait</b></td><td>Trie, renomme, extrait des données, synthétise, produit Word, Excel, PowerPoint</td><td>Automatise des routines complètes : rapport hebdomadaire, tri de demandes, veille programmée à heure fixe</td></tr>
+      <tr><td><b>Le garde-fou natif</b></td><td>Montre son plan avant d'agir ; n'accède qu'aux dossiers ouverts par vous</td><td>Demande votre approbation pour les actions sensibles (envois, modifications)</td></tr>
+      <tr><td><b>Depuis quand</b></td><td>Préversion janvier 2026, déploiement élargi au printemps 2026</td><td>Annoncés le 22 avril 2026 ; gratuits jusqu'au 6 mai 2026, facturés en crédits d'usage depuis</td></tr>
+      <tr><td><b>Pour qui</b></td><td>Offres payantes Claude (individuelles et équipe)</td><td>Offres professionnelles ChatGPT (Business, Enterprise, Edu)</td></tr>
+    </tbody>
+  </table>
+  <p>La parenté avec la page <b>Agents autonomes</b> du livre est directe : même famille d'outils, ici cadrée sur le travail de bureau. Et un point de bascule à connaître : OpenAI a annoncé la migration progressive des <b>Custom GPT</b> (page dédiée du livre) vers ce format d'agents.</p>
+</section>
+
+<section id="cowork">
+  <h2>Cowork, en trois temps</h2>
+  <p class="chapeau">Dans l'application de bureau Claude, avec un abonnement payant.</p>
+
+  <div class="regle">
+    <div class="pastille p-bleu">1</div>
+    <div class="regle-corps">
+      <h4>Installez, puis créez le dossier de mission</h4>
+      <p>Application de bureau Claude (Mac ou Windows), onglet Cowork. Avant toute chose, créez sur votre ordinateur un dossier dédié, par exemple « IA_travail », et n'y mettez que des documents sans données de patients : modèles de courriers, protocoles, pièces comptables anonymes.</p>
+    </div>
+  </div>
+
+  <div class="regle">
+    <div class="pastille p-orange">2</div>
+    <div class="regle-corps">
+      <h4>Autorisez ce dossier, et lui seul</h4>
+      <p>Cowork demande l'accès dossier par dossier : n'accordez que le dossier de mission. Jamais le Bureau entier, jamais les Documents, jamais un dossier qui contient le moindre fichier patient. L'agent lit tout ce qu'on lui ouvre ; le périmètre EST la sécurité.</p>
+    </div>
+  </div>
+
+  <div class="regle">
+    <div class="pastille p-vert">3</div>
+    <div class="regle-corps">
+      <h4>Confiez une mission précise, validez le plan</h4>
+      <p>Décrivez le résultat attendu, le format, et ce qui est interdit (voir les missions types plus bas). Cowork présente son plan : lisez-le avant de lancer, puis relisez le livrable comme vous reliriez le travail d'un nouveau secrétaire. Les premières missions calibrent la confiance.</p>
+    </div>
+  </div>
+</section>
+
+<section id="workspace">
+  <h2>Workspace Agents, côté ChatGPT</h2>
+  <p>Le principe : vous décrivez un flux de travail en langage naturel (bouton « Agents »), l'outil le configure, le teste, puis l'exécute seul, y compris à heure fixe et sans que vous soyez connecté. Les agents se branchent sur vos outils (messagerie, agenda, tableurs, Slack), gardent la mémoire de vos corrections, et demandent par défaut votre accord avant les actions sensibles.</p>
+  <p>Réservés aux offres professionnelles à leur lancement (Business, Enterprise, Edu), en préversion de recherche. Pour un cabinet de groupe déjà équipé de ChatGPT Business, c'est le candidat naturel pour l'administratif récurrent : rapport d'activité, préparation de réunions, tri de demandes non médicales. Même règle qu'en face : l'agent ne touche jamais un flux qui contient des données de patients sans cadre contractuel adapté.</p>
+</section>
+
+<section id="missions">
+  <h2>Trois missions types, à copier</h2>
+  <p class="chapeau">Rédigées pour un premier essai sans risque. Adaptez les crochets, gardez les interdictions : c'est elles qui font la sécurité.</p>
+
+  <div class="bloc">
+    <div class="bloc-tete"><h4>Ranger et renommer un dossier (Cowork)</h4><button type="button" class="copier">Copier</button></div>
+    <pre>Mission : ranger le dossier autorisé [IA_travail/Compta].
+1. Classe les PDF par mois d'après leur date.
+2. Renomme chaque fichier : AAAA-MM-JJ_type_fournisseur.
+3. Produis un tableau Excel : date, fournisseur, montant TTC, catégorie.
+4. Ne supprime rien. Termine par la liste des fichiers illisibles ou douteux.
+Ce dossier ne doit contenir aucune donnée de patient : si tu en détectes une,
+arrête la mission et signale-le moi.</pre>
+  </div>
+
+  <div class="bloc">
+    <div class="bloc-tete"><h4>La veille du vendredi (agent programmé)</h4><button type="button" class="copier">Copier</button></div>
+    <pre>Chaque vendredi à 12 h, prépare une synthèse d'une page : les cinq actualités
+de la semaine en [spécialité] importantes pour un praticien de ville français.
+Pour chaque item : titre, trois lignes chiffrées, source exacte et datée.
+N'invente aucune référence : sans certitude, écris « à vérifier ».
+Envoie-moi la synthèse pour validation. Ne diffuse jamais rien directement.</pre>
+  </div>
+
+  <div class="bloc">
+    <div class="bloc-tete"><h4>L'extraction prudente (tableur depuis des PDF)</h4><button type="button" class="copier">Copier</button></div>
+    <pre>Dans le dossier autorisé [IA_travail/Factures], extrais de chaque PDF :
+date, émetteur, objet, montant, échéance. Livre un tableau Excel trié par date.
+Règles : marque « incertain » toute valeur peu lisible au lieu de deviner ;
+ne modifie aucun fichier source ; termine par la liste des documents
+non traités, avec la raison.</pre>
+  </div>
+</section>
+
+<section id="cadre">
+  <h2>Le cadre : cinq règles non négociables</h2>
+  <div class="zone-rouge">
+    <h3>Avant la première mission</h3>
+    <ul class="interdit">
+      <li><b>Un dossier dédié, zéro donnée de patient.</b> L'agent lit tout le périmètre autorisé : le tri se fait avant, pas après. Le sas d'anonymisation de la page IA open source complète le dispositif.</li>
+      <li><b>Pas de boîte mail de soin, pas d'agenda de consultation.</b> Ces flux contiennent des données de santé : on n'y branche pas un agent grand public. Les connecteurs se réservent aux flux administratifs.</li>
+      <li><b>Validation avant envoi, modification ou suppression.</b> Laissez actifs les garde-fous d'approbation des deux outils ; ne passez jamais un agent en « tout autoriser ».</li>
+      <li><b>Relecture de chaque livrable.</b> Un agent produit vite, y compris ses erreurs. Ce qui sort du cabinet est relu et signé par vous, comme le reste.</li>
+      <li><b>Équipe formée, usage tracé.</b> L'obligation de maîtrise de l'AI Act (février 2025) couvre aussi ces outils : une page de règles écrites, et l'on note qui confie quoi à quel agent.</li>
+    </ul>
+  </div>
+
+  <div class="banniere">
+    <p>L'agent fait. Le médecin répond de tout ce qui sort.
+    <small>Une mission d'agent, c'est un ORCF étendu : objectif, périmètre, format, interdits. Le flou est le premier risque.</small></p>
+  </div>
+</section>
+
+<section id="faq">
+  <h2>Questions fréquentes</h2>
+  <details>
+    <summary>Puis-je lui confier ma boîte mail du cabinet ?</summary>
+    <p>Une boîte de cabinet reçoit des données de santé : résultats, courriers, messages de patients. Y brancher un agent grand public revient à lui ouvrir ces données. Si l'automatisation de la messagerie vous tente, faites-le sur une adresse strictement administrative (fournisseurs, comptabilité), avec validation avant tout envoi, ou attendez une offre avec garanties d'hébergement santé.</p>
+  </details>
+  <details>
+    <summary>Quelle différence avec la page « Agents autonomes » du livre ?</summary>
+    <p>Même technologie, périmètre différent. La page Agents autonomes décrit le phénomène général et ses niveaux d'autonomie ; celle-ci couvre les deux produits de bureau installables aujourd'hui, avec un cadre d'usage au cabinet. Commencez ici : le dossier dédié est le meilleur terrain d'apprentissage.</p>
+  </details>
+  <details>
+    <summary>Combien ça coûte ?</summary>
+    <p>Cowork est inclus dans les offres payantes de Claude (individuelles et équipe, selon l'offre). Les Workspace Agents, gratuits pendant leur préversion jusqu'au 6 mai 2026, sont depuis facturés en crédits selon l'usage, sur les offres professionnelles de ChatGPT. Dans les deux cas, comptez surtout le coût d'apprentissage : quelques heures pour formuler de bonnes missions.</p>
+  </details>
+  <details>
+    <summary>Et si l'agent fait une bêtise dans mes fichiers ?</summary>
+    <p>C'est précisément pourquoi le dossier de mission est dédié et sauvegardé : au pire, on restaure. Les deux outils journalisent leurs actions et montrent ce qu'ils ont fait ; prenez l'habitude de lire ce compte rendu. Et rappel utile : une mission bien écrite interdit explicitement la suppression.</p>
+  </details>
+</section>
+
+<section id="sources">
+  <h2>Sources</h2>
+  <table class="tableau">
+    <thead><tr><th>Élément</th><th>Source</th></tr></thead>
+    <tbody>
+      <tr><td>Cowork : préversion janvier 2026, application de bureau Mac et Windows, offres payantes, plan montré avant action, accès par dossiers autorisés</td><td>Anthropic (application Claude) ; presse spécialisée, consultée en août 2026</td></tr>
+      <tr><td>Workspace Agents : annonce du 22 avril 2026, préversion de recherche, offres Business / Enterprise / Edu, gratuité jusqu'au 6 mai 2026 puis crédits d'usage, exécution programmée, approbation des actions sensibles, migration annoncée des Custom GPT</td><td>OpenAI ; presse spécialisée (BDM, LeptiDigital), avril 2026</td></tr>
+      <tr><td>Obligation de maîtrise des outils d'IA pour les organisations qui les déploient, depuis février 2025</td><td>Règlement (UE) 2024/1689, art. 4</td></tr>
+      <tr><td>Secret médical et données de santé applicables aux flux du cabinet</td><td>CSP art. L.1110-4 ; RGPD, art. 9</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<footer>
+  <p><strong>L'IA Minute du Médecin</strong>, Dr Guillaume Zagury et Samuel De Queiroz, Éditions Medicilline.</p>
+  <p>Ressource compagnon de la double page « Workspace &amp; Cowork ». Produits en évolution rapide : cette page est révisée à chaque changement notable d'offre ou de fonctionnement.</p>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var chips = document.querySelectorAll("nav button[data-cible]");
+  Array.prototype.forEach.call(chips, function(btn){
+    btn.addEventListener("click", function(){
+      var cible = document.getElementById(btn.getAttribute("data-cible"));
+      if(cible){ cible.scrollIntoView({ behavior:"smooth", block:"start" }); }
+    });
+  });
+
+  var onglets = document.querySelectorAll(".onglets button[data-panneau]");
+  Array.prototype.forEach.call(onglets, function(btn){
+    btn.addEventListener("click", function(){
+      Array.prototype.forEach.call(onglets, function(autre){
+        autre.setAttribute("aria-selected", autre === btn ? "true" : "false");
+        var p = document.getElementById(autre.getAttribute("data-panneau"));
+        if(p){ p.hidden = (autre !== btn); }
+      });
+    });
+  });
+
+  var controles = document.querySelectorAll("[data-controle]");
+  var barre = document.getElementById("jauge-barre");
+  var compteur = document.getElementById("jauge-compteur");
+  var total = controles.length;
+
+  function maj(){
+    if(!barre || !compteur || !total){ return; }
+    var faits = 0;
+    Array.prototype.forEach.call(controles, function(c){
+      var box = c.querySelector("input[type=checkbox]");
+      if(box && box.checked){ faits++; c.classList.add("fait"); }
+      else { c.classList.remove("fait"); }
+    });
+    barre.style.width = (faits/total*100) + "%";
+    barre.style.background = (faits === total) ? "#27AE60" : "#DC322F";
+    compteur.textContent = faits + " / " + total;
+  }
+
+  Array.prototype.forEach.call(controles, function(c){
+    var box = c.querySelector("input[type=checkbox]");
+    if(box){ box.addEventListener("change", maj); }
+  });
+  maj();
+
+  var boutons = document.querySelectorAll(".copier");
+  Array.prototype.forEach.call(boutons, function(btn){
+    btn.addEventListener("click", function(){
+      var bloc = btn.closest(".bloc");
+      var pre = bloc ? bloc.querySelector("pre") : null;
+      if(!pre){ return; }
+      var texte = pre.textContent;
+      var fini = function(){
+        btn.textContent = "Copié";
+        btn.classList.add("ok");
+        setTimeout(function(){ btn.textContent = "Copier"; btn.classList.remove("ok"); }, 1800);
+      };
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(texte).then(fini, function(){ secours(texte, fini); });
+      } else { secours(texte, fini); }
+    });
+  });
+
+  function secours(texte, fini){
+    var zone = document.createElement("textarea");
+    zone.value = texte;
+    zone.setAttribute("readonly","");
+    zone.style.position = "absolute";
+    zone.style.left = "-9999px";
+    document.body.appendChild(zone);
+    zone.select();
+    try { document.execCommand("copy"); fini(); } catch(e){}
+    document.body.removeChild(zone);
+  }
+})();
+</script>
+</body>
+</html>

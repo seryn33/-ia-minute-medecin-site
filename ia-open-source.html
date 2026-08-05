@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L'IA open source au cabinet · L'IA Minute du Médecin</title>
+<meta name="description" content="Ressource compagnon du livre L'IA Minute du Médecin : faire tourner un modèle sur sa propre machine : pourquoi, avec quels outils, quels modèles en 2026, et pour quels usages médicaux.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Fira+Sans+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --rouge:#DC322F;--noir:#1A1A1A;--blanc:#FFFFFF;--jaune:#FFD700;
+  --bleu:#3498DB;--orange:#F39C12;--vert:#27AE60;--violet:#8E44AD;--teal:#1ABC9C;
+  --gris:#BDC3C7;--gris-clair:#F4F5F6;--gris-ligne:#E1E4E6;--gris-texte:#5A6268;
+}
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{margin:0;background:var(--blanc);color:var(--noir);font-family:"Fira Sans Condensed","Roboto Condensed",Arial,sans-serif;font-size:17px;line-height:1.5;}
+.page{max-width:720px;margin:0 auto;padding:0 18px 80px;}
+h1,h2,h3,h4{font-family:"Oswald","Arial Narrow",Arial,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.2px;}
+p{margin:0 0 14px;}
+
+header{padding:26px 0 8px;}
+.eyebrow{display:inline-block;font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:var(--blanc);background:var(--noir);padding:5px 11px;}
+h1{font-size:33px;line-height:1.06;margin:14px 0 0;}
+h1 mark{background:var(--jaune);color:var(--noir);padding:0 5px;}
+.sous-titre{font-family:"Fira Sans Condensed",Arial,sans-serif;font-style:italic;font-weight:600;color:var(--rouge);font-size:19px;margin:10px 0 0;text-transform:none;}
+.trait{height:4px;background:var(--rouge);margin:16px 0 22px;}
+.meta{font-size:14px;color:var(--gris-texte);margin:0 0 22px;}
+
+.flash{border:3px solid var(--rouge);border-radius:14px;padding:16px 18px;margin:0 0 26px;}
+.flash h2{font-size:19px;margin:0 0 10px;color:var(--rouge);}
+.flash ul{margin:0;padding-left:20px;}
+.flash li{margin-bottom:9px;}
+
+nav{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 34px;}
+nav button{font-family:"Oswald",Arial,sans-serif;font-weight:500;font-size:13px;letter-spacing:.6px;text-transform:uppercase;background:var(--gris-clair);color:var(--noir);border:2px solid var(--gris-ligne);border-radius:999px;padding:7px 13px;cursor:pointer;}
+nav button:hover{background:var(--noir);color:var(--blanc);border-color:var(--noir);}
+nav button:focus-visible{outline:3px solid var(--rouge);outline-offset:2px;}
+
+section{border-top:2px solid var(--gris-ligne);padding-top:26px;margin-top:34px;scroll-margin-top:14px;}
+section > h2{font-size:25px;margin:0 0 4px;line-height:1.1;}
+.chapeau{color:var(--gris-texte);font-size:16px;margin:0 0 20px;}
+h3{font-size:19px;margin:26px 0 8px;}
+
+.regle{display:flex;gap:14px;border:2px solid var(--gris-ligne);border-radius:14px;padding:14px;margin-bottom:12px;}
+.pastille{flex:0 0 42px;height:42px;border-radius:50%;color:var(--blanc);font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:19px;display:flex;align-items:center;justify-content:center;}
+.p-bleu{background:var(--bleu);}.p-orange{background:var(--orange);}.p-vert{background:var(--vert);}.p-violet{background:var(--violet);}.p-teal{background:var(--teal);}
+.regle-corps{flex:1;min-width:0;}
+.regle h4{font-size:17px;margin:4px 0 6px;}
+.regle p{font-size:16px;margin:0 0 8px;}
+.regle p:last-child{margin-bottom:0;}
+.piege{font-size:15px;background:var(--gris-clair);border-left:4px solid var(--orange);padding:8px 10px;margin:0;}
+.piege b{font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:13px;letter-spacing:.6px;color:var(--orange);}
+
+.onglets{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px;}
+.onglets button{font-family:"Oswald",Arial,sans-serif;font-weight:500;font-size:13px;letter-spacing:.6px;text-transform:uppercase;background:var(--blanc);color:var(--noir);border:2px solid var(--noir);border-radius:8px;padding:7px 12px;cursor:pointer;}
+.onglets button[aria-selected="true"]{background:var(--noir);color:var(--blanc);}
+.onglets button:focus-visible{outline:3px solid var(--rouge);outline-offset:2px;}
+.panneau[hidden]{display:none;}
+
+.bloc{border:2px solid var(--gris-ligne);border-radius:14px;overflow:hidden;margin:0 0 16px;}
+.bloc-tete{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--gris-clair);padding:10px 12px;border-bottom:2px solid var(--gris-ligne);}
+.bloc-tete h4{margin:0;font-size:15px;}
+.copier{font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:12px;letter-spacing:.8px;text-transform:uppercase;background:var(--rouge);color:var(--blanc);border:none;border-radius:6px;padding:7px 12px;cursor:pointer;white-space:nowrap;}
+.copier.ok{background:var(--vert);}
+.copier:focus-visible{outline:3px solid var(--noir);outline-offset:2px;}
+pre{margin:0;padding:14px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px;line-height:1.5;white-space:pre-wrap;word-wrap:break-word;}
+.badge{display:inline-block;background:var(--gris);color:var(--noir);border-radius:5px;font-family:"Oswald",Arial,sans-serif;font-size:11.5px;letter-spacing:.7px;text-transform:uppercase;padding:3px 8px;margin:0 6px 6px 0;}
+
+.tableau{width:100%;border-collapse:collapse;font-size:15px;margin:0 0 18px;}
+.tableau th,.tableau td{border:1px solid var(--gris-ligne);padding:8px 10px;text-align:left;vertical-align:top;}
+.tableau th{background:var(--noir);color:var(--blanc);font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:13px;letter-spacing:.5px;}
+.tableau tr:nth-child(even) td{background:var(--gris-clair);}
+
+.controle{display:flex;gap:12px;border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;margin-bottom:10px;}
+.controle.fait{border-color:var(--vert);background:#F3FBF6;}
+.controle input{width:22px;height:22px;accent-color:var(--vert);cursor:pointer;flex:0 0 22px;margin-top:2px;}
+.controle h4{margin:0 0 4px;font-size:16px;}
+.controle p{margin:0;font-size:15.5px;}
+.progression{display:flex;align-items:center;gap:12px;margin:0 0 18px;border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;}
+.jauge{flex:1;height:12px;background:var(--gris-ligne);border-radius:999px;overflow:hidden;}
+.jauge span{display:block;height:100%;width:0;background:var(--rouge);transition:width .25s ease;}
+.compteur{font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:16px;white-space:nowrap;}
+
+.zone-rouge{border:3px solid var(--rouge);border-radius:14px;padding:16px 18px;margin:18px 0;}
+.zone-rouge h3{margin-top:0;color:var(--rouge);}
+.interdit{list-style:none;padding:0;margin:0;}
+.interdit li{padding-left:26px;position:relative;margin-bottom:8px;}
+.interdit li::before{content:"\00d7";position:absolute;left:0;top:-2px;color:var(--rouge);font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:22px;line-height:1;}
+
+.banniere{background:var(--rouge);color:var(--blanc);border-radius:14px;padding:18px 20px;margin:26px 0;}
+.banniere p{margin:0;font-family:"Oswald",Arial,sans-serif;font-size:19px;line-height:1.25;text-transform:uppercase;}
+.banniere small{display:block;font-family:"Fira Sans Condensed",Arial,sans-serif;text-transform:none;font-size:15px;margin-top:8px;opacity:.95;}
+
+details{border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;margin-bottom:10px;}
+details[open]{border-color:var(--noir);}
+summary{cursor:pointer;font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:16px;text-transform:uppercase;letter-spacing:.3px;}
+summary::-webkit-details-marker{display:none;}
+summary::before{content:"+ ";color:var(--rouge);font-weight:700;}
+details[open] summary::before{content:"\2212 ";}
+details p{margin:10px 0 0;font-size:16px;}
+
+footer{border-top:4px solid var(--noir);margin-top:44px;padding-top:18px;font-size:14px;color:var(--gris-texte);}
+footer strong{color:var(--noir);}
+
+@media (max-width:520px){
+  body{font-size:16px;}h1{font-size:27px;}section > h2{font-size:21px;}
+  .tableau{font-size:14px;}pre{font-size:12.5px;}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none !important;scroll-behavior:auto !important;}}
+</style>
+</head>
+<body>
+<div class="page">
+
+<header>
+  <span class="eyebrow">Ressource compagnon · L'IA Minute du Médecin</span>
+  <h1>L'IA open source : <mark>le modèle chez vous</mark></h1>
+  <p class="sous-titre">Des modèles gratuits qui tournent sur votre propre ordinateur : la donnée ne sort pas du cabinet. Ce que ça vaut, ce que ça coûte, et comment s'y mettre en dix minutes.</p>
+  <div class="trait"></div>
+  <p class="meta">Mise à jour : 5 août 2026. Le paysage des modèles bouge vite : les noms cités sont ceux de l'été 2026.</p>
+</header>
+
+<div class="flash">
+  <h2>Trois choses à comprendre avant de télécharger</h2>
+  <ul>
+    <li><strong>« Open source » signifie ici : le modèle s'installe chez vous.</strong> Les poids du modèle sont publiés ; un logiciel gratuit le fait tourner sur votre ordinateur, sans connexion. Conséquence majeure pour un médecin : <b>ce que vous tapez ne quitte jamais votre machine</b>.</li>
+    <li><strong>Le ticket d'entrée est plus bas qu'on ne croit.</strong> Un ordinateur récent avec 16 Go de mémoire fait tourner confortablement un modèle de taille moyenne ; installation en dix minutes avec LM Studio ou Ollama, sans ligne de commande pour le premier.</li>
+    <li><strong>La contrepartie est réelle : un modèle local est moins fiable qu'un grand modèle en ligne.</strong> Brouillons, reformulation, anonymisation, résumé de documents : oui. Questions cliniques pointues : non, le risque d'erreur y est plus élevé, pas plus faible.</li>
+  </ul>
+</div>
+
+<nav aria-label="Sommaire">
+  <button type="button" data-cible="comprendre">Comprendre</button>
+  <button type="button" data-cible="installer">Installer</button>
+  <button type="button" data-cible="modeles">Les modèles</button>
+  <button type="button" data-cible="usages">Usages cabinet</button>
+  <button type="button" data-cible="limites">Les limites</button>
+  <button type="button" data-cible="sources">Sources</button>
+</nav>
+
+<section id="comprendre">
+  <h2>Local ou en ligne : ce qui change vraiment</h2>
+  <table class="tableau">
+    <thead><tr><th></th><th>Grand modèle en ligne</th><th>Modèle ouvert, en local</th></tr></thead>
+    <tbody>
+      <tr><td><b>Où va la donnée</b></td><td>Sur les serveurs de l'éditeur</td><td>Nulle part : elle reste sur votre machine</td></tr>
+      <tr><td><b>Puissance</b></td><td>Maximale, mise à jour en continu</td><td>Correcte à bonne, selon votre matériel</td></tr>
+      <tr><td><b>Coût</b></td><td>Abonnement mensuel</td><td>Gratuit ; le coût, c'est votre ordinateur</td></tr>
+      <tr><td><b>Connexion</b></td><td>Indispensable</td><td>Aucune : fonctionne en zone blanche, en visite, en avion</td></tr>
+      <tr><td><b>Recherche web</b></td><td>Oui, selon l'outil</td><td>Non : connaissances figées à la date d'entraînement</td></tr>
+      <tr><td><b>Bon usage médical</b></td><td>Raisonnement, synthèse, questions complexes, données anonymisées</td><td>Tout ce qui touche des documents sensibles, brouillons, anonymisation</td></tr>
+    </tbody>
+  </table>
+  <p>Une précision de vocabulaire que les puristes feront à raison : la plupart de ces modèles sont dits « à poids ouverts » : le modèle est téléchargeable, ses données d'entraînement ne le sont pas toujours. Pour l'usage au cabinet, la distinction ne change rien : c'est la licence d'utilisation (souvent très permissive, type Apache 2.0 ou MIT) et l'exécution locale qui comptent.</p>
+</section>
+
+<section id="installer">
+  <h2>S'y mettre en trois temps</h2>
+  <p class="chapeau">Mac, Windows ou Linux. Aucune compétence technique au-delà d'installer un logiciel.</p>
+
+  <div class="regle">
+    <div class="pastille p-bleu">1</div>
+    <div class="regle-corps">
+      <h4>Installez LM Studio ou Ollama</h4>
+      <p><b>LM Studio</b> : interface graphique complète, catalogue de modèles intégré : le choix naturel pour débuter. <b>Ollama</b> : plus dépouillé, apprécié des utilisateurs à l'aise avec la ligne de commande, avec désormais sa propre interface. Les deux sont gratuits ; téléchargez depuis le site officiel de l'éditeur, uniquement.</p>
+    </div>
+  </div>
+
+  <div class="regle">
+    <div class="pastille p-orange">2</div>
+    <div class="regle-corps">
+      <h4>Téléchargez un modèle adapté à votre machine</h4>
+      <p>Le logiciel indique ce que votre matériel supporte. Repères : <b>8 Go</b> de mémoire = petits modèles (4 milliards de paramètres, versions compressées) pour dépanner ; <b>16 Go</b> = la zone de confort des modèles moyens ; <b>32 Go et plus</b> = les modèles qui rivalisent avec le milieu de gamme en ligne. Les Mac à puce Apple sont particulièrement à l'aise à cet exercice.</p>
+    </div>
+  </div>
+
+  <div class="regle">
+    <div class="pastille p-vert">3</div>
+    <div class="regle-corps">
+      <h4>Calibrez la confiance avant l'usage</h4>
+      <p>Faites passer au modèle le test des trois questions de la page « 6 erreurs » : une réponse que vous connaissez, une réponse qui n'existe pas, une fausse prémisse volontaire. Un modèle local se trompe plus souvent qu'un grand modèle en ligne : mesurez-le une fois, vous saurez quoi lui confier.</p>
+    </div>
+  </div>
+</section>
+
+<section id="modeles">
+  <h2>Les modèles qui comptent, été 2026</h2>
+  <p class="chapeau">Tous téléchargeables gratuitement via LM Studio, Ollama ou Hugging Face. Le paysage se renouvelle tous les six mois : retenez les familles plus que les numéros de version.</p>
+  <table class="tableau">
+    <thead><tr><th>Famille</th><th>Éditeur</th><th>À retenir</th></tr></thead>
+    <tbody>
+      <tr><td><b>Gemma 3</b></td><td>Google</td><td>Du très petit (tourne sur un portable modeste) au grand ; comprend aussi les images ; plus de 140 langues</td></tr>
+      <tr><td><b>gpt-oss</b></td><td>OpenAI</td><td>Les modèles ouverts d'OpenAI (août 2025), licence Apache 2.0 ; bon raisonnement, la version 20b tourne avec 16 Go</td></tr>
+      <tr><td><b>Mistral Small</b></td><td>Mistral AI (France)</td><td>Licence Apache 2.0, français particulièrement soigné : le choix naturel pour les courriers</td></tr>
+      <tr><td><b>Qwen 3</b></td><td>Alibaba</td><td>Licence Apache 2.0, toutes tailles, très bons scores : la famille la plus déclinée du moment</td></tr>
+      <tr><td><b>Llama 4</b></td><td>Meta</td><td>Contexte géant (documents très longs) ; licence « communautaire », plus restrictive que l'Apache 2.0</td></tr>
+      <tr><td><b>DeepSeek</b></td><td>DeepSeek (Chine)</td><td>Licence MIT, raisonnement remarquable ; les grandes versions demandent du gros matériel</td></tr>
+      <tr><td><b>MedGemma</b></td><td>Google</td><td>Dérivé médical de Gemma (texte et imagerie), publié sur Hugging Face : <b>outil de recherche</b>, pas un dispositif médical : à explorer, jamais pour décider</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="usages">
+  <h2>Cinq usages qui ont du sens au cabinet</h2>
+
+  <div class="regle">
+    <div class="pastille p-bleu">1</div>
+    <div class="regle-corps">
+      <h4>Le sas d'anonymisation : l'usage n°1</h4>
+      <p>Le modèle local nettoie un document de toutes ses données identifiantes <b>avant</b> qu'il ne parte vers un outil en ligne. La donnée sensible ne quitte jamais la machine ; le grand modèle en ligne ne reçoit que la version propre. Le meilleur des deux mondes ; le prompt est ci-dessous.</p>
+    </div>
+  </div>
+
+  <div class="regle">
+    <div class="pastille p-orange">2</div>
+    <div class="regle-corps">
+      <h4>Résumer et structurer des documents sensibles</h4>
+      <p>Synthèse d'un dossier avant une consultation complexe, mise en forme de notes : tout ce que vous n'enverriez jamais en ligne se traite en local, porte fermée.</p>
+    </div>
+  </div>
+
+  <div class="regle">
+    <div class="pastille p-vert">3</div>
+    <div class="regle-corps">
+      <h4>Les brouillons hors connexion</h4>
+      <p>Visite à domicile, EHPAD en zone blanche, train : courriers, fiches, reformulations fonctionnent sans réseau. La qualité d'un modèle moyen suffit largement à un premier jet que vous relirez.</p>
+    </div>
+  </div>
+
+  <div class="regle">
+    <div class="pastille p-violet">4</div>
+    <div class="regle-corps">
+      <h4>Interroger vos propres documents</h4>
+      <p>LM Studio et les outils compagnons (AnythingLLM, Open WebUI) permettent de « brancher » le modèle sur un dossier de protocoles ou de recommandations : vos référentiels, interrogeables localement : l'esprit NotebookLM, version porte fermée.</p>
+    </div>
+  </div>
+
+  <div class="regle">
+    <div class="pastille p-teal">5</div>
+    <div class="regle-corps">
+      <h4>Un poste partagé pour le cabinet de groupe</h4>
+      <p>Une machine correcte du cabinet peut servir de modèle commun pour l'équipe, accessible depuis les autres postes du réseau interne. Installation à faire faire par votre prestataire informatique, en exigeant que rien ne soit exposé à l'internet.</p>
+    </div>
+  </div>
+
+  <div class="bloc">
+    <div class="bloc-tete"><h4>Le prompt du sas d'anonymisation</h4><button type="button" class="copier">Copier</button></div>
+    <pre>Réécris ce texte en remplaçant toute donnée identifiante par des balises génériques :
+noms et initiales → [PATIENT] ou [MÉDECIN], dates précises → [DATE] (garde les délais : « à 3 semaines »),
+lieux et établissements → [VILLE], [HÔPITAL], numéros et identifiants → [ID], professions et situations rares → formulation générale.
+Ne modifie rien d'autre : ni les données cliniques, ni les résultats, ni la chronologie relative.
+Termine par la liste de tout ce que tu as remplacé, pour vérification.
+
+Texte : [coller ici]</pre>
+  </div>
+</section>
+
+<section id="limites">
+  <h2>Les limites, sans fard</h2>
+  <div class="zone-rouge">
+    <h3>Ce qu'un modèle local n'est pas</h3>
+    <ul class="interdit">
+      <li><b>Ce n'est pas un dispositif médical</b> : aucun modèle ouvert généraliste n'est certifié pour un usage clinique, MedGemma inclus, que Google publie explicitement pour la recherche et le développement.</li>
+      <li><b>Ce n'est pas plus fiable parce que c'est chez vous</b> : à taille égale, un modèle local hallucine davantage qu'un grand modèle en ligne. Jamais une posologie, un seuil ou une référence sans vérification à la source.</li>
+      <li><b>Ce n'est pas connecté</b> : pas de recherche web, connaissances arrêtées à la date d'entraînement du modèle : inutilisable pour l'actualité réglementaire ou une reco récente.</li>
+      <li><b>Ce n'est pas hors la loi pour autant</b> : secret médical et RGPD s'appliquent à votre machine : chiffrement du disque, session verrouillée, sauvegardes maîtrisées. Le local supprime le transfert de données, pas vos obligations.</li>
+    </ul>
+  </div>
+
+  <div class="banniere">
+    <p>Le grand modèle en ligne pour la puissance, le petit modèle local pour la confidentialité. Le médecin averti se sert des deux.
+    <small>Règle d'or inchangée : ce qui est sensible reste local ; ce qui part en ligne est anonymisé ; ce qui est décisionnel est vérifié.</small></p>
+  </div>
+</section>
+
+<section id="faq">
+  <h2>Questions fréquentes</h2>
+  <details>
+    <summary>Est-ce vraiment gratuit ? Où est le piège ?</summary>
+    <p>Les logiciels (LM Studio, Ollama) et les modèles cités sont gratuits, y compris pour un usage professionnel dans la plupart des licences (Apache 2.0, MIT ; vérifiez pour Llama, dont la licence est spécifique). Le « piège » est ailleurs : le coût, c'est votre matériel et votre temps de prise en main. Les éditeurs de modèles, eux, y trouvent l'adoption de leur écosystème.</p>
+  </details>
+  <details>
+    <summary>Quel matériel acheter si je pars de zéro ?</summary>
+    <p>N'achetez rien avant d'avoir essayé sur votre machine actuelle : un ordinateur de moins de cinq ans avec 16 Go de mémoire donne déjà un résultat honnête. Si vous investissez : un Mac à puce Apple avec beaucoup de mémoire unifiée, ou un PC avec une carte graphique récente et de la mémoire vidéo : c'est elle qui fait la vitesse.</p>
+  </details>
+  <details>
+    <summary>Ai-je le droit d'utiliser MedGemma avec mes patients ?</summary>
+    <p>Vous pouvez le télécharger et l'explorer librement : Google le publie sous conditions d'utilisation dédiées aux modèles de santé, en précisant qu'il ne s'agit pas d'un produit clinique. L'utiliser pour orienter une décision de soin reviendrait à utiliser un outil non certifié dans un acte médical : votre responsabilité pleine et entière, sans le filet du marquage CE. Terrain d'exploration et de recherche : oui. Aide à la décision : non.</p>
+  </details>
+  <details>
+    <summary>Mon éditeur de logiciel métier me vend déjà de l'« IA locale ». C'est pareil ?</summary>
+    <p>Pas forcément : « local » peut signifier sur votre poste, sur un serveur du cabinet, ou sur le cloud privé de l'éditeur. Trois questions à lui poser : où tourne le modèle exactement, quelles données y transitent, et qui est l'hébergeur. S'il y a des données de santé, la certification HDS s'applique. Les réponses figurent dans votre grille d'évaluation (page dédiée du livre).</p>
+  </details>
+</section>
+
+<section id="sources">
+  <h2>Sources</h2>
+  <table class="tableau">
+    <thead><tr><th>Élément</th><th>Source</th></tr></thead>
+    <tbody>
+      <tr><td>gpt-oss : modèles ouverts d'OpenAI, licence Apache 2.0, versions 20b et 120b</td><td>OpenAI, annonce d'août 2025</td></tr>
+      <tr><td>MedGemma : modèles médicaux ouverts (4B multimodal, 27B), publiés pour la recherche et le développement</td><td>Google, Health AI Developer Foundations / Hugging Face, 2025</td></tr>
+      <tr><td>Licences et tailles : Gemma 3, Qwen 3, Mistral Small (Apache 2.0), DeepSeek (MIT), Llama 4 (licence communautaire Meta)</td><td>Fiches officielles des modèles (Hugging Face), consultées en août 2026</td></tr>
+      <tr><td>Outils d'exécution locale : LM Studio, Ollama, et compagnons (AnythingLLM, Open WebUI)</td><td>Sites officiels des éditeurs, consultés en août 2026</td></tr>
+      <tr><td>Obligations inchangées sur les données de santé traitées localement</td><td>RGPD ; CSP art. L.1110-4 ; recommandations CNIL sur la sécurité des postes de travail</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<footer>
+  <p><strong>L'IA Minute du Médecin</strong>, Dr Guillaume Zagury et Samuel De Queiroz, Éditions Medicilline.</p>
+  <p>Ressource compagnon de la page « L'IA open source ». Les modèles cités sont ceux de l'été 2026 ; cette page est révisée à chaque évolution notable du paysage.</p>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var chips = document.querySelectorAll("nav button[data-cible]");
+  Array.prototype.forEach.call(chips, function(btn){
+    btn.addEventListener("click", function(){
+      var cible = document.getElementById(btn.getAttribute("data-cible"));
+      if(cible){ cible.scrollIntoView({ behavior:"smooth", block:"start" }); }
+    });
+  });
+
+  var onglets = document.querySelectorAll(".onglets button[data-panneau]");
+  Array.prototype.forEach.call(onglets, function(btn){
+    btn.addEventListener("click", function(){
+      Array.prototype.forEach.call(onglets, function(autre){
+        autre.setAttribute("aria-selected", autre === btn ? "true" : "false");
+        var p = document.getElementById(autre.getAttribute("data-panneau"));
+        if(p){ p.hidden = (autre !== btn); }
+      });
+    });
+  });
+
+  var controles = document.querySelectorAll("[data-controle]");
+  var barre = document.getElementById("jauge-barre");
+  var compteur = document.getElementById("jauge-compteur");
+  var total = controles.length;
+
+  function maj(){
+    if(!barre || !compteur || !total){ return; }
+    var faits = 0;
+    Array.prototype.forEach.call(controles, function(c){
+      var box = c.querySelector("input[type=checkbox]");
+      if(box && box.checked){ faits++; c.classList.add("fait"); }
+      else { c.classList.remove("fait"); }
+    });
+    barre.style.width = (faits/total*100) + "%";
+    barre.style.background = (faits === total) ? "#27AE60" : "#DC322F";
+    compteur.textContent = faits + " / " + total;
+  }
+
+  Array.prototype.forEach.call(controles, function(c){
+    var box = c.querySelector("input[type=checkbox]");
+    if(box){ box.addEventListener("change", maj); }
+  });
+  maj();
+
+  var boutons = document.querySelectorAll(".copier");
+  Array.prototype.forEach.call(boutons, function(btn){
+    btn.addEventListener("click", function(){
+      var bloc = btn.closest(".bloc");
+      var pre = bloc ? bloc.querySelector("pre") : null;
+      if(!pre){ return; }
+      var texte = pre.textContent;
+      var fini = function(){
+        btn.textContent = "Copié";
+        btn.classList.add("ok");
+        setTimeout(function(){ btn.textContent = "Copier"; btn.classList.remove("ok"); }, 1800);
+      };
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(texte).then(fini, function(){ secours(texte, fini); });
+      } else { secours(texte, fini); }
+    });
+  });
+
+  function secours(texte, fini){
+    var zone = document.createElement("textarea");
+    zone.value = texte;
+    zone.setAttribute("readonly","");
+    zone.style.position = "absolute";
+    zone.style.left = "-9999px";
+    document.body.appendChild(zone);
+    zone.select();
+    try { document.execCommand("copy"); fini(); } catch(e){}
+    document.body.removeChild(zone);
+  }
+})();
+</script>
+</body>
+</html>

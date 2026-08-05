@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Les Gems de Gemini · L'IA Minute du Médecin</title>
+<meta name="description" content="Ressource compagnon du livre L'IA Minute du Médecin : l'assistant sur mesure côté Google : créer un Gem en dix minutes, trois Gems prêts à copier pour le cabinet, et le partage façon Drive.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Fira+Sans+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --rouge:#DC322F;--noir:#1A1A1A;--blanc:#FFFFFF;--jaune:#FFD700;
+  --bleu:#3498DB;--orange:#F39C12;--vert:#27AE60;--violet:#8E44AD;--teal:#1ABC9C;
+  --gris:#BDC3C7;--gris-clair:#F4F5F6;--gris-ligne:#E1E4E6;--gris-texte:#5A6268;
+}
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{margin:0;background:var(--blanc);color:var(--noir);font-family:"Fira Sans Condensed","Roboto Condensed",Arial,sans-serif;font-size:17px;line-height:1.5;}
+.page{max-width:720px;margin:0 auto;padding:0 18px 80px;}
+h1,h2,h3,h4{font-family:"Oswald","Arial Narrow",Arial,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.2px;}
+p{margin:0 0 14px;}
+
+header{padding:26px 0 8px;}
+.eyebrow{display:inline-block;font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:var(--blanc);background:var(--noir);padding:5px 11px;}
+h1{font-size:33px;line-height:1.06;margin:14px 0 0;}
+h1 mark{background:var(--jaune);color:var(--noir);padding:0 5px;}
+.sous-titre{font-family:"Fira Sans Condensed",Arial,sans-serif;font-style:italic;font-weight:600;color:var(--rouge);font-size:19px;margin:10px 0 0;text-transform:none;}
+.trait{height:4px;background:var(--rouge);margin:16px 0 22px;}
+.meta{font-size:14px;color:var(--gris-texte);margin:0 0 22px;}
+
+.flash{border:3px solid var(--rouge);border-radius:14px;padding:16px 18px;margin:0 0 26px;}
+.flash h2{font-size:19px;margin:0 0 10px;color:var(--rouge);}
+.flash ul{margin:0;padding-left:20px;}
+.flash li{margin-bottom:9px;}
+
+nav{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 34px;}
+nav button{font-family:"Oswald",Arial,sans-serif;font-weight:500;font-size:13px;letter-spacing:.6px;text-transform:uppercase;background:var(--gris-clair);color:var(--noir);border:2px solid var(--gris-ligne);border-radius:999px;padding:7px 13px;cursor:pointer;}
+nav button:hover{background:var(--noir);color:var(--blanc);border-color:var(--noir);}
+nav button:focus-visible{outline:3px solid var(--rouge);outline-offset:2px;}
+
+section{border-top:2px solid var(--gris-ligne);padding-top:26px;margin-top:34px;scroll-margin-top:14px;}
+section > h2{font-size:25px;margin:0 0 4px;line-height:1.1;}
+.chapeau{color:var(--gris-texte);font-size:16px;margin:0 0 20px;}
+h3{font-size:19px;margin:26px 0 8px;}
+
+.regle{display:flex;gap:14px;border:2px solid var(--gris-ligne);border-radius:14px;padding:14px;margin-bottom:12px;}
+.pastille{flex:0 0 42px;height:42px;border-radius:50%;color:var(--blanc);font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:19px;display:flex;align-items:center;justify-content:center;}
+.p-bleu{background:var(--bleu);}.p-orange{background:var(--orange);}.p-vert{background:var(--vert);}.p-violet{background:var(--violet);}.p-teal{background:var(--teal);}
+.regle-corps{flex:1;min-width:0;}
+.regle h4{font-size:17px;margin:4px 0 6px;}
+.regle p{font-size:16px;margin:0 0 8px;}
+.regle p:last-child{margin-bottom:0;}
+.piege{font-size:15px;background:var(--gris-clair);border-left:4px solid var(--orange);padding:8px 10px;margin:0;}
+.piege b{font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:13px;letter-spacing:.6px;color:var(--orange);}
+
+.onglets{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px;}
+.onglets button{font-family:"Oswald",Arial,sans-serif;font-weight:500;font-size:13px;letter-spacing:.6px;text-transform:uppercase;background:var(--blanc);color:var(--noir);border:2px solid var(--noir);border-radius:8px;padding:7px 12px;cursor:pointer;}
+.onglets button[aria-selected="true"]{background:var(--noir);color:var(--blanc);}
+.onglets button:focus-visible{outline:3px solid var(--rouge);outline-offset:2px;}
+.panneau[hidden]{display:none;}
+
+.bloc{border:2px solid var(--gris-ligne);border-radius:14px;overflow:hidden;margin:0 0 16px;}
+.bloc-tete{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--gris-clair);padding:10px 12px;border-bottom:2px solid var(--gris-ligne);}
+.bloc-tete h4{margin:0;font-size:15px;}
+.copier{font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:12px;letter-spacing:.8px;text-transform:uppercase;background:var(--rouge);color:var(--blanc);border:none;border-radius:6px;padding:7px 12px;cursor:pointer;white-space:nowrap;}
+.copier.ok{background:var(--vert);}
+.copier:focus-visible{outline:3px solid var(--noir);outline-offset:2px;}
+pre{margin:0;padding:14px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px;line-height:1.5;white-space:pre-wrap;word-wrap:break-word;}
+.badge{display:inline-block;background:var(--gris);color:var(--noir);border-radius:5px;font-family:"Oswald",Arial,sans-serif;font-size:11.5px;letter-spacing:.7px;text-transform:uppercase;padding:3px 8px;margin:0 6px 6px 0;}
+
+.tableau{width:100%;border-collapse:collapse;font-size:15px;margin:0 0 18px;}
+.tableau th,.tableau td{border:1px solid var(--gris-ligne);padding:8px 10px;text-align:left;vertical-align:top;}
+.tableau th{background:var(--noir);color:var(--blanc);font-family:"Oswald",Arial,sans-serif;text-transform:uppercase;font-size:13px;letter-spacing:.5px;}
+.tableau tr:nth-child(even) td{background:var(--gris-clair);}
+
+.controle{display:flex;gap:12px;border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;margin-bottom:10px;}
+.controle.fait{border-color:var(--vert);background:#F3FBF6;}
+.controle input{width:22px;height:22px;accent-color:var(--vert);cursor:pointer;flex:0 0 22px;margin-top:2px;}
+.controle h4{margin:0 0 4px;font-size:16px;}
+.controle p{margin:0;font-size:15.5px;}
+.progression{display:flex;align-items:center;gap:12px;margin:0 0 18px;border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;}
+.jauge{flex:1;height:12px;background:var(--gris-ligne);border-radius:999px;overflow:hidden;}
+.jauge span{display:block;height:100%;width:0;background:var(--rouge);transition:width .25s ease;}
+.compteur{font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:16px;white-space:nowrap;}
+
+.zone-rouge{border:3px solid var(--rouge);border-radius:14px;padding:16px 18px;margin:18px 0;}
+.zone-rouge h3{margin-top:0;color:var(--rouge);}
+.interdit{list-style:none;padding:0;margin:0;}
+.interdit li{padding-left:26px;position:relative;margin-bottom:8px;}
+.interdit li::before{content:"\00d7";position:absolute;left:0;top:-2px;color:var(--rouge);font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:22px;line-height:1;}
+
+.banniere{background:var(--rouge);color:var(--blanc);border-radius:14px;padding:18px 20px;margin:26px 0;}
+.banniere p{margin:0;font-family:"Oswald",Arial,sans-serif;font-size:19px;line-height:1.25;text-transform:uppercase;}
+.banniere small{display:block;font-family:"Fira Sans Condensed",Arial,sans-serif;text-transform:none;font-size:15px;margin-top:8px;opacity:.95;}
+
+details{border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;margin-bottom:10px;}
+details[open]{border-color:var(--noir);}
+summary{cursor:pointer;font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:16px;text-transform:uppercase;letter-spacing:.3px;}
+summary::-webkit-details-marker{display:none;}
+summary::before{content:"+ ";color:var(--rouge);font-weight:700;}
+details[open] summary::before{content:"\2212 ";}
+details p{margin:10px 0 0;font-size:16px;}
+
+footer{border-top:4px solid var(--noir);margin-top:44px;padding-top:18px;font-size:14px;color:var(--gris-texte);}
+footer strong{color:var(--noir);}
+
+@media (max-width:520px){
+  body{font-size:16px;}h1{font-size:27px;}section > h2{font-size:21px;}
+  .tableau{font-size:14px;}pre{font-size:12.5px;}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none !important;scroll-behavior:auto !important;}}
+</style>
+</head>
+<body>
+<div class="page">
+
+<header>
+  <span class="eyebrow">Ressource compagnon · L'IA Minute du Médecin</span>
+  <h1>Les Gems : Gemini <mark>à votre façon</mark></h1>
+  <p class="sous-titre">Un Gem, c'est Gemini pré-réglé avec vos consignes et vos documents. Gratuit, intégré à l'univers Google, partageable comme un fichier Drive.</p>
+  <div class="trait"></div>
+  <p class="meta">Mise à jour : 5 août 2026. Les interfaces évoluent vite : les chemins d'écran peuvent bouger, les principes restent.</p>
+</header>
+
+<div class="flash">
+  <h2>Trois choses à savoir avant de créer le vôtre</h2>
+  <ul>
+    <li><strong>Un Gem = des instructions permanentes + des documents de référence.</strong> Vous réglez une fois le rôle, le ton et les règles ; chaque conversation avec ce Gem repart de ce socle. C'est l'équivalent Google du Custom GPT, gratuit dans l'application Gemini depuis mars 2025.</li>
+    <li><strong>Sa force, c'est l'écosystème.</strong> Les connaissances d'un Gem peuvent venir directement de votre Drive, et depuis septembre 2025 un Gem se partage comme un document : précieux en cabinet de groupe sous Google Workspace.</li>
+    <li><strong>Même règle que partout : aucune donnée de patient.</strong> Et une distinction à faire d'emblée : compte personnel et compte professionnel Workspace n'offrent pas les mêmes garanties ; le détail est dans l'encadré rouge.</li>
+  </ul>
+</div>
+
+<nav aria-label="Sommaire">
+  <button type="button" data-cible="creer">Créer un Gem</button>
+  <button type="button" data-cible="gems">3 Gems à copier</button>
+  <button type="button" data-cible="partage">Partager</button>
+  <button type="button" data-cible="cadre">Le cadre</button>
+  <button type="button" data-cible="faq">Questions</button>
+  <button type="button" data-cible="sources">Sources</button>
+</nav>
+
+<section id="creer">
+  <h2>Créer votre premier Gem, en trois temps</h2>
+  <p class="chapeau">Sur gemini.google.com ou dans l'application mobile. Comptez dix minutes.</p>
+
+  <div class="regle">
+    <div class="pastille p-bleu">1</div>
+    <div class="regle-corps">
+      <h4>Ouvrez le gestionnaire de Gems</h4>
+      <p>Dans le menu latéral de Gemini : « Gems », puis « Créer un Gem ». Des Gems préconçus par Google s'y trouvent déjà : regardez-en un pour comprendre la mécanique, puis créez le vôtre.</p>
+    </div>
+  </div>
+
+  <div class="regle">
+    <div class="pastille p-orange">2</div>
+    <div class="regle-corps">
+      <h4>Nommez, puis écrivez les instructions</h4>
+      <p>Un nom d'usage (« Courriers », « Fiches patient »), puis les instructions permanentes : rôle, public, règles, format. La structure ORCF du livre s'applique telle quelle : les trois blocs ci-dessous sont prêts à coller. Gemini propose aussi de réécrire vos instructions pour les renforcer : relisez sa version, gardez la main.</p>
+    </div>
+  </div>
+
+  <div class="regle">
+    <div class="pastille p-vert">3</div>
+    <div class="regle-corps">
+      <h4>Ajoutez les connaissances, puis testez</h4>
+      <p>Boutons d'ajout de fichiers : depuis l'appareil ou depuis Drive : gabarits <b>anonymisés</b>, protocoles, recommandations. Testez ensuite sur deux cas réels anonymisés, corrigez les instructions, pas les réponses. Le Gem apparaît désormais dans votre menu latéral, à un clic.</p>
+    </div>
+  </div>
+</section>
+
+<section id="gems">
+  <h2>Trois Gems prêts à copier</h2>
+  <p class="chapeau">Collez chaque bloc dans le champ « Instructions » d'un nouveau Gem, adaptez la spécialité, ajoutez vos documents.</p>
+
+  <div class="bloc">
+    <div class="bloc-tete"><h4>Gem « Courriers du cabinet »</h4><button type="button" class="copier">Copier</button></div>
+    <pre>Tu assistes un médecin [spécialité] exerçant en France pour ses courriers professionnels.
+Règles :
+1. Vouvoiement, ton confraternel sobre. Médicaments en DCI.
+2. Structure : motif d'adressage, éléments cliniques, question posée, courtoisie brève. Une page maximum.
+3. Je fournis des situations anonymisées ; si un détail semble identifiant, signale-le avant de rédiger.
+4. S'il te manque une information pour conclure, pose la question au lieu d'inventer.
+5. Imite le plan et le ton des courriers fournis en connaissances.</pre>
+  </div>
+
+  <div class="bloc">
+    <div class="bloc-tete"><h4>Gem « Fiches patient »</h4><button type="button" class="copier">Copier</button></div>
+    <pre>Tu rédiges des fiches d'information patient pour un cabinet de médecine [spécialité] en France.
+Règles :
+1. Niveau de lecture : 12 ans. Phrases courtes, mots du quotidien, zéro jargon non expliqué.
+2. Structure fixe : de quoi s'agit-il / ce que vous devez faire / les signes qui doivent faire reconsulter / le 15 en urgence.
+3. Aucune donnée personnelle, aucun dosage inventé : si le traitement n'est pas fourni, laisse [TRAITEMENT] à compléter.
+4. Termine par « Fiche remise à titre d'information : elle complète les explications de votre médecin, elle ne les remplace pas. »
+5. Sur demande « bilingue », produis deux colonnes : français / [langue].</pre>
+  </div>
+
+  <div class="bloc">
+    <div class="bloc-tete"><h4>Gem « Préparation de staff »</h4><button type="button" class="copier">Copier</button></div>
+    <pre>Tu prépares des supports de staff pour un médecin [spécialité] en France.
+Règles :
+1. À partir des articles ou recommandations que je fournis : synthèse en une page (contexte, méthode, résultats chiffrés, limites, impact pratique).
+2. Distingue toujours ce qui vient du document fourni de tes connaissances générales.
+3. Cite la section ou la page du document pour chaque chiffre repris.
+4. Termine par trois questions à ouvrir en discussion d'équipe.
+5. Aucun cas patient réel : uniquement la littérature et des situations génériques.</pre>
+  </div>
+</section>
+
+<section id="partage">
+  <h2>Partager un Gem : la mécanique Drive</h2>
+  <p>Depuis <b>septembre 2025</b>, un Gem se partage comme un document : bouton de partage, destinataires ou lien, et chacun utilise, ou copie, le Gem reçu. La tuyauterie est celle de Drive, avec une conséquence pratique : un Gem n'est partageable que si ses connaissances viennent de fichiers (appareil ou Drive). Dans un cabinet sous Google Workspace, l'administrateur peut encadrer ou désactiver le partage au niveau du domaine.</p>
+  <p>L'usage qui rapporte en groupe : <b>un seul associé construit</b> le Gem « Courriers » ou « Fiches patient », le teste une semaine, puis le partage à tout le cabinet. Harmonisation instantanée des documents sortants, et une seule fiche à corriger quand un modèle change.</p>
+</section>
+
+<section id="cadre">
+  <h2>Le cadre : compte personnel ou compte Workspace</h2>
+  <div class="zone-rouge">
+    <h3>À régler avant le premier usage professionnel</h3>
+    <ul class="interdit">
+      <li><b>Aucune donnée de patient</b>, ni dans les instructions, ni dans les fichiers de connaissances, ni dans les conversations : un Gem stocke, donc n'y rangez que de l'anonyme.</li>
+      <li><b>Sur un compte personnel gratuit</b>, l'« activité dans les applis Gemini » peut être relue par des humains et servir à améliorer les services : désactivez ce réglage dans votre compte Google, ou réservez l'usage professionnel à un compte Workspace.</li>
+      <li><b>Sur un compte Google Workspace</b>, les données de votre domaine bénéficient des engagements professionnels de Google et ne servent pas à entraîner les modèles en dehors de votre organisation. Pour un cabinet, c'est le cadre à privilégier.</li>
+      <li><b>Gem ou pas, la validation reste un acte médical</b> : tout document sortant est relu et signé par vous.</li>
+    </ul>
+  </div>
+
+  <div class="banniere">
+    <p>Un Gem bien réglé, c'est votre méthode qui répond à votre place, pas à la place du médecin.
+    <small>Custom GPT, Gem, Projet Claude : trois noms pour un même réflexe : capitaliser ses consignes au lieu de les répéter.</small></p>
+  </div>
+</section>
+
+<section id="faq">
+  <h2>Questions fréquentes</h2>
+  <details>
+    <summary>Gem ou Custom GPT : lequel choisir ?</summary>
+    <p>Celui de l'écosystème où vous vivez déjà. Messagerie, agenda et documents chez Google : les Gems s'intègrent naturellement, connaissances Drive comprises. Habitué de ChatGPT : le Custom GPT (page dédiée du livre) rend le même service. Les instructions, elles, se transportent d'un monde à l'autre par simple copier-coller : c'est votre vrai capital.</p>
+  </details>
+  <details>
+    <summary>Combien de Gems, et combien de documents ?</summary>
+    <p>Autant de Gems que d'usages distincts, mais trois Gems affûtés battent dix Gems flous. Côté connaissances, chargez peu et bien : vos deux meilleurs gabarits valent mieux que quarante fichiers hétérogènes, et les quotas exacts varient selon l'offre.</p>
+  </details>
+  <details>
+    <summary>Mon Gem peut-il chercher sur le web ?</summary>
+    <p>Gemini s'appuie sur la recherche Google quand la question le demande : utile pour l'actualité, à double tranchant pour le médical. Pour un travail sur vos référentiels, dites-le dans les instructions : « réponds d'abord à partir des documents fournis, signale explicitement ce qui vient d'ailleurs ». La règle du livre demeure : tout chiffre décisionnel se vérifie à la source.</p>
+  </details>
+  <details>
+    <summary>Que devient mon Gem si je change d'offre ou d'outil ?</summary>
+    <p>Vos instructions sont un simple texte : gardez-en une copie dans votre bibliothèque de prompts, avec vos gabarits. Reconstruire le même assistant ailleurs (Custom GPT, Projet Claude) prend alors dix minutes. Ne soyez jamais captif d'une interface : votre méthode vous appartient.</p>
+  </details>
+</section>
+
+<section id="sources">
+  <h2>Sources</h2>
+  <table class="tableau">
+    <thead><tr><th>Élément</th><th>Source</th></tr></thead>
+    <tbody>
+      <tr><td>Gems accessibles sans frais dans l'application Gemini</td><td>Google, annonce officielle, mars 2025</td></tr>
+      <tr><td>Partage des Gems (mécanique Drive), déployé mi-septembre 2025 ; connaissances requises depuis fichiers ou Drive ; contrôles administrateur Workspace</td><td>Google, annonce du partage des Gems, septembre 2025 ; Google Workspace Updates, 18 septembre 2025</td></tr>
+      <tr><td>Relecture humaine possible de l'activité Gemini sur compte personnel ; engagements professionnels des comptes Workspace</td><td>Google, centre d'aide Gemini (confidentialité) et documentation Workspace, consultés en août 2026</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<footer>
+  <p><strong>L'IA Minute du Médecin</strong>, Dr Guillaume Zagury et Samuel De Queiroz, Éditions Medicilline.</p>
+  <p>Ressource compagnon de la double page « Les Gems de Gemini ». Interfaces et offres évoluent : cette page est révisée régulièrement, les principes de fond ne bougent pas.</p>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var chips = document.querySelectorAll("nav button[data-cible]");
+  Array.prototype.forEach.call(chips, function(btn){
+    btn.addEventListener("click", function(){
+      var cible = document.getElementById(btn.getAttribute("data-cible"));
+      if(cible){ cible.scrollIntoView({ behavior:"smooth", block:"start" }); }
+    });
+  });
+
+  var onglets = document.querySelectorAll(".onglets button[data-panneau]");
+  Array.prototype.forEach.call(onglets, function(btn){
+    btn.addEventListener("click", function(){
+      Array.prototype.forEach.call(onglets, function(autre){
+        autre.setAttribute("aria-selected", autre === btn ? "true" : "false");
+        var p = document.getElementById(autre.getAttribute("data-panneau"));
+        if(p){ p.hidden = (autre !== btn); }
+      });
+    });
+  });
+
+  var controles = document.querySelectorAll("[data-controle]");
+  var barre = document.getElementById("jauge-barre");
+  var compteur = document.getElementById("jauge-compteur");
+  var total = controles.length;
+
+  function maj(){
+    if(!barre || !compteur || !total){ return; }
+    var faits = 0;
+    Array.prototype.forEach.call(controles, function(c){
+      var box = c.querySelector("input[type=checkbox]");
+      if(box && box.checked){ faits++; c.classList.add("fait"); }
+      else { c.classList.remove("fait"); }
+    });
+    barre.style.width = (faits/total*100) + "%";
+    barre.style.background = (faits === total) ? "#27AE60" : "#DC322F";
+    compteur.textContent = faits + " / " + total;
+  }
+
+  Array.prototype.forEach.call(controles, function(c){
+    var box = c.querySelector("input[type=checkbox]");
+    if(box){ box.addEventListener("change", maj); }
+  });
+  maj();
+
+  var boutons = document.querySelectorAll(".copier");
+  Array.prototype.forEach.call(boutons, function(btn){
+    btn.addEventListener("click", function(){
+      var bloc = btn.closest(".bloc");
+      var pre = bloc ? bloc.querySelector("pre") : null;
+      if(!pre){ return; }
+      var texte = pre.textContent;
+      var fini = function(){
+        btn.textContent = "Copié";
+        btn.classList.add("ok");
+        setTimeout(function(){ btn.textContent = "Copier"; btn.classList.remove("ok"); }, 1800);
+      };
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(texte).then(fini, function(){ secours(texte, fini); });
+      } else { secours(texte, fini); }
+    });
+  });
+
+  function secours(texte, fini){
+    var zone = document.createElement("textarea");
+    zone.value = texte;
+    zone.setAttribute("readonly","");
+    zone.style.position = "absolute";
+    zone.style.left = "-9999px";
+    document.body.appendChild(zone);
+    zone.select();
+    try { document.execCommand("copy"); fini(); } catch(e){}
+    document.body.removeChild(zone);
+  }
+})();
+</script>
+</body>
+</html>
