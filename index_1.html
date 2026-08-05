@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ressources compagnon · L'IA Minute du Médecin</title>
+<meta name="description" content="Les ressources interactives du livre L'IA Minute du Médecin (Dr Guillaume Zagury et Samuel De Queiroz, Éditions Medicilline) : prompts prêts à copier, check-lists, grilles et protocoles, mis à jour régulièrement.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Fira+Sans+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --rouge:#DC322F;--noir:#1A1A1A;--blanc:#FFFFFF;--jaune:#FFD700;
+  --gris:#BDC3C7;--gris-clair:#F4F5F6;--gris-ligne:#E1E4E6;--gris-texte:#5A6268;
+}
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{margin:0;background:var(--blanc);color:var(--noir);font-family:"Fira Sans Condensed","Roboto Condensed",Arial,sans-serif;font-size:17px;line-height:1.5;}
+.page{max-width:720px;margin:0 auto;padding:0 18px 80px;}
+h1,h2{font-family:"Oswald","Arial Narrow",Arial,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.2px;}
+p{margin:0 0 14px;}
+
+header{padding:26px 0 8px;}
+.eyebrow{display:inline-block;font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:var(--blanc);background:var(--noir);padding:5px 11px;}
+h1{font-size:33px;line-height:1.06;margin:14px 0 0;}
+h1 mark{background:var(--jaune);color:var(--noir);padding:0 5px;}
+.sous-titre{font-family:"Fira Sans Condensed",Arial,sans-serif;font-style:italic;font-weight:600;color:var(--rouge);font-size:19px;margin:10px 0 0;text-transform:none;}
+.trait{height:4px;background:var(--rouge);margin:16px 0 22px;}
+
+section{border-top:2px solid var(--gris-ligne);padding-top:24px;margin-top:30px;}
+section > h2{font-size:22px;margin:0 0 14px;line-height:1.1;}
+
+.liste{display:block;}
+.liste a{display:flex;gap:12px;align-items:baseline;text-decoration:none;color:var(--noir);border:2px solid var(--gris-ligne);border-radius:12px;padding:12px 14px;margin-bottom:10px;}
+.liste a:hover{border-color:var(--noir);}
+.liste a:focus-visible{outline:3px solid var(--rouge);outline-offset:2px;}
+.liste .titre{font-family:"Oswald",Arial,sans-serif;font-weight:600;font-size:16px;text-transform:uppercase;letter-spacing:.3px;white-space:nowrap;}
+.liste .desc{color:var(--gris-texte);font-size:15px;min-width:0;}
+.liste .fleche{margin-left:auto;color:var(--rouge);font-family:"Oswald",Arial,sans-serif;font-weight:700;}
+
+.note{font-size:15.5px;background:var(--gris-clair);border-left:4px solid var(--rouge);padding:9px 11px;margin:22px 0 0;}
+
+footer{border-top:4px solid var(--noir);margin-top:44px;padding-top:18px;font-size:14px;color:var(--gris-texte);}
+footer strong{color:var(--noir);}
+
+@media (max-width:520px){
+  body{font-size:16px;}h1{font-size:27px;}section > h2{font-size:19px;}
+  .liste a{flex-wrap:wrap;}
+  .liste .titre{white-space:normal;}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<header>
+  <span class="eyebrow">Ressources compagnon</span>
+  <h1>L'IA Minute <mark>du Médecin</mark></h1>
+  <p class="sous-titre">Les ressources interactives du livre : prompts prêts à copier, check-lists, grilles et protocoles. Le livre garde la méthode, ces pages suivent l'actualité.</p>
+  <div class="trait"></div>
+</header>
+
+<section>
+  <h2>Prendre en main</h2>
+  <div class="liste">
+    <a href="/orcf"><span class="titre">La bibliothèque ORCF</span><span class="desc">Dix prompts, trois relances, sept erreurs</span><span class="fleche">→</span></a>
+    <a href="/arbre-decision"><span class="titre">Puis-je utiliser l'IA ?</span><span class="desc">L'arbre de décision interactif</span><span class="fleche">→</span></a>
+    <a href="/hallucinations"><span class="titre">Hallucinations</span><span class="desc">Les taux, les tests, les parades</span><span class="fleche">→</span></a>
+    <a href="/custom-gpt"><span class="titre">Custom GPT</span><span class="desc">Votre assistant sur mesure, pas à pas</span><span class="fleche">→</span></a>
+    <a href="/grille"><span class="titre">Grille d'évaluation</span><span class="desc">Noter un outil IA avant de signer</span><span class="fleche">→</span></a>
+  </div>
+</section>
+
+<section>
+  <h2>Au cabinet</h2>
+  <div class="liste">
+    <a href="/scribe"><span class="titre">Le scribe IA</span><span class="desc">Information patient, relecture, quand couper</span><span class="fleche">→</span></a>
+    <a href="/site-cabinet"><span class="titre">Le site du cabinet</span><span class="desc">Prompt complet et mentions obligatoires</span><span class="fleche">→</span></a>
+    <a href="/courriers"><span class="titre">Courriers et mails</span><span class="desc">Les modèles et le bon canal</span><span class="fleche">→</span></a>
+    <a href="/cotation"><span class="titre">Aide à la cotation</span><span class="desc">Les bonnes questions avant de coter</span><span class="fleche">→</span></a>
+    <a href="/comptabilite"><span class="titre">Comptabilité</span><span class="desc">Le tableau de bord du cabinet</span><span class="fleche">→</span></a>
+    <a href="/rgpd-hds"><span class="titre">RGPD et HDS</span><span class="desc">Anonymiser, risques réels, protocole 72 h</span><span class="fleche">→</span></a>
+    <a href="/responsabilite"><span class="titre">Responsabilité</span><span class="desc">Le dossier de preuve, pas à pas</span><span class="fleche">→</span></a>
+  </div>
+</section>
+
+<section>
+  <h2>Savoir et transmettre</h2>
+  <div class="liste">
+    <a href="/notebooklm"><span class="titre">Interroger un corpus</span><span class="desc">Carnets documentaires sans perdre la nuance</span><span class="fleche">→</span></a>
+    <a href="/veille"><span class="titre">Veille scientifique</span><span class="desc">Prompts de veille par spécialité</span><span class="fleche">→</span></a>
+    <a href="/formation"><span class="titre">Formation augmentée</span><span class="desc">Quatre livrables, portfolio, certification</span><span class="fleche">→</span></a>
+    <a href="/staff-rcp"><span class="titre">Staff et RCP</span><span class="desc">Préparer une réunion sans dossier patient</span><span class="fleche">→</span></a>
+  </div>
+</section>
+
+<section>
+  <h2>Créer des supports</h2>
+  <div class="liste">
+    <a href="/visuels"><span class="titre">Visuels médicaux</span><span class="desc">Huit prompts d'images prêts à copier</span><span class="fleche">→</span></a>
+    <a href="/bd-patient"><span class="titre">La BD patient</span><span class="desc">Un remis personnalisé, case par case</span><span class="fleche">→</span></a>
+    <a href="/video"><span class="titre">Vidéo médicale</span><span class="desc">Du visuel fixe au mini-cours filmé</span><span class="fleche">→</span></a>
+    <a href="/audio-cabinet"><span class="titre">Audio du cabinet</span><span class="desc">Votre identité sonore avec l'IA</span><span class="fleche">→</span></a>
+    <a href="/diaporama"><span class="titre">Le diaporama</span><span class="desc">Staff, congrès, cours, grand public</span><span class="fleche">→</span></a>
+  </div>
+</section>
+
+<section>
+  <h2>Comprendre la suite</h2>
+  <div class="liste">
+    <a href="/ia-agentique"><span class="titre">IA agentique</span><span class="desc">Niveaux d'autonomie et périmètre de contrôle</span><span class="fleche">→</span></a>
+    <a href="/agents-autonomes"><span class="titre">Agents autonomes</span><span class="desc">Le hors-piste 2026, bonus du livre</span><span class="fleche">→</span></a>
+    <a href="/agi"><span class="titre">AGI</span><span class="desc">Qui dit quoi, et que surveiller</span><span class="fleche">→</span></a>
+    <a href="/horizon-2030"><span class="titre">Horizon 2030</span><span class="desc">Le calendrier réglementaire, date par date</span><span class="fleche">→</span></a>
+  </div>
+  <p class="note">Chaque page correspond à une double page du livre et s'ouvre aussi directement par son QR code. Les contenus sont révisés régulièrement : les dates de mise à jour figurent en haut de chaque page.</p>
+</section>
+
+<footer>
+  <p><strong>L'IA Minute du Médecin</strong>, Dr Guillaume Zagury et Samuel De Queiroz, Éditions Medicilline.</p>
+  <p>Ces ressources complètent le livre. Elles ne constituent ni un avis médical, ni un conseil juridique.</p>
+</footer>
+
+</div>
+</body>
+</html>
